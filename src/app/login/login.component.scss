@@ -1,0 +1,18 @@
+// component styles are encapsulated and only applied to their components
+#welcomeBanner {
+  display: 'block'
+}
+#formWrapper {
+  width: '660px';
+  height: '330px';
+  display: 'block'; 
+}
+.demo-full-width{
+  display:'block'
+}
+.loginForm{
+  display:'block';
+  width:'410px'; padding:'0 71px';
+  padding-top:'10px'; 
+  position:'relative';
+}
