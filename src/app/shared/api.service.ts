@@ -7,13 +7,18 @@ export class SchoolService {
     schoolName = 'Test School';
 }
 
-
 @Injectable()
 export class LoginService {
     loginUrl = 'api/token';
     loggedIn = false;
     loggedInUser: User;
-    constructor(private http: Http) { }
+    constructor(private http: Http) { 
+        this.loggedInUser = {
+            name:'Tanmay',
+            id:3456,
+            token:'token'
+        }
+    }
     login(): Observable<User> {
         this.loggedIn = true;
         return this.http.get(this.loginUrl)
@@ -39,4 +44,15 @@ export class LoginService {
 @Injectable()
 export class ParentService {
     title = 'Angular 2';
+}
+
+@Injectable()
+export class NotificationService{
+    notifications = [
+        {
+            title:'Message Title',
+            message:'Lorem ipsum doler sit amet',
+            timestamp:1234567
+        }
+    ]
 }

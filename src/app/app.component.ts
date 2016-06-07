@@ -11,25 +11,22 @@ import { ParentComponent } from './parent';
 
 import '../style/app.scss';
 
-
 /*
  * App Component
  * Top Level Component
  */
 @Component({
-  selector: 'my-secureslice', // <my-app></my-app>
-  providers: [SchoolService],
-  directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES],
-  template: require('./app.component.html'),
-  styles: [require('./app.component.scss')],
+    selector: 'my-secureslice', // <my-app></my-app>
+    providers: [SchoolService],
+    directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES],
+    template: require('./app.component.html'),
+    styles: [require('./app.component.scss')],
 })
 @RouteConfig([
-  {path: '/Login', component: LoginComponent, name: 'Login' , useAsDefault: true},
-  {path: '/Parent/...', component: ParentComponent, name: 'Parent'}
+    { path: '/login', component: LoginComponent, name: 'Login', useAsDefault: true },
+    { path: '/parent/...', component: ParentComponent, name: 'Parent' }
 ])
 export class AppComponent {
-  url = 'https://github.com/preboot/angular2-webpack';
-
-  constructor(private school: SchoolService) {
-  }
+    constructor(private school: SchoolService) {
+    }
 }

@@ -6,14 +6,14 @@
                 <span id="sign-in-title"> Sign in to get started </span>
                 <md-input class="full-width" placeholder="Username/email address" [(ngModel)]="username"></md-input>
                 <md-input class="full-width" placeholder="Password" type="password" [(ngModel)]="password"></md-input>
-                <button md-raised-button color="primary" id="login-button" (click)="login()" >Login</button>
-                <button md-button id="forgot-password" >Forgot Password?</button>
+                <button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="login()" >Login</button>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="forgot-password" >Forgot Password?</button>
             </div>
         </div>
         <div id="parent-signup" >
             <div >
-                <h4>Parents! Join today to manage your children's activities</h4>
-                <button md-raised-button id="join-today-button" >Join Today</button>
+                <h5>Parents! Join today to manage your children's activities</h5>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="join-today-button" >Join Today</button>
             </div>
         </div>
     </div>
