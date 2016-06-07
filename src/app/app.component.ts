@@ -19,7 +19,7 @@ import '../style/app.scss';
 @Component({
   selector: 'my-secureslice', // <my-app></my-app>
   providers: [SchoolService],
-  directives: [...ROUTER_DIRECTIVES,...MD_SIDENAV_DIRECTIVES,...MD_LIST_DIRECTIVES,...MD_TOOLBAR_DIRECTIVES],
+  directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES],
   template: require('./app.component.html'),
   styles: [require('./app.component.scss')],
 })

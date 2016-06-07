@@ -1,18 +1,117 @@
 // component styles are encapsulated and only applied to their components
-#welcomeBanner {
-  display: 'block'
+#my-login{
+    background-color: #000;
 }
-#formWrapper {
-  width: '660px';
-  height: '330px';
-  display: 'block'; 
+#welcome-banner {
+    display: block
 }
-.demo-full-width{
-  display:'block'
+#form-wrapper {
+    width: 660px;
+    height: 330px;
+    display: block; 
 }
-.loginForm{
-  display:'block';
-  width:'410px'; padding:'0 71px';
-  padding-top:'10px'; 
-  position:'relative';
+.full-width{
+    display:block;
+    margin-top: 40px;
+}
+.login-form{
+    display:block;
+    width:410px; 
+    padding:0 71px;
+    padding-top:10px; 
+    position:relative;
+    display: inline-block;
+    width: 410px;
+    height: 330px;
+    border-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px,;
+    border: 2px solid #ddd;
+    border-right: 0px;
+}
+
+#login-wrapper{
+    width: 740px;
+    height: 500px;
+    padding: 10px 20px;
+    margin: 0 auto;
+}
+
+#welcome-banner{
+    display: block;
+}
+
+#form-wrapper{
+    width: 660px;
+    height: 330px;
+    display: block ;
+}
+
+#login-form{
+    display: inline-block;
+    width: 410px;
+    height: 326px;
+    border-radius: 5px;
+    border-bottom-right-radius:0px;
+    border-top-right-radius: 0px;
+    border: 2px solid #ddd;
+    border-right: 0px;
+}
+    
+#left-block{
+    display: block;
+    width: 240px;
+    margin: 0 auto;
+    padding-top: 10px;
+    position: relative;
+}
+
+#forgot-password{
+    display: block;
+    position: absolute;
+    margin-top: 5px;
+    right: 0px;
+    font-size: 12px;
+    border: 1px;
+}
+
+#parent-signup{
+    position: absolute;
+    display: inline-block; 
+    width: 250px; 
+    height: 330px; 
+    border-radius:5px; 
+    border-bottom-left-radius: 0px; 
+    border-top-left-radius: 0px; 
+    background-color: #2D9ADD; 
+}
+
+h4{ 
+    font-style: normal; 
+    font-weight: 400; 
+    line-height: 25px; 
+    display: block; 
+    margin: 90px auto; 
+    width:210px; 
+    margin-bottom: 10px; 
+    color: #FFF; 
+    text-align: center; 
+}
+
+#sign-in-title{
+    display: block;
+    font-weight: 400;
+    margin-top: 20px;
+    font-size: 20px;
+}
+#login-button{
+    width: 100%;
+}
+.fill-remaining-space{
+    flex: 1 1 auto;
+}
+
+#join-today-button{
+    display: block;
+    margin: 0 auto;
 }
