@@ -6,10 +6,9 @@ md-sidenav {
   
 }
 .router-link-active{
-  // @extend .mdl-button--colored;
     display: block; 
-    // color: #fff;
-    // background-color: #000;
+    color: #fff;
+    background-color: #000;
 }
 #donate-button{
     display: block;
