@@ -5,3 +5,14 @@ md-sidenav {
   width: 200px;
   
 }
+.router-link-active{
+  // @extend .mdl-button--colored;
+    display: block; 
+    // color: #fff;
+    // background-color: #000;
+}
+#donate-button{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}

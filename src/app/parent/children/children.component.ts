@@ -13,7 +13,7 @@ export class ChildrenComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Hello Home');
+    console.log('Children');
   }
 
 }

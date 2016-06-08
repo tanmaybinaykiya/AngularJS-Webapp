@@ -33,4 +33,8 @@ export class ParentComponent implements OnInit {
     ngOnInit() {
         console.log('Hello Home');
     }
+
+    donate(){
+        console.log('Thanks for intending to donate');
+    }
 }

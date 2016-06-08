@@ -12,12 +12,12 @@ export class LoginService {
     loginUrl = 'api/token';
     loggedIn = false;
     loggedInUser: User;
-    constructor(private http: Http) { 
+    constructor(private http: Http) {
         this.loggedInUser = {
-            name:'Tanmay',
-            id:3456,
-            token:'token'
-        }
+            name: 'Tanmay',
+            id: 3456,
+            token: 'token'
+        };
     }
     login(): Observable<User> {
         this.loggedIn = true;
@@ -47,12 +47,12 @@ export class ParentService {
 }
 
 @Injectable()
-export class NotificationService{
+export class NotificationService {
     notifications = [
         {
-            title:'Message Title',
-            message:'Lorem ipsum doler sit amet',
-            timestamp:1234567
+            title: 'Message Title',
+            message: 'Lorem ipsum doler sit amet',
+            timestamp: 1234567
         }
-    ]
+    ];
 }
