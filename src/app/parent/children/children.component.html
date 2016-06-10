@@ -1,3 +1,45 @@
-<p>
-  This is Children
-</p>
+<span id="institution-name-title">Institution Information: </span><span id="institution-name">{{institution.name}}</span>
+
+<div id="enrolled-students-table" class="table-container">
+    <span class="table-title">Students Enrolled</span>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
+        <thead>
+            <tr>
+                <th class="table-heading mdl-data-table__cell--non-numeric">#</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Name</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Class</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Teacher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of enrolledStudents; let idx = index">
+                <td class="mdl-data-table__cell--non-numeric">{{idx+1}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{student.name}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{student.class}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{student.teacher}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="billing-history-table" class="table-container">
+    <span class="table-title">Billing History</span>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
+        <thead>
+            <tr>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Date</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Institution</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Amount</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Invoice</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of billingHistory">
+                <td class="mdl-data-table__cell--non-numeric">{{row.date}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{row.institution}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{row.amount}}</td>
+                <td class="mdl-data-table__cell--non-numeric"><a href={{row.invoiceLink}}> <md-icon svgIcon="thumb-up"></md-icon></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
