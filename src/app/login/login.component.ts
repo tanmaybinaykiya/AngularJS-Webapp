@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/Parent']);
     }
 
-    forgot() {
-         this.router.navigate(['/iForgot']);
+    forgotPassword() {
+    }
+    
+    joinToday() {
     }
 
 }

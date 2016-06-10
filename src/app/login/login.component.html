@@ -3,17 +3,17 @@
     <div id="form-wrapper">
         <div id="login-form" >
             <div id="left-block">
-                <span id="sign-in-title"> Sign in to get started </span>
+                <span id="sign-in-title" class="md-warn"> Sign in to get started </span>
                 <md-input class="full-width" placeholder="Username/email address" [(ngModel)]="username"></md-input>
                 <md-input class="full-width" placeholder="Password" type="password" [(ngModel)]="password"></md-input>
-                <button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" (click)="login()" >Login</button>
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="forgot-password" >Forgot Password?</button>
+                <button id="login-button"  md-raised-button color="primary" (click)="login()" >Sign in</button>
+                <button id="forgot-password"  md-button color="warn" (click)="forgotPassword()" >Forgot Password?</button>
             </div>
         </div>
         <div id="parent-signup" >
             <div >
                 <h5>Parents! Join today to manage your children's activities</h5>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="join-today-button" >Join Today</button>
+                <button id="join-today-button"  md-button color="primary" (click)="joinToday()" >Join Today</button>
             </div>
         </div>
     </div>

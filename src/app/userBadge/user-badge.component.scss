@@ -1,13 +1,13 @@
 :host {
     border-left: 1px solid #fff;
     width: 129px;
-    padding: 12px 5px;
+    padding: 13px 5px;
     cursor:pointer;
 }
 #user-role{
     font-size: 12px;
     display: block;
-    background-color: #fff;
+    background-color: #fff; 
     line-height: 16px;
     height: initial;
     width: 140px;
@@ -19,3 +19,18 @@
     margin: 0 auto;
     font-size: 16px;
 }
+
+// .notification-panel{
+//     // z-index: -1;  
+//     // position: absolute;
+//     width: 154px;
+//     color: #000;
+//     border: 1px solid #000;
+//     margin-left: -6px;
+//     margin-top: 13px;
+//     display: block;
+// }
+
+// .notification-panel:hover{
+//     background-color: #f00;
+// }

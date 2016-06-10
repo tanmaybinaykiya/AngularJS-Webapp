@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ParentService } from '../../shared';
-import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
+import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 
 @Component({
     selector: 'my-children',
-    directives: [MdIcon],
+    directives: [MdIcon/*, MATERIAL_DIRECTIVES*/],
     providers: [ParentService, MdIconRegistry],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
@@ -13,8 +13,7 @@ export class ChildrenComponent implements OnInit {
 
     institution = {
         name:'Loyola High School',
-        
-    }
+    };
 
     billingHistory = [
         {
