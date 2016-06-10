@@ -1,3 +1,47 @@
-<p>
-  This is profile
-</p>
+<div id="enrolled-students-table" class="table-container">
+    <span class="table-title">Students Enrolled</span>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
+        <thead>
+            <tr>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Name</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Relationship</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of profileInfo; let idx = index">
+                <td class="mdl-data-table__cell--non-numeric">{{row.name}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{row.relationship}}</td>
+                <td class="mdl-data-table__cell--non-numeric" *ngIf="row.status.isAccepted">{{row.status.role}}</td>
+                <td class="mdl-data-table__cell--non-numeric" *ngIf="!row.status.isAccepted">
+                    <a>Send Invitation</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button md-raised-button color="primary">Invite Friends</button>
+</div>
+
+<div id="billing-history-table" class="table-container">
+    <span class="table-title">Billing History</span>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
+        <thead>
+            <tr>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Type</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Account Number</th>
+                <th class="table-heading mdl-data-table__cell--non-numeric">Primary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of billingInfo">
+                <td class="mdl-data-table__cell--non-numeric">{{row.type}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{row.accountNumber}}</td>
+                <td class="mdl-data-table__cell--non-numeric" *ngIf="row.status.isExpired">Expired!</td>
+                <td class="mdl-data-table__cell--non-numeric" *ngIf="!row.status.isExpired">
+                    <md-slide-toggle class="slide-toggle" [checked]="row.status.isPrimary"></md-slide-toggle>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button md-raised-button color="primary">Add Payment Type</button>
+</div>
