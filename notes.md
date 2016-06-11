@@ -1,0 +1,1 @@
+http://valor-software.com/ng2-file-upload/

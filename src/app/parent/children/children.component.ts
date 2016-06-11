@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ParentService } from '../../shared';
+import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
-import { ManageChildProfileComponent } from './manage-child-profile/'
-import { PayTuitionFeesComponent } from './pay-tuition-fees/'
-import { UnenrollComponent } from './unenroll/'
+import { ParentService } from '../../shared';
+import { ManageChildProfileComponent } from './manage-child-profile/';
+import { PayTuitionFeesComponent } from './pay-tuition-fees/';
+import { UnenrollComponent } from './unenroll/';
+import { EnrollStudentComponent } from './enroll-student/'
+import { DropDownMenuComponent } from '../../drop-down-menu/';
 
 @Component({
     selector: 'my-children',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent, PayTuitionFeesComponent, UnenrollComponent ],
-    providers: [ ParentService, MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent, PayTuitionFeesComponent, UnenrollComponent, DropDownMenuComponent, EnrollStudentComponent, MdButton, MdAnchor ],
+    providers: [ParentService, MdIconRegistry],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
 })
 export class ChildrenComponent implements OnInit {
-
+    // menuItems : Array<String> = ["abcd", "bcdef", "efgh"];
     isInstitutionPanelOpen: Boolean = false;
     isManageChildProfileModalOpen: Boolean = false;
-    
+
     institution = {
         name: 'Loyola High School',
         details: ['Pashan Road,', 'Pune 411008']

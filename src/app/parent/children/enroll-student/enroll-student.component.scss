@@ -1,0 +1,81 @@
+:host{
+    font-family:Roboto, Arial, Helvetica;
+}
+#wrapper{
+    position: absolute;
+    left:0;
+    top:0;
+    background: rgba(10, 10, 10, 0.5);
+    -pie-background:  rgba(10, 10, 10, 0.5);
+    behavior: url(PIE.htc);
+    width:100%;
+    height: 100%;
+    z-index:3;
+}
+#modal{
+    position: relative;
+    margin: 3% auto;
+    width: 900px;
+}
+#submit-button{
+    margin-left: 20px;
+}
+.input-field{
+    // width:30%;
+    margin:10px;
+}
+label{
+    font-size: 16px;
+    color:#009688;
+}
+select{
+    background-color: #009688;
+    height: 36px;
+    border: none;
+    padding: 0 10px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+}
+option{
+    background-color: #009688;
+    line-height: 20px;
+    height: 36px;
+    padding: 10px;
+    border:none;
+    font-size: 16px;
+}
+option:hover{
+    background-color: #FFF;
+    color: #009688;
+}
+.form-group{
+    display: inline-block;
+}
+.file-uploader-container{
+    display: block;
+}
+input[type="file"]{
+    // background-color: #f00;
+    display: none;
+}
+div.file-uploader-container label{
+    background-color: #009688;
+    margin: 10px;
+    display: inline-block;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 20px;
+} 
+#form-tab-message{
+    display: block;
+    margin: 25px auto;
+    font-size: 16px;
+    width: 90%;
+}

@@ -3,17 +3,19 @@
     <md-icon>home</md-icon>
 </button>
 <div *ngIf="isInstitutionPanelOpen">
-    <md-card class="institution-details-card" >
-    <md-card-title-group>
-        <md-card-title>{{institution.name}}</md-card-title>
-        <md-card-subtitle>{{institution.details[0]}}</md-card-subtitle>
-        <md-card-subtitle>{{institution.details[1]}}</md-card-subtitle>
-    </md-card-title-group>
+    <md-card class="institution-details-card">
+        <md-card-title-group>
+            <md-card-title>{{institution.name}}</md-card-title>
+            <md-card-subtitle>{{institution.details[0]}}</md-card-subtitle>
+            <md-card-subtitle>{{institution.details[1]}}</md-card-subtitle>
+        </md-card-title-group>
     </md-card>
 </div>
 <manage-child-profile #childProfileManager></manage-child-profile>
 <pay-tuition-fees #tuitionFeesManager></pay-tuition-fees>
 <unenroll #unenrollManager></unenroll>
+<enroll-student #enrollStudentManager ></enroll-student>
+<!--<my-menu label="tanmay" items={{menuItems}}></my-menu>-->
 <div id="enrolled-students-table" class="table-container">
     <span class="table-title">Students Enrolled</span>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
@@ -30,7 +32,8 @@
                 <td class="mdl-data-table__cell--non-numeric">{{idx+1}}</td>
                 <td class="mdl-data-table__cell--non-numeric">
                     <span class="student-name"> {{student.name}} </span>
-                    <button id="student-submenu-button-{{idx}}" class="student-submenu-button mdl-button mdl-js-button mdl-button--icon" >
+                    <!-- TODO Fails when routed--> 
+                    <button id="student-submenu-button-{{idx}}" class="student-submenu-button mdl-button mdl-js-button mdl-button--icon">
                         <md-icon>home</md-icon>
                     </button>
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
@@ -44,6 +47,7 @@
             </tr>
         </tbody>
     </table>
+    <button md-raised-button color="primary" (click)="enrollStudentManager.toggleView()">Enroll Student</button>
 </div>
 
 <div id="billing-history-table" class="table-container">
