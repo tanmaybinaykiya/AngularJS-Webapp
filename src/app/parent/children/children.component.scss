@@ -37,3 +37,11 @@
 .student-submenu-button{
      float: right;
 }
+.institution-details-card{
+    position: absolute;
+    left: 460px;
+    top: 10px;
+    width: 130px;
+    z-index: 2;
+    padding: 20px 30px 10px;
+}

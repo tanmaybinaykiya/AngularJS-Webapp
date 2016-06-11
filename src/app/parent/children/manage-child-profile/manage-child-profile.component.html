@@ -1,0 +1,17 @@
+<div *ngIf="isModalOpen">
+    <div id="wrapper">
+        <div id="modal">
+            <md-card>
+                <md-card-title>Manage Child Profile</md-card-title>
+                <md-card-content>
+                    <md-input placeholder="Add Food Allergies" style="width: 100%"></md-input>
+                    <md-input placeholder="Add Medical Note" style="width: 100%"></md-input>
+                </md-card-content>
+                <md-card-actions align="end">
+                    <button md-raised-button color="secondary" (click)="isModalOpen = !isModalOpen">Cancel</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="isModalOpen = !isModalOpen">Submit</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>

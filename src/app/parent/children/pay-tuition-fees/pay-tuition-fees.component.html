@@ -1,0 +1,23 @@
+<div *ngIf="isModalOpen">
+    <div id="wrapper">
+        <div id="modal">
+            <md-card>
+                <md-card-title>Pay Tuition Fees</md-card-title>
+                <md-card-content>
+                    <label for="slide-toggle">Auto-Pay enabled:</label>
+                    <md-slide-toggle id="slide-toggle" [(ngModel)]="slideToggleModel" color="primary"></md-slide-toggle>
+                    <div class="form-group">
+                        <label>Make a one Time Payment:</label>
+                        <select class="form-control" required>
+                            <option *ngFor="let paymentOption of paymentOptions" [value]="paymentOption">{{paymentOption}}</option>
+                        </select>
+                    </div>
+                </md-card-content>
+                <md-card-actions align="end">
+                    <button md-raised-button color="secondary" (click)="toggleView()">Cancel</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="toggleView()">Submit</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>

@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ParentService } from '../../shared';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
+import { ManageChildProfileComponent } from './manage-child-profile/'
+import { PayTuitionFeesComponent } from './pay-tuition-fees/'
+import { UnenrollComponent } from './unenroll/'
 
 @Component({
     selector: 'my-children',
-    directives: [MdIcon/*, MATERIAL_DIRECTIVES*/],
-    providers: [ParentService, MdIconRegistry],
+    directives: [ MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent, PayTuitionFeesComponent, UnenrollComponent ],
+    providers: [ ParentService, MdIconRegistry ],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
 })
 export class ChildrenComponent implements OnInit {
 
+    isInstitutionPanelOpen: Boolean = false;
+    isManageChildProfileModalOpen: Boolean = false;
+    
     institution = {
-        name:'Loyola High School',
+        name: 'Loyola High School',
+        details: ['Pashan Road,', 'Pune 411008']
     };
 
     billingHistory = [
@@ -38,6 +46,7 @@ export class ChildrenComponent implements OnInit {
             invoiceLink: '/lalala4'
         }
     ];
+
     enrolledStudents = [
         {
             name: 'Barack Obama',
@@ -57,11 +66,17 @@ export class ChildrenComponent implements OnInit {
             teacher: 'Putin'
         }
     ];
+
     constructor(private parentService: ParentService, mdIconRegistry: MdIconRegistry) {
         mdIconRegistry
             .addSvgIcon('thumb-up', '/icon/assets/thumbup-icon.svg')
             .addSvgIconSetInNamespace('core', '/icon/assets/core-icon-set.svg')
             .registerFontClassAlias('fontawesome', 'fa');
+    }
+
+    toggleInstitutionDetails() {
+        this.isInstitutionPanelOpen = !this.isInstitutionPanelOpen;
+        console.log("cliekced", this.isInstitutionPanelOpen);
     }
 
     ngOnInit() {
