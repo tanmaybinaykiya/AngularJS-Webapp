@@ -1,0 +1,31 @@
+<div *ngIf="isModalOpen">
+    <div id="wrapper">
+        <div id="modal">
+            <md-card>
+                <md-card-title>Invite Your family members</md-card-title>
+                <md-card-content>
+                    <md-input class="input-field  more-width" placeholder="Name"></md-input>
+                    <div class="input-field form-group">
+                        <label for="role-control">Role</label>
+                        <select id="role-control" class="form-control" required>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Spouse">Relative</option>
+                            <option value="Spouse">Sibling</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <md-input class="input-field more-width" placeholder="Email" ></md-input>
+                    <div class="input-field form-group">
+                        <label for="read-only">Read only</label>
+                        <md-slide-toggle id="read-only" class="input-field slide-toggle" color="primary"></md-slide-toggle>
+                    </div>
+                </md-card-content>
+                <md-card-actions align="end">
+                    <button md-raised-button color="secondary" (click)="isModalOpen = !isModalOpen">Cancel</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="isModalOpen = !isModalOpen">Submit</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,25 @@
-:host{
-    font-family:Roboto, Arial, Helvetica;
+#wrapper{
+    position: absolute;
+    left:0;
+    top:0;
+    background: rgba(10, 10, 10, 0.5);
+    -pie-background:  rgba(10, 10, 10, 0.5);
+    behavior: url(PIE.htc);
+    width:100%;
+    height: 100%;
+    z-index:3;
+}
+#modal{
+    position: relative;
+    margin: 10% auto;
+    width: 500px;
+}
+#submit-button{
+    margin-left: 20px;
 }
 label{
     font-size: 16px;
+    color:#009688;
 }
 select{
     background-color: #009688;

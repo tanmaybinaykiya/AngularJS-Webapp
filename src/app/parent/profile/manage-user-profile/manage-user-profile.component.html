@@ -1,0 +1,25 @@
+<div *ngIf="isModalOpen">
+    <div id="wrapper">
+        <div id="modal">
+            <md-card>
+                <md-card-title>Manage User Profile</md-card-title>
+                <md-card-content>
+                    <md-input placeholder="Name" style="width: 100%"></md-input>
+                    <md-input placeholder="Email" style="width: 100%"></md-input>
+                    <div class="input-field form-group">
+                        <label for="role-control">Change Role</label>
+                        <select id="role-control" class="form-control" required>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Etc">Etc</option>
+                        </select>
+                    </div>
+                </md-card-content>
+                <md-card-actions align="end">
+                    <button md-raised-button color="secondary" (click)="isModalOpen = !isModalOpen">Cancel</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="isModalOpen = !isModalOpen">Submit</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>

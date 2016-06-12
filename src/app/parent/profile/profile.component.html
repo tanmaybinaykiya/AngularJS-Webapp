@@ -1,5 +1,10 @@
-<div id="enrolled-students-table" class="table-container">
-    <span class="table-title">Students Enrolled</span>
+<delete-user #deleteUserManager></delete-user>
+<manage-user-profile #userProfileManager></manage-user-profile>
+<reset-password #resetPasswordManager></reset-password>
+<invite-friends #invitationManager></invite-friends>
+<add-payment-type #addPaymentManager></add-payment-type>
+<div id="profile-administration-table" class="table-container">
+    <span class="table-title">Profile Administration</span>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
         <thead>
             <tr>
@@ -10,7 +15,18 @@
         </thead>
         <tbody>
             <tr *ngFor="let row of profileInfo; let idx = index">
-                <td class="mdl-data-table__cell--non-numeric">{{row.name}}</td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    <span>{{row.name}}</span>
+                    <!-- TODO Fails when routed--> 
+                    <button id="user-submenu-button-{{idx}}" class="user-submenu-button mdl-button mdl-js-button mdl-button--icon">
+                        <md-icon>home</md-icon>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="user-submenu-button-{{idx}}">
+                        <button class="submenu mdl-menu__item" (click)="userProfileManager.toggleView()">Manage</button>
+                        <button class="submenu mdl-menu__item mdl-menu__item--full-bleed-divider" (click)="resetPasswordManager.toggleView()">Reset Password</button>
+                        <button class="submenu mdl-menu__item" (click)="deleteUserManager.toggleView()">Delete User</button>
+                    </ul>
+                </td>
                 <td class="mdl-data-table__cell--non-numeric">{{row.relationship}}</td>
                 <td class="mdl-data-table__cell--non-numeric" *ngIf="row.status.isAccepted">{{row.status.role}}</td>
                 <td class="mdl-data-table__cell--non-numeric" *ngIf="!row.status.isAccepted">
@@ -19,11 +35,11 @@
             </tr>
         </tbody>
     </table>
-    <button md-raised-button color="primary">Invite Friends</button>
+    <button class="action-buttons" md-raised-button color="primary" (click)="invitationManager.toggleView()">Invite Friends</button>
 </div>
 
-<div id="billing-history-table" class="table-container">
-    <span class="table-title">Billing History</span>
+<div id="billing-adminitstration-table" class="table-container">
+    <span class="table-title">Billing Administration</span>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
         <thead>
             <tr>
@@ -38,10 +54,10 @@
                 <td class="mdl-data-table__cell--non-numeric">{{row.accountNumber}}</td>
                 <td class="mdl-data-table__cell--non-numeric" *ngIf="row.status.isExpired">Expired!</td>
                 <td class="mdl-data-table__cell--non-numeric" *ngIf="!row.status.isExpired">
-                    <md-slide-toggle class="slide-toggle" [checked]="row.status.isPrimary"></md-slide-toggle>
+                    <md-slide-toggle class="slide-toggle" color="primary" [checked]="row.status.isPrimary"></md-slide-toggle>
                 </td>
             </tr>
         </tbody>
     </table>
-    <button md-raised-button color="primary">Add Payment Type</button>
+    <button class="action-buttons" md-raised-button color="primary" (click)="addPaymentManager.toggleView()">Add Payment Type</button>
 </div>
