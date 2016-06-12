@@ -8,13 +8,16 @@ import { ManageUserProfileComponent } from './manage-user-profile/'
 import { ResetPasswordComponent } from './reset-password/'
 import { InviteFriendsComponent } from './invite-friends/'
 import { AddPaymentTypeComponent } from './add-payment-type/'
+import { DeletePaymentTypeComponent } from './delete-payment-type/'
 
 @Component({
     selector: 'my-profile',
     providers: [ParentService, MdIconRegistry],
     template: require('./profile.component.html'),
     styles: [require('./profile.component.scss')],
-    directives: [MdSlideToggle, MdButton, MdAnchor, MdIcon, DeleteUserComponent, ManageUserProfileComponent, ResetPasswordComponent, InviteFriendsComponent, AddPaymentTypeComponent]
+    directives: [MdSlideToggle, MdButton, MdAnchor, MdIcon, DeleteUserComponent,
+        ManageUserProfileComponent, ResetPasswordComponent, InviteFriendsComponent,
+        AddPaymentTypeComponent, DeletePaymentTypeComponent]
 })
 export class ProfileComponent implements OnInit {
     billingInfo = [

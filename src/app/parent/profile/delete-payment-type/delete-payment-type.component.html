@@ -1,0 +1,17 @@
+<div *ngIf="isModalOpen">
+    <div id="wrapper">
+        <div id="modal">
+            <md-card>
+                <md-card-title-group>
+                    <!--<img md-card-sm-image src="path/to/img.png">-->
+                    <md-card-title>Delete Payment Type</md-card-title>
+                    <md-card-subtitle>Yes, please delete this payment type. I understand, this may interrupt auto-pay.</md-card-subtitle>
+                </md-card-title-group>
+                <md-card-actions align="end">
+                    <button md-raised-button color="primary" (click)="isModalOpen = !isModalOpen">Cancel</button>
+                    <button md-raised-button color="warn" id="submit-button" (click)="isModalOpen = !isModalOpen">Delete Payment Type</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>
