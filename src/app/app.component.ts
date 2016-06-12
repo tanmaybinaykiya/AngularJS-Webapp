@@ -8,6 +8,9 @@ import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { SchoolService } from './shared';
 import { LoginComponent } from './login';
 import { ParentComponent } from './parent';
+import { SuperAdminComponent } from './superadmin';
+import { AdminComponent } from './admin';
+
 
 import '../style/app.scss';
 
@@ -24,7 +27,9 @@ import '../style/app.scss';
 })
 @RouteConfig([
     { path: '/login', component: LoginComponent, name: 'Login', useAsDefault: true },
-    { path: '/parent/...', component: ParentComponent, name: 'Parent' }
+    { path: '/parent/...', component: ParentComponent, name: 'Parent' },
+    { path: '/superadmin', component: SuperAdminComponent, name: 'SuperAdmin' },
+    { path: '/admin/...', component: AdminComponent, name: 'Admin' },
 ])
 export class AppComponent {
     constructor(private school: SchoolService) {

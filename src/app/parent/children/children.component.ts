@@ -7,11 +7,11 @@ import { ManageChildProfileComponent } from './manage-child-profile/';
 import { PayTuitionFeesComponent } from './pay-tuition-fees/';
 import { UnenrollComponent } from './unenroll/';
 import { EnrollStudentComponent } from './enroll-student/'
-import { DropDownMenuComponent } from '../../drop-down-menu/';
+// import { DropDownMenuComponent } from '../../drop-down-menu/';
 
 @Component({
     selector: 'my-children',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent, PayTuitionFeesComponent, UnenrollComponent, DropDownMenuComponent, EnrollStudentComponent, MdButton, MdAnchor ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent, PayTuitionFeesComponent, UnenrollComponent, EnrollStudentComponent, MdButton, MdAnchor ],
     providers: [ParentService, MdIconRegistry],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]

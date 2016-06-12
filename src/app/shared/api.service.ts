@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response,Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { User } from '../models/user';
 @Injectable()
@@ -9,19 +9,22 @@ export class SchoolService {
 
 @Injectable()
 export class LoginService {
-    loginUrl = 'api/token';
+    loginUrl = 'http://localhost:3000/users/token';
     loggedIn = false;
     loggedInUser: User;
     constructor(private http: Http) {
         this.loggedInUser = {
             name: 'Tanmay',
+            role:'superadmin',
             id: 3456,
             token: 'token'
         };
     }
-    login(): Observable<User> {
-        this.loggedIn = true;
-        return this.http.get(this.loginUrl)
+    login(userName:String, password:String): Observable<User> {
+        let body = JSON.stringify({ email:userName, password:password });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.loginUrl, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -33,10 +36,15 @@ export class LoginService {
     }
     private handleError(error: any) {
         this.loggedIn = false;
-        let errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
+        try{
+            let errMsg= JSON.parse( error.json().errorMessage).message;
+            console.error(errMsg); // log to console instead
+            return Observable.throw(errMsg);
+        }catch(err){
+            console.error("Actual error from servide " , error);
+            console.error("Error while parsing error" , err);
+            return Observable.throw("Unknown service error");
+        }
     }
 
 }

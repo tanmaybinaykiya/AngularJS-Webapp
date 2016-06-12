@@ -3,7 +3,7 @@ import { Router } from '@angular/router-deprecated';
 import { LoginService, SchoolService } from '../shared';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
-
+import { User } from '../models/user';
 @Component({
     selector: 'my-login',
     template: require('./login.component.html'),
@@ -26,14 +26,28 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        console.log(this.username);
-        console.log(this.password);
-        this.router.navigate(['/Parent']);
+        var self = this;
+        this.loginService.login(this.username, this.password)
+            .subscribe(
+            function (currentUser: User) {
+                if (currentUser.role === 'parent') {
+                    self.router.navigate(['/Parent']);
+                } else if (currentUser.role === 'superadmin') {
+                    self.router.navigate(['/SuperAdmin']);
+                } else if (currentUser.role === 'admin') {
+                    self.router.navigate(['/Admin']);
+                }else{
+                    self.errorMessage = "Not a valid user";
+                }
+            },
+            error => this.errorMessage = <any>error);
+
+
     }
 
     forgotPassword() {
     }
-    
+
     joinToday() {
     }
 
