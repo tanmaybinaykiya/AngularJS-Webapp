@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ControlGroup, FormBuilder, Validators } from '@angular/common';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
@@ -7,12 +8,17 @@ import { ManageChildProfileComponent } from './manage-child-profile/';
 import { PayTuitionFeesComponent } from './pay-tuition-fees/';
 import { UnenrollComponent } from './unenroll/';
 import { EnrollStudentComponent } from './enroll-student/'
-// import { DropDownMenuComponent } from '../../drop-down-menu/';
+import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question'
+import { QuestionBase } from '../../lib/question-base'
+import { DropdownQuestion } from '../../lib/question-dropdown'
+import { QuestionControlService } from '../../lib/question-control.service'
 
 @Component({
     selector: 'my-children',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent, PayTuitionFeesComponent, UnenrollComponent, EnrollStudentComponent, MdButton, MdAnchor ],
-    providers: [ParentService, MdIconRegistry],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent,
+        PayTuitionFeesComponent, UnenrollComponent, EnrollStudentComponent,
+        MdButton, MdAnchor, DynamicFormQuestionComponent],
+    providers: [ParentService, MdIconRegistry, QuestionControlService],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
 })
@@ -20,7 +26,7 @@ export class ChildrenComponent implements OnInit {
     // menuItems : Array<String> = ["abcd", "bcdef", "efgh"];
     isInstitutionPanelOpen: Boolean = false;
     isManageChildProfileModalOpen: Boolean = false;
-
+    form: ControlGroup;
     institution = {
         name: 'Loyola High School',
         details: ['Pashan Road,', 'Pune 411008']
@@ -70,11 +76,26 @@ export class ChildrenComponent implements OnInit {
         }
     ];
 
-    constructor(private parentService: ParentService, mdIconRegistry: MdIconRegistry) {
+    question: QuestionBase<any> =
+        new DropdownQuestion({
+            key: 'brave',
+            label: 'Bravery Rating',
+            options: [
+                { key: 'solid', value: 'Solid' },
+                { key: 'great', value: 'Great' },
+                { key: 'good', value: 'Good' },
+                { key: 'unproven', value: 'Unproven' }
+            ],
+            order: 3
+        });
+
+
+    constructor(private fb: FormBuilder, private parentService: ParentService, mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService) {
         mdIconRegistry
             .addSvgIcon('thumb-up', '/icon/assets/thumbup-icon.svg')
             .addSvgIconSetInNamespace('core', '/icon/assets/core-icon-set.svg')
             .registerFontClassAlias('fontawesome', 'fa');
+
     }
 
     toggleInstitutionDetails() {
@@ -83,7 +104,13 @@ export class ChildrenComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Children');
+        console.log('Children', this.form);
+        this.form = this.toControlGroup(this.question);
     }
 
+    toControlGroup(question: QuestionBase<any>) {
+        let group = {};
+        group[question.key] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
+        return this.fb.group(group);
+    }
 }

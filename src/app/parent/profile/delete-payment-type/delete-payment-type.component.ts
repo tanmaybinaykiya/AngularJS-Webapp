@@ -6,10 +6,10 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'delete-payment-type',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES ],
-    providers: [ MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
+    providers: [MdIconRegistry],
     template: require('./delete-payment-type.component.html'),
-    styles: [ require('./delete-payment-type.component.scss') ]
+    styles: [require('./delete-payment-type.component.scss')]
 })
 export class DeletePaymentTypeComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class DeletePaymentTypeComponent implements OnInit {
     ngOnInit() {
         console.log('DeletePaymentTypeComponent');
     }
-    
-    toggleView(){
+
+    toggleView() {
         this.isModalOpen = !this.isModalOpen;
     }
 

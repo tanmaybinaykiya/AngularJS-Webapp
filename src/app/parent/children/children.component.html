@@ -1,3 +1,6 @@
+<form [ngFormModel]="form">
+    <df-question [question]="question" [form]="form"></df-question>
+</form>
 <span id="institution-name-title">Institution Information: </span><span id="institution-name">{{institution.name}}</span>
 <button id="institution-details-button" class="mdl-button mdl-js-button mdl-button--icon" (click)="isInstitutionPanelOpen = !isInstitutionPanelOpen">
     <md-icon>home</md-icon>
@@ -47,7 +50,7 @@
             </tr>
         </tbody>
     </table>
-    <button md-raised-button color="primary" (click)="enrollStudentManager.toggleView()">Enroll Student</button>
+    <button class="action-buttons" md-raised-button color="primary" (click)="enrollStudentManager.toggleView()">Enroll Student</button>
 </div>
 
 <div id="billing-history-table" class="table-container">
