@@ -1,4 +1,17 @@
 // component styles are encapsulated and only applied to their components
-* {
-  color: #FFEF00;
+:host{
+    clear: both;
+    display: block;
+    padding: 10px;
+    min-height: 100%;
+    background-color: #eee; 
+}
+.input-button{
+    display: block;
+    padding: 10px 0;
+}
+md-card{
+    display: block;
+    width:500px;
+    margin: 10px auto;
 }
