@@ -2,6 +2,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var AWS = require("aws-sdk");
+var request = require('request');
 // Webpack Plugins
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var autoprefixer = require('autoprefixer');
@@ -17,6 +18,40 @@ var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isDeploy = ( process.env.deploy === 'beta' || process.env.deploy === 'prod' );
 var isProd = ENV === 'build' || isDeploy === true;
+
+function ClearCloudFlareCachePlugin(options) {
+  // Setup the plugin instance with options...
+}
+
+ClearCloudFlareCachePlugin.prototype.apply = function(compiler) {
+  compiler.plugin("done", () => {
+        console.log("Clearing cloudflare cache ...");
+        var files={"files":["https://app-beta.secureslice.com/index.html","https://app-beta.secureslice.com"]};
+        if(process.env.deploy==='prod'){
+          files={"files":["https://app.secureslice.com/index.html","https://app.secureslice.com"]};
+        }
+        request.delete({
+          url:"https://api.cloudflare.com/client/v4/zones/66221526cbd9df3d231698f5c085a73a/purge_cache",
+          body:files,
+          json:true,
+          headers:{
+            "X-Auth-Email": "apps@secureslice.com",
+            "X-Auth-Key": "9397041a36a4e4d9448b03dc25ea24221e8f0"
+          }
+        }, function (error, response, body) {
+          if(error || response.statusCode !== 200){
+            console.error("Error clearing cloudflare cache ", error , "Response status code: " , response.statusCode);
+            throw new Error("Error clearing cloudflare cache, do it manually");
+          }else{
+            console.log("Cleared cloudflare cache for files ", files);
+          }
+        });
+  });
+};
+
+
+
+
 module.exports = function makeWebpackConfig() {
   /**
    * Config
@@ -278,6 +313,7 @@ module.exports = function makeWebpackConfig() {
         Bucket: s3BucketName
       }
     }));
+    config.plugins.push(new ClearCloudFlareCachePlugin());
   }
   return config;
 }();
