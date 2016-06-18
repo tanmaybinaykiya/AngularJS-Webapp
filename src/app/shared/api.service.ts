@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response,Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { User } from '../models/user';
 @Injectable()
@@ -32,13 +32,13 @@ export class LoginService {
     constructor(private http: Http) {
         this.loggedInUser = {
             name: 'Tanmay',
-            role:'superadmin',
+            role: 'superadmin',
             id: 3456,
             token: 'token'
         };
     }
-    login(userName:String, password:String): Observable<User> {
-        let body = JSON.stringify({ email:userName, password:password });
+    login(userName: String, password: String): Observable<User> {
+        let body = JSON.stringify({ email: userName, password: password });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.loginUrl, body, options)
@@ -53,14 +53,14 @@ export class LoginService {
     }
     private handleError(error: any) {
         this.loggedIn = false;
-        try{
-            let errMsg= JSON.parse( error.json().errorMessage).message;
+        try {
+            let errMsg = JSON.parse(error.json().errorMessage).message;
             console.error(errMsg); // log to console instead
             return Observable.throw(errMsg);
-        }catch(err){
-            console.error("Actual error from servide " , error);
-            console.error("Error while parsing error" , err);
-            return Observable.throw("Unknown service error");
+        } catch (err) {
+            console.error('Actual error from servide ', error);
+            console.error('Error while parsing error', err);
+            return Observable.throw('Unknown service error');
         }
     }
 

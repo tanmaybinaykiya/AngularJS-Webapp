@@ -3,12 +3,12 @@ import { MdSlideToggle } from '@angular2-material/slide-toggle/slide-toggle';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { ParentService } from '../../shared';
-import { DeleteUserComponent } from './delete-user/'
-import { ManageUserProfileComponent } from './manage-user-profile/'
-import { ResetPasswordComponent } from './reset-password/'
-import { InviteFriendsComponent } from './invite-friends/'
-import { AddPaymentTypeComponent } from './add-payment-type/'
-import { DeletePaymentTypeComponent } from './delete-payment-type/'
+import { DeleteUserComponent } from './delete-user/';
+import { ManageUserProfileComponent } from './manage-user-profile/';
+import { ResetPasswordComponent } from './reset-password/';
+import { InviteFriendsComponent } from './invite-friends/';
+import { AddPaymentTypeComponent } from './add-payment-type/';
+import { DeletePaymentTypeComponent } from './delete-payment-type/';
 
 @Component({
     selector: 'my-profile',

@@ -6,10 +6,10 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'manage-user-profile',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES ],
-    providers: [ MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
+    providers: [MdIconRegistry],
     template: require('./manage-user-profile.component.html'),
-    styles: [ require('./manage-user-profile.component.scss') ]
+    styles: [require('./manage-user-profile.component.scss')]
 })
 export class ManageUserProfileComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class ManageUserProfileComponent implements OnInit {
     ngOnInit() {
         console.log('ManageUserProfileComponent');
     }
-    
-    toggleView(){
+
+    toggleView() {
         this.isModalOpen = !this.isModalOpen;
     }
 

@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
     constructor(/*private loginService: LoginService, private schoolService: SchoolService*/) {
     }
 
-    notificationMenu(){
+    notificationMenu() {
         console.log('notificationMenu');
     }
     ngOnInit() {

@@ -5,16 +5,16 @@ import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 
 import { ParentService } from '../../shared';
-import { QuestionControlService } from '../../lib/question-control.service'
+import { QuestionControlService } from '../../lib/question-control.service';
 
-import { QuestionBase } from '../../lib/question-base'
+import { QuestionBase } from '../../lib/question-base';
 
 import { ManageChildProfileComponent } from './manage-child-profile/';
 import { PayTuitionFeesComponent } from './pay-tuition-fees/';
 import { UnenrollComponent } from './unenroll/';
-import { EnrollStudentComponent } from './enroll-student/'
-import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question'
-import { DropdownQuestion } from '../../lib/question-dropdown'
+import { EnrollStudentComponent } from './enroll-student/';
+import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question';
+import { DropdownQuestion } from '../../lib/question-dropdown';
 
 @Component({
     selector: 'my-children',
@@ -80,20 +80,20 @@ export class ChildrenComponent implements OnInit {
     ];
 
     question: QuestionBase<any> =
-        new DropdownQuestion({
-            key: 'brave',
-            label: 'Bravery Rating',
-            options: [
-                { key: 'solid', value: 'Solid' },
-                { key: 'great', value: 'Great' },
-                { key: 'good', value: 'Good' },
-                { key: 'unproven', value: 'Unproven' }
-            ],
-            order: 3
-        });
+    new DropdownQuestion({
+        key: 'brave',
+        label: 'Bravery Rating',
+        options: [
+            { key: 'solid', value: 'Solid' },
+            { key: 'great', value: 'Great' },
+            { key: 'good', value: 'Good' },
+            { key: 'unproven', value: 'Unproven' }
+        ],
+        order: 3
+    });
 
-
-    constructor(private fb: FormBuilder, private parentService: ParentService, mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService) {
+    constructor(private fb: FormBuilder, private parentService: ParentService,
+        mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService) {
         mdIconRegistry
             .addSvgIcon('thumb-up', '/icon/assets/thumbup-icon.svg')
             .addSvgIconSetInNamespace('core', '/icon/assets/core-icon-set.svg')
@@ -103,7 +103,7 @@ export class ChildrenComponent implements OnInit {
 
     toggleInstitutionDetails() {
         this.isInstitutionPanelOpen = !this.isInstitutionPanelOpen;
-        console.log("cliekced", this.isInstitutionPanelOpen);
+        console.log('cliekced', this.isInstitutionPanelOpen);
     }
 
     ngOnInit() {

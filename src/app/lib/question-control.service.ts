@@ -1,5 +1,5 @@
 import { Injectable }   from '@angular/core';
-import { ControlGroup, FormBuilder, Validators } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/common';
 import { QuestionBase } from './question-base';
 
 @Injectable()

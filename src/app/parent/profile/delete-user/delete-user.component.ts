@@ -6,10 +6,10 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'delete-user',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES ],
-    providers: [ MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
+    providers: [MdIconRegistry],
     template: require('./delete-user.component.html'),
-    styles: [ require('./delete-user.component.scss') ]
+    styles: [require('./delete-user.component.scss')]
 })
 export class DeleteUserComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class DeleteUserComponent implements OnInit {
     ngOnInit() {
         console.log('DeleteUserComponent');
     }
-    
-    toggleView(){
+
+    toggleView() {
         this.isModalOpen = !this.isModalOpen;
     }
 

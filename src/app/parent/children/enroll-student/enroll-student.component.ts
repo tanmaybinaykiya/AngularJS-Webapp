@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Directive } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_TABS_DIRECTIVES } from '@angular2-material/tabs/tabs';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
@@ -10,7 +10,9 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
     selector: 'enroll-student',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective, FileDropDirective],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
+        MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective,
+        FileDropDirective],
     providers: [MdIconRegistry],
     template: require('./enroll-student.component.html'),
     styles: [require('./enroll-student.component.scss')]

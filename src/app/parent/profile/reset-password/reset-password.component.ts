@@ -6,10 +6,10 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'reset-password',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES ],
-    providers: [ MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
+    providers: [MdIconRegistry],
     template: require('./reset-password.component.html'),
-    styles: [ require('./reset-password.component.scss') ]
+    styles: [require('./reset-password.component.scss')]
 })
 export class ResetPasswordComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class ResetPasswordComponent implements OnInit {
     ngOnInit() {
         console.log('ResetPasswordComponent');
     }
-    
-    toggleView(){
+
+    toggleView() {
         this.isModalOpen = !this.isModalOpen;
     }
 

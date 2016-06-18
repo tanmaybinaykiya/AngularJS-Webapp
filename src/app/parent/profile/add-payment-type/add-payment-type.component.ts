@@ -7,7 +7,7 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'add-payment-type',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES],
     providers: [MdIconRegistry],
     template: require('./add-payment-type.component.html'),
     styles: [require('./add-payment-type.component.scss')]

@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
     password: string;
     errorMessage: string;
 
-    constructor(private loginService: LoginService, private router: Router, private school: SchoolService) {
-
+    constructor(private loginService: LoginService, private router: Router,
+        private school: SchoolService) {
     }
 
     ngOnInit() {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        var self = this;
+        let self = this;
         this.loginService.login(this.username, this.password)
             .subscribe(
             function (currentUser: User) {
@@ -36,13 +36,11 @@ export class LoginComponent implements OnInit {
                     self.router.navigate(['/SuperAdmin']);
                 } else if (currentUser.role === 'admin') {
                     self.router.navigate(['/Admin']);
-                }else{
-                    self.errorMessage = "Not a valid user";
+                } else {
+                    self.errorMessage = 'Not a valid user';
                 }
             },
             error => this.errorMessage = <any>error);
-
-
     }
 
     forgotPassword() {
