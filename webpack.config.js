@@ -1,22 +1,22 @@
 // Helper: root(), and rootDir() are defined at the bottom
 var path = require('path');
 var webpack = require('webpack');
-
+var AWS = require("aws-sdk");
 // Webpack Plugins
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-
+var S3Plugin = require('webpack-s3-plugin')
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
 var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
-var isProd = ENV === 'build';
-
+var isDeploy = ( process.env.deploy === 'beta' || process.env.deploy === 'prod' );
+var isProd = ENV === 'build' || isDeploy === true;
 module.exports = function makeWebpackConfig() {
   /**
    * Config
@@ -56,8 +56,8 @@ module.exports = function makeWebpackConfig() {
   config.output = isTest ? {} : {
     path: root('dist'),
     publicPath: isProd ? '/' : 'http://localhost:8080/',
-    filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',
-    chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
+    filename: isProd ? '[hash]/js/[name].js' : 'js/[name].js',
+    chunkFilename: isProd ? '[hash]/[id].chunk.js' : '[id].chunk.js'
   };
 
   /**
@@ -101,7 +101,7 @@ module.exports = function makeWebpackConfig() {
       },
 
       // copy those assets to output
-      {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
+      {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=[hash]/fonts/[name].[ext]?'},
 
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
@@ -190,7 +190,7 @@ module.exports = function makeWebpackConfig() {
       // Extract css files
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd})
+      new ExtractTextPlugin('[hash]/css/[name].css', {disable: !isProd})
     );
   }
 
@@ -221,6 +221,7 @@ module.exports = function makeWebpackConfig() {
     );
   }
 
+  
   /**
    * PostCSS
    * Reference: https://github.com/postcss/autoprefixer-core
@@ -260,7 +261,24 @@ module.exports = function makeWebpackConfig() {
     historyApiFallback: true,
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   };
-
+  if(isDeploy){
+    var deployTarget = process.env.deploy;
+    var s3BucketName='app-beta.secureslice.com';
+    if(deployTarget === 'prod'){
+      s3BucketName='app.secureslice.com';
+    }
+    var credentials = new AWS.SharedIniFileCredentials({profile: 'beta'});
+    config.plugins.push(new S3Plugin({
+      directory: "dist/",
+      s3Options: {
+        credentials:credentials,
+        region: 'us-east-1'
+      },
+      s3UploadOptions: {
+        Bucket: s3BucketName
+      }
+    }));
+  }
   return config;
 }();
 

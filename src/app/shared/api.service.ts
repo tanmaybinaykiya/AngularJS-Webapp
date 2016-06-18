@@ -8,8 +8,25 @@ export class SchoolService {
 }
 
 @Injectable()
+export class ApiUrlService {
+    schoolName = 'Test School';
+
+}
+
+var getApiHost = function() {
+  switch (window.location.hostname)  {
+    case 'app-beta.secureslice.com':
+      return 'https://api.secureslice.com/beta'
+    case 'localhost':
+      return 'http://localhost:3000'
+    default:
+      return 'https://api.secureslice.com/prod'
+  }
+};
+
+@Injectable()
 export class LoginService {
-    loginUrl = 'http://localhost:3000/users/token';
+    loginUrl = getApiHost() + '/users/token';
     loggedIn = false;
     loggedInUser: User;
     constructor(private http: Http) {
