@@ -6,10 +6,10 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'manage-child-profile',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES ],
-    providers: [ MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
+    providers: [MdIconRegistry],
     template: require('./manage-child-profile.component.html'),
-    styles: [ require('./manage-child-profile.component.scss') ]
+    styles: [require('./manage-child-profile.component.scss')]
 })
 export class ManageChildProfileComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class ManageChildProfileComponent implements OnInit {
     ngOnInit() {
         console.log('ManageChildProfileComponent');
     }
-    
-    toggleView(){
+
+    toggleView() {
         this.isModalOpen = !this.isModalOpen;
     }
 

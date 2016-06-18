@@ -14,7 +14,8 @@ import { ProfileComponent } from './profile';
 @Component({
     selector: 'my-parent',
     providers: [ParentService],
-    directives: [MdButton, MdAnchor, ...ROUTER_DIRECTIVES, HeaderComponent, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ],
+    directives: [MdButton, MdAnchor, ...ROUTER_DIRECTIVES, HeaderComponent,
+        ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES],
     template: require('./parent.component.html'),
     styles: [require('./parent.component.scss')]
 })
@@ -34,7 +35,7 @@ export class ParentComponent implements OnInit {
         console.log('Hello Home');
     }
 
-    donate(){
+    donate() {
         console.log('Thanks for intending to donate');
     }
 }

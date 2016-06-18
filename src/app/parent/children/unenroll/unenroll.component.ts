@@ -6,10 +6,10 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 
 @Component({
     selector: 'unenroll',
-    directives: [ MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES ],
-    providers: [ MdIconRegistry ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
+    providers: [MdIconRegistry],
     template: require('./unenroll.component.html'),
-    styles: [ require('./unenroll.component.scss') ]
+    styles: [require('./unenroll.component.scss')]
 })
 export class UnenrollComponent implements OnInit {
 
@@ -21,8 +21,8 @@ export class UnenrollComponent implements OnInit {
     ngOnInit() {
         console.log('UnenrollComponent');
     }
-    
-    toggleView(){
+
+    toggleView() {
         this.isModalOpen = !this.isModalOpen;
     }
 

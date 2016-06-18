@@ -15,19 +15,19 @@ import { AdministrationComponent } from './administration/';
 
 @Component({
     selector: 'admin',
-    directives: [MdButton, MdAnchor, ...ROUTER_DIRECTIVES, 
-        HeaderComponent, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, 
-        ...MD_TOOLBAR_DIRECTIVES ],
+    directives: [MdButton, MdAnchor, ...ROUTER_DIRECTIVES,
+        HeaderComponent, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES,
+        ...MD_TOOLBAR_DIRECTIVES],
     template: require('./admin.component.html'),
     styles: [require('./admin.component.scss')]
 })
 
 @RouteConfig([
     { path: '/enrollmentCenter', component: EnrollmentCenterComponent, name: 'EnrollmentCenter', useAsDefault: true },
-    { path: '/people',          component: PeopleComponent, name: 'People'},
-    { path: '/billing',         component: BillingComponent, name: 'Billing'},
-    { path: '/notification',    component: NotificationComponent, name: 'Notification'},
-    { path: '/administration',  component: AdministrationComponent, name: 'Administration'},
+    { path: '/people', component: PeopleComponent, name: 'People' },
+    { path: '/billing', component: BillingComponent, name: 'Billing' },
+    { path: '/notification', component: NotificationComponent, name: 'Notification' },
+    { path: '/administration', component: AdministrationComponent, name: 'Administration' },
 ])
 
 export class AdminComponent implements OnInit {
@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
         console.log('Hello AdminComponent');
     }
 
-    donate(){
+    donate() {
         console.log('Thanks for intending to donate');
     }
 }
