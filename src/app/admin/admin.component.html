@@ -1,3 +1,16 @@
-<p>
-  Admin Page
-</p>
+<header-toolbar ></header-toolbar>
+<md-sidenav-layout>
+  <md-sidenav opened="true" mode="side">
+    <md-nav-list>
+      <a md-list-item [routerLink]="['EnrollmentCenter']"> Enrollment Center </a>
+      <a md-list-item [routerLink]="['People']"> People </a>
+      <a md-list-item [routerLink]="['Billing']"> Billing </a>
+      <a md-list-item [routerLink]="['Notification']"> Notification </a>
+      <a md-list-item [routerLink]="['Administration']"> Administration </a>
+      <!--<a md-list-item [routerLink]="['Profile']"> Profile </a>-->
+    </md-nav-list>
+  <button id="manual-billing-button"  md-raised-button color="secondary">Manual Billing</button>
+  </md-sidenav>
+  <router-outlet></router-outlet>
+</md-sidenav-layout>
+

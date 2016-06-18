@@ -9,8 +9,7 @@ import { SchoolService } from './shared';
 import { LoginComponent } from './login';
 import { ParentComponent } from './parent';
 import { SuperAdminComponent } from './superadmin';
-import { AdminComponent } from './admin';
-
+import { AdminComponent } from './admin/';
 
 import '../style/app.scss';
 

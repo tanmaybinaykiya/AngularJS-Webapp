@@ -16,7 +16,7 @@ export class DynamicForm {
     payLoad = '';
     constructor(private qcs: QuestionControlService) { }
     ngOnInit() {
-        this.form = this.qcs.toControlGroup(this.questions);
+        this.form = this.qcs.toControlGroupArray(this.questions);
     }
     onSubmit() {
         this.payLoad = JSON.stringify(this.form.value);

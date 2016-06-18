@@ -1,6 +1,6 @@
-<form [ngFormModel]="form">
+<!--<form [ngFormModel]="form">
     <df-question [question]="question" [form]="form"></df-question>
-</form>
+</form>-->
 <span id="institution-name-title">Institution Information: </span><span id="institution-name">{{institution.name}}</span>
 <button id="institution-details-button" class="mdl-button mdl-js-button mdl-button--icon" (click)="isInstitutionPanelOpen = !isInstitutionPanelOpen">
     <md-icon>home</md-icon>
@@ -36,8 +36,8 @@
                 <td class="mdl-data-table__cell--non-numeric">
                     <span class="student-name"> {{student.name}} </span>
                     <!-- TODO Fails when routed--> 
-                    <button id="student-submenu-button-{{idx}}" class="student-submenu-button mdl-button mdl-js-button mdl-button--icon">
-                        <md-icon>home</md-icon>
+                    <button md-icon-button id="student-submenu-button-{{idx}}" class="student-submenu-button">
+                        <md-icon class="md-24">add</md-icon>
                     </button>
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
                         <button class="submenu mdl-menu__item" (click)="childProfileManager.toggleView()">Manage</button>

@@ -3,15 +3,18 @@ import { ControlGroup, FormBuilder, Validators } from '@angular/common';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
+
 import { ParentService } from '../../shared';
+import { QuestionControlService } from '../../lib/question-control.service'
+
+import { QuestionBase } from '../../lib/question-base'
+
 import { ManageChildProfileComponent } from './manage-child-profile/';
 import { PayTuitionFeesComponent } from './pay-tuition-fees/';
 import { UnenrollComponent } from './unenroll/';
 import { EnrollStudentComponent } from './enroll-student/'
 import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question'
-import { QuestionBase } from '../../lib/question-base'
 import { DropdownQuestion } from '../../lib/question-dropdown'
-import { QuestionControlService } from '../../lib/question-control.service'
 
 @Component({
     selector: 'my-children',

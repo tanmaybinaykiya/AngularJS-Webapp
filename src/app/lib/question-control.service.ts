@@ -11,4 +11,13 @@ export class QuestionControlService {
         group[question.key] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
         return this.fb.group(group);
     }
+
+    toControlGroupArray(questions: QuestionBase<any>[]) {
+        let group = {};
+
+        questions.forEach(question => {
+            group[question.key] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
+        });
+        return this.fb.group(group);
+    }
 }

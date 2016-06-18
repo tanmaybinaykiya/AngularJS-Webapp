@@ -1,0 +1,54 @@
+<div id="enrolment-centre-table" class="table-container">
+    <span class="table-title">Enrollment Centre</span>
+    <md-tab-group>
+        <md-tab>
+            <template md-tab-label>Wait List</template>
+            <template md-tab-content>
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
+                    <thead>
+                        <tr>
+                            <th class="table-heading mdl-data-table__cell--non-numeric">#</th>
+                            <th class="table-heading mdl-data-table__cell--non-numeric">Name</th>
+                            <th class="table-heading mdl-data-table__cell--non-numeric">Reason</th>
+                            <th class="table-heading mdl-data-table__cell--non-numeric">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of enrolledStudents; let idx = index;">
+                            <td class="mdl-data-table__cell--non-numeric">{{idx+1}}</td>
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <span class="student-name"> {{student.name}} </span>
+                                <!-- TODO Fails when routed-->
+                                <button id="student-submenu-button-{{idx}}" class="student-submenu-button mdl-button mdl-js-button mdl-button--icon">
+                                    <md-icon>home</md-icon>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
+                                    <button class="submenu mdl-menu__item" (click)="childProfileManager.toggleView()">Manage</button>
+                                    <button class="submenu mdl-menu__item mdl-menu__item--full-bleed-divider" (click)="tuitionFeesManager.toggleView()">Pay Tuition Fees</button>
+                                    <button class="submenu mdl-menu__item" (click)="unenrollManager.toggleView()">Un-enroll</button>
+                                </ul>
+                            </td>
+                            <td class="mdl-data-table__cell--non-numeric">{{student.class}}</td>
+                            <td class="mdl-data-table__cell--non-numeric">{{student.teacher}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+        </md-tab>
+        <md-tab>
+            <template md-tab-label>Two</template>
+            <template md-tab-content>
+                <h1>Some more tab content</h1>
+                <p>...</p>
+            </template>
+        </md-tab>
+    </md-tab-group>
+
+
+
+
+
+
+
+    <button class="action-buttons" md-raised-button color="primary" (click)="enrollStudentManager.toggleView()">Enroll Student</button>
+</div>

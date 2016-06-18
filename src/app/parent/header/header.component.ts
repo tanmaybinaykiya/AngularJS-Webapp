@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService, SchoolService } from '../shared';
+import { LoginService, SchoolService } from '../../shared';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { UserBadgeComponent } from './userBadge/user-badge.component';
 @Component({

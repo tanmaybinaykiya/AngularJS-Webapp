@@ -1,4 +1,17 @@
-// component styles are encapsulated and only applied to their components
-* {
-  color: #FFEF00;
+md-sidenav-layout {
+  min-height: 500px;
+}
+md-sidenav {
+  width: 200px;
+  
+}
+.router-link-active{
+    display: block; 
+    color: #fff;
+    background-color: #009688;
+}
+#manual-billing-button{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
 }

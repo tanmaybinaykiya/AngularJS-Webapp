@@ -1,0 +1,36 @@
+:host {
+    border-left: 1px solid #fff;
+    width: 129px;
+    padding: 13px 5px;
+    cursor:default;
+}
+#user-role{
+    font-size: 12px;
+    display: block;
+    background-color: #fff; 
+    line-height: 16px;
+    height: initial;
+    width: 140px;
+    padding: none;
+}
+
+#user-name{
+    display: table;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+// .notification-panel{
+//     // z-index: -1;  
+//     // position: absolute;
+//     width: 154px;
+//     color: #000;
+//     border: 1px solid #000;
+//     margin-left: -6px;
+//     margin-top: 13px;
+//     display: block;
+// }
+
+// .notification-panel:hover{
+//     background-color: #f00;
+// }

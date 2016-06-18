@@ -4,7 +4,7 @@ import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
-import { HeaderComponent } from '../header';
+import { HeaderComponent } from './header';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 
 import { ParentService } from '../shared';
