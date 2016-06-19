@@ -39,7 +39,7 @@
                     <button md-icon-button id="student-submenu-button-{{idx}}" class="student-submenu-button">
                         <md-icon>arrow_drop_down</md-icon>
                     </button>
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
+                    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
                         <button class="submenu mdl-menu__item" (click)="childProfileManager.toggleView()">Manage</button>
                         <button class="submenu mdl-menu__item mdl-menu__item--full-bleed-divider" (click)="tuitionFeesManager.toggleView()">Pay Tuition Fees</button>
                         <button class="submenu mdl-menu__item" (click)="unenrollManager.toggleView()">Un-enroll</button>
