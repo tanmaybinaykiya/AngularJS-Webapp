@@ -3,12 +3,12 @@
 </form>-->
 <span id="institution-name-title">Institution Information: </span><span id="institution-name">{{institution.name}}</span>
 <button id="institution-details-button" class="mdl-button mdl-js-button mdl-button--icon" (click)="isInstitutionPanelOpen = !isInstitutionPanelOpen">
-    <md-icon>home</md-icon>
+    <md-icon>radio_button_checked</md-icon>
 </button>
 <div *ngIf="isInstitutionPanelOpen">
     <md-card class="institution-details-card">
         <md-card-title-group>
-            <md-card-title>{{institution.name}}</md-card-title>
+            <md-card-subtitle>{{institution.name}}</md-card-subtitle>
             <md-card-subtitle>{{institution.details[0]}}</md-card-subtitle>
             <md-card-subtitle>{{institution.details[1]}}</md-card-subtitle>
         </md-card-title-group>
@@ -37,7 +37,7 @@
                     <span class="student-name"> {{student.name}} </span>
                     <!-- TODO Fails when routed--> 
                     <button md-icon-button id="student-submenu-button-{{idx}}" class="student-submenu-button">
-                        <md-icon class="md-24">add</md-icon>
+                        <md-icon>arrow_drop_down</md-icon>
                     </button>
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
                         <button class="submenu mdl-menu__item" (click)="childProfileManager.toggleView()">Manage</button>

@@ -1,6 +1,5 @@
 // component styles are encapsulated and only applied to their components
 a p span button{
-    font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 14px;
 }
 .table-container{
@@ -36,18 +35,33 @@ a p span button{
 }
 .student-submenu-button{
      float: right;
+     height: initial;
+     width: initial;
 }
 .institution-details-card{
     position: absolute;
     left: 460px;
     top: 10px;
-    width: 130px;
+    width: 200px;
     z-index: 2;
     padding: 20px 30px 10px;
+    background-color: #009688;
 }
 .action-buttons{
     width: 150px;
     padding: 5px;
     display: block;
     margin-top: 20px;
+}
+tbody tr:nth-child(odd) {
+    background-color: #f5f7f8;
+}
+table{
+    box-shadow: none;
+    border: none;
+    border-top:1px solid rgba(0,0,0,.12);
+}
+md-card-subtitle{
+    color:#fff;
+    margin-bottom: 10px;
 }
