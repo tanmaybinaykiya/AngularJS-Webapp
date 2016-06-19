@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './reset-password/';
 import { InviteFriendsComponent } from './invite-friends/';
 import { AddPaymentTypeComponent } from './add-payment-type/';
 import { DeletePaymentTypeComponent } from './delete-payment-type/';
+import { ResendInvitationComponent } from './resend-invitation/';
 
 @Component({
     selector: 'my-profile',
@@ -17,7 +18,7 @@ import { DeletePaymentTypeComponent } from './delete-payment-type/';
     styles: [require('./profile.component.scss')],
     directives: [MdSlideToggle, MdButton, MdAnchor, MdIcon, DeleteUserComponent,
         ManageUserProfileComponent, ResetPasswordComponent, InviteFriendsComponent,
-        AddPaymentTypeComponent, DeletePaymentTypeComponent]
+        AddPaymentTypeComponent, DeletePaymentTypeComponent, ResendInvitationComponent]
 })
 export class ProfileComponent implements OnInit {
     billingInfo = [

@@ -1,0 +1,19 @@
+<div *ngIf="isModalOpen">
+    <div id="wrapper">
+        <div id="modal">
+            <md-card>
+                <md-card-title>Resend Invitation</md-card-title>
+                <md-card-content>
+                    <span>Is the information accurate?</span>
+                    <md-input placeholder="Name" style="width: 100%"></md-input>
+                    <md-input placeholder="Email" style="width: 100%"></md-input>
+                    <span>We will resend the invitation link</span>
+                </md-card-content>
+                <md-card-actions align="end">
+                    <button md-raised-button color="secondary" (click)="isModalOpen = !isModalOpen">Cancel</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="isModalOpen = !isModalOpen">Resend Invitation</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>
