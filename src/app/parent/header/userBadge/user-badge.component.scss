@@ -1,23 +1,50 @@
 :host {
-    border-left: 1px solid #fff;
-    width: 129px;
-    padding: 13px 5px;
+    border-left: 1px solid #45627f;
+    padding: 13px 5px 13px 15px;
     cursor:default;
 }
+span{
+    color: #fff;
+}
+md-icon{
+    color: #fff;
+}
 #user-role{
-    font-size: 12px;
     display: block;
-    background-color: #fff; 
+    font-size: 12px;
     line-height: 16px;
     height: initial;
-    width: 140px;
-    padding: none;
+    padding: 0;
+    cursor:default;
 }
 
 #user-name{
-    display: table;
+    display: block;
     margin: 0 auto;
+    text-align: center;
     font-size: 16px;
+    
+}
+
+#badge-value{
+    display: inline-block;
+    width: 20px;
+    background-color: #e94d3c;
+    border-radius: 10px;    
+    vertical-align: super;
+}
+#badge-value span{
+    font-size: 10px;
+    display: block;
+    /* width: 100%; */
+    text-align: center;
+}
+#content{
+    display: inline-block;
+    width: 80px;
+}
+#drop-down-icon{
+    display: inline-block;
 }
 
 // .notification-panel{

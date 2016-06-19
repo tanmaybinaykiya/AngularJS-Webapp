@@ -10,8 +10,8 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
     selector: 'enroll-student',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
-        MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective,
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, 
+        MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective, 
         FileDropDirective],
     providers: [MdIconRegistry],
     template: require('./enroll-student.component.html'),

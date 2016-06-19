@@ -83,14 +83,20 @@
                             <template md-tab-label>Additional Forms</template>
                             <template md-tab-content>
                                 <span id="form-tab-message">The admission process is not complete. You must complete and upload all forms for the admission process to continue</span>
-                                
+
                                 <div class="file-uploader-container">
                                     <label for="medical-form">Medical Form</label>
                                     <input id="medical-form" type="file" ng2FileSelect [uploader]="uploader" />
+                                    <div class="progress" style="">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                                    </div>
                                 </div>
                                 <div class="file-uploader-container">
                                     <label for="tuition-form">Tuition Form</label>
                                     <input id="tuition-form" type="file" ng2FileSelect [uploader]="uploader" />
+                                    <div class="progress" style="">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                                    </div>
                                 </div>
                             </template>
                         </md-tab>

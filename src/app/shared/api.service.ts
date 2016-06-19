@@ -13,15 +13,15 @@ export class ApiUrlService {
 
 }
 
-var getApiHost = function() {
-  switch (window.location.hostname)  {
-    case 'app-beta.secureslice.com':
-      return 'https://api.secureslice.com/beta'
-    case 'localhost':
-      return 'http://localhost:3000'
-    default:
-      return 'https://api.secureslice.com/prod'
-  }
+let getApiHost = function () {
+    switch (window.location.hostname) {
+        case 'app-beta.secureslice.com':
+            return 'https://api.secureslice.com/beta';
+        case 'localhost':
+            return 'http://localhost:3000';
+        default:
+            return 'https://api.secureslice.com/prod';
+    }
 };
 
 @Injectable()
