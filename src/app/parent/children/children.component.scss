@@ -1,6 +1,8 @@
 // component styles are encapsulated and only applied to their components
-a p span button{
+a, p, span, button{
     font-size: 14px;
+    text-decoration: none;
+    color:#000;
 }
 .table-container{
     margin-top: 10px; 
@@ -78,4 +80,12 @@ md-card-subtitle{
 }
 .negative-color{
     color:#f00;
+}
+.invoice-link-icon{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6c/Adobe_PDF_icon.svg');
+}
+.invoice-link{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 }

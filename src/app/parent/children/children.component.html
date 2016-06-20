@@ -17,7 +17,7 @@
 <manage-child-profile #childProfileManager></manage-child-profile>
 <pay-tuition-fees #tuitionFeesManager></pay-tuition-fees>
 <unenroll #unenrollManager></unenroll>
-<enroll-student #enrollStudentManager ></enroll-student>
+<enroll-student #enrollStudentManager></enroll-student>
 <!--<my-menu label="tanmay" items={{menuItems}}></my-menu>-->
 <div id="enrolled-students-table" class="table-container">
     <span class="table-title">Students Enrolled</span>
@@ -35,7 +35,7 @@
                 <td class="mdl-data-table__cell--non-numeric">{{idx+1}}</td>
                 <td class="mdl-data-table__cell--non-numeric">
                     <span class="student-name"> {{student.name}} </span>
-                    <!-- TODO Fails when routed--> 
+                    <!-- TODO Fails when routed-->
                     <button md-icon-button id="student-submenu-button-{{idx}}" class="student-submenu-button">
                         <md-icon>arrow_drop_down</md-icon>
                     </button>
@@ -69,9 +69,9 @@
                 <td class="mdl-data-table__cell--non-numeric">{{row.date}}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{row.institution}}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{row.amount}}</td>
-                <td class="mdl-data-table__cell--non-numeric">
-                    <a href={{row.invoiceLink}}>
-                        <md-icon svgIcon="thumb-up"></md-icon>
+                <td class="mdl-data-table__cell--non-numeric" style="width: 100px;">
+                    <a class="invoice-link" href={{row.invoiceLink}}>
+                         <md-icon class="invoice-link-icon md-24"></md-icon>
                     </a>
                 </td>
             </tr>

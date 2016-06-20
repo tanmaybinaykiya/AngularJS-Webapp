@@ -32,7 +32,7 @@
                 <td class="mdl-data-table__cell--non-numeric">{{row.relationship}}</td>
                 <td class="mdl-data-table__cell--non-numeric" *ngIf="row.status.isAccepted">{{row.status.role}}</td>
                 <td class="mdl-data-table__cell--non-numeric" *ngIf="!row.status.isAccepted">
-                    <a (click)="resendPaymentManager.toggleView()">Send Invitation</a>
+                    <a (click)="resendPaymentManager.toggleView()">Resend Invitation</a>
                 </td>
             </tr>
         </tbody>

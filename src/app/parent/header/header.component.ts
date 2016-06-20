@@ -12,6 +12,8 @@ import { UserBadgeComponent } from './userBadge/user-badge.component';
 
 export class HeaderComponent implements OnInit {
 
+    private schoolName:String;
+
     constructor(private loginService: LoginService, private schoolService: SchoolService) {
     }
 
@@ -20,5 +22,6 @@ export class HeaderComponent implements OnInit {
     }
     ngOnInit() {
         console.log('Hello Home');
+        this.schoolName=this.schoolService.schoolName;
     }
 }

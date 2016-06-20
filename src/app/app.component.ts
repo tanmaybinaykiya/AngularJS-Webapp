@@ -10,6 +10,7 @@ import { LoginComponent } from './login';
 import { ParentComponent } from './parent';
 import { SuperAdminComponent } from './superadmin';
 import { AdminComponent } from './admin/';
+import { ModalComponent } from './lib/modal/';
 
 import '../style/app.scss';
 
@@ -20,7 +21,8 @@ import '../style/app.scss';
 @Component({
     selector: 'my-secureslice', // <my-app></my-app>
     providers: [SchoolService],
-    directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES],
+    directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, 
+    ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })
