@@ -1,4 +1,8 @@
 // component styles are encapsulated and only applied to their components
+a{
+    color: #00F;
+    font-weight: 400;
+}
 a, p, span, button{
     font-size: 14px;
 }
