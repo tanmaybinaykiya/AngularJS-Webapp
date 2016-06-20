@@ -1,8 +1,6 @@
 // component styles are encapsulated and only applied to their components
 a, p, span, button{
     font-size: 14px;
-    text-decoration: none;
-    color:#000;
 }
 .table-container{
     margin-top: 10px; 
@@ -55,6 +53,9 @@ a, p, span, button{
     display: block;
     margin-top: 20px;
 }
+
+
+
 tbody tr:nth-child(odd) {
     background-color: #f5f7f8;
 }
@@ -63,10 +64,20 @@ table{
     border: none;
     border-top:1px solid rgba(0,0,0,.12);
 }
+td:hover, td span:hover{
+    color: #009688;
+}
+
+
 md-card-subtitle{
     color:#fff;
     margin-bottom: 10px;
 }
+
+
+
+
+
 .mdl-menu{
     background-color: #33495f;
     width: 200px;
