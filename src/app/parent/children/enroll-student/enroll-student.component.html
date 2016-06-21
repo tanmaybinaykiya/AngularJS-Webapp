@@ -1,4 +1,4 @@
-<div *ngIf="isModalOpen">
+<div>
     <div id="wrapper">
         <div id="modal">
             <md-card>
@@ -103,7 +103,7 @@
                     </md-tab-group>
                 </md-card-content>
                 <md-card-actions align="end">
-                    <button md-raised-button color="primary" id="submit-button" (click)="isModalOpen = !isModalOpen">Save and Exit</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="closeView()">Save and Exit</button>
                 </md-card-actions>
             </md-card>
         </div>

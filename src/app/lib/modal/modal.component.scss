@@ -1,5 +1,5 @@
 #wrapper{
-    position: absolute;
+    position: fixed;
     left:0;
     top:0;
     background: rgba(10, 10, 10, 0.5);
@@ -7,5 +7,5 @@
     behavior: url(PIE.htc);
     width:100%;
     height: 100%;
-    z-index:999;
+    z-index:3;
 }

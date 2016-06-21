@@ -1,31 +1,31 @@
 import { Injectable }   from '@angular/core';
 import { FormBuilder, Validators } from '@angular/common';
+import { Subject }    from 'rxjs/Subject';
+import { Modal } from '../enums/modal-names.enums'
+import { ModalState } from './modal-state'
 
 @Injectable()
 export class ModalControlService {
-    private isOpenState: Boolean = false;
-    // private state = this.isOpenState.asObservable(); 
+    private isOpenState = new Subject<ModalState>();
+    isOpen$ = this.isOpenState.asObservable();
 
-    constructor() { }
-    
-    someFunct (){
-        // return this.state;
+    constructor() { 
+         this.isOpen$.subscribe(state => {
+            console.log('ModalControlService state updated', state);
+        });
+        console.log(this);
     }
-
-    enable() {
+    
+    enable(modal: Modal) {
         console.log('modal opened');
-        this.isOpenState = true;
+        this.isOpenState.next(new ModalState(modal, true));
         console.log('modal updated', this.isOpenState);
     }
 
     disable() {
         console.log('modal closed');
-        this.isOpenState = false;
-    }
-
-    isOpen() {
-        console.log('modal asked', this.isOpenState);
-        return this.isOpenState;
+        this.isOpenState.next(new ModalState(Modal.None, false));
+        console.log('modal updated', this.isOpenState);
     }
 
 }

@@ -1,2 +1,19 @@
-<div id="wrapper" *ngIf="modalControlService.isOpen()">
+<div id="wrapper" *ngIf="modalState.isOpen">
+    <div [ngSwitch]="modalState.modal">
+        <pay-tuition-fees *ngSwitchWhen="'ParentChildrenModal_PayTuitionFees'"></pay-tuition-fees>
+        <manage-child-profile *ngSwitchWhen="'ParentChildrenModal_Manage'"></manage-child-profile>
+        <unenroll *ngSwitchWhen="'ParentChildrenModal_Unenroll'"></unenroll>
+        <enroll-student *ngSwitchWhen="'ParentChildrenModal_EnrollStudent'"></enroll-student>
+        <p *ngSwitchWhen="'None'"></p>
+    <!--'ParentProfileModal_ManageProfile'-->
+    <!--'ParentProfileModal_ResetPassword'-->
+    <!--'ParentProfileModal_DeleteUser'-->
+    <!--'ParentProfileModal_ResendInvitation'-->
+    <!--'ParentProfileModal_InviteFriends'-->
+    <!--'ParentProfileModal_ManageBilling'-->
+    <!--'ParentProfileModal_DeletePaymentType'-->
+    <!--'ParentProfileModal_AddPaymentType'-->
+
+        <p *ngSwitchDefault>Error: {{modalState.modal}}</p>
+    </div>
 </div>

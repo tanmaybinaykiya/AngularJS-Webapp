@@ -6,15 +6,17 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 
 import { ParentService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
+import { ModalControlService } from '../../lib/modal/modal-control.service';
+import { Modal } from '../../lib/enums/modal-names.enums';
 
 import { QuestionBase } from '../../lib/question-base';
+import { DropdownQuestion } from '../../lib/question-dropdown';
 
 import { ManageChildProfileComponent } from './manage-child-profile/';
 import { PayTuitionFeesComponent } from './pay-tuition-fees/';
 import { UnenrollComponent } from './unenroll/';
 import { EnrollStudentComponent } from './enroll-student/';
 import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question';
-import { DropdownQuestion } from '../../lib/question-dropdown';
 
 @Component({
     selector: 'my-children',
@@ -30,6 +32,8 @@ export class ChildrenComponent implements OnInit {
     isInstitutionPanelOpen: Boolean = false;
     isManageChildProfileModalOpen: Boolean = false;
     form: ControlGroup;
+    modalControlService: ModalControlService;
+
     institution = {
         name: 'Loyola High School',
         details: ['Pashan Road,', 'Pune 411008']
@@ -93,12 +97,9 @@ export class ChildrenComponent implements OnInit {
     });
 
     constructor(private fb: FormBuilder, private parentService: ParentService,
-        mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService) {
-        mdIconRegistry
-            .addSvgIcon('thumb-up', '/icon/assets/thumbup-icon.svg')
-            .addSvgIconSetInNamespace('core', '/icon/assets/core-icon-set.svg')
-            .registerFontClassAlias('fontawesome', 'fa');
-
+        mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
+        modalControlService: ModalControlService) {
+            this.modalControlService=modalControlService;
     }
 
     toggleInstitutionDetails() {
@@ -115,5 +116,10 @@ export class ChildrenComponent implements OnInit {
         let group = {};
         group[question.key] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
         return this.fb.group(group);
+    }
+
+    toggleModal(modal:Modal){
+        console.log('toggleModal', modal);
+        this.modalControlService.enable(modal);
     }
 }

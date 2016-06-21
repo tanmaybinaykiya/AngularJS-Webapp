@@ -6,6 +6,7 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 
 import { SchoolService } from './shared';
+import { ModalControlService } from './lib/modal/modal-control.service';
 import { LoginComponent } from './login';
 import { ParentComponent } from './parent';
 import { SuperAdminComponent } from './superadmin';
@@ -20,7 +21,7 @@ import '../style/app.scss';
  */
 @Component({
     selector: 'my-secureslice', // <my-app></my-app>
-    providers: [SchoolService],
+    providers: [SchoolService, ModalControlService],
     directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, 
     ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
     template: require('./app.component.html'),

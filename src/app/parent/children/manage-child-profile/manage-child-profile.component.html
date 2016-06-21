@@ -1,4 +1,4 @@
-<div *ngIf="isModalOpen">
+<div>
     <div id="wrapper">
         <div id="modal">
             <md-card>
@@ -8,8 +8,8 @@
                     <md-input placeholder="Add Medical Note" style="width: 100%"></md-input>
                 </md-card-content>
                 <md-card-actions align="end">
-                    <button md-raised-button color="secondary" (click)="isModalOpen = !isModalOpen">Cancel</button>
-                    <button md-raised-button color="primary" id="submit-button" (click)="isModalOpen = !isModalOpen">Submit</button>
+                    <button md-raised-button color="secondary" (click)="closeView()">Cancel</button>
+                    <button md-raised-button color="primary" id="submit-button" (click)="closeView()">Submit</button>
                 </md-card-actions>
             </md-card>
         </div>

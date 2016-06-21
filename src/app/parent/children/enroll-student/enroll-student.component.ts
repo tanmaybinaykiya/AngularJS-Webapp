@@ -5,6 +5,7 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { ModalControlService } from '../../../lib/modal/modal-control.service.ts';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -20,19 +21,21 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 export class EnrollStudentComponent implements OnInit {
     @Input() isModalOpen: Boolean;
+    private modalControlService:ModalControlService
     public uploader: FileUploader = new FileUploader({ url: URL });
     public hasBaseDropZoneOver: boolean = false;
     public hasAnotherDropZoneOver: boolean = false;
 
-    constructor(mdIconRegistry: MdIconRegistry) {
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService:ModalControlService) {
+        this.modalControlService=modalControlService;
     }
 
     ngOnInit() {
         console.log('EnrollStudentComponent');
     }
 
-    toggleView() {
-        this.isModalOpen = !this.isModalOpen;
+    closeView() {
+        this.modalControlService.disable();
     }
 
     public fileOverBase(e: any): void {

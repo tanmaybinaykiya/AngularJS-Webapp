@@ -1,4 +1,4 @@
-<div *ngIf="isModalOpen">
+<div>
     <div id="wrapper">
         <div id="modal">
             <md-card>
@@ -10,8 +10,8 @@
                         I receive written confirmation from the school.</md-card-subtitle>
                 </md-card-title-group>
                 <md-card-actions align="end">
-                    <button md-raised-button color="primary" (click)="isModalOpen = !isModalOpen">Cancel</button>
-                    <button md-raised-button color="warn" id="submit-button" (click)="isModalOpen = !isModalOpen">Submit</button>
+                    <button md-raised-button color="primary" (click)="closeView()">Cancel</button>
+                    <button md-raised-button color="warn" id="submit-button" (click)="closeView()">Submit</button>
                 </md-card-actions>
             </md-card>
         </div>
