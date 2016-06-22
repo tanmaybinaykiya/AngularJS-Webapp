@@ -4,16 +4,15 @@
         <manage-child-profile *ngSwitchWhen="'ParentChildrenModal_Manage'"></manage-child-profile>
         <unenroll *ngSwitchWhen="'ParentChildrenModal_Unenroll'"></unenroll>
         <enroll-student *ngSwitchWhen="'ParentChildrenModal_EnrollStudent'"></enroll-student>
+        <manage-user-profile *ngSwitchWhen="'ParentProfileModal_ManageProfile'"></manage-user-profile>
+        <reset-password *ngSwitchWhen="'ParentProfileModal_ResetPassword'"></reset-password>
+        <delete-user *ngSwitchWhen="'ParentProfileModal_DeleteUser'"></delete-user>
+        <resend-invitation *ngSwitchWhen="'ParentProfileModal_ResendInvitation'"></resend-invitation>
+        <invite-friends *ngSwitchWhen="'ParentProfileModal_InviteFriends'"></invite-friends>
+        <add-payment-type *ngSwitchWhen="'ParentProfileModal_ManageBilling'"></add-payment-type>
+        <delete-payment-type *ngSwitchWhen="'ParentProfileModal_DeletePaymentType'"></delete-payment-type>
+        <add-payment-type *ngSwitchWhen="'ParentProfileModal_AddPaymentType'"></add-payment-type>
         <p *ngSwitchWhen="'None'"></p>
-    <!--'ParentProfileModal_ManageProfile'-->
-    <!--'ParentProfileModal_ResetPassword'-->
-    <!--'ParentProfileModal_DeleteUser'-->
-    <!--'ParentProfileModal_ResendInvitation'-->
-    <!--'ParentProfileModal_InviteFriends'-->
-    <!--'ParentProfileModal_ManageBilling'-->
-    <!--'ParentProfileModal_DeletePaymentType'-->
-    <!--'ParentProfileModal_AddPaymentType'-->
-
         <p *ngSwitchDefault>Error: {{modalState.modal}}</p>
     </div>
 </div>

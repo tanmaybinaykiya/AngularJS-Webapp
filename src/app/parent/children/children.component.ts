@@ -12,17 +12,12 @@ import { Modal } from '../../lib/enums/modal-names.enums';
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
 
-import { ManageChildProfileComponent } from './manage-child-profile/';
-import { PayTuitionFeesComponent } from './pay-tuition-fees/';
-import { UnenrollComponent } from './unenroll/';
-import { EnrollStudentComponent } from './enroll-student/';
 import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question';
 
 @Component({
     selector: 'my-children',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, ManageChildProfileComponent,
-        PayTuitionFeesComponent, UnenrollComponent, EnrollStudentComponent,
-        MdButton, MdAnchor, DynamicFormQuestionComponent],
+    directives: [MdIcon, MD_CARD_DIRECTIVES,MdButton, MdAnchor, 
+        DynamicFormQuestionComponent],
     providers: [ParentService, MdIconRegistry, QuestionControlService],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
@@ -118,8 +113,4 @@ export class ChildrenComponent implements OnInit {
         return this.fb.group(group);
     }
 
-    toggleModal(modal:Modal){
-        console.log('toggleModal', modal);
-        this.modalControlService.enable(modal);
-    }
 }

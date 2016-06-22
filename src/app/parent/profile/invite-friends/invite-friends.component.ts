@@ -4,6 +4,7 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 import { MdSlideToggle } from '@angular2-material/slide-toggle/slide-toggle';
+import { ModalControlService } from '../../../lib/modal/modal-control.service.ts';
 
 @Component({
     selector: 'invite-friends',
@@ -13,18 +14,19 @@ import { MdSlideToggle } from '@angular2-material/slide-toggle/slide-toggle';
     styles: [require('./invite-friends.component.scss')]
 })
 export class InviteFriendsComponent implements OnInit {
+    
+    modalControlService: ModalControlService;
 
-    @Input() isModalOpen: Boolean;
-
-    constructor(mdIconRegistry: MdIconRegistry) {
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
+        this.modalControlService = modalControlService;
     }
 
+    closeView() {
+        this.modalControlService.disable();
+    }
+    
     ngOnInit() {
         console.log('InviteFriendsComponent');
-    }
-
-    toggleView() {
-        this.isModalOpen = !this.isModalOpen;
     }
 
 }

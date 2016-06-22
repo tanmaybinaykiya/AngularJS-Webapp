@@ -3,6 +3,7 @@ import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
+import { ModalControlService } from '../../../lib/modal/modal-control.service.ts';
 
 @Component({
     selector: 'delete-user',
@@ -12,18 +13,18 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
     styles: [require('./delete-user.component.scss')]
 })
 export class DeleteUserComponent implements OnInit {
-
-    @Input() isModalOpen: Boolean;
-
-    constructor(mdIconRegistry: MdIconRegistry) {
+    modalControlService: ModalControlService;
+    
+    constructor(mdIconRegistry: MdIconRegistry,  modalControlService:ModalControlService) {
+        this.modalControlService=modalControlService;
+    }
+    
+    closeView() {
+        this.modalControlService.disable();
     }
 
     ngOnInit() {
         console.log('DeleteUserComponent');
-    }
-
-    toggleView() {
-        this.isModalOpen = !this.isModalOpen;
     }
 
 }
