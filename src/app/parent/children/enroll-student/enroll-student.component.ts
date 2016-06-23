@@ -11,8 +11,8 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
     selector: 'enroll-student',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, 
-        MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective, 
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
+        MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective,
         FileDropDirective],
     providers: [MdIconRegistry],
     template: require('./enroll-student.component.html'),
@@ -21,13 +21,13 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 export class EnrollStudentComponent implements OnInit {
     @Input() isModalOpen: Boolean;
-    private modalControlService:ModalControlService
+    private modalControlService: ModalControlService
     public uploader: FileUploader = new FileUploader({ url: URL });
     public hasBaseDropZoneOver: boolean = false;
     public hasAnotherDropZoneOver: boolean = false;
 
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService:ModalControlService) {
-        this.modalControlService=modalControlService;
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
+        this.modalControlService = modalControlService;
     }
 
     ngOnInit() {

@@ -3,7 +3,7 @@ import { MdSlideToggle } from '@angular2-material/slide-toggle/slide-toggle';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 
-import { MDL } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
+import { MDLDirective } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
 
 import { ParentService } from '../../shared';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
@@ -14,7 +14,7 @@ import { Modal } from '../../lib/enums/modal-names.enums';
     providers: [ParentService, MdIconRegistry],
     template: require('./profile.component.html'),
     styles: [require('./profile.component.scss')],
-    directives: [MdSlideToggle, MdButton, MdAnchor, MdIcon, MDL ]
+    directives: [MdSlideToggle, MdButton, MdAnchor, MdIcon, MDLDirective]
 })
 export class ProfileComponent implements OnInit {
     modalControlService: ModalControlService;
@@ -65,15 +65,16 @@ export class ProfileComponent implements OnInit {
             }
         }
     ];
+
     constructor(private loginService: ParentService, modalControlService: ModalControlService) {
-            this.modalControlService=modalControlService;
+        this.modalControlService = modalControlService;
     }
 
     ngOnInit() {
         console.log('Profile');
     }
 
-    toggleModal(modal:Modal){
+    toggleModal(modal: Modal) {
         console.log('Profile: toggleModal', modal);
         this.modalControlService.enable(modal);
     }

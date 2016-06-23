@@ -14,11 +14,11 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service.ts
 })
 export class DeletePaymentTypeComponent implements OnInit {
     modalControlService: ModalControlService;
-    
-    constructor(mdIconRegistry: MdIconRegistry,  modalControlService:ModalControlService) {
-        this.modalControlService=modalControlService;
+
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
+        this.modalControlService = modalControlService;
     }
-    
+
     closeView() {
         this.modalControlService.disable();
     }

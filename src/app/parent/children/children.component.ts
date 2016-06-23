@@ -4,7 +4,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 
-import { MDL } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
+import { MDLDirective } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
 
 import { ParentService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
@@ -18,8 +18,8 @@ import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-for
 
 @Component({
     selector: 'my-children',
-    directives: [MdIcon, MD_CARD_DIRECTIVES,MdButton, MdAnchor, 
-        DynamicFormQuestionComponent, MDL ],
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
+        DynamicFormQuestionComponent, MDLDirective],
     providers: [ParentService, MdIconRegistry, QuestionControlService],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
@@ -96,7 +96,7 @@ export class ChildrenComponent implements OnInit {
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
         modalControlService: ModalControlService) {
-            this.modalControlService=modalControlService;
+        this.modalControlService = modalControlService;
     }
 
     toggleInstitutionDetails() {
@@ -111,7 +111,8 @@ export class ChildrenComponent implements OnInit {
 
     toControlGroup(question: QuestionBase<any>) {
         let group = {};
-        group[question.key] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
+        group[question.key] = question.required ?
+            [question.value || '', Validators.required] : [question.value || ''];
         return this.fb.group(group);
     }
 

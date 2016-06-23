@@ -13,11 +13,11 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service.ts
     styles: [require('./manage-child-profile.component.scss')]
 })
 export class ManageChildProfileComponent implements OnInit {
-    modalControlService:ModalControlService;
+    modalControlService: ModalControlService;
     @Input() isModalOpen: Boolean;
 
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService:ModalControlService) {
-        this.modalControlService=modalControlService;
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
+        this.modalControlService = modalControlService;
     }
 
     ngOnInit() {

@@ -6,7 +6,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 
 @Component({
     selector: 'header-toolbar',
-    directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent, MdButton, MdAnchor ],
+    directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent, MdButton, MdAnchor],
     providers: [LoginService, SchoolService],
     template: require('./header.component.html'),
     styles: [require('./header.component.scss')]
@@ -14,7 +14,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 
 export class HeaderComponent implements OnInit {
 
-    private schoolName:String;
+    private schoolName: String;
 
     constructor(private loginService: LoginService, private schoolService: SchoolService) {
     }
@@ -24,6 +24,6 @@ export class HeaderComponent implements OnInit {
     }
     ngOnInit() {
         console.log('Hello Home');
-        this.schoolName=this.schoolService.schoolName;
+        this.schoolName = this.schoolService.schoolName;
     }
 }

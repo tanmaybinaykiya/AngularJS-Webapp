@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';

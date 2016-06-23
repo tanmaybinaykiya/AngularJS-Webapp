@@ -16,7 +16,6 @@ import { Modal } from '../../../lib/enums/modal-names.enums';
 })
 export class PayTuitionFeesComponent implements OnInit {
     
-    @Input() isModalOpen: Boolean;
     @Input() isAutoPayEnabled: Boolean;
     paymentOptions = ['AMEX X156', 'ACH X156'];
 

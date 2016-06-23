@@ -5,7 +5,6 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 import { ModalControlService } from '../../../lib/modal/modal-control.service.ts';
 
-
 @Component({
     selector: 'unenroll',
     directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
@@ -14,11 +13,13 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service.ts
     styles: [require('./unenroll.component.scss')]
 })
 export class UnenrollComponent implements OnInit {
+   
     private modalControlService: ModalControlService;
+    
     @Input() isModalOpen: Boolean;
 
     constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
-        this.modalControlService=modalControlService;
+        this.modalControlService = modalControlService;
     }
 
     ngOnInit() {

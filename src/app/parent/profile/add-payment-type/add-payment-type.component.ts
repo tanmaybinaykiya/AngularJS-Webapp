@@ -8,7 +8,7 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service.ts
 
 @Component({
     selector: 'add-payment-type',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, 
+    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton,
         MdAnchor, MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES],
     providers: [MdIconRegistry],
     template: require('./add-payment-type.component.html'),
@@ -16,11 +16,11 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service.ts
 })
 
 export class AddPaymentTypeComponent implements OnInit {
-    
+
     modalControlService: ModalControlService;
-    
-    constructor(mdIconRegistry: MdIconRegistry,  modalControlService:ModalControlService) {
-        this.modalControlService=modalControlService;
+
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
+        this.modalControlService = modalControlService;
     }
 
     closeView() {
@@ -31,5 +31,5 @@ export class AddPaymentTypeComponent implements OnInit {
         console.log('AddPaymentTypeComponent');
     }
 
-    
+
 }
