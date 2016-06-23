@@ -4,6 +4,8 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 
+import { MDL } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
+
 import { ParentService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
@@ -17,7 +19,7 @@ import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-for
 @Component({
     selector: 'my-children',
     directives: [MdIcon, MD_CARD_DIRECTIVES,MdButton, MdAnchor, 
-        DynamicFormQuestionComponent],
+        DynamicFormQuestionComponent, MDL ],
     providers: [ParentService, MdIconRegistry, QuestionControlService],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
