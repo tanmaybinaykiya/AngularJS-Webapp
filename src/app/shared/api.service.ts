@@ -35,8 +35,8 @@ export class LoginService {
         console.log("hello login service");
     }
 
-    login(userName: String, password: String): Observable<User> {
-        let body = JSON.stringify({ email: userName, password: password });
+    login(email: String, password: String): Observable<User> {
+        let body = JSON.stringify({ email: email, password: password });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.loginUrl, body, options)

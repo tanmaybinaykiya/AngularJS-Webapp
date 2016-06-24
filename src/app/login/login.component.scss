@@ -1,10 +1,13 @@
 // component styles are encapsulated and only applied to their components
-#my-login{
-    background-color: #000;
+:host{
+    display: block;
+    background-color: #eee;
+    height: 100%;
 }
 #welcome-banner {
     display: block
 }
+
 #form-wrapper {
     width: 660px;
     height: 330px;
@@ -31,10 +34,11 @@
 }
 
 #login-wrapper{
-    width: 740px;
+    width: 660px;
     height: 500px;
     padding: 10px 20px;
     margin: 0 auto;
+    background-color: #FFF;
 }
 
 #welcome-banner{
@@ -102,7 +106,8 @@ h5{
     display: block;
     font-weight: 400;
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 16px;
+    color:#009688;
 }
 #login-button{
     width: 100%;
@@ -118,3 +123,27 @@ h5{
     color:#2D9ADD;
     text-transform: uppercase;
 }
+.error{
+    color:red;
+}
+.footer{
+    display: block;
+    width: 344px;
+    color: #aaa;
+    margin: 0 auto;
+    margin-top:40px;
+}
+.footer button{
+    background: none;
+    border:none;
+    color:#aaa;
+    vertical-align: middle;
+    padding: 0;
+}
+.footer span a{
+    color:#aaa;
+    font-weight: 600;
+}
+.footer button:focus{
+    outline: none;
+}    

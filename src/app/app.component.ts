@@ -13,27 +13,36 @@ import { AdminComponent } from './admin/';
 import { ModalComponent } from './lib/modal/';
 import { LoginService, SchoolService } from './shared';
 
-import '../style/app.scss';
-
-/*
- * App Component
- * Top Level Component
- */
 @Component({
-    selector: 'my-secureslice', // <my-app></my-app>
+    selector: 'my-secureslice',
     providers: [SchoolService, ModalControlService, LoginService, SchoolService],
     directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, 
-    ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
+        ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })
 @RouteConfig([
-    { path: '/login', component: LoginComponent, name: 'Login', useAsDefault: true },
-    { path: '/parent/...', component: ParentComponent, name: 'Parent' },
-    { path: '/superadmin', component: SuperAdminComponent, name: 'SuperAdmin' },
-    { path: '/admin/...', component: AdminComponent, name: 'Admin' },
+    { 
+        path: '/login', 
+        component: LoginComponent, 
+        name: 'Login', 
+        useAsDefault: true 
+    }, { 
+        path: '/parent/...', 
+        component: ParentComponent, 
+        name: 'Parent' 
+    }, { 
+        path: '/superadmin', 
+        component: SuperAdminComponent, 
+        name: 'SuperAdmin' 
+    }, { 
+        path: '/admin/...', 
+        component: AdminComponent, 
+        name: 'Admin' 
+    }
 ])
 export class AppComponent {
-    constructor(private school: SchoolService) {
-    }
+
+    constructor(private school: SchoolService) { }
+
 }
