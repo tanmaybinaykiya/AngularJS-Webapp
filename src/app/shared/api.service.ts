@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { User } from '../models/user';
+
 @Injectable()
 export class SchoolService {
     schoolName = 'Test School';
@@ -10,7 +11,6 @@ export class SchoolService {
 @Injectable()
 export class ApiUrlService {
     schoolName = 'Test School';
-
 }
 
 let getApiHost = function () {
@@ -26,17 +26,15 @@ let getApiHost = function () {
 
 @Injectable()
 export class LoginService {
+
     loginUrl = getApiHost() + '/users/token';
     loggedIn = false;
     loggedInUser: User;
+
     constructor(private http: Http) {
-        this.loggedInUser = {
-            name: 'Tanmay',
-            role: 'superadmin',
-            id: 3456,
-            token: 'token'
-        };
+        console.log("hello login service");
     }
+
     login(userName: String, password: String): Observable<User> {
         let body = JSON.stringify({ email: userName, password: password });
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -45,12 +43,15 @@ export class LoginService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+
     private extractData(res: Response) {
         this.loggedIn = true;
         let body = res.json();
         this.loggedInUser = body;
+        console.log('extractData: ', this.loggedInUser);
         return body || {};
     }
+
     private handleError(error: any) {
         this.loggedIn = false;
         try {
@@ -63,7 +64,6 @@ export class LoginService {
             return Observable.throw('Unknown service error');
         }
     }
-
 }
 
 @Injectable()

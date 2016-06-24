@@ -4,14 +4,13 @@ import { LoginService, SchoolService } from '../shared';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import { User } from '../models/user';
+
 @Component({
     selector: 'my-login',
     template: require('./login.component.html'),
-    providers: [LoginService, SchoolService],
     directives: [...MD_BUTTON_DIRECTIVES, ...MD_INPUT_DIRECTIVES],
     styles: [require('./login.component.scss')]
 })
-
 export class LoginComponent implements OnInit {
     username: string;
     password: string;
@@ -31,22 +30,28 @@ export class LoginComponent implements OnInit {
             .subscribe(
             function (currentUser: User) {
                 if (currentUser.role === 'parent') {
+                    self.loginService.loggedInUser=currentUser;
+                    self.loginService.loggedIn=true;
                     self.router.navigate(['/Parent']);
                 } else if (currentUser.role === 'superadmin') {
+                    self.loginService.loggedInUser=currentUser;
+                    self.loginService.loggedIn=true;
                     self.router.navigate(['/SuperAdmin']);
                 } else if (currentUser.role === 'admin') {
+                    self.loginService.loggedInUser=currentUser;
+                    self.loginService.loggedIn=true;
                     self.router.navigate(['/Admin']);
                 } else {
                     self.errorMessage = 'Not a valid user';
                 }
+                
             },
             error => this.errorMessage = <any>error);
+        
     }
 
-    forgotPassword() {
-    }
+    forgotPassword() { }
 
-    joinToday() {
-    }
+    joinToday() { }
 
 }

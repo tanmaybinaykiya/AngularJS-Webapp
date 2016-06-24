@@ -7,7 +7,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 @Component({
     selector: 'header-toolbar',
     directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent, MdButton, MdAnchor],
-    providers: [LoginService, SchoolService],
+    providers: [SchoolService],
     template: require('./header.component.html'),
     styles: [require('./header.component.scss')]
 })

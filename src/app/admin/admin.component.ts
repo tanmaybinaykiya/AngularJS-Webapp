@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Router, RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
@@ -12,6 +12,7 @@ import { PeopleComponent } from './people/';
 import { BillingComponent } from './billing/';
 import { NotificationComponent } from './notification/';
 import { AdministrationComponent } from './administration/';
+import { LoginService } from '../shared/api.service'
 
 @Component({
     selector: 'admin',
@@ -32,12 +33,14 @@ import { AdministrationComponent } from './administration/';
 
 export class AdminComponent implements OnInit {
 
-    constructor() {
-
+    constructor(private loginService: LoginService, private router: Router) {
+        console.log('Hello AdminComponent');
     }
 
     ngOnInit() {
-        console.log('Hello AdminComponent');
+        if(!this.loginService.loggedInUser || this.loginService.loggedInUser.role !== 'parent'){
+            this.router.navigate(['/Login']);
+        }
     }
 
     donate() {

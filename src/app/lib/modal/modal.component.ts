@@ -29,7 +29,7 @@ export class ModalComponent implements OnInit {
         modal: Modal.None
     };
 
-    constructor(modalControlService: ModalControlService) {
+    constructor(private modalControlService: ModalControlService) {
         console.log(modalControlService);
         modalControlService.isOpen$.subscribe(state => {
             console.log('state updated', state);
