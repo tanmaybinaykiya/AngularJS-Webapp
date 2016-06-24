@@ -1,5 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { NgSwitch, NgSwitchWhen, NgSwitchDefault } from '@angular/common';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 import { ModalControlService } from './modal-control.service';
 import { ModalState } from './modal-state';
@@ -18,7 +18,7 @@ import { JoinTodayComponent, ForgotPasswordComponent } from '../../login';
     selector: 'modal',
     template: require('./modal.component.html'),
     styles: [require('./modal.component.scss')],
-    directives: [NgSwitch, NgSwitchWhen, NgSwitchDefault, PayTuitionFeesComponent,
+    directives: [NgSwitch, NgSwitchCase, NgSwitchDefault, PayTuitionFeesComponent,
         EnrollStudentComponent, ManageChildProfileComponent, UnenrollComponent,
         AddPaymentTypeComponent, DeletePaymentTypeComponent, DeleteUserComponent,
         InviteFriendsComponent, ManageUserProfileComponent, ProfileComponent,

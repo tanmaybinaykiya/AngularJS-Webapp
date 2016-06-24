@@ -1,20 +1,20 @@
 <div id="wrapper" *ngIf="modalState.isOpen">
     <div [ngSwitch]="modalState.modal">
-        <pay-tuition-fees *ngSwitchWhen="'ParentChildrenModal_PayTuitionFees'"></pay-tuition-fees>
-        <manage-child-profile *ngSwitchWhen="'ParentChildrenModal_Manage'"></manage-child-profile>
-        <unenroll *ngSwitchWhen="'ParentChildrenModal_Unenroll'"></unenroll>
-        <enroll-student *ngSwitchWhen="'ParentChildrenModal_EnrollStudent'"></enroll-student>
-        <manage-user-profile *ngSwitchWhen="'ParentProfileModal_ManageProfile'"></manage-user-profile>
-        <reset-password *ngSwitchWhen="'ParentProfileModal_ResetPassword'"></reset-password>
-        <delete-user *ngSwitchWhen="'ParentProfileModal_DeleteUser'"></delete-user>
-        <resend-invitation *ngSwitchWhen="'ParentProfileModal_ResendInvitation'"></resend-invitation>
-        <invite-friends *ngSwitchWhen="'ParentProfileModal_InviteFriends'"></invite-friends>
-        <add-payment-type *ngSwitchWhen="'ParentProfileModal_ManageBilling'"></add-payment-type>
-        <delete-payment-type *ngSwitchWhen="'ParentProfileModal_DeletePaymentType'"></delete-payment-type>
-        <add-payment-type *ngSwitchWhen="'ParentProfileModal_AddPaymentType'"></add-payment-type>
-        <forgot-password *ngSwitchWhen="'LoginModal_ForgotPassword'"></forgot-password>
-        <join-today *ngSwitchWhen="'LoginModal_Join'"></join-today>
-        <p *ngSwitchWhen="'None'"></p>
+        <pay-tuition-fees *ngSwitchCase="'ParentChildrenModal_PayTuitionFees'"></pay-tuition-fees>
+        <manage-child-profile *ngSwitchCase="'ParentChildrenModal_Manage'"></manage-child-profile>
+        <unenroll *ngSwitchCase="'ParentChildrenModal_Unenroll'"></unenroll>
+        <enroll-student *ngSwitchCase="'ParentChildrenModal_EnrollStudent'"></enroll-student>
+        <manage-user-profile *ngSwitchCase="'ParentProfileModal_ManageProfile'"></manage-user-profile>
+        <reset-password *ngSwitchCase="'ParentProfileModal_ResetPassword'"></reset-password>
+        <delete-user *ngSwitchCase="'ParentProfileModal_DeleteUser'"></delete-user>
+        <resend-invitation *ngSwitchCase="'ParentProfileModal_ResendInvitation'"></resend-invitation>
+        <invite-friends *ngSwitchCase="'ParentProfileModal_InviteFriends'"></invite-friends>
+        <add-payment-type *ngSwitchCase="'ParentProfileModal_ManageBilling'"></add-payment-type>
+        <delete-payment-type *ngSwitchCase="'ParentProfileModal_DeletePaymentType'"></delete-payment-type>
+        <add-payment-type *ngSwitchCase="'ParentProfileModal_AddPaymentType'"></add-payment-type>
+        <forgot-password *ngSwitchCase="'LoginModal_ForgotPassword'"></forgot-password>
+        <join-today *ngSwitchCase="'LoginModal_Join'"></join-today>
+        <p *ngSwitchCase="'None'"></p>
         <p *ngSwitchDefault>Error: {{modalState.modal}}</p>
     </div>
 </div>

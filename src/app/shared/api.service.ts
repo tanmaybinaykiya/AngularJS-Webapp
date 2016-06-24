@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { User } from '../models/user';
-
+import { CanActivate,Router }    from '@angular/router';
 @Injectable()
 export class SchoolService {
     schoolName = 'Test School';
@@ -81,3 +81,6 @@ export class NotificationService {
         }
     ];
 }
+export const APP_SERVICES = [
+  NotificationService,ParentService,LoginService,ApiUrlService,SchoolService
+];

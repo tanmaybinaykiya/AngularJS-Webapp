@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
@@ -23,14 +23,6 @@ import { LoginService } from '../shared/api.service'
     styles: [require('./admin.component.scss')]
 })
 
-@RouteConfig([
-    { path: '/enrollmentCenter', component: EnrollmentCenterComponent, name: 'EnrollmentCenter', useAsDefault: true },
-    { path: '/people', component: PeopleComponent, name: 'People' },
-    { path: '/billing', component: BillingComponent, name: 'Billing' },
-    { path: '/notification', component: NotificationComponent, name: 'Notification' },
-    { path: '/administration', component: AdministrationComponent, name: 'Administration' },
-])
-
 export class AdminComponent implements OnInit {
 
     constructor(private loginService: LoginService, private router: Router) {
@@ -38,9 +30,7 @@ export class AdminComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(!this.loginService.loggedInUser || this.loginService.loggedInUser.role !== 'parent'){
-            this.router.navigate(['/Login']);
-        }
+        
     }
 
     donate() {

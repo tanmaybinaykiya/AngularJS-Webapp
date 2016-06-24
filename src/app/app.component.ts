@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
@@ -15,32 +15,12 @@ import { LoginService, SchoolService } from './shared';
 
 @Component({
     selector: 'my-secureslice',
-    providers: [SchoolService, ModalControlService, LoginService, SchoolService],
+    providers: [ModalControlService],
     directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, 
         ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })
-@RouteConfig([
-    { 
-        path: '/login', 
-        component: LoginComponent, 
-        name: 'Login', 
-        useAsDefault: true 
-    }, { 
-        path: '/parent/...', 
-        component: ParentComponent, 
-        name: 'Parent' 
-    }, { 
-        path: '/superadmin', 
-        component: SuperAdminComponent, 
-        name: 'SuperAdmin' 
-    }, { 
-        path: '/admin/...', 
-        component: AdminComponent, 
-        name: 'Admin' 
-    }
-])
 export class AppComponent {
 
     constructor(private school: SchoolService) { }
