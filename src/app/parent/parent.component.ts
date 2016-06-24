@@ -24,7 +24,7 @@ export class ParentComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+        console.log('Hello Parent');
     }
 
     donate() {

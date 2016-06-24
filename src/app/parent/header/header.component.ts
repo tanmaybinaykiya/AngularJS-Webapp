@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+
 import { LoginService, SchoolService } from '../../shared';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { UserBadgeComponent } from './userBadge/user-badge.component';
@@ -16,14 +18,20 @@ export class HeaderComponent implements OnInit {
 
     private schoolName: String;
 
-    constructor(private loginService: LoginService, private schoolService: SchoolService) {
+    constructor(private loginService: LoginService, private schoolService: SchoolService,
+        private router: Router) {
     }
 
     notificationMenu() {
-        console.log('notificationMenu');
+        console.log('Header');
     }
     ngOnInit() {
         console.log('Hello Home');
         this.schoolName = this.schoolService.schoolName;
+    }
+
+    logout(){
+        this.loginService.loggedInUser={};
+        this.router.navigate(['/Login']);
     }
 }
