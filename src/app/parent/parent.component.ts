@@ -27,9 +27,7 @@ import { ProfileComponent } from './profile';
 
 export class ParentComponent implements OnInit {
 
-    constructor(private parentService: ParentService) {
-
-    }
+    constructor(private parentService: ParentService) { }
 
     ngOnInit() {
         console.log('Hello Home');

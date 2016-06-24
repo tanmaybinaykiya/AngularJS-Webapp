@@ -10,9 +10,9 @@ import {AppComponent} from './app/app.component';
 const ENV_PROVIDERS = [];
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
-  enableProdMode();
+    enableProdMode();
 } else {
-  ENV_PROVIDERS.push(ELEMENT_PROBE_PROVIDERS);
+    ENV_PROVIDERS.push(ELEMENT_PROBE_PROVIDERS);
 }
 
 bootstrap(AppComponent, [
@@ -21,5 +21,5 @@ bootstrap(AppComponent, [
     ...ROUTER_PROVIDERS,
     ...ENV_PROVIDERS,
     { provide: LocationStrategy, useClass: HashLocationStrategy } // use #/ routes, remove this for HTML5 mode
-  ])
-  .catch(err => console.error(err));
+])
+    .catch(err => console.error(err));

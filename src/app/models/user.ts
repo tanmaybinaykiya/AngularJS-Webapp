@@ -1,7 +1,13 @@
 export class User {
-  constructor(
-    public id:number,
-    public name:string,
-    public role:string,
-    public token:string) { }
+    id: number;
+    name: string;
+    role: string;
+    token: string;
+
+    constructor( id: number, name: string, role: string, token: string) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+        this.token = token;
+    }
 }
