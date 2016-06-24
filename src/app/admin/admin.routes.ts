@@ -3,6 +3,7 @@ import { PeopleComponent } from './people/';
 import { BillingComponent } from './billing/';
 import { NotificationComponent } from './notification/';
 import { AdministrationComponent } from './administration/';
+import { AdminRegisterComponent } from './register';
 import { AdminComponent } from './admin.component';
 import { CanActivate,Router }    from '@angular/router';
 import { LoginService } from '../shared/api.service'
@@ -21,6 +22,10 @@ export const AdminRoutes = [
             { path: 'notification', component: NotificationComponent, name: 'Notification' },
             { path: 'administration', component: AdministrationComponent, name: 'Administration' },
         ]
+    },
+    {
+        path: 'admin/register',
+        component: AdminRegisterComponent
     }
 
 ];
