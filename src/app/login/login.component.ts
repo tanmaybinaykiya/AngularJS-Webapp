@@ -7,6 +7,9 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 
 import { LoginService, SchoolService } from '../shared';
+import { ModalControlService } from '../lib/modal/modal-control.service';
+import { Modal } from '../lib/enums/modal-names.enums';
+
 import { User } from '../models/user';
 
 @Component({
@@ -22,7 +25,7 @@ export class LoginComponent implements OnInit {
     errorMessage: string;
 
     constructor(private loginService: LoginService, private router: Router,
-        private school: SchoolService) {
+        private school: SchoolService, private modalControlService: ModalControlService) {
     }
 
     ngOnInit() {
@@ -58,5 +61,15 @@ export class LoginComponent implements OnInit {
     forgotPassword() { }
 
     joinToday() { }
+
+    handler(password: string, email:string) {
+        console.log('key: ',password, email);
+        this.login();
+    }
+
+    toggleModal(modal: Modal) {
+        console.log('Login: toggleModal', modal);
+        this.modalControlService.enable(modal);
+    }
 
 }

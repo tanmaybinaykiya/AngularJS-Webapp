@@ -4,17 +4,17 @@
         <div id="login-form">
             <div id="left-block">
                 <span id="sign-in-title" class="md-warn"> Sign in to get started </span>
-                <md-input class="full-width" placeholder="Email address" [(ngModel)]="email"></md-input>
-                <md-input class="full-width" placeholder="Password" type="password" [(ngModel)]="password"></md-input>
+                <md-input class="full-width" placeholder="Email address" (keyup.enter)="handler()" [(ngModel)]="email"></md-input>
+                <md-input class="full-width" (keyup.enter)="handler()" placeholder="Password" type="password" [(ngModel)]="password"></md-input>
                 <button id="login-button" md-raised-button color="primary" (click)="login()">Sign in</button>
-                <button id="forgot-password" md-button color="warn" (click)="forgotPassword()">Forgot Password?</button>
-                <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+                <div class="error-message" [hidden]="!errorMessage">{{errorMessage}}</div>
+                <button id="forgot-password" md-button (click)="toggleModal('LoginModal_ForgotPassword')" >Forgot Password?</button>
             </div>
         </div>
         <div id="parent-signup">
             <div>
                 <h5>Parents! Join today to manage your children's activities</h5>
-                <button id="join-today-button" md-button color="primary" (click)="joinToday()">Join Today</button>
+                <button id="join-today-button" md-button color="primary" (click)="toggleModal('LoginModal_Join')">Join Today</button>
             </div>
         </div>
     </div>

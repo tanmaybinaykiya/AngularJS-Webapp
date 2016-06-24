@@ -2,7 +2,7 @@
 :host{
     display: block;
     background-color: #eee;
-    height: 100%;
+    min-height: 100%;
 }
 #welcome-banner {
     display: block
@@ -71,12 +71,11 @@
 }
 
 #forgot-password{
-    display: block;
-    position: absolute;
+    margin-left: 112px;
     margin-top: 5px;
-    right: 0px;
     font-size: 12px;
     border: 1px;
+    color:#999;
 }
 
 #parent-signup{
@@ -123,8 +122,10 @@ h5{
     color:#2D9ADD;
     text-transform: uppercase;
 }
-.error{
+.error-message{
     color:red;
+    padding: 5px 0;
+    transition: 3s show;
 }
 .footer{
     display: block;

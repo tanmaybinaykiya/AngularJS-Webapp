@@ -12,6 +12,8 @@
         <add-payment-type *ngSwitchWhen="'ParentProfileModal_ManageBilling'"></add-payment-type>
         <delete-payment-type *ngSwitchWhen="'ParentProfileModal_DeletePaymentType'"></delete-payment-type>
         <add-payment-type *ngSwitchWhen="'ParentProfileModal_AddPaymentType'"></add-payment-type>
+        <forgot-password *ngSwitchWhen="'LoginModal_ForgotPassword'"></forgot-password>
+        <join-today *ngSwitchWhen="'LoginModal_Join'"></join-today>
         <p *ngSwitchWhen="'None'"></p>
         <p *ngSwitchDefault>Error: {{modalState.modal}}</p>
     </div>

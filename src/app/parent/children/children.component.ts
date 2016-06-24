@@ -29,7 +29,6 @@ export class ChildrenComponent implements OnInit {
     isInstitutionPanelOpen: Boolean = false;
     isManageChildProfileModalOpen: Boolean = false;
     form: ControlGroup;
-    modalControlService: ModalControlService;
 
     institution = {
         name: 'Loyola High School',
@@ -95,8 +94,7 @@ export class ChildrenComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
-        modalControlService: ModalControlService) {
-        this.modalControlService = modalControlService;
+        private modalControlService: ModalControlService) {
     }
 
     toggleInstitutionDetails() {
@@ -116,4 +114,8 @@ export class ChildrenComponent implements OnInit {
         return this.fb.group(group);
     }
 
+    toggleModal(modal: Modal) {
+        console.log('Profile: toggleModal', modal);
+        this.modalControlService.enable(modal);
+    }
 }

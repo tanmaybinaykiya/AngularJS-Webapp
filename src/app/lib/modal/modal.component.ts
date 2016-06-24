@@ -12,6 +12,8 @@ import { AddPaymentTypeComponent, DeletePaymentTypeComponent, DeleteUserComponen
     InviteFriendsComponent, ManageUserProfileComponent, ProfileComponent,
     ResendInvitationComponent, ResetPasswordComponent } from '../../parent/profile';
 
+import { JoinTodayComponent, ForgotPasswordComponent } from '../../login';
+
 @Component({
     selector: 'modal',
     template: require('./modal.component.html'),
@@ -20,7 +22,8 @@ import { AddPaymentTypeComponent, DeletePaymentTypeComponent, DeleteUserComponen
         EnrollStudentComponent, ManageChildProfileComponent, UnenrollComponent,
         AddPaymentTypeComponent, DeletePaymentTypeComponent, DeleteUserComponent,
         InviteFriendsComponent, ManageUserProfileComponent, ProfileComponent,
-        ResendInvitationComponent, ResetPasswordComponent],
+        ResendInvitationComponent, ResetPasswordComponent, JoinTodayComponent, 
+        ForgotPasswordComponent ],
 })
 export class ModalComponent implements OnInit {
 
