@@ -4,11 +4,20 @@
         <div id="login-form">
             <div id="left-block">
                 <span id="sign-in-title" class="md-warn"> Sign in to get started </span>
-                <md-input class="full-width" placeholder="Email address" (keyup.enter)="handler()" [(ngModel)]="email"></md-input>
-                <md-input class="full-width" (keyup.enter)="handler()" placeholder="Password" type="password" [(ngModel)]="password"></md-input>
-                <button id="login-button" md-raised-button color="primary" (click)="login()">Sign in</button>
-                <div class="error-message" [hidden]="!errorMessage">{{errorMessage}}</div>
-                <button id="forgot-password" md-button (click)="toggleModal('LoginModal_ForgotPassword')" >Forgot Password?</button>
+                <form>
+                    <md-input class="full-width" placeholder="Email address" (keyup.enter)="handler()" [(ngModel)]="email" ngControl="email" #spy #emailz="ngForm">
+                        <md-hint [hidden]="emailz.valid || emailz.pristine" align="end">Please enter a valid email</md-hint>
+                    </md-input>
+
+                    <md-input class="full-width" (keyup.enter)="handler()" placeholder="Password" type="password" [(ngModel)]="password" name="password">
+                        <md-hint align="end">Please enter a password</md-hint>
+                    </md-input>
+                   
+                    <button id="login-button" md-raised-button color="primary" (click)="login(spy)">Sign in</button>
+                    <div class="error-message" [hidden]="!errorMessage">{{errorMessage}}</div>
+                    <button id="forgot-password" md-button (click)="toggleModal('LoginModal_ForgotPassword')">Forgot Password?</button>
+                </form>
+                <!--<br>TODO: remove this: {{spy._inputElement.nativeElement.className}}-->
             </div>
         </div>
         <div id="parent-signup">
@@ -21,7 +30,7 @@
 </div>
 <div class="footer">
     <span>Powered by <a href="https://www.secureslice.com">SecureSlice</a>. We are here to help</span>
-        <button>
+    <button>
     <md-icon class="md-24">call</md-icon>
         </button>
     <button>

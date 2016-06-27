@@ -14,8 +14,13 @@
     display: block; 
 }
 .full-width{
-    display:block;
-    margin-top: 40px;
+    // display:block;
+    width:240px;
+    margin-bottom: 20px;
+}
+.md-hint{
+    top: 4em;
+    color: red;
 }
 .login-form{
     display:block;
@@ -88,6 +93,9 @@
     border-top-left-radius: 0px; 
     background-color: #2D9ADD; 
 }
+.ng-valid .md-hint{
+    display: none;
+}
 
 h5{ 
     font-style: normal; 
@@ -107,6 +115,7 @@ h5{
     margin-top: 20px;
     font-size: 16px;
     color:#009688;
+    margin-bottom: 20px;
 }
 #login-button{
     width: 100%;

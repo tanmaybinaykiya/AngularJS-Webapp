@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm }    from '@angular/common';
+import { REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
@@ -15,7 +15,7 @@ import { User } from '../models/user';
 @Component({
     selector: 'my-login',
     template: require('./login.component.html'),
-    directives: [...MD_BUTTON_DIRECTIVES, ...MD_INPUT_DIRECTIVES, MdIcon],
+    directives: [...MD_BUTTON_DIRECTIVES, ...MD_INPUT_DIRECTIVES, MdIcon, REACTIVE_FORM_DIRECTIVES],
     providers: [MdIconRegistry],
     styles: [require('./login.component.scss')]
 })
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
     errorMessage: string;
+    name: string;
 
     constructor(private loginService: LoginService, private router: Router,
         private school: SchoolService, private modalControlService: ModalControlService) {
