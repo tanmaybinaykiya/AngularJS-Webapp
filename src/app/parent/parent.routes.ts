@@ -8,9 +8,9 @@ export const ParentRoutes = [
         component: ParentComponent,
         canActivate: [ParentGuard],
         children: [
-            { path: '', redirectTo: 'children',terminal: true},
-            { path: 'children', component: ChildrenComponent , name:'children'},
-            { path: 'profile', component: ProfileComponent, name:'profile'}
+            { path: '', redirectTo: 'children', terminal: true },
+            { path: 'children', component: ChildrenComponent, name: 'children' },
+            { path: 'profile', component: ProfileComponent, name: 'profile' }
         ]
     },
 

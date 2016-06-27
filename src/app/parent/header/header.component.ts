@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import { LoginService, SchoolService } from '../../shared';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
@@ -31,7 +31,10 @@ export class HeaderComponent implements OnInit {
     }
 
     logout(){
-        this.loginService.loggedInUser={};
-        this.router.navigate(['/Login']);
+        console.log('logout triggered');
+        this.loginService.loggedIn=false;
+        console.log('navigating');
+        this.router.navigate(['/login']);
+        console.log('navigated');
     }
 }
