@@ -132,9 +132,11 @@ h5{
     text-transform: uppercase;
 }
 .error-message{
-    color:red;
+    color:#f44336;
     padding: 5px 0;
-    transition: 3s show;
+    display: block;
+    text-align: center;
+    // transition: 3s show;
 }
 .footer{
     display: block;

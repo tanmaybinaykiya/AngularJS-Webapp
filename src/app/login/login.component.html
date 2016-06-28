@@ -15,7 +15,7 @@
                     
                     <button id="login-button" [disabled]="!isValid" md-raised-button color="primary" (click)="login(spy)">Sign in</button>
                     <md-progress-bar [hidden]="!isRequested" mode="query"></md-progress-bar>
-                    <div class="error-message" [hidden]="!errorMessage">{{errorMessage}}</div>
+                    <span class="error-message" [hidden]="!errorMessage">{{errorMessage}}</span>
                     <button id="forgot-password" md-button (click)="toggleModal('LoginModal_ForgotPassword')">Forgot Password?</button>
                 </form>
                 <!--<br>TODO: remove this: {{spy._inputElement.nativeElement.className}}-->

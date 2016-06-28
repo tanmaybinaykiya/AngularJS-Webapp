@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
             },
             function (error) {
                 self.isRequested = false;
-                this.errorMessage = <any>error
+                self.errorMessage = <any>error;
             });
 
     }
