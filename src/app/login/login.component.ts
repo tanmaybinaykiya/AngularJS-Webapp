@@ -45,6 +45,14 @@ export class LoginComponent implements OnInit {
         console.log('Hello Home');
     }
 
+    setErrorMessage(message: string) {
+        this.errorMessage = message;
+        let self = this;
+        setTimeout(function () {
+            self.errorMessage = null;
+        }, 1500);
+    }
+
     login() {
         let self = this;
         self.isRequested = true;
@@ -65,14 +73,13 @@ export class LoginComponent implements OnInit {
                     self.loginService.loggedIn = true;
                     self.router.navigate(['/admin']);
                 } else {
-                    self.errorMessage = 'Not a valid user';
+                    self.setErrorMessage('Not a valid user');
                 }
             },
             function (error) {
                 self.isRequested = false;
-                self.errorMessage = <any>error;
+                self.setErrorMessage(error);
             });
-
     }
 
     forgotPassword() { }
