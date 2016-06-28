@@ -12,8 +12,9 @@
                     <md-input class="full-width" (keyup.enter)="handler()" placeholder="Password" type="password" [(ngModel)]="password" name="password">
                         <md-hint align="end">Please enter a password</md-hint>
                     </md-input>
-                   
-                    <button id="login-button" md-raised-button color="primary" (click)="login(spy)">Sign in</button>
+                    
+                    <button id="login-button" [disabled]="!isValid" md-raised-button color="primary" (click)="login(spy)">Sign in</button>
+                    <md-progress-bar [hidden]="!isRequested" mode="query"></md-progress-bar>
                     <div class="error-message" [hidden]="!errorMessage">{{errorMessage}}</div>
                     <button id="forgot-password" md-button (click)="toggleModal('LoginModal_ForgotPassword')">Forgot Password?</button>
                 </form>

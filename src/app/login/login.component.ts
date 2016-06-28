@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MdSpinner } from '@angular2-material/progress-circle/progress-circle';
+import { MdProgressBar } from '@angular2-material/progress-bar/progress-bar';
 
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
@@ -15,7 +17,8 @@ import { User } from '../models/user';
 @Component({
     selector: 'my-login',
     template: require('./login.component.html'),
-    directives: [...MD_BUTTON_DIRECTIVES, ...MD_INPUT_DIRECTIVES, MdIcon, REACTIVE_FORM_DIRECTIVES],
+    directives: [...MD_BUTTON_DIRECTIVES, ...MD_INPUT_DIRECTIVES,
+        MdIcon, REACTIVE_FORM_DIRECTIVES, MdSpinner, MdProgressBar],
     providers: [MdIconRegistry],
     styles: [require('./login.component.scss')]
 })
@@ -24,9 +27,18 @@ export class LoginComponent implements OnInit {
     password: string;
     errorMessage: string;
     name: string;
+    isRequested: boolean = false;
 
     constructor(private loginService: LoginService, private router: Router,
         private school: SchoolService, private modalControlService: ModalControlService) {
+    }
+
+    get isValid(): boolean {
+        return !(
+            (this.email == null || this.email == "")
+            || (this.password == null || this.password == "")
+            || (this.isRequested)
+        );
     }
 
     ngOnInit() {
@@ -35,9 +47,11 @@ export class LoginComponent implements OnInit {
 
     login() {
         let self = this;
+        self.isRequested = true;
         this.loginService.login(this.email, this.password)
             .subscribe(
             function (currentUser: User) {
+                self.isRequested = false;
                 if (currentUser.role === 'parent') {
                     self.loginService.loggedInUser = currentUser;
                     self.loginService.loggedIn = true;
@@ -53,9 +67,11 @@ export class LoginComponent implements OnInit {
                 } else {
                     self.errorMessage = 'Not a valid user';
                 }
-
             },
-            error => this.errorMessage = <any>error);
+            function (error) {
+                self.isRequested = false;
+                this.errorMessage = <any>error
+            });
 
     }
 
@@ -63,8 +79,8 @@ export class LoginComponent implements OnInit {
 
     joinToday() { }
 
-    handler(password: string, email:string) {
-        console.log('key: ',password, email);
+    handler(password: string, email: string) {
+        console.log('key: ', password, email);
         this.login();
     }
 

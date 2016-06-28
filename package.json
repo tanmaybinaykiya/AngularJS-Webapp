@@ -45,6 +45,9 @@
     "@angular2-material/slide-toggle": "^2.0.0-alpha.5-2",
     "@angular2-material/tabs": "^2.0.0-alpha.5-2",
     "@angular2-material/toolbar": "^2.0.0-alpha.5-2",
+    "@angular2-material/progress-circle": "^2.0.0-alpha.5-2",
+    "@angular2-material/progress-bar": "^2.0.0-alpha.5-2",
+    
     "es6-shim": "^0.35.0",
     "ng2-file-upload": "1.0.3",
     "reflect-metadata": "0.1.2",
