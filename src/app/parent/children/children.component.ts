@@ -29,8 +29,8 @@ export class ChildrenComponent implements OnInit {
 
     form: ControlGroup;
     institution: Institution;
-    isLoading: boolean = false;
-    isInstitutionPanelOpen:boolean = false;
+    // isLoading: boolean = false;
+    isInstitutionPanelOpen: boolean = false;
 
     billingHistory = [
         {
@@ -92,24 +92,32 @@ export class ChildrenComponent implements OnInit {
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
         private modalControlService: ModalControlService, private schoolService: SchoolService,
-        private loginService:LoginService ) { }
+        private loginService: LoginService) { }
 
     ngOnInit() {
         console.log('Children On init', this.schoolService);
         this.form = this.toControlGroup(this.question);
         let self = this;
 
-        self.isLoading=true;
+        // self.isLoading = true;
         let institutionCode = this.loginService.loggedInUser.institutionShortCode;
         this.schoolService.getSchool(institutionCode)
             .subscribe(function (school: Institution) {
                 console.log('school', school);
-                self.isLoading=false;
+                // self.isLoading = false;
                 self.institution = school;
             },
             function (error) {
                 console.log(error);
             });
+
+        // this.schoolService.school.subscribe(function (school: Institution) {
+        //     console.log('school', school);
+        //     // self.isLoading = false;
+        //     self.institution = school;
+        // }, function (err: any) {
+        //     console.log(err);
+        // })
     }
 
     ngOnChanges() {
