@@ -16,6 +16,7 @@ md-icon{
     height: initial;
     padding: 0;
     cursor:default;
+    text-transform: capitalize;
 }
 
 #user-name{
@@ -23,7 +24,7 @@ md-icon{
     margin: 0 auto;
     text-align: center;
     font-size: 16px;
-    
+    text-transform: capitalize;
 }
 
 #badge-value{

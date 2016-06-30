@@ -3,7 +3,7 @@ import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list/list';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
-
+import { LoginService } from '../../../shared';
 
 @Component({
     selector: 'user-badge',
@@ -16,11 +16,13 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 export class UserBadgeComponent implements OnInit {
     user = 'Dr. House';
     role = 'Parent';
-    constructor() {
+    constructor(private loginService: LoginService) {
     }
 
     ngOnInit() {
         console.log('Hello Home');
+        this.user=this.loginService.loggedInUser.name;
+        this.role=this.loginService.loggedInUser.role;
     }
 }
 

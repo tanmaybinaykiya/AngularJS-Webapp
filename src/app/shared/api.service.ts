@@ -8,9 +8,9 @@ import { Subject }    from 'rxjs/Subject';
 
 @Injectable()
 export class SchoolService {
-    
+
     private _school = new Subject<Institution>();
-	school = this._school.asObservable();
+    school = this._school.asObservable();
 
     private getInstitutionUrl: string = getApiHost() + "/institution/shortcode";
 
@@ -18,7 +18,7 @@ export class SchoolService {
         console.log("hello SchoolService");
     }
 
-    getSchool(institutionCode:string): Observable<Institution> {
+    getSchool(institutionCode: string): Observable<Institution> {
         console.log('getSchool called');
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -92,6 +92,7 @@ export class LoginService {
         this.loggedIn = true;
         let body = res.json();
         this.loggedInUser = body;
+        this.loggedInUser.name = body.firstname;
         console.log('extractData: ', this.loggedInUser);
         return body || {};
     }

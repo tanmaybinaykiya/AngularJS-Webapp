@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     }
 
     notificationMenu() {
-        console.log('Header');
+        console.log('notificationMenu');
     }
     ngOnInit() {
         console.log('Hello HeaderComponent', this.loginService.loggedInUser.institutionShortCode);
