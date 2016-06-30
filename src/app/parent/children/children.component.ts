@@ -6,10 +6,11 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
 
 import { MDLDirective } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
 
-import { ParentService } from '../../shared';
+import { ParentService, SchoolService, LoginService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';
+import { Institution } from '../../models/institution';
 
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
@@ -25,15 +26,11 @@ import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-for
     styles: [require('./children.component.scss')]
 })
 export class ChildrenComponent implements OnInit {
-    // menuItems : Array<String> = ["abcd", "bcdef", "efgh"];
-    isInstitutionPanelOpen: Boolean = false;
-    isManageChildProfileModalOpen: Boolean = false;
-    form: ControlGroup;
 
-    institution = {
-        name: 'Loyola High School',
-        details: ['Pashan Road,', 'Pune 411008']
-    };
+    form: ControlGroup;
+    institution: Institution;
+    isLoading: boolean = false;
+    isInstitutionPanelOpen:boolean = false;
 
     billingHistory = [
         {
@@ -94,17 +91,29 @@ export class ChildrenComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
-        private modalControlService: ModalControlService) {
-    }
-
-    toggleInstitutionDetails() {
-        this.isInstitutionPanelOpen = !this.isInstitutionPanelOpen;
-        console.log('cliekced', this.isInstitutionPanelOpen);
-    }
+        private modalControlService: ModalControlService, private schoolService: SchoolService,
+        private loginService:LoginService ) { }
 
     ngOnInit() {
-        console.log('Children', this.form);
+        console.log('Children On init', this.schoolService);
         this.form = this.toControlGroup(this.question);
+        let self = this;
+
+        self.isLoading=true;
+        let institutionCode = this.loginService.loggedInUser.institutionShortCode;
+        this.schoolService.getSchool(institutionCode)
+            .subscribe(function (school: Institution) {
+                console.log('school', school);
+                self.isLoading=false;
+                self.institution = school;
+            },
+            function (error) {
+                console.log(error);
+            });
+    }
+
+    ngOnChanges() {
+        console.log('Children ngOnChanges called');
     }
 
     toControlGroup(question: QuestionBase<any>) {

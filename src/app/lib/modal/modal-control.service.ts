@@ -12,7 +12,6 @@ export class ModalControlService {
         this.isOpen$.subscribe(state => {
             console.log('ModalControlService state updated', state);
         });
-        console.log(this);
     }
 
     enable(modal: Modal) {

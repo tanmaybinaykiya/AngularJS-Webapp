@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginService, SchoolService } from '../../shared';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { UserBadgeComponent } from './userBadge/user-badge.component';
 import { MdButton, MdAnchor } from '@angular2-material/button/button';
 
+import { LoginService, SchoolService } from '../../shared';
+import { Institution } from '../../models/institution'
+
 @Component({
     selector: 'header-toolbar',
     directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent, MdButton, MdAnchor],
-    providers: [SchoolService],
+    providers: [],
     template: require('./header.component.html'),
     styles: [require('./header.component.scss')]
 })
@@ -17,6 +19,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 export class HeaderComponent implements OnInit {
 
     private schoolName: String;
+    isLoading:boolean=false;
 
     constructor(private loginService: LoginService, private schoolService: SchoolService,
         private router: Router) {
@@ -26,13 +29,25 @@ export class HeaderComponent implements OnInit {
         console.log('Header');
     }
     ngOnInit() {
-        console.log('Hello Home');
-        this.schoolName = this.schoolService.schoolName;
+        console.log('Hello HeaderComponent', this.loginService.loggedInUser.institutionShortCode);
+        let institutionCode = this.loginService.loggedInUser.institutionShortCode;
+        var self = this;
+        self.isLoading=true;
+        this.schoolService.getSchool(institutionCode)
+            .subscribe(function (school: Institution) {
+                console.log('school', school);
+                self.isLoading=false;
+                self.schoolName = school.name;
+            },
+            function (error) {
+                console.log(error);
+            });
+
     }
 
-    logout(){
+    logout() {
         console.log('logout triggered');
-        this.loginService.loggedIn=false;
+        this.loginService.loggedIn = false;
         console.log('navigating');
         this.router.navigate(['/login']);
         console.log('navigated');

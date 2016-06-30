@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     isRequested: boolean = false;
 
     constructor(private loginService: LoginService, private router: Router,
-        private school: SchoolService, private modalControlService: ModalControlService) {
+        private schoolService: SchoolService, private modalControlService: ModalControlService) {
     }
 
     get isValid(): boolean {

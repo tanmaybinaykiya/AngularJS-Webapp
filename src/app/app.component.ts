@@ -15,7 +15,7 @@ import { LoginService, SchoolService } from './shared';
 
 @Component({
     selector: 'my-secureslice',
-    providers: [ModalControlService],
+    providers: [ModalControlService, SchoolService],
     directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, 
         ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
     template: require('./app.component.html'),
@@ -23,6 +23,6 @@ import { LoginService, SchoolService } from './shared';
 })
 export class AppComponent {
 
-    constructor(private school: SchoolService) { }
+    constructor() { }
 
 }

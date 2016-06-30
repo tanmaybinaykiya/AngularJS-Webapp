@@ -1,22 +1,19 @@
-<div mdl>
-    <span id="institution-name-title">Institution Information: </span><span id="institution-name">{{institution.name}}</span>
-    <button id="institution-details-button" class="mdl-button mdl-js-button mdl-button--icon" (click)="isInstitutionPanelOpen = !isInstitutionPanelOpen">
+<div mdl *ngIf="!isLoading">
+    <span id="institution-name-title">Institution Information: </span>
+    <span id="institution-name">{{institution.name}}</span>
+    <button id="institution-details-button" class="mdl-button mdl-js-button mdl-button--icon" 
+        (click)="isInstitutionPanelOpen = !isInstitutionPanelOpen">
         <md-icon>radio_button_checked</md-icon>
     </button>
     <div *ngIf="isInstitutionPanelOpen">
         <md-card class="institution-details-card">
             <md-card-title-group>
                 <md-card-subtitle>{{institution.name}}</md-card-subtitle>
-                <md-card-subtitle>{{institution.details[0]}}</md-card-subtitle>
-                <md-card-subtitle>{{institution.details[1]}}</md-card-subtitle>
+                <md-card-subtitle>{{institution.addressline1}}</md-card-subtitle>
+                <!--<md-card-subtitle>{{institution.details[1]}}</md-card-subtitle>-->
             </md-card-title-group>
         </md-card>
     </div>
-    <!--<manage-child-profile #childProfileManager></manage-child-profile>
-    <!--<pay-tuition-fees #tuitionFeesManager></pay-tuition-fees>-->
-    <!--<unenroll #unenrollManager></unenroll>
-    <enroll-student #enrollStudentManager></enroll-student>-->
-    <!--<my-menu label="tanmay" items={{menuItems}}></my-menu>-->
     <div id="enrolled-students-table" class="table-container">
         <span class="table-title">Students Enrolled</span>
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">

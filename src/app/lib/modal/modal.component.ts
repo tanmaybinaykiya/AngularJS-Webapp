@@ -33,7 +33,6 @@ export class ModalComponent implements OnInit {
     };
 
     constructor(private modalControlService: ModalControlService) {
-        console.log(modalControlService);
         modalControlService.isOpen$.subscribe(state => {
             console.log('state updated', state);
             this.modalState = state;
