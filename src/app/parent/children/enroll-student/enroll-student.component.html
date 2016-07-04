@@ -8,6 +8,7 @@
                         <md-tab>
                             <template md-tab-label>Student Information</template>
                             <template md-tab-content>
+
                                 <md-input class="input-field" placeholder="First Name"></md-input>
                                 <md-input class="input-field" placeholder="Middle Name"></md-input>
                                 <md-input class="input-field" placeholder="Last Name"></md-input>
@@ -16,24 +17,8 @@
                                 <md-input class="input-field" placeholder="City of Birth"></md-input>
                                 <md-input class="input-field" placeholder="State of Birth"></md-input>
                                 <md-input class="input-field" placeholder="Country of Birth"></md-input>
-                                <div class="input-field form-group">
-                                    <!--<label for="race-control">Race:</label>-->
-                                    <select id="race-control" class="form-control" required>
-                                        <option value="ami">American Indian</option>
-                                        <option value="aln">Alaskan Native</option>
-                                        <option value="asi">Asian</option>
-                                        <option value="afm">African American</option>
-                                        <option value="hpi">Native Hawaian or Other Pacific Islander</option>
-                                        <option value="ame">American</option>
-                                    </select>
-                                </div>
-                                <div class="input-field form-group">
-                                    <!--<label for="gender-control">Gender:</label>-->
-                                    <select id="gender-control" class="form-control" required>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </div>
+                                <custom-dropdown options={{races}} placeholder="Select Race"></custom-dropdown>
+                                <custom-dropdown options={{genders}} placeholder="Select Gender"></custom-dropdown>
                                 <div class="input-field mdl-textfield mdl-js-textfield" style="width:92%; margin: 0 0 0 10px;">
                                     <label>Additional Information</label>
                                     <textarea placeholder="Enter any additional information" class="mdl-textfield__input" type="text" rows="3" id="sample5"></textarea>
@@ -47,31 +32,10 @@
                                 <md-input class="input-field" placeholder="CVV2 Number"></md-input>
                                 <div class="input-field form-group">
                                     <label for="gender-control">Expiration:</label>
-                                    <select id="month-control" class="form-control" required>
-                                        <option value=01>01</option>
-                                        <option value=01>02</option>
-                                        <option value=01>03</option>
-                                        <option value=01>04</option>
-                                        <option value=01>05</option>
-                                        <option value=01>06</option>
-                                        <option value=01>07</option>
-                                        <option value=01>09</option>
-                                        <option value=01>09</option>
-                                        <option value=01>10</option>
-                                        <option value=01>11</option>
-                                        <option value=01>12</option>
-                                    </select>
+                                    <custom-dropdown options={{months}} placeholder="Month"></custom-dropdown>
                                 </div>
                                 <div class="input-field form-group">
-                                    <!--<label for="gender-control"></label>-->
-                                    <select id="year-control" class="form-control" required>
-                                        <option value=2016>2016</option>
-                                        <option value=2017>2017</option>
-                                        <option value=2018>2018</option>
-                                        <option value=2019>2019</option>
-                                        <option value=2020>2020</option>
-                                        <option value=2021>2021</option>
-                                    </select>
+                                     <custom-dropdown options={{years}} placeholder="Year"></custom-dropdown>
                                 </div>
                                 <md-input class="input-field" placeholder="Street"></md-input>
                                 <md-input class="input-field" placeholder="City"></md-input>

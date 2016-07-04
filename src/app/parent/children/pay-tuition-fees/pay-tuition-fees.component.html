@@ -8,9 +8,7 @@
                     <md-slide-toggle id="slide-toggle" [(ngModel)]="slideToggleModel" color="primary"></md-slide-toggle>
                     <div class="form-group">
                         <label>Make a one Time Payment:</label>
-                        <select class="form-control" required>
-                            <option *ngFor="let paymentOption of paymentOptions" [value]="paymentOption">{{paymentOption}}</option>
-                        </select>
+                        <custom-dropdown options={{paymentOptions}} placeholder="Select Payment Type"></custom-dropdown>
                     </div>
                 </md-card-content>
                 <md-card-actions align="end">

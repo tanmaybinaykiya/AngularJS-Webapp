@@ -1,0 +1,15 @@
+<div class="dropdown">
+    <div id="title-group" (click)="clickHandler()">
+        <p id="select-title">{{selectedOption.value}}</p>
+        <md-icon id="drop-down-arrow">arrow_drop_down</md-icon>
+    </div>
+    <div id="option-section">
+        <!--<md-icon id="drop-up-arrow" >arrow_drop_up</md-icon>-->
+        <div [hidden]="!isSelected" id="option-group">
+            <div *ngFor="let option of _options" >
+                <span class="option" *ngIf="!isDivider(option)" (click)="select(option)">{{option}}</span>
+                <hr *ngIf="isDivider(option)" />
+            </div>
+        </div>
+    </div>
+</div>

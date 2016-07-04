@@ -6,6 +6,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { ModalControlService } from '../../../lib/modal/modal-control.service.ts';
+import { DropDownComponent } from '../../../lib/custom-dropdown/dropdown.component';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -13,7 +14,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
     selector: 'enroll-student',
     directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
         MD_INPUT_DIRECTIVES, MD_TABS_DIRECTIVES, FileSelectDirective,
-        FileDropDirective],
+        FileDropDirective, DropDownComponent],
     providers: [MdIconRegistry],
     template: require('./enroll-student.component.html'),
     styles: [require('./enroll-student.component.scss')]
@@ -25,9 +26,20 @@ export class EnrollStudentComponent implements OnInit {
     public uploader: FileUploader = new FileUploader({ url: URL });
     public hasBaseDropZoneOver: boolean = false;
     public hasAnotherDropZoneOver: boolean = false;
+    private races: String[] = ['American Indian', 'Alaskan Native', 'Asian', 'African American',
+        'Native Hawaian or Other Pacific Islander', 'American'];
+    private genders: String[] = ['Male', 'Female'];
+    private months: number[];
+    private years: number[];
+
+    range(a, b, c) { c = []; while (a--) c[a] = a + b; return c; };
 
     constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
         this.modalControlService = modalControlService;
+        this.months = this.range(12, 1, this.months);
+        console.log(this.months);
+        this.years = this.range(50, 2016, this.years);
+        console.log(this.years);
     }
 
     ngOnInit() {
