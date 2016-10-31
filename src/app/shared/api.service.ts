@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
 import { User } from '../models/user';
-import { CanActivate, Router }    from '@angular/router';
 import { Institution } from '../models/institution';
-import { Subject }    from 'rxjs/Subject';
 
 @Injectable()
 export class SchoolService {
@@ -12,10 +13,10 @@ export class SchoolService {
     private _school = new Subject<Institution>();
     school = this._school.asObservable();
 
-    private getInstitutionUrl: string = getApiHost() + "/institution/shortcode";
+    private getInstitutionUrl: string = getApiHost() + '/institution/shortcode';
 
     constructor(private http: Http) {
-        console.log("hello SchoolService");
+        console.log('hello SchoolService');
     }
 
     getSchool(institutionCode: string): Observable<Institution> {
@@ -25,7 +26,7 @@ export class SchoolService {
         let params: URLSearchParams = new URLSearchParams();
         let url = this.getInstitutionUrl;
         params.set('shortCode', institutionCode);
-        console.log("url: ", url, "params: ", params);
+        console.log('url: ', url, 'params: ', params);
         return this.http.get(this.getInstitutionUrl, { search: params })
             .map(this.extractData)
             .catch(this.handleError);
@@ -76,7 +77,7 @@ export class LoginService {
     loggedInUser: User;
 
     constructor(private http: Http) {
-        console.log("hello login service");
+        console.log('hello login service');
     }
 
     login(email: String, password: String): Observable<User> {

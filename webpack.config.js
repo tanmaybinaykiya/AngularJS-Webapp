@@ -79,7 +79,6 @@ module.exports = function makeWebpackConfig() {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
         'app': './src/main.ts', // our angular app
-        'login': './src/login/login.ts'
     };
 
     /**

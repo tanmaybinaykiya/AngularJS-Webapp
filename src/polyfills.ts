@@ -1,8 +1,8 @@
 
 
-// import 'es6-shim';
+import 'es6-shim';
 import 'reflect-metadata';
-// require('zone.js/dist/zone');
+require('zone.js/dist/zone');
 
 import 'ts-helpers';
 

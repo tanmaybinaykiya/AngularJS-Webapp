@@ -1,5 +1,5 @@
-import { CanActivate,Router }    from '@angular/router';
-import { LoginService } from '../shared/api.service'
+import { CanActivate, Router } from '@angular/router';
+import { LoginService } from '../shared/api.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class SuperAdminGuard implements CanActivate {
         console.log('Hello SuperAdminGuard');
     }
     canActivate() {
-        if(this.loginService.loggedInUser && this.loginService.loggedInUser.role == 'superadmin'){
+        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'superadmin') {
             return true;
         }
         this.router.navigate(['login']);

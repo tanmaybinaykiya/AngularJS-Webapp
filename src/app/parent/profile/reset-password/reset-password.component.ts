@@ -1,27 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
-import { MdButton, MdAnchor } from '@angular2-material/button/button';
-import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
-import { ModalControlService } from '../../../lib/modal/modal-control.service.ts';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'reset-password',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor, MD_INPUT_DIRECTIVES],
-    providers: [MdIconRegistry],
+    selector: 'my-ss-reset-password',
     template: require('./reset-password.component.html'),
     styles: [require('./reset-password.component.scss')]
 })
 export class ResetPasswordComponent implements OnInit {
 
-    modalControlService: ModalControlService;
-
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
-        this.modalControlService = modalControlService;
+    constructor() {
     }
 
     closeView() {
-        this.modalControlService.disable();
+        console.log('close Modal');
     }
 
     ngOnInit() {

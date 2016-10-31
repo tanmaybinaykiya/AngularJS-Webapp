@@ -1,38 +1,30 @@
-<md-card>
-    <md-card-title>Create institution</md-card-title>
-    <md-card-content>
-        <form>
-        <md-input class="input-button" placeholder="Name" [(ngModel)]="institutionName" type="text"></md-input>
-        <md-input class="input-button" placeholder="ShortCode" [(ngModel)]="institutionShortCode" type="text"></md-input>
-        </form>
-    </md-card-content>
-    <md-card-actions align="end">
-        <button id="create-insti-button" md-raised-button color="primary" (click)="createInstitution()">Submit</button>
-    </md-card-actions>
-</md-card>
-
-<md-card>
-    <md-card-title>Invite admin to institution</md-card-title>
-    <md-card-content>
-        <form>
-            <md-input class="input-button" placeholder="Name" type="text"></md-input>
-            <md-input class="input-button" placeholder="Institution Short Code" type="text"></md-input>
-        </form>
-    </md-card-content>
-    <md-card-actions align="end">
-        <button id="invite-admin-button" md-raised-button color="primary" (click)="inviteAdmin()">Submit</button>
-    </md-card-actions>
-</md-card>
-
-<md-card>
-    <md-card-title>Elevate user privileges to superadmin</md-card-title>
-    <md-card-content>
-        <form>
-            <md-input class="input-button" placeholder="Name" type="text"></md-input>
-            <md-input class="input-button" placeholder="Institution Short Code" type="text"></md-input>
-        </form>
-    </md-card-content>
-    <md-card-actions align="end">
-        <button id="super-adminize-button" md-raised-button color="primary" (click)="promoteToSuperAdmin()">Submit</button>
-    </md-card-actions>
-</md-card>
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>TabView</h1>
+            <p-tabView>
+                <p-tabPanel header="Create institution">
+                    <form>
+                        <input type="text" placeholder="Name" [(ngModel)]="institutionName" pInputText><label>Name</label>
+                        <input type="text" placeholder="ShortCode" [(ngModel)]="institutionShortCode" pInputText><label>Institution Short Code</label>
+                    </form>
+                    <button type="button" id="super-adminize-button" (click)="createInstitution()" pButton label="Submit"></button>
+                </p-tabPanel>
+                <p-tabPanel header="Invite admin to institution">
+                    <form>
+                        <input type="text" placeholder="Name" pInputText><label>Name</label>
+                        <input type="text" placeholder="ShortCode" pInputText><label>Institution Short Code</label>
+                    </form>
+                    <button type="button" id="super-adminize-button" (click)="inviteAdmin()" pButton label="Submit"></button>
+                </p-tabPanel>
+                <p-tabPanel header="Elevate user privileges to superadmin">
+                    <form>
+                        <input type="text" pInputText><label>Name</label>
+                        <input type="text" pInputText><label>Institution Short Code</label>
+                    </form>
+                    <button type="button" id="super-adminize-button" pButton label="Submit" (click)="promoteToSuperAdmin()"></button>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>
