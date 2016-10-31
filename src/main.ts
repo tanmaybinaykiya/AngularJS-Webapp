@@ -1,28 +1,24 @@
 import { enableProdMode } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { ELEMENT_PROBE_PROVIDERS } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { HTTP_PROVIDERS } from '@angular/http';
-import { APP_ROUTER_PROVIDERS } from './app/app.routes';
-import { AppComponent } from './app/app.component';
-import { AdminGuard , ParentGuard, SuperAdminGuard } from './app/security'
-import { APP_SERVICES } from './app/shared';
+
+// import { APP_ROUTER_PROVIDERS } from './app/app.routes';
+import { AppModule } from './app/app.module';
+// import { AdminGuard , ParentGuard, SuperAdminGuard } from './app/security';
+// import { APP_SERVICES } from './app/shared';
 
 const ENV_PROVIDERS = [];
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
     enableProdMode();
-} else {
-    ENV_PROVIDERS.push(ELEMENT_PROBE_PROVIDERS);
 }
 
-bootstrap(AppComponent, [
+platformBrowserDynamic().bootstrapModule(AppModule, [
     // These are dependencies of our App
-    ...HTTP_PROVIDERS,
+    // ...HTTP_PROVIDERS,
     ...ENV_PROVIDERS,
-    ...APP_ROUTER_PROVIDERS,
-    ...APP_SERVICES,
-    AdminGuard, ParentGuard, SuperAdminGuard,
+    // ...APP_ROUTER_PROVIDERS,
+    // ...APP_SERVICES,
+    // AdminGuard, ParentGuard, SuperAdminGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy } // use #/ routes, remove this for HTML5 mode
-])
-    .catch(err => console.error(err));
+]).catch(err => console.error(err));

@@ -1,28 +1,23 @@
-import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+/// <reference path="../_all.d.ts" />
+'use strict';
 
-import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
+import { Component, AfterViewInit, ElementRef } from '@angular/core';
+declare var Ultima: any;
 
 import { ModalControlService } from './lib/modal/modal-control.service';
-import { LoginComponent } from './login';
-import { ParentComponent } from './parent';
-import { SuperAdminComponent } from './superadmin';
-import { AdminComponent } from './admin/';
-import { ModalComponent } from './lib/modal/';
 import { LoginService, SchoolService } from './shared';
 
 @Component({
-    selector: 'my-secureslice',
-    providers: [ModalControlService, SchoolService],
-    directives: [...ROUTER_DIRECTIVES, ...MD_SIDENAV_DIRECTIVES, 
-        ...MD_LIST_DIRECTIVES, ...MD_TOOLBAR_DIRECTIVES, ModalComponent],
+    selector: 'my-ss-app',
+    providers: [ModalControlService, SchoolService, LoginService],
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
-    constructor() { }
+    constructor(private el: ElementRef) { }
 
+    ngAfterViewInit() {
+        Ultima.init(this.el.nativeElement);
+    }
 }

@@ -1,34 +1,13 @@
-import { provideRouter }       from '@angular/router';
-import { LoginComponent } from './login';
-import { SuperAdminComponent } from './superadmin';
-import { DropDownComponent } from './lib/custom-dropdown/dropdown.component';
-import { AdminRoutes } from './admin/admin.routes';
-import { ParentRoutes } from './parent/parent.routes';
-import { SuperAdminGuard } from './security';
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
+import { ParentComponent } from './parent/parent.component';
 
-export const SchoolAppRoutes = [
-     ...AdminRoutes,
-     ...ParentRoutes,
-     {
-        path: '',
-        redirectTo: '/login',
-        terminal: true
-     },
-    {
-        path: 'login',
-        component: LoginComponent,
-        name: 'Login',
-        useAsDefault: true
-    }, {
-        path: 'superadmin',
-        component: SuperAdminComponent,
-        canActivate: [SuperAdminGuard],
-    }, {
-        path: 'test',
-        component: DropDownComponent,
-    }
+export const routes: Routes = [
+    { path: 'parent', component: ParentComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'admin', component: AdminComponent },
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(SchoolAppRoutes)
-];
+export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);
