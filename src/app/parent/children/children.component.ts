@@ -1,35 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ControlGroup, FormBuilder, Validators } from '@angular/common';
-import { MdButton, MdAnchor } from '@angular2-material/button/button';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
-
-import { MDLDirective } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
+import { Component, OnInit, } from '@angular/core';
+// import { ControlGroup, FormBuilder, Validators } from '@angular/common';
 
 import { ParentService, SchoolService, LoginService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
-import { ModalControlService } from '../../lib/modal/modal-control.service';
-import { Modal } from '../../lib/enums/modal-names.enums';
 import { Institution } from '../../models/institution';
 
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
 
-import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question';
-
 @Component({
     selector: 'my-children',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
-        DynamicFormQuestionComponent, MDLDirective],
-    providers: [ParentService, MdIconRegistry, QuestionControlService],
+    providers: [ParentService, QuestionControlService],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
 })
 export class ChildrenComponent implements OnInit {
 
-    form: ControlGroup;
+    // form: ControlGroup;
+    private isLoading: boolean = true;
     institution: Institution;
-    // isLoading: boolean = false;
     isInstitutionPanelOpen: boolean = false;
 
     billingHistory = [
@@ -89,50 +78,51 @@ export class ChildrenComponent implements OnInit {
         order: 3
     });
 
-    constructor(private fb: FormBuilder, private parentService: ParentService,
-        mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
-        private modalControlService: ModalControlService, private schoolService: SchoolService,
-        private loginService: LoginService) { }
+    constructor(private parentService: ParentService,
+        // private fb: FormBuilder, 
+        private qcs: QuestionControlService, private loginService: LoginService,
+        private schoolService: SchoolService) { }
 
     ngOnInit() {
         console.log('Children On init', this.schoolService);
-        this.form = this.toControlGroup(this.question);
+        // this.form = this.toControlGroup(this.question);
         let self = this;
 
-        // self.isLoading = true;
-        let institutionCode = this.loginService.loggedInUser.institutionShortCode;
-        this.schoolService.getSchool(institutionCode)
-            .subscribe(function (school: Institution) {
-                console.log('school', school);
-                // self.isLoading = false;
-                self.institution = school;
-            },
-            function (error) {
-                console.log(error);
-            });
+        self.isLoading = true;
+        let institutionCode = '1234'; // this.loginService.loggedInUser.institutionShortCode;
+        // this.schoolService.getSchool(institutionCode)
+        //     .subscribe(function(school: Institution) {
+        //         console.log('school', school);
+        //         self.isLoading = false;
+        self.institution = new Institution('shortCode', 'customerId', 'name', 'adminemail',
+            'addressline1', 'city', 'state', 12345, 'country'); // school;
+        // },
+        // function(error) {
+        //     console.log(error);
+        // });
 
         // this.schoolService.school.subscribe(function (school: Institution) {
         //     console.log('school', school);
-        //     // self.isLoading = false;
+        //     self.isLoading = false;
         //     self.institution = school;
         // }, function (err: any) {
         //     console.log(err);
         // })
     }
 
-    ngOnChanges() {
+    onChanges() {
         console.log('Children ngOnChanges called');
     }
 
-    toControlGroup(question: QuestionBase<any>) {
-        let group = {};
-        group[question.key] = question.required ?
-            [question.value || '', Validators.required] : [question.value || ''];
-        return this.fb.group(group);
-    }
+    // toControlGroup(question: QuestionBase<any>) {
+    //     let group = {};
+    //     group[question.key] = question.required ?
+    //         [question.value || '', Validators.required] : [question.value || ''];
+    //     return this.fb.group(group);
+    // }
 
-    toggleModal(modal: Modal) {
-        console.log('Profile: toggleModal', modal);
-        this.modalControlService.enable(modal);
-    }
+    // toggleModal(modal: Modal) {
+    //     console.log('Profile: toggleModal', modal);
+    //     this.modalControlService.enable(modal);
+    // }
 }

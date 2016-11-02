@@ -1,26 +1,8 @@
 export class Institution {
 
-    shortCode: string;
-    customerId: string;
-    name: string;
-    adminemail: string;
-    addressline1: string;
-    city: string;
-    state: string;
-    zip: number;
-    country: string;
-
-    constructor(shortCode: string, customerId: string, name: string,
-        adminemail: string, addressline1: string, city: string,
-        state: string, zip: number, country: string) {
-        this.shortCode = shortCode;
-        this.customerId = customerId;
-        this.name = name;
-        this.adminemail = adminemail;
-        this.addressline1 = addressline1;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.country = country;
+    constructor(public shortCode: string, public customerId: string, public name: string,
+        public adminemail: string, public addressline1: string, public city: string,
+        public state: string, public zip: number, public country: string) {
     }
+
 }

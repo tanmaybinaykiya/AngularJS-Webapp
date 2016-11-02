@@ -21,8 +21,8 @@ export class SchoolService {
 
     getSchool(institutionCode: string): Observable<Institution> {
         console.log('getSchool called');
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+        // let headers = new Headers({ 'Content-Type': 'application/json' });
+        // let options = new RequestOptions({ headers: headers });
         let params: URLSearchParams = new URLSearchParams();
         let url = this.getInstitutionUrl;
         params.set('shortCode', institutionCode);

@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { UserBadgeComponent } from './userBadge/user-badge.component';
-import { MdButton, MdAnchor } from '@angular2-material/button/button';
 
 import { LoginService, SchoolService } from '../../shared';
 import { Institution } from '../../models/institution'
 
 @Component({
     selector: 'header-toolbar',
-    directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent, MdButton, MdAnchor],
     providers: [],
     template: require('./header.component.html'),
     styles: [require('./header.component.scss')]

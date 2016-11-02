@@ -4,11 +4,11 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 declare var Ultima: any;
 
-// import { LoginService, SchoolService } from './shared';
+import { LoginService, SchoolService } from './shared';
 
 @Component({
     selector: 'my-ss-app',
-    // providers: [ SchoolService, LoginService],
+    providers: [SchoolService, LoginService],
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })

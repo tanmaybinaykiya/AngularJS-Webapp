@@ -67,14 +67,16 @@ import { TreeTableModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './superadmin/superadmin.component';
+import { ParentComponent } from './parent/parent.component';
+import { ChildrenComponent } from './parent/children/children.component';
 
-// import { AppRoutes } from './app.routes';
+import { AppRoutes } from './app.routes';
+import { ParentRoutes } from './parent/parent.routes';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        // AppRoutes,
         HttpModule,
         AccordionModule,
         AutoCompleteModule,
@@ -136,9 +138,11 @@ import { SuperAdminComponent } from './superadmin/superadmin.component';
         ToolbarModule,
         TooltipModule,
         TreeModule,
-        TreeTableModule
+        TreeTableModule,
+        AppRoutes,
+        // ParentRoutes
     ],
-    declarations: [AppComponent, SuperAdminComponent],
+    declarations: [AppComponent, SuperAdminComponent, ParentComponent, ChildrenComponent],
     bootstrap: [AppComponent]
 })
 
