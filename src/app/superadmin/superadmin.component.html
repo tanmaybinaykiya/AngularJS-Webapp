@@ -1,30 +1,49 @@
-<div class="ui-g">
-    <div class="ui-g-12">
-        <div class="card card-w-title">
-            <h1>TabView</h1>
-            <p-tabView>
-                <p-tabPanel header="Create institution">
-                    <form>
-                        <input type="text" placeholder="Name" [(ngModel)]="institutionName" pInputText><label>Name</label>
-                        <input type="text" placeholder="ShortCode" [(ngModel)]="institutionShortCode" pInputText><label>Institution Short Code</label>
-                    </form>
-                    <button type="button" id="super-adminize-button" (click)="createInstitution()" pButton label="Submit"></button>
-                </p-tabPanel>
-                <p-tabPanel header="Invite admin to institution">
-                    <form>
-                        <input type="text" placeholder="Name" pInputText><label>Name</label>
-                        <input type="text" placeholder="ShortCode" pInputText><label>Institution Short Code</label>
-                    </form>
-                    <button type="button" id="super-adminize-button" (click)="inviteAdmin()" pButton label="Submit"></button>
-                </p-tabPanel>
-                <p-tabPanel header="Elevate user privileges to superadmin">
-                    <form>
-                        <input type="text" pInputText><label>Name</label>
-                        <input type="text" pInputText><label>Institution Short Code</label>
-                    </form>
-                    <button type="button" id="super-adminize-button" pButton label="Submit" (click)="promoteToSuperAdmin()"></button>
-                </p-tabPanel>
-            </p-tabView>
-        </div>
-    </div>
+<div class="ui-md-7">
+	<div class="ui-g-12">
+		<div class="card">
+			<p-tabView>
+				<p-tabPanel header="Create institution">
+					<!--<form>-->
+					<div class="ui-md-7">
+						<label>Name</label>
+						<input type="text" name="institutionName" [(ngModel)]="institutionName" pInputText>
+					</div>
+					<div class="ui-md-7">
+						<label>Institution Short Code</label>
+						<input type="text" name="institutionShortCode" [(ngModel)]="institutionShortCode" pInputText>
+					</div>
+					<!--</form>-->
+					<div class="ui-md-7">
+						<button type="button" id="super-adminize-button" (click)="createInstitution()" pButton label="Submit"></button>
+					</div>
+				</p-tabPanel>
+				<p-tabPanel header="Invite admin to institution">
+					<!--<form>-->
+					<div class="ui-md-7">
+						<label>Admin Name</label>
+						<input type="text" pInputText>
+					</div>
+					<div class="ui-md-7">
+						<label>Institution Short Code</label>
+						<input type="text" pInputText>
+					</div>
+					<!--</form>-->
+					<button type="button" id="super-adminize-button" (click)="inviteAdmin()" pButton label="Submit"></button>
+				</p-tabPanel>
+				<p-tabPanel header="Elevate user privileges to superadmin">
+					<!--<form>-->
+					<div class="ui-md-7">
+						<label>Name</label>
+						<input type="text" pInputText>
+					</div>
+					<div class="ui-md-7">
+						<label>Institution Short Code</label>
+						<input type="text" pInputText>
+					</div>
+					<!--</form>-->
+					<button type="button" id="super-adminize-button" pButton label="Submit" (click)="promoteToSuperAdmin()"></button>
+				</p-tabPanel>
+			</p-tabView>
+		</div>
+	</div>
 </div>

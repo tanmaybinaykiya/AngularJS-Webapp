@@ -4,12 +4,11 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 declare var Ultima: any;
 
-import { ModalControlService } from './lib/modal/modal-control.service';
-import { LoginService, SchoolService } from './shared';
+// import { LoginService, SchoolService } from './shared';
 
 @Component({
     selector: 'my-ss-app',
-    providers: [ModalControlService, SchoolService, LoginService],
+    // providers: [ SchoolService, LoginService],
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })
