@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styles: [require('./user-badge.component.scss')]
 })
 
-export class UserBadgeComponent implements OnInit {
+export class AdminHeaderUserBadgeComponent implements OnInit {
     user = 'Dr. House';
     role = 'Admin';
     constructor() {

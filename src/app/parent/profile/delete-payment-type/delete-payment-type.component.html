@@ -1,17 +1,8 @@
 <div>
-    <div id="wrapper">
-        <div id="modal">
-            <md-card>
-                <md-card-title-group>
-                    <!--<img md-card-sm-image src="path/to/img.png">-->
-                    <md-card-title>Delete Payment Type</md-card-title>
-                    <md-card-subtitle>Yes, please delete this payment type. I understand, this may interrupt auto-pay.</md-card-subtitle>
-                </md-card-title-group>
-                <md-card-actions align="end">
-                    <button md-raised-button color="primary" (click)="closeView()">Cancel</button>
-                    <button md-raised-button color="warn" id="submit-button" (click)="closeView()">Delete Payment Type</button>
-                </md-card-actions>
-            </md-card>
-        </div>
+    <div class="card card-w-title">
+        <h1>Delete Payment Type</h1>
+        <h3>Yes, please delete this payment type. I understand, this may interrupt auto-pay.</h3>
+        <button color="primary" (click)="closeView()">Cancel</button>
+        <button color="warn" id="submit-button" (click)="closeView()">Delete Payment Type</button>
     </div>
 </div>

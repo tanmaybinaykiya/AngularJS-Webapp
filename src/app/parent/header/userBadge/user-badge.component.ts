@@ -7,7 +7,7 @@ import { LoginService } from '../../../shared';
     styles: [require('./user-badge.component.scss')]
 })
 
-export class UserBadgeComponent implements OnInit {
+export class ParentHeaderUserBadgeComponent implements OnInit {
     user = 'Dr. House';
     role = 'Parent';
     constructor(private loginService: LoginService) {

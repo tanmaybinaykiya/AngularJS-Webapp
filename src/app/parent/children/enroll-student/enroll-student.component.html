@@ -1,75 +1,58 @@
 <div>
-    <div id="wrapper">
-        <div id="modal">
-            <md-card>
-                <md-card-title>Enroll Student</md-card-title>
-                <md-card-content>
-                    <md-tab-group>
-                        <md-tab>
-                            <template md-tab-label>Student Information</template>
-                            <template md-tab-content>
-
-                                <md-input class="input-field" placeholder="First Name"></md-input>
-                                <md-input class="input-field" placeholder="Middle Name"></md-input>
-                                <md-input class="input-field" placeholder="Last Name"></md-input>
-                                <md-input class="input-field" placeholder="Prefered Nickname"></md-input>
-                                <md-input class="input-field" placeholder="Date of Birth"></md-input>
-                                <md-input class="input-field" placeholder="City of Birth"></md-input>
-                                <md-input class="input-field" placeholder="State of Birth"></md-input>
-                                <md-input class="input-field" placeholder="Country of Birth"></md-input>
-                                <custom-dropdown options={{races}} placeholder="Select Race"></custom-dropdown>
-                                <custom-dropdown options={{genders}} placeholder="Select Gender"></custom-dropdown>
-                                <div class="input-field mdl-textfield mdl-js-textfield" style="width:92%; margin: 0 0 0 10px;">
-                                    <label>Additional Information</label>
-                                    <textarea placeholder="Enter any additional information" class="mdl-textfield__input" type="text" rows="3" id="sample5"></textarea>
-                                </div>
-                            </template>
-                        </md-tab>
-                        <md-tab>
-                            <template md-tab-label>Payment Information</template>
-                            <template md-tab-content>
-                                <md-input class="input-field" placeholder="Credit Card Number"></md-input>
-                                <md-input class="input-field" placeholder="CVV2 Number"></md-input>
-                                <div class="input-field form-group">
-                                    <label for="gender-control">Expiration:</label>
-                                    <custom-dropdown options={{months}} placeholder="Month"></custom-dropdown>
-                                </div>
-                                <div class="input-field form-group">
-                                     <custom-dropdown options={{years}} placeholder="Year"></custom-dropdown>
-                                </div>
-                                <md-input class="input-field" placeholder="Street"></md-input>
-                                <md-input class="input-field" placeholder="City"></md-input>
-                                <md-input class="input-field" placeholder="State"></md-input>
-                                <md-input class="input-field" placeholder="Zip"></md-input>
-                            </template>
-                        </md-tab>
-                        <md-tab>
-                            <template md-tab-label>Additional Forms</template>
-                            <template md-tab-content>
-                                <span id="form-tab-message">The admission process is not complete. You must complete and upload all forms for the admission process to continue</span>
-
-                                <div class="file-uploader-container">
-                                    <label for="medical-form">Medical Form</label>
-                                    <input id="medical-form" type="file" ng2FileSelect [uploader]="uploader" />
-                                    <div class="progress" style="">
-                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-                                    </div>
-                                </div>
-                                <div class="file-uploader-container">
-                                    <label for="tuition-form">Tuition Form</label>
-                                    <input id="tuition-form" type="file" ng2FileSelect [uploader]="uploader" />
-                                    <div class="progress" style="">
-                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-                                    </div>
-                                </div>
-                            </template>
-                        </md-tab>
-                    </md-tab-group>
-                </md-card-content>
-                <md-card-actions align="end">
-                    <button md-raised-button color="primary" id="submit-button" (click)="closeView()">Save and Exit</button>
-                </md-card-actions>
-            </md-card>
-        </div>
+    <div class="card card-w-title">
+        <h1>Enroll Student</h1>
+        <p-tabView>
+            <p-tabPanel header="Student Information">
+                <input class="input-field" placeholder="First Name" />
+                <input class="input-field" placeholder="Middle Name" />
+                <input class="input-field" placeholder="Last Name" />
+                <input class="input-field" placeholder="Prefered Nickname" />
+                <input class="input-field" placeholder="Date of Birth" />
+                <input class="input-field" placeholder="City of Birth" />
+                <input class="input-field" placeholder="State of Birth" />
+                <input class="input-field" placeholder="Country of Birth" />
+                <label>Select Race</label>
+                <p-dropdown [options]="races" [(ngModel)]="selectedRace" [autoWidth]="false"></p-dropdown>
+                <label>Select Gender</label>
+                <p-dropdown [options]="genders" [(ngModel)]="selectedGender" [autoWidth]="false"></p-dropdown>
+                <div>
+                    <label>Additional Information</label>
+                    <textarea placeholder="Enter any additional information" type="text" rows="3" id="sample5"></textarea>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Payment Information">
+                <input class="input-field" placeholder="Credit Card Number" />
+                <input class="input-field" placeholder="CVV2 Number" />
+                <div class="input-field form-group">
+                    <label>Expiration:</label>
+                    <p-dropdown [options]="months" [(ngModel)]="selectedMonth" [autoWidth]="false"></p-dropdown>
+                </div>
+                <div class="input-field form-group">
+                    <p-dropdown [options]="years" [(ngModel)]="selectedYear" [autoWidth]="false"></p-dropdown>
+                </div>
+                <input placeholder="Street" />
+                <input placeholder="City" />
+                <input placeholder="State" />
+                <input placeholder="Zip" />
+            </p-tabPanel>
+            <p-tabPanel header="Additional Forms">
+                <span id="form-tab-message">The admission process is not complete. You must complete and upload all forms for the admission process to continue</span>
+                <div class="file-uploader-container">
+                    <label for="medical-form">Medical Form</label>
+                    <input id="medical-form" type="file" />
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
+                <div class="file-uploader-container">
+                    <label for="tuition-form">Tuition Form</label>
+                    <input id="tuition-form" type="file" />
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <button color="primary" id="submit-button" (click)="closeView()">Save and Exit</button>
     </div>
 </div>

@@ -1,19 +1,10 @@
 <div>
-    <div id="wrapper">
-        <div id="modal">
-            <md-card>
-                <md-card-title-group>
-                    <!--<img md-card-sm-image src="path/to/img.png">-->
-                    <md-card-title>Un-enroll Child</md-card-title>
-                    <md-card-subtitle>I understand, that the school will review my un-enroll request. I also understand that I may be liable
-                        for any penalty or forfeiture for tuition payment paid. My un-enroll request is not complete until
-                        I receive written confirmation from the school.</md-card-subtitle>
-                </md-card-title-group>
-                <md-card-actions align="end">
-                    <button md-raised-button color="primary" (click)="closeView()">Cancel</button>
-                    <button md-raised-button color="warn" id="submit-button" (click)="closeView()">Submit</button>
-                </md-card-actions>
-            </md-card>
-        </div>
-    </div>
+	<div class="card card-w-title">
+		<h1>Un-enroll Child</h1>
+		<h3>I understand, that the school will review my un-enroll request. I also understand that I may be liable for any penalty
+			or forfeiture for tuition payment paid. My un-enroll request is not complete until I receive written confirmation from
+			the school.</h3>
+		<button md-raised-button color="primary" (click)="closeView()">Cancel</button>
+		<button md-raised-button color="warn" id="submit-button" (click)="closeView()">Submit</button>
+	</div>
 </div>

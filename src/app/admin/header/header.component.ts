@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { LoginService, SchoolService } from '../shared';
-import { UserBadgeComponent } from './userBadge/user-badge.component';
+import { LoginService, SchoolService } from '../../shared';
 
 @Component({
     selector: 'header-toolbar',
@@ -8,9 +7,9 @@ import { UserBadgeComponent } from './userBadge/user-badge.component';
     styles: [require('./header.component.scss')]
 })
 
-export class HeaderComponent implements OnInit {
+export class AdminHeaderComponent implements OnInit {
 
-    constructor(/*private loginService: LoginService, private schoolService: SchoolService*/) {
+    constructor(private loginService: LoginService, private schoolService: SchoolService) {
     }
 
     notificationMenu() {

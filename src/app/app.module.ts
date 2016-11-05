@@ -65,13 +65,43 @@ import { TooltipModule } from 'primeng/primeng';
 import { TreeModule } from 'primeng/primeng';
 import { TreeTableModule } from 'primeng/primeng';
 
+
 import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './superadmin/superadmin.component';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 import { ParentComponent } from './parent/parent.component';
+
+import { AdministrationComponent } from './admin/administration/administration.component';
+import { BillingComponent } from './admin/billing/billing.component';
+import { EnrollmentCenterComponent } from './admin/enrollment-center/enrollment-center.component';
+import { AdminHeaderComponent } from './admin/header/header.component';
+import { AdminHeaderUserBadgeComponent } from './admin/header/userBadge/user-badge.component';
+import { NotificationComponent } from './admin/notification/notification.component';
+import { PeopleComponent } from './admin/people/people.component';
+import { AdminRegisterComponent } from './admin/register/register.component';
+
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { JoinTodayComponent } from './login/join-today/join-today.component';
+
 import { ChildrenComponent } from './parent/children/children.component';
+import { EnrollStudentComponent } from './parent/children/enroll-student/enroll-student.component';
+import { ManageChildProfileComponent } from './parent/children/manage-child-profile/manage-child-profile.component';
+import { PayTuitionFeesComponent } from './parent/children/pay-tuition-fees/pay-tuition-fees.component';
+import { UnenrollComponent } from './parent/children/unenroll/unenroll.component';
+import { ParentHeaderComponent } from './parent/header/header.component';
+import { ParentHeaderUserBadgeComponent } from './parent/header/userBadge/user-badge.component';
+
+import { AddPaymentTypeComponent } from './parent/profile/add-payment-type/add-payment-type.component';
+import { DeletePaymentTypeComponent } from './parent/profile/delete-payment-type/delete-payment-type.component';
+import { DeleteUserComponent } from './parent/profile/delete-user/delete-user.component';
+import { InviteFriendsComponent } from './parent/profile/invite-friends/invite-friends.component';
+import { ManageUserProfileComponent } from './parent/profile/manage-user-profile/manage-user-profile.component';
+import { ProfileComponent } from './parent/profile/profile.component';
+import { ResendInvitationComponent } from './parent/profile/resend-invitation/resend-invitation.component';
+import { ResetPasswordComponent } from './parent/profile/reset-password/reset-password.component';
 
 import { AppRoutes } from './app.routes';
-import { ParentRoutes } from './parent/parent.routes';
 
 @NgModule({
     imports: [
@@ -140,9 +170,40 @@ import { ParentRoutes } from './parent/parent.routes';
         TreeModule,
         TreeTableModule,
         AppRoutes,
-        // ParentRoutes
     ],
-    declarations: [AppComponent, SuperAdminComponent, ParentComponent, ChildrenComponent],
+    declarations: [AppComponent,
+        LoginComponent,
+        SuperAdminComponent,
+        AdminComponent,
+        ParentComponent,
+        ChildrenComponent,
+        EnrollmentCenterComponent,
+        AdministrationComponent,
+        BillingComponent,
+        EnrollmentCenterComponent,
+        AdminHeaderComponent,
+        AdminHeaderUserBadgeComponent,
+        NotificationComponent,
+        PeopleComponent,
+        AdminRegisterComponent,
+        ForgotPasswordComponent,
+        JoinTodayComponent,
+        ChildrenComponent,
+        EnrollStudentComponent,
+        ManageChildProfileComponent,
+        PayTuitionFeesComponent,
+        UnenrollComponent,
+        ParentHeaderComponent,
+        ParentHeaderUserBadgeComponent,
+        AddPaymentTypeComponent,
+        DeletePaymentTypeComponent,
+        DeleteUserComponent,
+        InviteFriendsComponent,
+        ManageUserProfileComponent,
+        ProfileComponent,
+        ResendInvitationComponent,
+        ResetPasswordComponent
+    ],
     bootstrap: [AppComponent]
 })
 

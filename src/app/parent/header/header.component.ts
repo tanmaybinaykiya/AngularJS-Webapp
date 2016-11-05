@@ -1,22 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { UserBadgeComponent } from './userBadge/user-badge.component';
-
 import { LoginService, SchoolService } from '../../shared';
-import { Institution } from '../../models/institution'
+import { Institution } from '../../models/institution';
 
 @Component({
-    selector: 'header-toolbar',
+    selector: 'my-ss-parent-header-toolbar',
     providers: [],
     template: require('./header.component.html'),
     styles: [require('./header.component.scss')]
 })
 
-export class HeaderComponent implements OnInit {
+export class ParentHeaderComponent implements OnInit {
 
     private schoolName: String;
-    isLoading:boolean=false;
+    isLoading: boolean = false;
 
     constructor(private loginService: LoginService, private schoolService: SchoolService,
         private router: Router) {
@@ -28,12 +25,12 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         console.log('Hello HeaderComponent', this.loginService.loggedInUser.institutionShortCode);
         let institutionCode = this.loginService.loggedInUser.institutionShortCode;
-        var self = this;
-        self.isLoading=true;
+        let self = this;
+        self.isLoading = true;
         this.schoolService.getSchool(institutionCode)
             .subscribe(function (school: Institution) {
                 console.log('school', school);
-                self.isLoading=false;
+                self.isLoading = false;
                 self.schoolName = school.name;
             },
             function (error) {

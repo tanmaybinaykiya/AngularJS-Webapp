@@ -1,4 +1,4 @@
-<div mdl>
+<div>
     <div id="profile-administration-table" class="table-container">
         <span class="table-title">Profile Administration</span>
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
@@ -39,15 +39,16 @@
     </div>
 
     <div id="billing-adminitstration-table" class="table-container">
-        <span class="table-title">Billing Administration</span>
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
-            <thead>
-                <tr>
-                    <th class="table-heading mdl-data-table__cell--non-numeric">Type</th>
-                    <th class="table-heading mdl-data-table__cell--non-numeric">Account Number</th>
-                    <th class="table-heading mdl-data-table__cell--non-numeric">Primary</th>
-                </tr>
-            </thead>
+           
+            <p-dataTable [value]="billingInfo" selectionMode="single" [paginator]="true" [rows]="10" [responsive]="true">
+                <header>Billing Administration</header>
+                <p-column field="type" header="Type" [sortable]="true"></p-column>
+                <p-column field="accountNumber" header="Account Number" [sortable]="true"></p-column>
+                <p-column field="status" header="Set Primary"></p-column>
+            </p-dataTable>
+
+        
+
             <tbody>
                 <tr *ngFor="let row of billingInfo; let idx = index">
                     <td class="mdl-data-table__cell--non-numeric">
@@ -71,7 +72,9 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+        
+
+
         <button class="action-buttons" md-raised-button color="primary" 
             (click)="toggleModal('ParentProfileModal_AddPaymentType')">Add Payment Type</button>
     </div>

@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { HeaderComponent } from './header';
-
-import { EnrollmentCenterComponent } from './enrollment-center';
-import { PeopleComponent } from './people/';
-import { BillingComponent } from './billing/';
-import { NotificationComponent } from './notification/';
-import { AdministrationComponent } from './administration/';
 import { LoginService } from '../shared/api.service'
 
 @Component({
