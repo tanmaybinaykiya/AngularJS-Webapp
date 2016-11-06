@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-// import { LoginService, SchoolService } from '../shared';
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
-import { UserBadgeComponent } from './userBadge/user-badge.component';
 
 @Component({
     selector: 'header-toolbar',
-    directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent],
-    template: require('./header.component.html'),
-    styles: [require('./header.component.scss')]
+    template: './header.component.html',
+    styles: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class AdminHeaderComponent implements OnInit {
 
     constructor(/*private loginService: LoginService, private schoolService: SchoolService*/) {
     }

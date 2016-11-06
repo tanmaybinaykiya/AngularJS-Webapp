@@ -5,9 +5,7 @@ import { NotificationComponent } from './notification/';
 import { AdministrationComponent } from './administration/';
 import { AdminRegisterComponent } from './register';
 import { AdminComponent } from './admin.component';
-import { CanActivate,Router }    from '@angular/router';
-import { LoginService } from '../shared/api.service'
-import { AdminGuard } from '../security'
+import { AdminGuard } from '../security';
 
 export const AdminRoutes = [
     {

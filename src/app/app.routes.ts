@@ -1,4 +1,6 @@
-import { provideRouter }       from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+
 import { LoginComponent } from './login';
 import { SuperAdminComponent } from './superadmin';
 import { DropDownComponent } from './lib/custom-dropdown/dropdown.component';
@@ -6,19 +8,16 @@ import { AdminRoutes } from './admin/admin.routes';
 import { ParentRoutes } from './parent/parent.routes';
 import { SuperAdminGuard } from './security';
 
-export const SchoolAppRoutes = [
-     ...AdminRoutes,
-     ...ParentRoutes,
-     {
+const routes: Routes = [
+    ...AdminRoutes,
+    ...ParentRoutes,
+    {
         path: '',
         redirectTo: '/login',
-        terminal: true
-     },
+    },
     {
         path: 'login',
         component: LoginComponent,
-        name: 'Login',
-        useAsDefault: true
     }, {
         path: 'superadmin',
         component: SuperAdminComponent,
@@ -29,6 +28,4 @@ export const SchoolAppRoutes = [
     }
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(SchoolAppRoutes)
-];
+export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

@@ -1,7 +1,8 @@
 import { ChildrenComponent } from './children';
 import { ProfileComponent } from './profile';
 import { ParentComponent } from './parent.component';
-import { ParentGuard } from '../security'
+import { ParentGuard } from '../security';
+
 export const ParentRoutes = [
     {
         path: 'parent',

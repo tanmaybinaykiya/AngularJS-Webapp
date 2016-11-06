@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSlideToggle } from '@angular2-material/slide-toggle/slide-toggle';
-import { MdButton, MdAnchor } from '@angular2-material/button/button';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
-
-import { MDLDirective } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
+import { MdIconRegistry } from '@angular2-material/icon/icon';
 
 import { ParentService } from '../../shared';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
@@ -11,10 +7,9 @@ import { Modal } from '../../lib/enums/modal-names.enums';
 
 @Component({
     selector: 'my-profile',
-    providers: [ParentService, MdIconRegistry],
-    template: require('./profile.component.html'),
-    styles: [require('./profile.component.scss')],
-    directives: [MdSlideToggle, MdButton, MdAnchor, MdIcon, MDLDirective]
+    viewProviders: [MdIconRegistry],
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
     modalControlService: ModalControlService;

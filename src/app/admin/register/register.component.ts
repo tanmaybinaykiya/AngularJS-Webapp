@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }    from '@angular/router';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'register',
     template: require('./register.component.html'),
@@ -7,19 +8,20 @@ import { Router }    from '@angular/router';
 
 })
 export class AdminRegisterComponent implements OnInit {
-    token:String;
+    token: String;
     constructor(private router: Router) {
         // Do stuff
     }
 
     ngOnInit() {
-        this.router
-      .routerState
-      .queryParams
-      .subscribe(params => {
-        this.token = params['token'];
-        console.log("Token=" + this.token);
-      });
+        // TODO 
+        // this.router
+        //     .routerState
+        //     .queryParams
+        //     .subscribe(params => {
+        //         this.token = params['token'];
+        //         console.log("Token=" + this.token);
+        //     });
     }
 
 }

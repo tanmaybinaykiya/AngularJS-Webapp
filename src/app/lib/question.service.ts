@@ -1,8 +1,7 @@
-import { Injectable }       from '@angular/core';
-import { QuestionBase }     from './question-base';
-import { DynamicForm }      from './dynamic-form/';
-import { TextboxQuestion }  from './question-textbox';
+import { Injectable } from '@angular/core';
+import { QuestionBase } from './question-base';
 import { DropdownQuestion } from './question-dropdown';
+
 @Injectable()
 export class QuestionService {
     // Todo: get from a remote source of question metadata

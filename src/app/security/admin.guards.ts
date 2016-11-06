@@ -1,5 +1,5 @@
-import { CanActivate,Router }    from '@angular/router';
-import { LoginService } from '../shared/api.service'
+import { CanActivate, Router } from '@angular/router';
+import { LoginService } from '../shared/api.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class AdminGuard implements CanActivate {
         console.log('Hello AdminGuard');
     }
     canActivate() {
-        if(this.loginService.loggedInUser && this.loginService.loggedInUser.role == 'admin'){
+        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'admin') {
             return true;
         }
         this.router.navigate(['login']);

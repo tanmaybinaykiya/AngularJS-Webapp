@@ -1,25 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
-import { UserBadgeComponent } from './userBadge/user-badge.component';
-import { MdButton, MdAnchor } from '@angular2-material/button/button';
-
 import { LoginService, SchoolService } from '../../shared';
-import { Institution } from '../../models/institution'
+import { Institution } from '../../models/institution';
 
 @Component({
     selector: 'header-toolbar',
-    directives: [...MD_TOOLBAR_DIRECTIVES, UserBadgeComponent, MdButton, MdAnchor],
-    providers: [],
-    template: require('./header.component.html'),
-    styles: [require('./header.component.scss')]
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class ParentHeaderComponent implements OnInit {
 
     private schoolName: String;
-    isLoading:boolean=false;
+    isLoading: boolean = false;
 
     constructor(private loginService: LoginService, private schoolService: SchoolService,
         private router: Router) {
@@ -31,12 +24,12 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         console.log('Hello HeaderComponent', this.loginService.loggedInUser.institutionShortCode);
         let institutionCode = this.loginService.loggedInUser.institutionShortCode;
-        var self = this;
-        self.isLoading=true;
+        let self = this;
+        self.isLoading = true;
         this.schoolService.getSchool(institutionCode)
             .subscribe(function (school: Institution) {
                 console.log('school', school);
-                self.isLoading=false;
+                self.isLoading = false;
                 self.schoolName = school.name;
             },
             function (error) {

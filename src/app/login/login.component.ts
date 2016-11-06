@@ -1,26 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MdSpinner } from '@angular2-material/progress-circle/progress-circle';
-import { MdProgressBar } from '@angular2-material/progress-bar/progress-bar';
-
-import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
-
-import { LoginService, SchoolService } from '../shared';
-import { ModalControlService } from '../lib/modal/modal-control.service';
-import { Modal } from '../lib/enums/modal-names.enums';
+import { MdIconRegistry } from '@angular2-material/icon/icon';
 
 import { User } from '../models/user';
+import { Modal } from '../lib/enums/modal-names.enums';
+import { LoginService, SchoolService } from '../shared';
+import { ModalControlService } from '../lib/modal/modal-control.service';
+
 
 @Component({
     selector: 'my-login',
-    template: require('./login.component.html'),
-    directives: [...MD_BUTTON_DIRECTIVES, ...MD_INPUT_DIRECTIVES,
-        MdIcon, REACTIVE_FORM_DIRECTIVES, MdSpinner, MdProgressBar],
-    providers: [MdIconRegistry],
-    styles: [require('./login.component.scss')]
+    viewProviders: [MdIconRegistry],
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
     email: string;
@@ -35,8 +27,8 @@ export class LoginComponent implements OnInit {
 
     get isValid(): boolean {
         return !(
-            (this.email == null || this.email == "")
-            || (this.password == null || this.password == "")
+            (this.email == null || this.email === '')
+            || (this.password == null || this.password === '')
             || (this.isRequested)
         );
     }

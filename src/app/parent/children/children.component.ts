@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlGroup, FormBuilder, Validators } from '@angular/common';
-import { MdButton, MdAnchor } from '@angular2-material/button/button';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card/card';
-
-import { MDLDirective } from '../../lib/mdl/MaterialDesignLiteUpgradeElement';
+import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
+import { MdIconRegistry } from '@angular2-material/icon/icon';
 
 import { ParentService, SchoolService, LoginService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
@@ -15,19 +11,15 @@ import { Institution } from '../../models/institution';
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
 
-import { DynamicFormQuestionComponent } from '../../lib/dynamic-form/dynamic-form-question';
-
 @Component({
     selector: 'my-children',
-    directives: [MdIcon, MD_CARD_DIRECTIVES, MdButton, MdAnchor,
-        DynamicFormQuestionComponent, MDLDirective],
-    providers: [ParentService, MdIconRegistry, QuestionControlService],
-    template: require('./children.component.html'),
-    styles: [require('./children.component.scss')]
+    viewProviders: [MdIconRegistry],
+    templateUrl: './children.component.html',
+    styleUrls: ['./children.component.scss']
 })
 export class ChildrenComponent implements OnInit {
 
-    form: ControlGroup;
+    form: any; // ControlGroup;
     institution: Institution;
     // isLoading: boolean = false;
     isInstitutionPanelOpen: boolean = false;
