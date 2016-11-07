@@ -1,10 +1,9 @@
-/// <reference path="../../../../_all.d.ts" />
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'user-badge',
-    templateUrl: './user-badge.component.html',
-    styleUrls: ['./user-badge.component.scss']
+    selector: 'admin-header-user-badge',
+    template: require('./user-badge.component.html'),
+    styles: [require('./user-badge.component.scss')]
 })
 export class AdminHeaderUserBadgeComponent implements OnInit {
     user = 'Dr. House';

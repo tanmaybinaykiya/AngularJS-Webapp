@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'billing',
-    templateUrl: './billing.component.html',
-    styleUrls: ['./billing.component.scss'],
+    template: require('./billing.component.html'),
+    styles: [require('./billing.component.scss')],
 })
 export class BillingComponent implements OnInit {
 

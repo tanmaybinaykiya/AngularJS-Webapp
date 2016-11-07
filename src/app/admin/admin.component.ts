@@ -5,8 +5,8 @@ import { LoginService } from '../shared/api.service';
 
 @Component({
     selector: 'admin',
-    template: './admin.component.html',
-    styles: ['./admin.component.scss']
+    template: require('./admin.component.html'),
+    styles: [require('./admin.component.scss')]
 })
 
 export class AdminComponent implements OnInit {

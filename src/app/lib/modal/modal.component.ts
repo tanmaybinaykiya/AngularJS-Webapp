@@ -6,8 +6,8 @@ import { Modal } from '../enums/modal-names.enums';
 
 @Component({
     selector: 'modal',
-    template: './modal.component.html',
-    styleUrls: ['./modal.component.scss'],
+    template: require('./modal.component.html'),
+    styles: [require('./modal.component.scss')],
 })
 export class ModalComponent implements OnInit {
 

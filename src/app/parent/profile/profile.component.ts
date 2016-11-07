@@ -8,8 +8,8 @@ import { Modal } from '../../lib/enums/modal-names.enums';
 @Component({
     selector: 'my-profile',
     viewProviders: [MdIconRegistry],
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss'],
+    template: require('./profile.component.html'),
+    styles: [require('./profile.component.scss')],
 })
 export class ProfileComponent implements OnInit {
     modalControlService: ModalControlService;

@@ -9,10 +9,9 @@ import { ParentRoutes } from './parent/parent.routes';
 import { SuperAdminGuard } from './security';
 
 const routes: Routes = [
-    ...AdminRoutes,
-    ...ParentRoutes,
     {
         path: '',
+        pathMatch: 'prefix',
         redirectTo: '/login',
     },
     {
@@ -25,7 +24,9 @@ const routes: Routes = [
     }, {
         path: 'test',
         component: DropDownComponent,
-    }
+    },
+    ...AdminRoutes,
+    ...ParentRoutes,
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

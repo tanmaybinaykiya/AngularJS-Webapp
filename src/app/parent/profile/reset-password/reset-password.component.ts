@@ -5,8 +5,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 @Component({
     selector: 'reset-password',
     viewProviders: [MdIconRegistry],
-    templateUrl: './reset-password.component.html',
-    styleUrls: ['./reset-password.component.scss']
+    template: require('./reset-password.component.html'),
+    styles: [require('./reset-password.component.scss')]
 })
 export class ResetPasswordComponent implements OnInit {
 

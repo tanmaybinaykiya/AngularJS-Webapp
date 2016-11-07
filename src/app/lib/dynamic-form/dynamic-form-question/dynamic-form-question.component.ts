@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-// import { ControlGroup }     from '@angular/common';
+// import { ControlGroup } from '@angular/forms';
 import { QuestionBase } from '../../question-base';
 @Component({
     selector: 'df-question',
-    templateUrl: './dynamic-form-question.component.html'
+    template: require('./dynamic-form-question.component.html')
 })
 export class DynamicFormQuestionComponent implements OnInit {
 

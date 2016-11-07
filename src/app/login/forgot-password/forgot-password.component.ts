@@ -5,8 +5,8 @@ import { ModalControlService } from '../../lib/modal/modal-control.service';
 @Component({
     selector: 'forgot-password',
     providers: [MdIconRegistry],
-    templateUrl: './forgot-password.component.html',
-    styleUrls: ['./forgot-password.component.scss']
+    template: require('./forgot-password.component.html'),
+    styles: [require('./forgot-password.component.scss')]
 })
 export class ForgotPasswordComponent implements OnInit {
     constructor(mdIconRegistry: MdIconRegistry, private modalControlService: ModalControlService) {

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { MdIconRegistry } from '@angular2-material/icon';
 
 import { User } from '../models/user';
@@ -7,12 +7,11 @@ import { Modal } from '../lib/enums/modal-names.enums';
 import { LoginService, SchoolService } from '../shared';
 import { ModalControlService } from '../lib/modal/modal-control.service';
 
-
 @Component({
     selector: 'my-login',
     viewProviders: [MdIconRegistry],
-    template: './login.component.html',
-    styles: ['./login.component.scss']
+    template: require('./login.component.html'),
+    styles: [require('./login.component.scss')]
 })
 export class LoginComponent implements OnInit {
     email: string;

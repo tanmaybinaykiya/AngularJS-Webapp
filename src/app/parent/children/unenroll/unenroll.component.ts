@@ -6,8 +6,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 @Component({
     selector: 'unenroll',
     viewProviders: [MdIconRegistry],
-    templateUrl: './unenroll.component.html',
-    styleUrls: ['./unenroll.component.scss']
+    template: require('./unenroll.component.html'),
+    styles: [require('./unenroll.component.scss')]
 })
 export class UnenrollComponent implements OnInit {
 

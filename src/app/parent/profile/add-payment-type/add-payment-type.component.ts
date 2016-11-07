@@ -4,8 +4,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 
 @Component({
     selector: 'add-payment-type',
-    templateUrl: './add-payment-type.component.html',
-    styleUrls: ['./add-payment-type.component.scss'],
+    template: require('./add-payment-type.component.html'),
+    styles: [require('./add-payment-type.component.scss')],
     viewProviders: [MdIconRegistry],
     encapsulation: ViewEncapsulation.None,
 })

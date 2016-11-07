@@ -5,8 +5,8 @@ import { LoginService, SchoolService } from './shared';
 @Component({
     selector: 'my-secureslice',
     providers: [ModalControlService, SchoolService, LoginService],
-    template: './app.component.html',
-    styles: ['./app.component.scss'],
+    template: require('./app.component.html'),
+    styles: [require('./app.component.scss')],
 })
 export class AppComponent {
     constructor() {

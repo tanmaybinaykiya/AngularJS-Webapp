@@ -3,10 +3,10 @@ import { MdIconRegistry } from '@angular2-material/icon';
 import { LoginService } from '../../../shared';
 
 @Component({
-    selector: 'user-badge',
+    selector: 'parent-header-user-badge',
     viewProviders: [MdIconRegistry],
-    templateUrl: './user-badge.component.html',
-    styleUrls: ['./user-badge.component.scss']
+    template: require('./user-badge.component.html'),
+    styles: [require('./user-badge.component.scss')]
 })
 export class ParentHeaderUserBadgeComponent implements OnInit {
     user = 'Dr. House';

@@ -4,8 +4,8 @@ import { MdIconRegistry } from '@angular2-material/icon';
 @Component({
     selector: 'custom-dropdown',
     viewProviders: [MdIconRegistry],
-    templateUrl: './dropdown.component.html',
-    styleUrls: ['./dropdown.component.scss'],
+    template: require('./dropdown.component.html'),
+    styles: [require('./dropdown.component.scss')],
 })
 export class DropDownComponent implements OnInit {
 

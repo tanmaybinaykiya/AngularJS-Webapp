@@ -14,8 +14,8 @@ import { DropdownQuestion } from '../../lib/question-dropdown';
 @Component({
     selector: 'my-children',
     viewProviders: [MdIconRegistry],
-    templateUrl: './children.component.html',
-    styleUrls: ['./children.component.scss']
+    template: require('./children.component.html'),
+    styles: [require('./children.component.scss')]
 })
 export class ChildrenComponent implements OnInit {
 
@@ -94,12 +94,12 @@ export class ChildrenComponent implements OnInit {
         // self.isLoading = true;
         let institutionCode = this.loginService.loggedInUser.institutionShortCode;
         this.schoolService.getSchool(institutionCode)
-            .subscribe(function(school: Institution) {
+            .subscribe(function (school: Institution) {
                 console.log('school', school);
                 // self.isLoading = false;
                 self.institution = school;
             },
-            function(error) {
+            function (error) {
                 console.log(error);
             });
 

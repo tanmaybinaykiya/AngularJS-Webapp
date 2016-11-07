@@ -4,8 +4,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 
 @Component({
     selector: 'delete-payment-type',
-    templateUrl: './delete-payment-type.component.html',
-    styleUrls: ['./delete-payment-type.component.scss'],
+    template: require('./delete-payment-type.component.html'),
+    styles: [require('./delete-payment-type.component.scss')],
     viewProviders: [MdIconRegistry],
     encapsulation: ViewEncapsulation.None,
 })

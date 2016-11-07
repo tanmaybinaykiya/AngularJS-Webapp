@@ -6,8 +6,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 @Component({
     selector: 'pay-tuition-fees',
     viewProviders: [MdIconRegistry],
-    templateUrl: './pay-tuition-fees.component.html',
-    styleUrls: ['./pay-tuition-fees.component.scss']
+    template: require('./pay-tuition-fees.component.html'),
+    styles: [require('./pay-tuition-fees.component.scss')]
 })
 export class PayTuitionFeesComponent implements OnInit {
 

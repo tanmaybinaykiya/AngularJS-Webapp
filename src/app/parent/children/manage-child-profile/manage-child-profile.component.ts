@@ -5,8 +5,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 @Component({
     selector: 'manage-child-profile',
     viewProviders: [MdIconRegistry],
-    templateUrl: './manage-child-profile.component.html',
-    styleUrls: ['./manage-child-profile.component.scss']
+    template: require('./manage-child-profile.component.html'),
+    styles: [require('./manage-child-profile.component.scss')]
 })
 export class ManageChildProfileComponent implements OnInit {
     modalControlService: ModalControlService;

@@ -8,8 +8,8 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
     selector: 'enroll-student',
     viewProviders: [MdIconRegistry],
-    templateUrl: './enroll-student.component.html',
-    styleUrls: ['./enroll-student.component.scss']
+    template: require('./enroll-student.component.html'),
+    styles: [require('./enroll-student.component.scss')]
 })
 
 export class EnrollStudentComponent implements OnInit {

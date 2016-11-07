@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'enrollment-center',
-    template: './enrollment-center.component.html',
-    styles: ['./enrollment-center.component.scss'],
+    template: require('./enrollment-center.component.html'),
+    styles: [require('./enrollment-center.component.scss')],
 
 })
 export class EnrollmentCenterComponent implements OnInit {

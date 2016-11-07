@@ -5,8 +5,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 @Component({
     selector: 'resend-invitation',
     providers: [MdIconRegistry],
-    template: './resend-invitation.component.html',
-    styles: ['./resend-invitation.component.scss']
+    template: require('./resend-invitation.component.html'),
+    styles: [require('./resend-invitation.component.scss')]
 })
 export class ResendInvitationComponent implements OnInit {
 

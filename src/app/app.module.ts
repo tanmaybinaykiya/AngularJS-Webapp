@@ -1,27 +1,28 @@
+
 // angular2
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 // material2
-import { MdIcon } from '@angular2-material/icon';
-import { MdInput } from '@angular2-material/input';
-import { MdButton } from '@angular2-material/button';
-import { MdSidenav } from '@angular2-material/sidenav';
-import { MdTab, MdTabGroup } from '@angular2-material/tabs';
-import { MdSpinner } from '@angular2-material/progress-circle';
-import { MdSlideToggle } from '@angular2-material/slide-toggle';
-import { MdProgressBar } from '@angular2-material/progress-bar';
-import { MdToolbarRow, MdToolbar } from '@angular2-material/toolbar';
-import { MdCard, MdCardHeader, MdCardTitleGroup } from '@angular2-material/card';
-import { MdListDivider, MdList, MdListAvatar, MdListItem } from '@angular2-material/list';
-import { MdCardContent, MdCardTitle, MdCardSubtitle, MdCardActions } from '@angular2-material/card';
+import { MdTabsModule } from '@angular2-material/tabs';
+import { MdIconModule } from '@angular2-material/icon';
+import { MdCardModule } from '@angular2-material/card';
+import { MdListModule } from '@angular2-material/list';
+import { MdInputModule } from '@angular2-material/input';
+import { MdButtonModule } from '@angular2-material/button';
+import { MdSidenavModule } from '@angular2-material/sidenav';
+import { MdToolbarModule } from '@angular2-material/toolbar';
+import { MdSlideToggleModule } from '@angular2-material/slide-toggle';
+import { MdProgressBarModule } from '@angular2-material/progress-bar';
+import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 
 // other libs
 import { MDLDirective } from './lib/mdl/MaterialDesignLiteUpgradeElement';
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 
 // app services
 import { APP_SERVICES } from './shared';
@@ -64,29 +65,33 @@ import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-qu
 
 @NgModule({
     imports: [
-        BrowserModule,
-        ReactiveFormsModule, FormsModule,
-        AppRoutes,
+        // NG2
         HttpModule,
+        FormsModule,
+        RouterModule,
+        BrowserModule,
+        ReactiveFormsModule,
+
+        // Material2
+        MdIconModule,
+        MdTabsModule,
+        MdCardModule,
+        MdListModule,
+        MdInputModule,
+        MdButtonModule,
+        MdSidenavModule,
+        MdToolbarModule,
+        MdSlideToggleModule,
+        MdProgressBarModule,
+        MdProgressCircleModule,
+
+        FileUploadModule,
+
+        AppRoutes,
     ],
     declarations: [
         // All components go here
-
-        // Library components
-        MdIcon,
-        MdInput,
-        MdButton,
-        MdSidenav,
-        MdSpinner,
         MDLDirective,
-        MdProgressBar,
-        MdSlideToggle,
-        MdTab, MdTabGroup,
-        MdToolbarRow, MdToolbar,
-        MdCard, MdCardHeader, MdCardTitleGroup,
-        FileSelectDirective, FileDropDirective,
-        MdListDivider, MdList, MdListAvatar, MdListItem,
-        MdCardContent, MdCardTitle, MdCardSubtitle, MdCardActions,
 
         // App components
         AppComponent,

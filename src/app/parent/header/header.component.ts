@@ -4,9 +4,9 @@ import { LoginService, SchoolService } from '../../shared';
 import { Institution } from '../../models/institution';
 
 @Component({
-    selector: 'header-toolbar',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    selector: 'parent-header-toolbar',
+    template: require('./header.component.html'),
+    styles: [require('./header.component.scss')]
 })
 
 export class ParentHeaderComponent implements OnInit {

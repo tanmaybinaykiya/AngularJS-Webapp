@@ -1,4 +1,4 @@
-<header-toolbar ></header-toolbar>
+<admin-header-toolbar></admin-header-toolbar>
 <md-sidenav-layout>
   <md-sidenav opened="true" mode="side">
     <md-nav-list>
@@ -9,8 +9,7 @@
       <a md-list-item [routerLink]="['Administration']" routerLinkActive="router-link-active"> Administration </a>
       <!--<a md-list-item [routerLink]="['Profile']"> Profile </a>-->
     </md-nav-list>
-  <button id="manual-billing-button"  md-raised-button color="secondary">Manual Billing</button>
+    <button id="manual-billing-button" md-raised-button color="secondary">Manual Billing</button>
   </md-sidenav>
   <router-outlet></router-outlet>
 </md-sidenav-layout>
-

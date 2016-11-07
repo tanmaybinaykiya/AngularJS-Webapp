@@ -4,8 +4,8 @@ import { ParentService } from '../shared';
 
 @Component({
     selector: 'my-parent',
-    templateUrl: './parent.component.html',
-    styleUrls: ['./parent.component.scss']
+    template: require('./parent.component.html'),
+    styles: [require('./parent.component.scss')]
 })
 export class ParentComponent implements OnInit {
 

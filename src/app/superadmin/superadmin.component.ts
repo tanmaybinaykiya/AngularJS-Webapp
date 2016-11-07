@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'my-superadmin',
-    templateUrl: './superadmin.component.html',
-    styleUrls: ['./superadmin.component.scss']
+    template: require('./superadmin.component.html'),
+    styles: [require('./superadmin.component.scss')]
 })
 export class SuperAdminComponent implements OnInit {
 

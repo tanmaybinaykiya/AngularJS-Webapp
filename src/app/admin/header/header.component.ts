@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'header-toolbar',
-    template: './header.component.html',
-    styles: ['./header.component.scss']
+    selector: 'admin-header-toolbar',
+    template: require('./header.component.html'),
+    styles: [require('./header.component.scss')]
 })
 
 export class AdminHeaderComponent implements OnInit {

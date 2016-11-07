@@ -5,8 +5,8 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 @Component({
     selector: 'manage-user-profile',
     viewProviders: [MdIconRegistry],
-    template: './manage-user-profile.component.html',
-    styles: ['./manage-user-profile.component.scss']
+    template: require('./manage-user-profile.component.html'),
+    styles: [require('./manage-user-profile.component.scss')]
 })
 export class ManageUserProfileComponent implements OnInit {
 
