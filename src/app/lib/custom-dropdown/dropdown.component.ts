@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 @Component({
     selector: 'custom-dropdown',

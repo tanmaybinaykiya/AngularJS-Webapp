@@ -1,32 +1,34 @@
+// angular2
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
-import { MdButton } from '@angular2-material/button';
+// material2
+import { MdIcon } from '@angular2-material/icon';
 import { MdInput } from '@angular2-material/input';
-import {
-    MdCardContent, MdCardTitle, MdCardSubtitle, MdCardActions,
-    MdCard, MdCardHeader, MdCardTitleGroup
-} from '@angular2-material/card/card';
+import { MdButton } from '@angular2-material/button';
 import { MdSidenav } from '@angular2-material/sidenav';
-import { MdListDivider, MdList, MdListAvatar, MdListItem } from '@angular2-material/list';
+import { MdTab, MdTabGroup } from '@angular2-material/tabs';
+import { MdSpinner } from '@angular2-material/progress-circle';
+import { MdSlideToggle } from '@angular2-material/slide-toggle';
+import { MdProgressBar } from '@angular2-material/progress-bar';
 import { MdToolbarRow, MdToolbar } from '@angular2-material/toolbar';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon/icon';
-import { MdTabChangeEvent, MdTab, MdTabGroup, MdTabsModule } from '@angular2-material/tabs/tabs';
-import { MdSlideToggle } from '@angular2-material/slide-toggle/slide-toggle';
+import { MdCard, MdCardHeader, MdCardTitleGroup } from '@angular2-material/card';
+import { MdListDivider, MdList, MdListAvatar, MdListItem } from '@angular2-material/list';
+import { MdCardContent, MdCardTitle, MdCardSubtitle, MdCardActions } from '@angular2-material/card';
+
+// other libs
+import { MDLDirective } from './lib/mdl/MaterialDesignLiteUpgradeElement';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
-import { MdSpinner } from '@angular2-material/progress-circle/progress-circle';
-import { MdProgressBar } from '@angular2-material/progress-bar/progress-bar';
 
-
+// app services
 import { APP_SERVICES } from './shared';
 import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 
-import { MDLDirective } from './lib/mdl/MaterialDesignLiteUpgradeElement';
-
+// app components
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ParentComponent } from './parent/parent.component';
@@ -60,7 +62,6 @@ import { ManageUserProfileComponent } from './parent/profile/manage-user-profile
 import { ManageChildProfileComponent } from './parent/children/manage-child-profile/manage-child-profile.component';
 import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-question/dynamic-form-question.component';
 
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -72,6 +73,7 @@ import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-qu
         // All components go here
 
         // Library components
+        MdIcon,
         MdInput,
         MdButton,
         MdSidenav,
@@ -79,15 +81,15 @@ import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-qu
         MDLDirective,
         MdProgressBar,
         MdSlideToggle,
-        MdIcon, MdIconRegistry,
+        MdTab, MdTabGroup,
         MdToolbarRow, MdToolbar,
         MdCard, MdCardHeader, MdCardTitleGroup,
         FileSelectDirective, FileDropDirective,
         MdListDivider, MdList, MdListAvatar, MdListItem,
-        MdTabChangeEvent, MdTab, MdTabGroup, MdTabsModule,
         MdCardContent, MdCardTitle, MdCardSubtitle, MdCardActions,
 
         // App components
+        AppComponent,
         LoginComponent,
         ModalComponent,
         AdminComponent,

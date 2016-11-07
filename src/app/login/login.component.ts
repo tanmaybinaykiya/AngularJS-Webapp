@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdIconRegistry } from '@angular2-material/icon/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 import { User } from '../models/user';
 import { Modal } from '../lib/enums/modal-names.enums';
@@ -11,8 +11,8 @@ import { ModalControlService } from '../lib/modal/modal-control.service';
 @Component({
     selector: 'my-login',
     viewProviders: [MdIconRegistry],
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    template: './login.component.html',
+    styles: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
     email: string;

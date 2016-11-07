@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
-import { MdIconRegistry } from '@angular2-material/icon/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 import { ParentService, SchoolService, LoginService } from '../../shared';
 import { QuestionControlService } from '../../lib/question-control.service';
@@ -94,12 +94,12 @@ export class ChildrenComponent implements OnInit {
         // self.isLoading = true;
         let institutionCode = this.loginService.loggedInUser.institutionShortCode;
         this.schoolService.getSchool(institutionCode)
-            .subscribe(function (school: Institution) {
+            .subscribe(function(school: Institution) {
                 console.log('school', school);
                 // self.isLoading = false;
                 self.institution = school;
             },
-            function (error) {
+            function(error) {
                 console.log(error);
             });
 
@@ -112,7 +112,7 @@ export class ChildrenComponent implements OnInit {
         // })
     }
 
-    ngOnChanges() {
+    OnChanges() {
         console.log('Children ngOnChanges called');
     }
 

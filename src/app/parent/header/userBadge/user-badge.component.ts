@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdIconRegistry } from '@angular2-material/icon/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 import { LoginService } from '../../../shared';
 
 @Component({

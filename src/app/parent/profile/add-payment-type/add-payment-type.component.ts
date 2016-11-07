@@ -1,4 +1,4 @@
-import { MdIconRegistry } from '@angular2-material/icon/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
 

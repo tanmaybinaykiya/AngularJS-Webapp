@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MdIconRegistry } from '@angular2-material/icon/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
 
