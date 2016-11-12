@@ -4,15 +4,19 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ParentGuard implements CanActivate {
+    
     constructor(private loginService: LoginService, private router: Router) {
         console.log('Hello ParentGuard');
     }
     canActivate() {
-        console.log(this.loginService.loggedInUser);
+        console.log('ParentGuard', this.loginService.loggedInUser);
         if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'parent') {
             return true;
+        } else {
+            // this.router.navigate(['login']);
+            // return false;
+            return true;
         }
-        this.router.navigate(['login']);
-        return false;
+
     }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+
 import { Observable } from 'rxjs/Observable';
+import * as _throw from 'rxjs/observable/throw';
 import { User } from '../models/user';
 import { Institution } from '../models/institution';
 import { Subject } from 'rxjs/Subject';
@@ -100,12 +102,13 @@ export class LoginService {
         this.loggedIn = false;
         try {
             let errMsg = JSON.parse(error.json().errorMessage).message;
-            console.error(errMsg); // log to console instead
-            return Observable.throw(errMsg);
+            console.error('LALALA:', errMsg); // log to console instead
+
+            return _throw._throw(errMsg);
         } catch (err) {
-            console.error('Actual error from servide ', error);
-            console.error('Error while parsing error', err);
-            return Observable.throw('Unknown service error');
+            console.error('LALALA1:', 'Actual error from server: ', error);
+            console.error('LALALA2:', 'Error while parsing error: ', err);
+            return _throw._throw('Unknown service error');
         }
     }
 }

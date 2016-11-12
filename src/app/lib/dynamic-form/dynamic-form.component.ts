@@ -1,18 +1,18 @@
+import { FormGroup } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-// import { ControlGroup }              from '@angular/common';
+
 import { QuestionBase } from '../question-base';
 import { QuestionControlService } from '../question-control.service';
-import { DynamicFormQuestionComponent } from './dynamic-form-question';
 
 @Component({
     selector: 'dynamic-form',
     template: require('./dynamic-form.component.html'),
     providers: [QuestionControlService]
 })
-export class DynamicFormComponent {
+export class DynamicFormComponent implements OnInit {
 
     @Input() questions: QuestionBase<any>[] = [];
-    form: any; // ControlGroup;
+    form: FormGroup;
     payLoad = '';
 
     constructor(private qcs: QuestionControlService) { }

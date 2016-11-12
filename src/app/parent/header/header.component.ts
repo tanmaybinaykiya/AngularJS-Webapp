@@ -16,13 +16,14 @@ export class ParentHeaderComponent implements OnInit {
 
     constructor(private loginService: LoginService, private schoolService: SchoolService,
         private router: Router) {
+        console.log('ParentHeaderComponent');
     }
 
     notificationMenu() {
         console.log('notificationMenu');
     }
     ngOnInit() {
-        console.log('Hello HeaderComponent', this.loginService.loggedInUser.institutionShortCode);
+        console.log('Hello ParentHeaderComponent', this.loginService.loggedInUser.institutionShortCode);
         let institutionCode = this.loginService.loggedInUser.institutionShortCode;
         let self = this;
         self.isLoading = true;

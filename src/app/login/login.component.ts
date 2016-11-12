@@ -1,27 +1,27 @@
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { MdIconRegistry } from '@angular2-material/icon';
 
 import { User } from '../models/user';
-import { Modal } from '../lib/enums/modal-names.enums';
 import { LoginService, SchoolService } from '../shared';
-import { ModalControlService } from '../lib/modal/modal-control.service';
 
 @Component({
-    selector: 'my-login',
-    viewProviders: [MdIconRegistry],
-    template: require('./login.component.html'),
-    styles: [require('./login.component.scss')]
+    selector: 'my-login-app',
+    template: require('./login.html')
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+
+    name: string;
     email: string;
     password: string;
     errorMessage: string;
-    name: string;
     isRequested: boolean = false;
+    form: FormGroup;
 
-    constructor(private loginService: LoginService, private router: Router,
-        private schoolService: SchoolService, private modalControlService: ModalControlService) {
+    constructor(private loginService: LoginService, private schoolService: SchoolService,
+        private router: Router, fbld: FormBuilder) {
+        console.log('Hello LoginComponent');
+        this.form = fbld.group({});
     }
 
     get isValid(): boolean {
@@ -32,16 +32,14 @@ export class LoginComponent implements OnInit {
         );
     }
 
-    ngOnInit() {
-        console.log('Hello Home');
-    }
+    get diagnostic() { return JSON.stringify({ email: this.email, password: this.password }); }
 
     setErrorMessage(message: string) {
-        this.errorMessage = message;
         let self = this;
+        self.errorMessage = message;
         setTimeout(function () {
             self.errorMessage = null;
-        }, 1500);
+        }, 2500);
     }
 
     login() {
@@ -50,41 +48,46 @@ export class LoginComponent implements OnInit {
         this.loginService.login(this.email, this.password)
             .subscribe(
             function (currentUser: User) {
+
                 self.isRequested = false;
-                if (currentUser.role === 'parent') {
-                    self.loginService.loggedInUser = currentUser;
-                    self.loginService.loggedIn = true;
-                    self.router.navigate(['/parent']);
-                } else if (currentUser.role === 'superadmin') {
-                    self.loginService.loggedInUser = currentUser;
-                    self.loginService.loggedIn = true;
-                    self.router.navigate(['/superadmin']);
-                } else if (currentUser.role === 'admin') {
-                    self.loginService.loggedInUser = currentUser;
-                    self.loginService.loggedIn = true;
-                    self.router.navigate(['/admin']);
-                } else {
-                    self.setErrorMessage('Not a valid user');
+                switch (currentUser.role) {
+
+                    case 'parent':
+                        self.loginService.loggedInUser = currentUser;
+                        self.loginService.loggedIn = true;
+                        self.router.navigate(['/parent']);
+                        break;
+
+                    case 'superadmin':
+                        self.loginService.loggedInUser = currentUser;
+                        self.loginService.loggedIn = true;
+                        self.router.navigate(['/superadmin']);
+                        break;
+
+                    case 'admin':
+                        self.loginService.loggedInUser = currentUser;
+                        self.loginService.loggedIn = true;
+                        self.router.navigate(['/admin']);
+                        break;
+
+                    default:
+                        self.setErrorMessage('Not a valid user');
+                        break;
                 }
-            },
-            function (error) {
+
+            }, function (error) {
                 self.isRequested = false;
+                console.log('Error: ', error);
                 self.setErrorMessage(error);
             });
     }
 
-    forgotPassword() { }
-
-    joinToday() { }
-
-    handler(password: string, email: string) {
-        console.log('key: ', password, email);
-        this.login();
+    forgotPassword() {
+        console.log('forgotPassword');
     }
 
-    toggleModal(modal: Modal) {
-        console.log('Login: toggleModal', modal);
-        this.modalControlService.enable(modal);
+    joinToday() {
+        console.log('joinToday');
     }
 
 }

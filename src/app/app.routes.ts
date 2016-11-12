@@ -1,20 +1,19 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { LoginComponent } from './login';
+import { LoginComponent } from './login/login.component';
 import { SuperAdminComponent } from './superadmin';
 import { DropDownComponent } from './lib/custom-dropdown/dropdown.component';
-import { AdminRoutes } from './admin/admin.routes';
+// import { AdminRoutes } from './admin/admin.routes';
 import { ParentRoutes } from './parent/parent.routes';
 import { SuperAdminGuard } from './security';
 
 const routes: Routes = [
     {
         path: '',
-        pathMatch: 'prefix',
+        pathMatch: 'full',
         redirectTo: '/login',
-    },
-    {
+    }, {
         path: 'login',
         component: LoginComponent,
     }, {
@@ -25,8 +24,8 @@ const routes: Routes = [
         path: 'test',
         component: DropDownComponent,
     },
-    ...AdminRoutes,
+    // ...AdminRoutes,
     ...ParentRoutes,
 ];
 
-export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);
+export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, { enableTracing: true });

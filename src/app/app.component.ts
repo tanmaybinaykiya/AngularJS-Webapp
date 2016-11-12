@@ -9,7 +9,8 @@ import { LoginService, SchoolService } from './shared';
     styles: [require('./app.component.scss')],
 })
 export class AppComponent {
-    constructor() {
-        console.log('Hello app component');
+    constructor(private modalControlService: ModalControlService, private schoolService: SchoolService,
+        private loginService: LoginService) {
+        console.log('Hello AppComponent');
     }
 }

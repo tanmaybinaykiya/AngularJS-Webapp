@@ -20,6 +20,9 @@ import { MdSlideToggleModule } from '@angular2-material/slide-toggle';
 import { MdProgressBarModule } from '@angular2-material/progress-bar';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 
+// primeng
+import { ButtonModule, PasswordModule, InputTextModule } from './lib/primeng/primeng';
+
 // other libs
 import { MDLDirective } from './lib/mdl/MaterialDesignLiteUpgradeElement';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -31,29 +34,19 @@ import { AppComponent } from './app.component';
 
 // app components
 import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
+
 import { ParentComponent } from './parent/parent.component';
 import { ModalComponent } from './lib/modal/modal.component';
-import { PeopleComponent } from './admin/people/people.component';
-import { BillingComponent } from './admin/billing/billing.component';
 import { ProfileComponent } from './parent/profile/profile.component';
-import { AdminHeaderComponent } from './admin/header/header.component';
 import { SuperAdminComponent } from './superadmin/superadmin.component';
 import { ChildrenComponent } from './parent/children/children.component';
 import { ParentHeaderComponent } from './parent/header/header.component';
-import { AdminRegisterComponent } from './admin/register/register.component';
 import { DropDownComponent } from './lib/custom-dropdown/dropdown.component';
-import { JoinTodayComponent } from './login/join-today/join-today.component';
 import { UnenrollComponent } from './parent/children/unenroll/unenroll.component';
-import { NotificationComponent } from './admin/notification/notification.component';
 import { DeleteUserComponent } from './parent/profile/delete-user/delete-user.component';
-import { AdministrationComponent } from './admin/administration/administration.component';
-import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
-import { AdminHeaderUserBadgeComponent } from './admin/header/userBadge/user-badge.component';
 import { ParentHeaderUserBadgeComponent } from './parent/header/userBadge/user-badge.component';
 import { InviteFriendsComponent } from './parent/profile/invite-friends/invite-friends.component';
 import { ResetPasswordComponent } from './parent/profile/reset-password/reset-password.component';
-import { EnrollmentCenterComponent } from './admin/enrollment-center/enrollment-center.component';
 import { EnrollStudentComponent } from './parent/children/enroll-student/enroll-student.component';
 import { AddPaymentTypeComponent } from './parent/profile/add-payment-type/add-payment-type.component';
 import { PayTuitionFeesComponent } from './parent/children/pay-tuition-fees/pay-tuition-fees.component';
@@ -63,6 +56,8 @@ import { ManageUserProfileComponent } from './parent/profile/manage-user-profile
 import { ManageChildProfileComponent } from './parent/children/manage-child-profile/manage-child-profile.component';
 import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-question/dynamic-form-question.component';
 
+import { SuperAdminGuard, ParentGuard } from './security';
+
 @NgModule({
     imports: [
         // NG2
@@ -71,6 +66,11 @@ import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-qu
         RouterModule,
         BrowserModule,
         ReactiveFormsModule,
+
+        // primeng
+        ButtonModule,
+        PasswordModule,
+        InputTextModule,
 
         // Material2
         MdIconModule,
@@ -88,48 +88,41 @@ import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-qu
         FileUploadModule,
 
         AppRoutes,
+
+
     ],
     declarations: [
         // All components go here
         MDLDirective,
 
         // App components
-        AppComponent,
         LoginComponent,
+
+        AppComponent,
         ModalComponent,
-        AdminComponent,
         ParentComponent,
-        PeopleComponent,
-        BillingComponent,
         ProfileComponent,
         ChildrenComponent,
         DropDownComponent,
         UnenrollComponent,
-        JoinTodayComponent,
         DeleteUserComponent,
         SuperAdminComponent,
-        AdminHeaderComponent,
         ParentHeaderComponent,
-        NotificationComponent,
         EnrollStudentComponent,
         ResetPasswordComponent,
-        AdminRegisterComponent,
         InviteFriendsComponent,
         AddPaymentTypeComponent,
-        AdministrationComponent,
-        ForgotPasswordComponent,
         PayTuitionFeesComponent,
         ResendInvitationComponent,
-        EnrollmentCenterComponent,
         ManageUserProfileComponent,
         DeletePaymentTypeComponent,
         ManageChildProfileComponent,
         DynamicFormQuestionComponent,
-        AdminHeaderUserBadgeComponent,
         ParentHeaderUserBadgeComponent,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+        SuperAdminGuard, ParentGuard,
         ...APP_SERVICES
     ],
     bootstrap: [AppComponent]
