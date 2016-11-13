@@ -1,17 +1,8 @@
-md-sidenav-layout {
-  min-height: 500px;
+.layout-container .layout-menu {
+    top: 0;
+    padding-top: 0;
 }
-md-sidenav {
-  width: 200px;
-  
-}
-.router-link-active{
-    display: block; 
-    color: #fff;
-    background-color: #009688;
-}
-#manual-billing-button{
-    display: block;
-    margin: 0 auto;
-    margin-top: 20px;
+
+.layout-container .layout-main {
+    padding: 15px 15px 15px 15px;
 }

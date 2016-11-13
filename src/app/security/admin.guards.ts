@@ -8,10 +8,11 @@ export class AdminGuard implements CanActivate {
         console.log('Hello AdminGuard');
     }
     canActivate() {
-        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'admin') {
-            return true;
-        }
-        this.router.navigate(['login']);
-        return false;
+        console.log('Logged in user:', this.loginService.dummyVar, this.loginService.loggedInUser);
+        // if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'admin') {
+        return true;
+        // }
+        // this.router.navigate(['login']);
+        // return false;
     }
 }

@@ -32,15 +32,15 @@ export class SchoolService {
         return getJSONAsObservable();
 
         /*
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
-                let params: URLSearchParams = new URLSearchParams();
-                let url = this.getInstitutionUrl;
-                params.set('shortCode', institutionCode);
-                console.log('url: ', url, 'params: ', params);
-                return this.http.get(this.getInstitutionUrl, { search: params })
-                    .map(this.extractData)
-                    .catch(this.handleError);
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+            let params: URLSearchParams = new URLSearchParams();
+            let url = this.getInstitutionUrl;
+            params.set('shortCode', institutionCode);
+            console.log('url: ', url, 'params: ', params);
+            return this.http.get(this.getInstitutionUrl, { search: params })
+                .map(this.extractData)
+                .catch(this.handleError);
         */
     }
 
@@ -87,6 +87,7 @@ export class LoginService {
     loginUrl = getApiHost() + '/users/token';
     loggedIn = false;
     loggedInUser: User;
+    dummyVar: string = 'defaultValue';
 
     constructor(private http: Http) {
         console.log('hello login service');
@@ -94,11 +95,14 @@ export class LoginService {
 
     dummyServiceResponse(cb: (result: User) => any) {
         setTimeout(function () {
-            cb(new User(1, 'tanmay', 'parent', 'blah', 'ISS'));
+            cb(new User(1, 'tanmay', 'admin', 'blah', 'ISS'));
         }, 1500);
     }
 
     login(email: String, password: String): Observable<User> {
+
+        this.dummyVar = 'login called 1ce';
+        console.log('Login called: dummyVar:', this.dummyVar);
         let getJSONAsObservable: () => Observable<User> = Rx.Observable.bindCallback(this.dummyServiceResponse);
         return getJSONAsObservable();
         /*

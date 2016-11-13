@@ -74,6 +74,7 @@ export class LoginComponent {
                     default:
                         self.setErrorMessage('Not a valid user');
                         break;
+
                 }
 
             }, function (error) {
@@ -84,12 +85,10 @@ export class LoginComponent {
     }
 
     forgotPassword() {
-        alert("hi");
         console.log('forgotPassword');
     }
 
     joinToday() {
-        alert("hi");
         console.log('joinToday');
     }
 

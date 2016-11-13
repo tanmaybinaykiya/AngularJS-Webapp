@@ -1,11 +1,20 @@
-import { EnrollmentCenterComponent } from './enrollment-center';
-import { PeopleComponent } from './people/';
-import { BillingComponent } from './billing/';
-import { NotificationComponent } from './notification/';
-import { AdministrationComponent } from './administration/';
-import { AdminRegisterComponent } from './register';
-import { AdminComponent } from './admin.component';
 import { AdminGuard } from '../security';
+import { AdminComponent } from './admin.component';
+
+import { PeopleComponent } from './people';
+import { BillingComponent } from './billing';
+import { ReportingComponent } from './reporting';
+import { AdministrationComponent } from './administration';
+import { EnrollmentCenterComponent } from './enrollment-center';
+import { AdminRegisterComponent } from './register';
+
+import { StaffComponent } from './administration/staff';
+import { ClassComponent } from './administration/class';
+import { SchoolComponent } from './administration/school';
+import { GeneralComponent } from './administration/general';
+import { StudentComponent } from './administration/student';
+import { DiscountsComponent } from './administration/discounts';
+import { NotificationComponent } from './administration/notification';
 
 export const AdminRoutes = [
     {
@@ -13,17 +22,28 @@ export const AdminRoutes = [
         component: AdminComponent,
         canActivate: [AdminGuard],
         children: [
-            { path: '', redirectTo: 'enrollmentCenter', terminal: true },
-            { path: 'enrollmentCenter', component: EnrollmentCenterComponent, name: 'EnrollmentCenter', useAsDefault: true },
-            { path: 'people', component: PeopleComponent, name: 'People' },
-            { path: 'billing', component: BillingComponent, name: 'Billing' },
-            { path: 'notification', component: NotificationComponent, name: 'Notification' },
-            { path: 'administration', component: AdministrationComponent, name: 'Administration' },
+            { path: '', redirectTo: 'enrollmentcenter', terminal: true },
+            { path: 'register', component: AdminRegisterComponent },
+            { path: 'enrollmentcenter', component: EnrollmentCenterComponent, name: 'enrollmentcenter', useAsDefault: true },
+            { path: 'people', component: PeopleComponent },
+            { path: 'billing', component: BillingComponent },
+            { path: 'notification', component: NotificationComponent },
+            { path: 'reporting', component: ReportingComponent },
+            {
+                path: 'administration',
+                component: AdministrationComponent,
+                children: [
+                    { path: '', redirectTo: 'school', terminal: true },
+                    { path: 'school', component: SchoolComponent, name: 'school' },
+                    { path: 'class', component: ClassComponent },
+                    { path: 'staff', component: StaffComponent },
+                    { path: 'student', component: StudentComponent },
+                    { path: 'discounts', component: DiscountsComponent },
+                    { path: 'notification', component: NotificationComponent },
+                    { path: 'general', component: GeneralComponent },
+                ]
+            },
         ]
     },
-    {
-        path: 'admin/register',
-        component: AdminRegisterComponent
-    }
 
 ];

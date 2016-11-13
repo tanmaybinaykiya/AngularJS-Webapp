@@ -29,7 +29,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 
 // app services
 import { APP_SERVICES } from './shared';
-import { QuestionControlService } from './lib/question-control.service'
+import { QuestionControlService } from './lib/question-control.service';
 import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 
@@ -57,7 +57,25 @@ import { ManageUserProfileComponent } from './parent/profile/manage-user-profile
 import { ManageChildProfileComponent } from './parent/children/manage-child-profile/manage-child-profile.component';
 import { DynamicFormQuestionComponent } from './lib/dynamic-form/dynamic-form-question/dynamic-form-question.component';
 
-import { SuperAdminGuard, ParentGuard } from './security';
+import { AdminComponent } from './admin';
+import { PeopleComponent } from './admin/people';
+import { BillingComponent } from './admin/billing';
+import { AdminHeaderComponent } from './admin/header';
+import { ReportingComponent } from './admin/reporting';
+import { AdminRegisterComponent } from './admin/register';
+import { AdministrationComponent } from './admin/administration';
+import { EnrollmentCenterComponent } from './admin/enrollment-center';
+import { AdminHeaderUserBadgeComponent } from './admin/header/userBadge';
+
+import { NotificationComponent } from './admin/administration/notification';
+import { SchoolComponent } from './admin/administration/school';
+import { StaffComponent } from './admin/administration/staff';
+import { StudentComponent } from './admin/administration/student';
+import { ClassComponent } from './admin/administration/class';
+import { DiscountsComponent } from './admin/administration/discounts';
+import { GeneralComponent } from './admin/administration/general';
+
+import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
 
 @NgModule({
     imports: [
@@ -97,17 +115,17 @@ import { SuperAdminGuard, ParentGuard } from './security';
         MDLDirective,
 
         // App components
-        LoginComponent,
-
         AppComponent,
         ModalComponent,
+        DropDownComponent,
+        DynamicFormQuestionComponent,
+
+        // parent
         ParentComponent,
         ProfileComponent,
         ChildrenComponent,
-        DropDownComponent,
         UnenrollComponent,
         DeleteUserComponent,
-        SuperAdminComponent,
         ParentHeaderComponent,
         EnrollStudentComponent,
         ResetPasswordComponent,
@@ -118,12 +136,40 @@ import { SuperAdminGuard, ParentGuard } from './security';
         ManageUserProfileComponent,
         DeletePaymentTypeComponent,
         ManageChildProfileComponent,
-        DynamicFormQuestionComponent,
         ParentHeaderUserBadgeComponent,
+
+        // login 
+        LoginComponent,
+
+        // super admin
+        SuperAdminComponent,
+
+        // admin
+        AdminComponent,
+        PeopleComponent,
+        BillingComponent,
+        ReportingComponent,
+        AdminHeaderComponent,
+        NotificationComponent,
+        AdminRegisterComponent,
+        AdministrationComponent,
+        EnrollmentCenterComponent,
+        AdminHeaderUserBadgeComponent,
+
+        // admin admin
+        StaffComponent,
+        ClassComponent,
+        SchoolComponent,
+        GeneralComponent,
+        StudentComponent,
+        DiscountsComponent,
+
+
     ],
+
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        SuperAdminGuard, ParentGuard,
+        SuperAdminGuard, ParentGuard, AdminGuard,
         ...APP_SERVICES,
         QuestionControlService
     ],
