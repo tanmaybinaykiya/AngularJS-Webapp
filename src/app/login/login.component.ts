@@ -7,7 +7,8 @@ import { LoginService, SchoolService } from '../shared';
 
 @Component({
     selector: 'my-login-app',
-    template: require('./login.html')
+    template: require('./login.component.html'),
+    styles: [require('./login.component.scss')]
 })
 export class LoginComponent {
 
@@ -83,10 +84,12 @@ export class LoginComponent {
     }
 
     forgotPassword() {
+        alert("hi");
         console.log('forgotPassword');
     }
 
     joinToday() {
+        alert("hi");
         console.log('joinToday');
     }
 

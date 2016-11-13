@@ -29,6 +29,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 
 // app services
 import { APP_SERVICES } from './shared';
+import { QuestionControlService } from './lib/question-control.service'
 import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 
@@ -123,7 +124,8 @@ import { SuperAdminGuard, ParentGuard } from './security';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         SuperAdminGuard, ParentGuard,
-        ...APP_SERVICES
+        ...APP_SERVICES,
+        QuestionControlService
     ],
     bootstrap: [AppComponent]
 })

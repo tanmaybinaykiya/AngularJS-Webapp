@@ -30,13 +30,13 @@
                             <template md-tab-content>
                                 <md-input class="input-field" placeholder="Credit Card Number"></md-input>
                                 <md-input class="input-field" placeholder="CVV2 Number"></md-input>
+                                <br>
                                 <div class="input-field form-group">
-                                    <label for="gender-control">Expiration:</label>
+                                    <label>Expiration:</label>
                                     <custom-dropdown options={{months}} placeholder="Month"></custom-dropdown>
+                                    <custom-dropdown options={{years}} placeholder="Year"></custom-dropdown>
                                 </div>
-                                <div class="input-field form-group">
-                                     <custom-dropdown options={{years}} placeholder="Year"></custom-dropdown>
-                                </div>
+                                <br>
                                 <md-input class="input-field" placeholder="Street"></md-input>
                                 <md-input class="input-field" placeholder="City"></md-input>
                                 <md-input class="input-field" placeholder="State"></md-input>

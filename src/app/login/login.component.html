@@ -1,0 +1,36 @@
+<div class="card wrapper-section ui-g">
+
+    <div class="ui-g-12">
+        <img src="../resources/layout/images/logo-ultima.svg">
+    </div>
+
+    <div class="ui-g-12 ui-md-6 login-section ui-fluid">
+        <form (ngSubmit)="login()">
+            <div class="ui-g-12">
+                <span class="md-inputfield">
+                    <input type="text" pInputText autocomplete="off" name="email" [(ngModel)]="email" >
+                    <label>Username</label>
+                </span>
+            </div>
+            <div class="ui-g-12">
+                <span class="md-inputfield">
+                    <input type="password" pInputText autocomplete="off" name="password" [(ngModel)]="password" >
+                    <label>Password</label>
+                </span>
+            </div>
+            <div class="ui-g-12">
+                <button type="submit" pButton label="Sign In" icon="ui-icon-person"></button>
+                <button type="button" (onclick)="forgotPassword()" pButton label="Forgot Password" icon="ui-icon-help" class="blue-grey-btn"></button>
+            </div>
+        </form>
+        <span *ngIf="errorMessage">{{errorMessage}}</span>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 join-today-section ui-fluid">
+        <h3 class="ui-g-12">
+            Parents! Join today to manage your childrens' activities
+        </h3>
+        <button type="button" (onclick)="joinToday()" pButton label="Join Today!" class="pink-btn" style="margin-bottom:10px; width:auto;"></button>
+    </div>
+
+</div>
