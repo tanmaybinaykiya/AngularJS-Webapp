@@ -13,7 +13,7 @@ export class EnrollmentCenterComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Hello Admin');
+        console.log('Hello EnrollmentCenterComponent');
     }
 
 }

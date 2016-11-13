@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { User } from '../models/user';
 import { LoginService } from '../shared/api.service';
 
 @Component({
@@ -11,11 +12,14 @@ import { LoginService } from '../shared/api.service';
 
 export class AdminComponent implements OnInit {
 
+    loggedInUser: User;
+
     constructor(private loginService: LoginService, private router: Router) {
         console.log('Hello AdminComponent');
     }
 
     ngOnInit() {
+        this.loggedInUser = this.loginService.loggedInUser;
     }
 
     donate() {
