@@ -1,3 +1,33 @@
 <div>
-    People
+    <div class="card card-w-title people-administration-table">
+
+        <p-dataTable [value]="people" selectionMode="multiple" [(selection)]="selection" [paginator]="true" [rows]="10" [responsive]="true">
+            <header>People Administration</header>
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="role" header="Role" [sortable]="true"></p-column>
+            <p-column field="institutionShortCode" header="Institution" [sortable]="false"></p-column>
+            <!--<p-column styleClass="col-button">
+                <template pTemplate type="header">
+                    <button type="button" pButton icon="fa-refresh"></button>
+                </template>
+                <template let-car="rowData" pTemplate type="body">
+                    <button type="button" pButton (click)="selectCar(car)" icon="fa-search"></button>
+                </template>
+            </p-column>-->
+        </p-dataTable>
+
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-8">
+            </div>
+            <div class="ui-g-12 ui-md-2">
+                <button pButton type="button" (click)="modify()" [disabled]="selection.length===0" label="Modify" icon="ui-icon-edit"></button>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+                <p-confirmDialog header="Confirmation" icon="fa ui-icon-warning" width="425"></p-confirmDialog>
+                <button pButton type="text" (click)="delete()" [disabled]="selection.length===0" class="pink-btn" label="Delete" icon="ui-icon-delete"></button>
+            </div>
+            {{diagnostic}}
+        </div>
+
+    </div>
 </div>

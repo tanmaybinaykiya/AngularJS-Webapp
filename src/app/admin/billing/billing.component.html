@@ -1,3 +1,56 @@
 <div>
-    Billing
+    <div class="card card-w-title billing-administration-table">
+
+        <p-dataTable [value]="people" selectionMode="multiple" [(selection)]="selection" [paginator]="true" [rows]="10" [responsive]="true">
+            <header>Billing Administration</header>
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="institution" header="Institution" [sortable]="true"></p-column>
+            <p-column field="paymentStatus" header="Payment Status" [sortable]="true">
+                <template let-user="rowData" pTemplate type="body">
+                    <i *ngIf="user.paymentStatus==='Paid'" class="material-icons">done</i>
+                    <span *ngIf="user.paymentStatus!=='Paid'">Past Due</span>
+                </template>
+            </p-column>
+            <p-column field="discount" header="Discount" [sortable]="true">
+                <template let-user="rowData" pTemplate type="body">
+                    <span *ngIf="user.discount===0">None</span>
+                    <span *ngIf="user.discount!==0">{{user.discount}}%</span>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-10">
+            </div>
+            <div class="ui-g-12 ui-md-2">
+                <p-dialog header="Discount Administration" [(visible)]="display" [width]=600 [height]=450 modal="modal" showEffect="fade">
+
+                    <div class="ui-g-12">
+                        <label for="discountValue">Apply the following discount:</label>
+                        <input type="text" class="ui-md-1" #discountValue id="discountValue" (keyup)="0" />
+                        <label for="discountValue">%</label>
+                    </div>
+                    value: {{discountValue.value}}
+                    <p-dataTable [value]="selection" selectionMode="none" [responsive]="true">
+                        <p-column field="name" header="Name"></p-column>
+                        <p-column field="currentPayment" header="Current Payment"></p-column>
+                        <p-column header="New Payment">
+                            <template let-user="rowData" pTemplate type="body">
+                                <span>${{user.currentPayment*((100 - discountValue.value)/100)}}</span>
+                            </template>
+                        </p-column>
+                    </p-dataTable>
+                    <footer>
+                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                            <button type="button" pButton icon="fa-close" (click)="display=false" label="Cancel"></button>
+                            <button type="button" pButton icon="fa-check" (click)="display=false" label="Apply Discount"></button>
+                        </div>
+                    </footer>
+                </p-dialog>
+                <button pButton type="button" (click)="display=true" label="Modify Discount" [disabled]="selection.length===0" icon="ui-icon-edit"></button>
+            </div>
+            {{diagnostic}}
+        </div>
+
+    </div>
 </div>

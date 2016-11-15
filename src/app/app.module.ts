@@ -21,7 +21,16 @@ import { MdProgressBarModule } from '@angular2-material/progress-bar';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 
 // primeng
-import { ButtonModule, PasswordModule, InputTextModule } from './lib/primeng/primeng';
+import {
+    ButtonModule,
+    PasswordModule,
+    InputTextModule,
+    DataTableModule,
+    DialogModule,
+    DataGridModule,
+    ConfirmDialogModule,
+    ConfirmationService
+} from './lib/primeng/primeng';
 
 // other libs
 import { MDLDirective } from './lib/mdl/MaterialDesignLiteUpgradeElement';
@@ -35,6 +44,8 @@ import { AppComponent } from './app.component';
 
 // app components
 import { LoginComponent } from './login/login.component';
+
+import { PageNotFoundComponent } from './page-not-found';
 
 import { ParentComponent } from './parent/parent.component';
 import { ModalComponent } from './lib/modal/modal.component';
@@ -87,9 +98,13 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         ReactiveFormsModule,
 
         // primeng
+        DialogModule,
         ButtonModule,
         PasswordModule,
+        DataGridModule,
         InputTextModule,
+        DataTableModule,
+        ConfirmDialogModule,
 
         // Material2
         MdIconModule,
@@ -119,6 +134,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         ModalComponent,
         DropDownComponent,
         DynamicFormQuestionComponent,
+        PageNotFoundComponent,
 
         // parent
         ParentComponent,
@@ -171,6 +187,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         SuperAdminGuard, ParentGuard, AdminGuard,
         ...APP_SERVICES,
+        ConfirmationService,
         QuestionControlService
     ],
     bootstrap: [AppComponent]

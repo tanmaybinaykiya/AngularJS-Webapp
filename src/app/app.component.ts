@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { ModalControlService } from './lib/modal/modal-control.service';
 import { LoginService, SchoolService } from './shared';
+
+declare var Ultima: any;
 
 @Component({
     selector: 'my-secureslice',
@@ -8,9 +10,14 @@ import { LoginService, SchoolService } from './shared';
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+
     constructor(private modalControlService: ModalControlService, private schoolService: SchoolService,
-        private loginService: LoginService) {
+        private loginService: LoginService, private el: ElementRef) {
         console.log('Hello AppComponent');
+    }
+
+    ngAfterViewInit() {
+        Ultima.init(this.el.nativeElement);
     }
 }

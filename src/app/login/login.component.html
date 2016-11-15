@@ -30,7 +30,24 @@
         <h3 class="ui-g-12">
             Parents! Join today to manage your childrens' activities
         </h3>
-        <button type="button" (onclick)="joinToday()" pButton label="Join Today!" class="pink-btn" style="margin-bottom:10px; width:auto;"></button>
+
+        <p-dialog header="Join Today" [(visible)]="display" modal="modal" showEffect="fade">
+            <h4 class="ui-g">Jack and Jill went up the hill to fetch a pail of water</h4>
+            <div class="ui-g-12">
+                <span class="md-inputfield">
+                    <input type="text" pInputText>
+                    <label>Email address</label>
+                </span>
+            </div>
+            <footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button pButton type="submit" label="Yes" style="margin-bottom:10px" (click)="display=false"></button>
+                    <button pButton type="button" label="No" style="margin-bottom:10px" (click)="display=false"></button>
+                </div>
+            </footer>
+        </p-dialog>
+
+        <button type="text" (click)="display=true" pButton class="pink-btn" style="margin-bottom:10px; width:auto;" label="Join Today!"></button>
     </div>
 
 </div>

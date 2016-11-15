@@ -209,97 +209,118 @@ var Dialog = (function () {
         }
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], Dialog.prototype, "header", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "draggable", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "resizable", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], Dialog.prototype, "minWidth", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], Dialog.prototype, "minHeight", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Dialog.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Dialog.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Dialog.prototype, "contentHeight", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "modal", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], Dialog.prototype, "showEffect", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "closeOnEscape", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "rtl", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "closable", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "responsive", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Dialog.prototype, "appendTo", void 0);
     __decorate([
-        core_1.ContentChild(shared_1.Header), 
+        core_1.ContentChild(shared_1.Header),
         __metadata('design:type', Object)
     ], Dialog.prototype, "headerFacet", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], Dialog.prototype, "onBeforeShow", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], Dialog.prototype, "onAfterShow", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], Dialog.prototype, "onBeforeHide", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], Dialog.prototype, "onAfterHide", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], Dialog.prototype, "visibleChange", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], Dialog.prototype, "visible", null);
     Dialog = __decorate([
         core_1.Component({
             selector: 'p-dialog',
-            template: "\n        <div [ngClass]=\"{'ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow':true,'ui-dialog-rtl':rtl,'ui-dialog-draggable':draggable}\" \n            [style.display]=\"visible ? 'block' : 'none'\" [style.width.px]=\"width\" [style.height.px]=\"height\" (mousedown)=\"moveOnTop()\" [@dialogState]=\"visible ? 'visible' : 'hidden'\">\n            <div class=\"ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top\"\n                (mousedown)=\"initDrag($event)\" (mouseup)=\"endDrag($event)\">\n                <span class=\"ui-dialog-title\" *ngIf=\"header\">{{header}}</span>\n                <span class=\"ui-dialog-title\" *ngIf=\"headerFacet\">\n                    <ng-content select=\"header\"></ng-content>\n                </span>\n                <a [ngClass]=\"{'ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all':true,'ui-state-hover':hoverCloseIcon}\" href=\"#\" role=\"button\" *ngIf=\"closable\" \n                    (click)=\"hide($event)\" (mouseenter)=\"hoverCloseIcon=true\" (mouseleave)=\"hoverCloseIcon=false\">\n                    <span class=\"fa fa-fw fa-close\"></span>\n                </a>\n            </div>\n            <div class=\"ui-dialog-content ui-widget-content\" [style.height.px]=\"contentHeight\">\n                <ng-content></ng-content>\n            </div>\n            <ng-content select=\"footer\"></ng-content>\n            <div *ngIf=\"resizable\" class=\"ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se\" style=\"z-index: 90;\"\n                (mousedown)=\"initResize($event)\"></div>\n        </div>\n    ",
+            template: "\
+                    <div [ngClass]=\"{'ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow':true,'ui-dialog-rtl':rtl,'ui-dialog-draggable':draggable}\" \
+                        [style.display]=\"visible ? 'block' : 'none'\" [style.width.px]=\"width\" [style.height.px]=\"height\" (mousedown)=\"moveOnTop()\" [@dialogState]=\"visible ? 'visible' : 'hidden'\">\
+                        <div class=\"ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top\"\
+                            (mousedown)=\"initDrag($event)\" (mouseup)=\"endDrag($event)\">\
+                            <span class=\"ui-dialog-title\" *ngIf=\"header\">{{header}}</span>\
+                            <span class=\"ui-dialog-title\" *ngIf=\"headerFacet\">\
+                                <ng-content select=\"header\"></ng-content>\
+                            </span>\
+                            <a [ngClass]=\"{'ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all':true,'ui-state-hover':hoverCloseIcon}\" href=\"#\" role=\"button\" *ngIf=\"closable\" \
+                                (click)=\"hide($event)\" (mouseenter)=\"hoverCloseIcon=true\" (mouseleave)=\"hoverCloseIcon=false\">\
+                                <span class=\"fa fa-fw fa-close\"></span>\
+                            </a>\
+                        </div>\
+                        <div class=\"ui-dialog-content ui-widget-content\" [style.height.px]=\"contentHeight\">\
+                            <ng-content></ng-content>\
+                        </div>\
+                        <ng-content select=\"footer\"></ng-content>\
+                        <div *ngIf=\"resizable\" class=\"ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se\" style=\"z-index: 90;\"\
+                            (mousedown)=\"initResize($event)\"></div>\
+                    </div>\
+                ",
             animations: [
                 core_1.trigger('dialogState', [
                     core_1.state('hidden', core_1.style({
@@ -313,11 +334,11 @@ var Dialog = (function () {
                 ])
             ],
             providers: [domhandler_1.DomHandler]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, domhandler_1.DomHandler, core_1.Renderer])
     ], Dialog);
     return Dialog;
-}());
+} ());
 exports.Dialog = Dialog;
 var DialogModule = (function () {
     function DialogModule() {
@@ -327,10 +348,10 @@ var DialogModule = (function () {
             imports: [common_1.CommonModule],
             exports: [Dialog],
             declarations: [Dialog]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], DialogModule);
     return DialogModule;
-}());
+} ());
 exports.DialogModule = DialogModule;
 //# sourceMappingURL=dialog.js.map

@@ -1,10 +1,12 @@
+export type Role = 'Admin' | 'Staff';
+
 export class User {
     id: number;
     name: string;
-    role: string;
+    role: Role;
     token: string;
     institutionShortCode: string;
-    constructor(id: number, name: string, role: string, token: string, institutionShortCode: string) {
+    constructor(id: number, name: string, role: Role, token: string, institutionShortCode: string) {
         this.id = id;
         this.name = name;
         this.role = role;
