@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit {
     constructor(private recipientService: RecipientService, fb: FormBuilder) {
         // Do stuff
         this.form = fb.group({
-            'cellNumber': [Validators.pattern('[0-9]{10}')],
+            'cellNumber': ['', Validators.pattern('[0-9]{10}')],
         });
     }
 
