@@ -29,7 +29,8 @@ import {
     DialogModule,
     DataGridModule,
     ConfirmDialogModule,
-    ConfirmationService
+    ConfirmationService,
+    AutoCompleteModule
 } from './lib/primeng/primeng';
 
 // other libs
@@ -74,11 +75,12 @@ import { BillingComponent } from './admin/billing';
 import { AdminHeaderComponent } from './admin/header';
 import { ReportingComponent } from './admin/reporting';
 import { AdminRegisterComponent } from './admin/register';
+import { NotificationComponent } from './admin/notification';
 import { AdministrationComponent } from './admin/administration';
 import { EnrollmentCenterComponent } from './admin/enrollment-center';
 import { AdminHeaderUserBadgeComponent } from './admin/header/userBadge';
 
-import { NotificationComponent } from './admin/administration/notification';
+import { AdminNotificationComponent } from './admin/administration/notification';
 import { SchoolComponent } from './admin/administration/school';
 import { StaffComponent } from './admin/administration/staff';
 import { StudentComponent } from './admin/administration/student';
@@ -104,6 +106,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         DataGridModule,
         InputTextModule,
         DataTableModule,
+        AutoCompleteModule,
         ConfirmDialogModule,
 
         // Material2
@@ -170,6 +173,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         AdminRegisterComponent,
         AdministrationComponent,
         EnrollmentCenterComponent,
+        AdminNotificationComponent,
         AdminHeaderUserBadgeComponent,
 
         // admin admin

@@ -23,33 +23,35 @@
             <div class="ui-g-12 ui-md-10">
             </div>
             <div class="ui-g-12 ui-md-2">
-                <p-dialog header="Discount Administration" [(visible)]="display" [width]=600 [height]=450 modal="modal" showEffect="fade">
 
-                    <div class="ui-g-12">
+                <p-dialog header="Discount Administration" [(visible)]="dialogDisplay" [width]=600 modal="modal" showEffect="fade">
+                    <div class="ui-g-12" id="discount-admin">
                         <label for="discountValue">Apply the following discount:</label>
-                        <input type="text" class="ui-md-1" #discountValue id="discountValue" (keyup)="0" />
+                        <input type="text" pInputText class="ui-md-1" [formControl]="discountForm.controls['discountValue']" id="discountValue" (keyup)="0"
+                        />
                         <label for="discountValue">%</label>
                     </div>
-                    value: {{discountValue.value}}
                     <p-dataTable [value]="selection" selectionMode="none" [responsive]="true">
                         <p-column field="name" header="Name"></p-column>
                         <p-column field="currentPayment" header="Current Payment"></p-column>
                         <p-column header="New Payment">
                             <template let-user="rowData" pTemplate type="body">
-                                <span>${{user.currentPayment*((100 - discountValue.value)/100)}}</span>
+                                <span *ngIf="discountForm.valid">${{user.currentPayment*((100 - discountValue)/100)}}</span>
+                                <span *ngIf="!discountForm.valid">N/A</span>
                             </template>
                         </p-column>
                     </p-dataTable>
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                            <button type="button" pButton icon="fa-close" (click)="display=false" label="Cancel"></button>
-                            <button type="button" pButton icon="fa-check" (click)="display=false" label="Apply Discount"></button>
+                            <button type="button" pButton class="primary" icon="fa-close" (click)="dialogDisplay=false" label="Cancel"></button>
+                            <button type="submit" pButton class="secondary" icon="fa-check" (click)="submit()" [disabled]="!discountForm.valid" label="Apply Discount"></button>
                         </div>
                     </footer>
                 </p-dialog>
-                <button pButton type="button" (click)="display=true" label="Modify Discount" [disabled]="selection.length===0" icon="ui-icon-edit"></button>
+
+                <button pButton type="button" (click)="dialogDisplay=true" label="Modify Discount" [disabled]="selection.length===0" icon="ui-icon-edit"></button>
+
             </div>
-            {{diagnostic}}
         </div>
 
     </div>

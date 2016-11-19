@@ -7,6 +7,7 @@ import { ReportingComponent } from './reporting';
 import { AdministrationComponent } from './administration';
 import { EnrollmentCenterComponent } from './enrollment-center';
 import { AdminRegisterComponent } from './register';
+import { NotificationComponent } from './notification';
 
 import { StaffComponent } from './administration/staff';
 import { ClassComponent } from './administration/class';
@@ -14,7 +15,7 @@ import { SchoolComponent } from './administration/school';
 import { GeneralComponent } from './administration/general';
 import { StudentComponent } from './administration/student';
 import { DiscountsComponent } from './administration/discounts';
-import { NotificationComponent } from './administration/notification';
+import { AdminNotificationComponent } from './administration/notification';
 
 export const AdminRoutes = [
     {
@@ -39,7 +40,7 @@ export const AdminRoutes = [
                     { path: 'staff', component: StaffComponent },
                     { path: 'student', component: StudentComponent },
                     { path: 'discounts', component: DiscountsComponent },
-                    { path: 'notification', component: NotificationComponent },
+                    { path: 'notification', component: AdminNotificationComponent },
                     { path: 'general', component: GeneralComponent },
                 ]
             },

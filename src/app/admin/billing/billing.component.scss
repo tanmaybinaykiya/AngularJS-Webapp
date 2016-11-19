@@ -5,3 +5,8 @@
 .ui-g-12 input {
     font-size: 14px;
 }
+
+#discount-admin input{
+    // hack because ui-fluid is overriding stuff
+    width: 8.33%;
+}

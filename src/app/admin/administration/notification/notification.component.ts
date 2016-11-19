@@ -5,14 +5,14 @@ import { Component, OnInit } from '@angular/core';
     template: require('./notification.component.html'),
     styles: [require('./notification.component.scss')],
 })
-export class NotificationComponent implements OnInit {
+export class AdminNotificationComponent implements OnInit {
 
     constructor() {
         // Do stuff
     }
 
     ngOnInit() {
-        console.log('Hello NotificationComponent');
+        console.log('Hello AdminNotificationComponent');
     }
 
 }

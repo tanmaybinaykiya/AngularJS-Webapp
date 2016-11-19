@@ -1,0 +1,48 @@
+<div>
+    <div class="card card-w-title clearfix">
+        <h1>Notification Administration</h1>
+        <div class="ui-g ui-g-8">
+            <form>
+
+                <div class="ui-g-12">
+                    <label for="from" class="ui-g-12 ui-md-1">From:</label>
+                    <input class="ui-g-12 ui-md-11" type="text" pInputText name="from" (keyup)="0" />
+                </div>
+
+                <div class="ui-g-12" style="margin-bottom:10px">
+                    <label for="to" class="ui-g-12 ui-md-1">To:</label>
+                    <p-autoComplete class="ui-g-12 ui-md-11" id="acSimple" name="to" [(ngModel)]="recipients" [suggestions]="filteredRecipients"
+                        [multiple]="true" (completeMethod)="filterRecipients($event)" field="name" [size]="30" [minLength]="1"></p-autoComplete>
+                </div>
+
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <textarea rows="5" cols="30" class="ui-g-12" pInputTextarea name="message" placeholder="Your Message..."></textarea>
+                    </span>
+                </div>
+
+                <button type="button" class="blue-grey-btn ui-g-12 ui-md-2" pButton label="Reset" icon="ui-icon-delete"></button>
+                <div class="ui-g-12 ui-md-2"></div>
+                <button type="submit" class="ui-g-12 ui-md-3" pButton label="Send Message" icon="ui-icon-chat"></button>
+                <button pButton type="button" class="blue-grey-btn ui-g-12 ui-md-4" (click)="dialogDisplay=true" label="Send Test Message"
+                    icon="ui-icon-message"></button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog header="Test Message" [(visible)]="dialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <h5>Enter a US based 10 digit cell phone number below</h5>
+    <div class="ui-g-12" id="cell-number">
+        <label for="cellNumber">Cell Number</label>
+        <input type="text" pInputText class="ui-md-3" [formControl]="form.controls['cellNumber']" id="cellNumber" (keyup)="0" />
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="secondary" icon="fa-check" (click)="sendTestMessage()" [disabled]="!form.valid" label="Send Message"></button>
+            <button type="button" pButton class="primary" icon="fa-close" (click)="dialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>

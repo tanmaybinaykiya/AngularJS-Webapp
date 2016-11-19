@@ -154,6 +154,32 @@ export class NotificationService {
         }
     ];
 }
+
+@Injectable()
+export class RecipientService {
+
+    getRecipients(): Observable<User[]> {
+        console.log('RecipientService called ');
+        let getJSONAsObservable: () => Observable<User[]> = Rx.Observable.bindCallback(this.dummyServiceResponse);
+        return getJSONAsObservable();
+    }
+
+    dummyServiceResponse(cb: (results: User[]) => any) {
+        console.log('dummyServiceResponse ');
+        setTimeout(function () {
+            console.log('Returning now: ');
+            cb([
+                new User(123, 'name11', 'Staff', 'tgrdchfgvjbn', 'ISS3'),
+                new User(12, 'name2', 'Staff', 'tgrdchfgvjbn', 'ISS2'),
+                new User(1234, 'name13', 'Staff', 'tgrdchfgvjbn', 'ISS4'),
+                new User(23, 'name4', 'Staff', 'tgrdchfgvjbn', 'ISS2'),
+                new User(31, 'name51', 'Staff', 'tgrdchfgvjbn', 'ISS1'),
+            ]);
+        }, 1500);
+    }
+
+}
+
 export const APP_SERVICES = [
-    NotificationService, ParentService, LoginService, ApiUrlService, SchoolService
+    NotificationService, ParentService, LoginService, ApiUrlService, SchoolService, RecipientService
 ];
