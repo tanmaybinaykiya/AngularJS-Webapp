@@ -12,6 +12,9 @@ import { RecipientService } from '../../shared/api.service';
 export class NotificationComponent implements OnInit {
 
     form: FormGroup;
+    private sender: string = '';
+    private message: string = '';
+    private recipients: User[] = [];
     private filteredRecipients: User[] = [];
     dialogDisplay: boolean = false;
 
@@ -40,6 +43,14 @@ export class NotificationComponent implements OnInit {
     sendTestMessage() {
         console.log('Sending test message:', this.form.controls['cellNumber'].value);
         this.dialogDisplay = false;
+    }
+
+    reset() {
+        console.log('reset');
+        this.filteredRecipients = [];
+        this.recipients = [];
+        this.sender = '';
+        this.message = '';
     }
 
 }

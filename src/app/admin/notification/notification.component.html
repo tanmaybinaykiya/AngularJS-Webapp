@@ -6,7 +6,7 @@
 
                 <div class="ui-g-12">
                     <label for="from" class="ui-g-12 ui-md-1">From:</label>
-                    <input class="ui-g-12 ui-md-11" type="text" pInputText name="from" (keyup)="0" />
+                    <input class="ui-g-12 ui-md-11" type="text" pInputText [(ngModel)]="sender" name="from" (keyup)="0" />
                 </div>
 
                 <div class="ui-g-12" style="margin-bottom:10px">
@@ -17,11 +17,11 @@
 
                 <div class="ui-g-12">
                     <span class="md-inputfield">
-                        <textarea rows="5" cols="30" class="ui-g-12" pInputTextarea name="message" placeholder="Your Message..."></textarea>
+                        <textarea rows="5" cols="30" class="ui-g-12" pInputTextarea name="message" [(ngModel)]="message" placeholder="Your Message..."></textarea>
                     </span>
                 </div>
 
-                <button type="button" class="blue-grey-btn ui-g-12 ui-md-2" pButton label="Reset" icon="ui-icon-delete"></button>
+                <button type="button" class="blue-grey-btn ui-g-12 ui-md-2" (click)="reset()" pButton label="Reset" icon="ui-icon-delete"></button>
                 <div class="ui-g-12 ui-md-2"></div>
                 <button type="submit" class="ui-g-12 ui-md-3" pButton label="Send Message" icon="ui-icon-chat"></button>
                 <button pButton type="button" class="blue-grey-btn ui-g-12 ui-md-4" (click)="dialogDisplay=true" label="Send Test Message"
