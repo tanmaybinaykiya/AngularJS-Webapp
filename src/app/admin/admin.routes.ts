@@ -11,7 +11,7 @@ import { NotificationComponent } from './notification';
 
 import { StaffComponent } from './administration/staff';
 import { ClassComponent } from './administration/class';
-import { SchoolComponent } from './administration/school';
+import { SchoolAdministrationComponent } from './administration/school';
 import { GeneralComponent } from './administration/general';
 import { StudentComponent } from './administration/student';
 import { DiscountsComponent } from './administration/discounts';
@@ -35,7 +35,7 @@ export const AdminRoutes = [
                 component: AdministrationComponent,
                 children: [
                     { path: '', redirectTo: 'school', terminal: true },
-                    { path: 'school', component: SchoolComponent, name: 'school' },
+                    { path: 'school', component: SchoolAdministrationComponent, name: 'school' },
                     { path: 'class', component: ClassComponent },
                     { path: 'staff', component: StaffComponent },
                     { path: 'student', component: StudentComponent },

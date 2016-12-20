@@ -1,4 +1,4 @@
-export type Role = 'Admin' | 'Staff';
+export type Role = 'Admin' | 'Staff' | 'Parent' | 'SuperAdmin';
 
 export class User {
     id: number;

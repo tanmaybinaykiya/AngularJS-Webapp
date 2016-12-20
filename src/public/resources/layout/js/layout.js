@@ -2,407 +2,407 @@
  * PrimeFaces Ultima Layout
  */
 Ultima = {
-    
-    init: function(app) {
-        this.wrapper = $(app.children[0]);
-        this.container = this.wrapper.children('.layout-container');
-        this.topbar = this.container.children('.topbar');
-        this.menu = $('#main-menu');
-        this.menuWrapper = this.menu.closest('.layout-menu');
-        this.menulinks = this.menu.find('a');
-        this.profileButton = $('#profile-options');
-        this.profileMenu = $('#profile-menu');
-        this.topbarItems = this.topbar.find('.topbar-items');
-        this.topbarLinks = this.topbarItems.find('> li > a');
-        this.menuButton = $('#menu-button');
-        this.topbarMenuButton = $('#topbar-menu-button');
-        this.menuActive = false;
-        this.topbarLinkClick = false;
-        this.topbarMenuClick = false;
 
-        this._bindEvents();
-        
-        if(!this.container.hasClass('menu-layout-horizontal')) {
-            this.restoreMenuState();
-        }
-                
-        this.menuWrapper.children('.nano').nanoScroller({flash:true});
-    },
-    
-    _bindEvents: function() {
-        var $this = this;
-        
-        this.menuButton.off('click.ultima').on('click.ultima', function(e) {
-            $this.menuButton.toggleClass('menu-button-rotate');
-            $this.topbarItems.removeClass('topbar-items-visible');
-            
-            //overlay
-            if($this.container.hasClass('menu-layout-overlay')) {
-                $this.container.toggleClass('layout-menu-overlay-active');
-                
-                if($this.container.hasClass('layout-menu-overlay-active')) {
-                    $this.enableModal();
-                }
-                else {
-                    $this.disableModal();
-                }
-            }
-            //static
-            else {
-                if($this.isDesktop()) {
-                    $this.container.toggleClass('layout-menu-static-inactive')
-                }
-                else {
-                    if($this.container.hasClass('layout-menu-static-active')) {
-                        $this.container.removeClass('layout-menu-static-active');
-                        $this.disableModal();
-                    }
-                    else {
-                        $this.container.addClass('layout-menu-static-active');
-                        $this.container.removeClass('layout-menu-static-inactive');
-                        $this.enableModal();
-                    }
-                }
-            }
-            
-            e.preventDefault();
-        });
-        
-        this.topbarMenuButton.off('click.ultima').on('click.ultima', function(e) {
-            $this.topbarMenuClick = true;
-            $this.topbarItems.find('ul').removeClass('fadeInDown fadeOutUp');
-            
-            if($this.container.hasClass('layout-menu-overlay-active')||$this.container.hasClass('layout-menu-static-active')) {
-                $this.menuButton.removeClass('menu-button-rotate');
-                $this.container.removeClass('layout-menu-overlay-active layout-menu-static-active');
-                $this.disableModal();
-            }
+  init: function (app) {
+    this.wrapper = $(app.children[0]);
+    this.container = this.wrapper.children('.layout-container');
+    this.topbar = this.container.children('.topbar');
+    this.menu = $('#main-menu');
+    this.menuWrapper = this.menu.closest('.layout-menu');
+    this.menulinks = this.menu.find('a');
+    this.profileButton = $('#profile-options');
+    this.profileMenu = $('#profile-menu');
+    this.topbarItems = this.topbar.find('.topbar-items');
+    this.topbarLinks = this.topbarItems.find('> li > a');
+    this.menuButton = $('#menu-button');
+    this.topbarMenuButton = $('#topbar-menu-button');
+    this.menuActive = false;
+    this.topbarLinkClick = false;
+    this.topbarMenuClick = false;
 
-            if($this.topbarItems.hasClass('topbar-items-visible')) {
-                $this.topbarItems.addClass('fadeOutUp');
-                
-                setTimeout(function() {
-                    $this.topbarItems.removeClass('fadeOutUp topbar-items-visible');
-                },500);
-            }
-            else {
-                $this.topbarItems.addClass('topbar-items-visible fadeInDown');
-            }
-            
-            e.preventDefault();
-        });
-        
-        this.menu.off('click.ultima').on('click.ultima', 'a', function(e) {
-            var link = $(this),
-            item = link.parent(),
-            submenu = item.children('ul'),
-            horizontal = $this.isHorizontal() && $this.isDesktop();
-            
-            if(horizontal) {
-                $this.horizontalMenuClick = true;
-            }
-                                     
-            if(item.hasClass('active-menuitem')) {
-                if(submenu.length) {
-                    item.removeClass('active-menuitem');
-                    
-                    if(horizontal) {
-                        if(item.parent().is($this.menu)) {
-                            $this.menuActive = false;
-                        }
-                        
-                        submenu.hide();
-                    }
-                    else {
-                        submenu.slideUp();
-                    }
-                }
-            }
-            else {                
-                if(horizontal) {
-                    if(submenu.length) {
-                        $this.deactivateItems(item.siblings());
-                        item.addClass('active-menuitem');
-                        $this.menuActive = true;
-                        submenu.show();
-                    }
-                    else {
-                        $this.deactivateHorizontalMenu();
-                    }
-                }
-                else {
-                    $this.deactivateItems(item.siblings(), true);
-                    $this.activate(item);
-                }
-            }
-            
-            if($this.isOverlay()||!$this.isDesktop()) {
-                if(!submenu.length) {
-                    $this.container.removeClass('layout-menu-overlay-active layout-menu-static-active');
-                    $this.disableModal();
-                    $this.menuButton.toggleClass('menu-button-rotate');
-                }                
-            }
-            
-            if(!horizontal) {
-                setTimeout(function() {
-                    $(".nano").nanoScroller();
-                }, 500);
-            }
-                                    
-            if(submenu.length) {
-                e.preventDefault();
-            }
-        });
-        
-        this.menu.off('mouseenter.ultima').on('mouseenter.ultima','> li > a', function(e) {    
-            if($this.isHorizontal() && $this.isDesktop()) {
-                var link = $(this),
-                item = link.parent(),
-                submenu = item.children('ul');
-                
-                if(!item.hasClass('active-menuitem')) {
-                    $this.menu.find('.active-menuitem').removeClass('active-menuitem');
-                    $this.menu.find('ul:visible').hide();
-                    $this.menu.find('.ink').remove();
-                    
-                    if($this.menuActive) {
-                        item.addClass('active-menuitem');
-                        item.children('ul').show();
-                    }
-                }
-            }
-        });
-        
-        this.profileButton.off('click.ultima').on('click.ultima', function(e) {
-            var profile = $this.profileMenu.prev('.profile'),
-            expanded = profile.hasClass('profile-expanded');
-            
-            $this.profileMenu.slideToggle();
-            $this.profileMenu.prev('.profile').toggleClass('profile-expanded');
-          
-            setTimeout(function() {
-                $(".nano").nanoScroller();
-            }, 500);
-            
-            e.preventDefault();
-        });
-                
-        this.topbar.off('click.ultima').on('click.ultima','.topbar-items > li > a', function(e) {
-            var link = $(this),
-            item = link.parent(),
-            submenu = link.next();
-            
-            $this.topbarLinkClick = true;
+    this._bindEvents();
 
-            item.siblings('.active-top-menu').removeClass('active-top-menu');
-            if($this.container.hasClass('layout-menu-overlay-active')) {
-                $this.menuButton.removeClass('menu-button-rotate');
-                $this.container.removeClass('layout-menu-overlay-active');
-                $this.disableModal();
-            }
-
-            if($this.isDesktop()) {
-                if(submenu.length) {
-                    if(item.hasClass('active-top-menu')) {
-                        submenu.addClass('fadeOutUp');
-                        
-                        setTimeout(function() {
-                            item.removeClass('active-top-menu'),
-                            submenu.removeClass('fadeOutUp');
-                        },500);
-                    }
-                    else {
-                        item.addClass('active-top-menu');
-                        submenu.addClass('fadeInDown');
-                    }
-                }
-            }
-            else {
-                item.children('ul').removeClass('fadeInDown fadeOutUp');
-                item.toggleClass('active-top-menu');
-            }   
-            
-            e.preventDefault();         
-        });
-        
-        $this.topbarItems.children('.search-item').off('click.ultima').on('click.ultima', function(e) {
-            $this.topbarLinkClick = true;
-        });
-        
-        $(document.body).off('click.ultima').on('click.ultima', function() {
-            if($this.isHorizontal() && !$this.horizontalMenuClick && $this.isDesktop()) {
-                $this.deactivateHorizontalMenu();
-            }
-            if(!$this.topbarMenuClick && !$this.topbarLinkClick) {
-                $this.topbarItems.find('.active-top-menu').removeClass('active-top-menu');
-                $this.topbarItems.removeClass('topbar-items-visible');
-            }
-            
-            $this.horizontalMenuClick = false;
-            $this.topbarLinkClick = false;
-            $this.topbarMenuClick = false;
-        });
-    },
-    
-    deactivateHorizontalMenu: function() {
-        this.menu.find('.active-menuitem').removeClass('active-menuitem');
-        this.menu.find('ul:visible').hide();
-        this.menuActive = false;
-    },
-    
-    activate: function(item) {
-        var submenu = item.children('ul');
-        item.addClass('active-menuitem');
-
-        if(submenu.length) {
-            submenu.slideDown();
-        }
-    },
-    
-    deactivate: function(item) {
-        var submenu = item.children('ul');
-        item.removeClass('active-menuitem');
-        
-        if(submenu.length) {
-            submenu.hide();
-        }
-    },
-        
-    deactivateItems: function(items, animate) {
-        var $this = this;
-        
-        for(var i = 0; i < items.length; i++) {
-            var item = items.eq(i),
-            submenu = item.children('ul');
-            
-            if(submenu.length) {
-                if(item.hasClass('active-menuitem')) {
-                    var activeSubItems = item.find('.active-menuitem');
-                    item.removeClass('active-menuitem');
-                    item.find('.ink').remove();
-                    
-                    if(animate) {
-                        submenu.slideUp('normal', function() {
-                            $(this).parent().find('.active-menuitem').each(function() {
-                                $this.deactivate($(this));
-                            });
-                        });
-                    }
-                    else {
-                        submenu.hide();
-                        item.find('.active-menuitem').each(function() {
-                            $this.deactivate($(this));
-                        });
-                    }
-                }
-                else {
-                    item.find('.active-menuitem').each(function() {
-                        var subItem = $(this);
-                        $this.deactivate(subItem);
-                    });
-                }
-            }
-            else if(item.hasClass('active-menuitem')) {
-                $this.deactivate(item);
-            }
-        }
-    },
-            
-    enableModal: function() {
-        this.modal = this.container.append('<div class="layout-mask"></div>').children('.layout-mask');
-    },
-    
-    disableModal: function() {
-        this.modal.remove();
-    },
-        
-    isHorizontal: function() {
-        return this.container.hasClass('menu-layout-horizontal');
-    },
-    
-    isOverlay: function() {
-        return this.container.hasClass('menu-layout-overlay');
-    },
-    
-    isTablet: function() {
-        var width = window.innerWidth;
-        return width <= 1024 && width > 640;
-    },
-
-    isDesktop: function() {
-        return window.innerWidth > 1024;
-    },
-
-    isMobile: function() {
-        return window.innerWidth <= 640;
-    },
-    
-    restoreMenuState: function() {
-        var $this = this;
-        setTimeout(function() {
-            var activeMenuLink = $this.menu.find('a.active-menulink');
-            if(activeMenuLink.length) {
-                var menuitem = activeMenuLink.parent();
-                $this.restoreMenuitem(menuitem);
-                
-                var parentList = menuitem.parent();
-                while(parentList.get(0) != $this.menu.get(0)) {
-                    var parentItem = parentList.parent();
-                    $this.restoreMenuitem(parentItem);
-                    parentList = parentItem.parent();
-                }
-            }
-        }, 50);
-    },
-    
-    restoreMenuitem: function(item) {
-        item.addClass('active-menuitem');
-        
-        var submenu = item.children('ul');
-        if(submenu.length) {
-            submenu.show();
-        }
+    if (!this.container.hasClass('menu-layout-horizontal')) {
+      this.restoreMenuState();
     }
-    
+
+    this.menuWrapper.children('.nano').nanoScroller({ flash: true });
+  },
+
+  _bindEvents: function () {
+    var $this = this;
+
+    this.menuButton.off('click.ultima').on('click.ultima', function (e) {
+      $this.menuButton.toggleClass('menu-button-rotate');
+      $this.topbarItems.removeClass('topbar-items-visible');
+
+      //overlay
+      if ($this.container.hasClass('menu-layout-overlay')) {
+        $this.container.toggleClass('layout-menu-overlay-active');
+
+        if ($this.container.hasClass('layout-menu-overlay-active')) {
+          $this.enableModal();
+        }
+        else {
+          $this.disableModal();
+        }
+      }
+      //static
+      else {
+        if ($this.isDesktop()) {
+          $this.container.toggleClass('layout-menu-static-inactive')
+        }
+        else {
+          if ($this.container.hasClass('layout-menu-static-active')) {
+            $this.container.removeClass('layout-menu-static-active');
+            $this.disableModal();
+          }
+          else {
+            $this.container.addClass('layout-menu-static-active');
+            $this.container.removeClass('layout-menu-static-inactive');
+            $this.enableModal();
+          }
+        }
+      }
+
+      e.preventDefault();
+    });
+
+    this.topbarMenuButton.off('click.ultima').on('click.ultima', function (e) {
+      $this.topbarMenuClick = true;
+      $this.topbarItems.find('ul').removeClass('fadeInDown fadeOutUp');
+
+      if ($this.container.hasClass('layout-menu-overlay-active') || $this.container.hasClass('layout-menu-static-active')) {
+        $this.menuButton.removeClass('menu-button-rotate');
+        $this.container.removeClass('layout-menu-overlay-active layout-menu-static-active');
+        $this.disableModal();
+      }
+
+      if ($this.topbarItems.hasClass('topbar-items-visible')) {
+        $this.topbarItems.addClass('fadeOutUp');
+
+        setTimeout(function () {
+          $this.topbarItems.removeClass('fadeOutUp topbar-items-visible');
+        }, 500);
+      }
+      else {
+        $this.topbarItems.addClass('topbar-items-visible fadeInDown');
+      }
+
+      e.preventDefault();
+    });
+
+    this.menu.off('click.ultima').on('click.ultima', 'a', function (e) {
+      var link = $(this),
+        item = link.parent(),
+        submenu = item.children('ul'),
+        horizontal = $this.isHorizontal() && $this.isDesktop();
+
+      if (horizontal) {
+        $this.horizontalMenuClick = true;
+      }
+
+      if (item.hasClass('active-menuitem')) {
+        if (submenu.length) {
+          item.removeClass('active-menuitem');
+
+          if (horizontal) {
+            if (item.parent().is($this.menu)) {
+              $this.menuActive = false;
+            }
+
+            submenu.hide();
+          }
+          else {
+            submenu.slideUp();
+          }
+        }
+      }
+      else {
+        if (horizontal) {
+          if (submenu.length) {
+            $this.deactivateItems(item.siblings());
+            item.addClass('active-menuitem');
+            $this.menuActive = true;
+            submenu.show();
+          }
+          else {
+            $this.deactivateHorizontalMenu();
+          }
+        }
+        else {
+          $this.deactivateItems(item.siblings(), true);
+          $this.activate(item);
+        }
+      }
+
+      if ($this.isOverlay() || !$this.isDesktop()) {
+        if (!submenu.length) {
+          $this.container.removeClass('layout-menu-overlay-active layout-menu-static-active');
+          // $this.disableModal();
+          $this.menuButton.toggleClass('menu-button-rotate');
+        }
+      }
+
+      if (!horizontal) {
+        setTimeout(function () {
+          $(".nano").nanoScroller();
+        }, 500);
+      }
+
+      if (submenu.length) {
+        e.preventDefault();
+      }
+    });
+
+    this.menu.off('mouseenter.ultima').on('mouseenter.ultima', '> li > a', function (e) {
+      if ($this.isHorizontal() && $this.isDesktop()) {
+        var link = $(this),
+          item = link.parent(),
+          submenu = item.children('ul');
+
+        if (!item.hasClass('active-menuitem')) {
+          $this.menu.find('.active-menuitem').removeClass('active-menuitem');
+          $this.menu.find('ul:visible').hide();
+          $this.menu.find('.ink').remove();
+
+          if ($this.menuActive) {
+            item.addClass('active-menuitem');
+            item.children('ul').show();
+          }
+        }
+      }
+    });
+
+    this.profileButton.off('click.ultima').on('click.ultima', function (e) {
+      var profile = $this.profileMenu.prev('.profile'),
+        expanded = profile.hasClass('profile-expanded');
+
+      $this.profileMenu.slideToggle();
+      $this.profileMenu.prev('.profile').toggleClass('profile-expanded');
+
+      setTimeout(function () {
+        $(".nano").nanoScroller();
+      }, 500);
+
+      e.preventDefault();
+    });
+
+    this.topbar.off('click.ultima').on('click.ultima', '.topbar-items > li > a', function (e) {
+      var link = $(this),
+        item = link.parent(),
+        submenu = link.next();
+
+      $this.topbarLinkClick = true;
+
+      item.siblings('.active-top-menu').removeClass('active-top-menu');
+      if ($this.container.hasClass('layout-menu-overlay-active')) {
+        $this.menuButton.removeClass('menu-button-rotate');
+        $this.container.removeClass('layout-menu-overlay-active');
+        $this.disableModal();
+      }
+
+      if ($this.isDesktop()) {
+        if (submenu.length) {
+          if (item.hasClass('active-top-menu')) {
+            submenu.addClass('fadeOutUp');
+
+            setTimeout(function () {
+              item.removeClass('active-top-menu'),
+                submenu.removeClass('fadeOutUp');
+            }, 500);
+          }
+          else {
+            item.addClass('active-top-menu');
+            submenu.addClass('fadeInDown');
+          }
+        }
+      }
+      else {
+        item.children('ul').removeClass('fadeInDown fadeOutUp');
+        item.toggleClass('active-top-menu');
+      }
+
+      e.preventDefault();
+    });
+
+    $this.topbarItems.children('.search-item').off('click.ultima').on('click.ultima', function (e) {
+      $this.topbarLinkClick = true;
+    });
+
+    $(document.body).off('click.ultima').on('click.ultima', function () {
+      if ($this.isHorizontal() && !$this.horizontalMenuClick && $this.isDesktop()) {
+        $this.deactivateHorizontalMenu();
+      }
+      if (!$this.topbarMenuClick && !$this.topbarLinkClick) {
+        $this.topbarItems.find('.active-top-menu').removeClass('active-top-menu');
+        $this.topbarItems.removeClass('topbar-items-visible');
+      }
+
+      $this.horizontalMenuClick = false;
+      $this.topbarLinkClick = false;
+      $this.topbarMenuClick = false;
+    });
+  },
+
+  deactivateHorizontalMenu: function () {
+    this.menu.find('.active-menuitem').removeClass('active-menuitem');
+    this.menu.find('ul:visible').hide();
+    this.menuActive = false;
+  },
+
+  activate: function (item) {
+    var submenu = item.children('ul');
+    item.addClass('active-menuitem');
+
+    if (submenu.length) {
+      submenu.slideDown();
+    }
+  },
+
+  deactivate: function (item) {
+    var submenu = item.children('ul');
+    item.removeClass('active-menuitem');
+
+    if (submenu.length) {
+      submenu.hide();
+    }
+  },
+
+  deactivateItems: function (items, animate) {
+    var $this = this;
+
+    for (var i = 0; i < items.length; i++) {
+      var item = items.eq(i),
+        submenu = item.children('ul');
+
+      if (submenu.length) {
+        if (item.hasClass('active-menuitem')) {
+          var activeSubItems = item.find('.active-menuitem');
+          item.removeClass('active-menuitem');
+          item.find('.ink').remove();
+
+          if (animate) {
+            submenu.slideUp('normal', function () {
+              $(this).parent().find('.active-menuitem').each(function () {
+                $this.deactivate($(this));
+              });
+            });
+          }
+          else {
+            submenu.hide();
+            item.find('.active-menuitem').each(function () {
+              $this.deactivate($(this));
+            });
+          }
+        }
+        else {
+          item.find('.active-menuitem').each(function () {
+            var subItem = $(this);
+            $this.deactivate(subItem);
+          });
+        }
+      }
+      else if (item.hasClass('active-menuitem')) {
+        $this.deactivate(item);
+      }
+    }
+  },
+
+  enableModal: function () {
+    this.modal = this.container.append('<div class="layout-mask"></div>').children('.layout-mask');
+  },
+
+  // disableModal: function () {
+  //   this.modal.remove();
+  // },
+
+  isHorizontal: function () {
+    return this.container.hasClass('menu-layout-horizontal');
+  },
+
+  isOverlay: function () {
+    return this.container.hasClass('menu-layout-overlay');
+  },
+
+  isTablet: function () {
+    var width = window.innerWidth;
+    return width <= 1024 && width > 640;
+  },
+
+  isDesktop: function () {
+    return window.innerWidth > 1024;
+  },
+
+  isMobile: function () {
+    return window.innerWidth <= 640;
+  },
+
+  restoreMenuState: function () {
+    var $this = this;
+    setTimeout(function () {
+      var activeMenuLink = $this.menu.find('a.active-menulink');
+      if (activeMenuLink.length) {
+        var menuitem = activeMenuLink.parent();
+        $this.restoreMenuitem(menuitem);
+
+        var parentList = menuitem.parent();
+        while (parentList.get(0) != $this.menu.get(0)) {
+          var parentItem = parentList.parent();
+          $this.restoreMenuitem(parentItem);
+          parentList = parentItem.parent();
+        }
+      }
+    }, 50);
+  },
+
+  restoreMenuitem: function (item) {
+    item.addClass('active-menuitem');
+
+    var submenu = item.children('ul');
+    if (submenu.length) {
+      submenu.show();
+    }
+  }
+
 };
 
 /* Ripple */
-$(function() {     
+$(function () {
 
-    var ink, d, x, y;
-    $(document.body).off('mousedown.ripple')
-            .on('mousedown.ripple','.ripplelink,.ui-button,.ui-listbox-item', null, function(e){
-        var element = $(this);
-        
-        if(element.find(".ink").length === 0){
-            if(element.hasClass('ripplelink'))
-                element.children('span').after("<span class='ink'></span>");
-            else
-                element.append("<span class='ink'></span>");
-        }
-             
-        ink = $(this).find(".ink");
-        ink.removeClass("animate");
-         
-        if(!ink.height() && !ink.width()){
-            d = Math.max($(this).outerWidth(), $(this).outerHeight());
-            ink.css({height: d, width: d});
-        }
-         
-        x = e.pageX - $(this).offset().left - ink.width()/2;
-        y = e.pageY - $(this).offset().top - ink.height()/2;
-         
-        ink.css({top: y+'px', left: x+'px', 'pointer-events': 'none'}).addClass("animate");
+  var ink, d, x, y;
+  $(document.body).off('mousedown.ripple')
+    .on('mousedown.ripple', '.ripplelink,.ui-button,.ui-listbox-item', null, function (e) {
+      var element = $(this);
+
+      if (element.find(".ink").length === 0) {
+        if (element.hasClass('ripplelink'))
+          element.children('span').after("<span class='ink'></span>");
+        else
+          element.append("<span class='ink'></span>");
+      }
+
+      ink = $(this).find(".ink");
+      ink.removeClass("animate");
+
+      if (!ink.height() && !ink.width()) {
+        d = Math.max($(this).outerWidth(), $(this).outerHeight());
+        ink.css({ height: d, width: d });
+      }
+
+      x = e.pageX - $(this).offset().left - ink.width() / 2;
+      y = e.pageY - $(this).offset().top - ink.height() / 2;
+
+      ink.css({ top: y + 'px', left: x + 'px', 'pointer-events': 'none' }).addClass("animate");
     });
 });
 
 /*! nanoScrollerJS - v0.8.7 - 2015
 * http://jamesflorentino.github.com/nanoScrollerJS/
 * Copyright (c) 2015 James Florentino; Licensed MIT */
-(function(factory) {
+(function (factory) {
   if (typeof define === 'function' && define.amd) {
-    return define(['jquery'], function($) {
+    return define(['jquery'], function ($) {
       return factory($, window, document);
     });
   } else if (typeof exports === 'object') {
@@ -410,7 +410,7 @@ $(function() {
   } else {
     return factory(jQuery, window, document);
   }
-})(function($, window, document) {
+})(function ($, window, document) {
   "use strict";
   var BROWSER_IS_IE7, BROWSER_SCROLLBAR_WIDTH, DOMSCROLL, DOWN, DRAG, ENTER, KEYDOWN, KEYUP, MOUSEDOWN, MOUSEENTER, MOUSEMOVE, MOUSEUP, MOUSEWHEEL, NanoScroll, PANEDOWN, RESIZE, SCROLL, SCROLLBAR, TOUCHMOVE, UP, WHEEL, cAF, defaults, getBrowserScrollbarWidth, hasTransform, isFFWithBuggyScrollbar, rAF, transform, _elementStyle, _prefixStyle, _vendor;
   defaults = {
@@ -715,7 +715,7 @@ $(function() {
   rAF = window.requestAnimationFrame;
   cAF = window.cancelAnimationFrame;
   _elementStyle = document.createElement('div').style;
-  _vendor = (function() {
+  _vendor = (function () {
     var i, transform, vendor, vendors, _i, _len;
     vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'];
     for (i = _i = 0, _len = vendors.length; _i < _len; i = ++_i) {
@@ -727,7 +727,7 @@ $(function() {
     }
     return false;
   })();
-  _prefixStyle = function(style) {
+  _prefixStyle = function (style) {
     if (_vendor === false) {
       return false;
     }
@@ -746,7 +746,7 @@ $(function() {
     @static
     @private
    */
-  getBrowserScrollbarWidth = function() {
+  getBrowserScrollbarWidth = function () {
     var outer, outerStyle, scrollbarWidth;
     outer = document.createElement('div');
     outerStyle = outer.style;
@@ -760,7 +760,7 @@ $(function() {
     document.body.removeChild(outer);
     return scrollbarWidth;
   };
-  isFFWithBuggyScrollbar = function() {
+  isFFWithBuggyScrollbar = function () {
     var isOSXFF, ua, version;
     ua = window.navigator.userAgent;
     isOSXFF = /(?=.+Mac OS X)(?=.+Firefox)/.test(ua);
@@ -780,7 +780,7 @@ $(function() {
     @param options {Object} nanoScroller's options
     @constructor
    */
-  NanoScroll = (function() {
+  NanoScroll = (function () {
     function NanoScroll(el, options) {
       this.el = el;
       this.options = options;
@@ -813,7 +813,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.preventScrolling = function(e, direction) {
+    NanoScroll.prototype.preventScrolling = function (e, direction) {
       if (!this.isActive) {
         return;
       }
@@ -838,7 +838,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.nativeScrolling = function() {
+    NanoScroll.prototype.nativeScrolling = function () {
       this.$content.css({
         WebkitOverflowScrolling: 'touch'
       });
@@ -854,7 +854,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.updateScrollValues = function() {
+    NanoScroll.prototype.updateScrollValues = function () {
       var content, direction;
       content = this.content;
       this.maxScrollTop = content.scrollHeight - content.clientHeight;
@@ -883,7 +883,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.setOnScrollStyles = function() {
+    NanoScroll.prototype.setOnScrollStyles = function () {
       var cssValue;
       if (hasTransform) {
         cssValue = {};
@@ -897,8 +897,8 @@ $(function() {
         if (cAF && this.scrollRAF) {
           cAF(this.scrollRAF);
         }
-        this.scrollRAF = rAF((function(_this) {
-          return function() {
+        this.scrollRAF = rAF((function (_this) {
+          return function () {
             _this.scrollRAF = null;
             return _this.slider.css(cssValue);
           };
@@ -915,10 +915,10 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.createEvents = function() {
+    NanoScroll.prototype.createEvents = function () {
       this.events = {
-        down: (function(_this) {
-          return function(e) {
+        down: (function (_this) {
+          return function (e) {
             _this.isBeingDragged = true;
             _this.offsetY = e.pageY - _this.slider.offset().top;
             if (!_this.slider.is(e.target)) {
@@ -930,8 +930,8 @@ $(function() {
             return false;
           };
         })(this),
-        drag: (function(_this) {
-          return function(e) {
+        drag: (function (_this) {
+          return function (e) {
             _this.sliderY = e.pageY - _this.$el.offset().top - _this.paneTop - (_this.offsetY || _this.sliderHeight * 0.5);
             _this.scroll();
             if (_this.contentScrollTop >= _this.maxScrollTop && _this.prevScrollTop !== _this.maxScrollTop) {
@@ -942,8 +942,8 @@ $(function() {
             return false;
           };
         })(this),
-        up: (function(_this) {
-          return function(e) {
+        up: (function (_this) {
+          return function (e) {
             _this.isBeingDragged = false;
             _this.pane.removeClass(_this.options.activeClass);
             _this.doc.unbind(MOUSEMOVE, _this.events[DRAG]).unbind(MOUSEUP, _this.events[UP]);
@@ -951,21 +951,21 @@ $(function() {
             return false;
           };
         })(this),
-        resize: (function(_this) {
-          return function(e) {
+        resize: (function (_this) {
+          return function (e) {
             _this.reset();
           };
         })(this),
-        panedown: (function(_this) {
-          return function(e) {
+        panedown: (function (_this) {
+          return function (e) {
             _this.sliderY = (e.offsetY || e.originalEvent.layerY) - (_this.sliderHeight * 0.5);
             _this.scroll();
             _this.events.down(e);
             return false;
           };
         })(this),
-        scroll: (function(_this) {
-          return function(e) {
+        scroll: (function (_this) {
+          return function (e) {
             _this.updateScrollValues();
             if (_this.isBeingDragged) {
               return;
@@ -994,8 +994,8 @@ $(function() {
             }
           };
         })(this),
-        wheel: (function(_this) {
-          return function(e) {
+        wheel: (function (_this) {
+          return function (e) {
             var delta;
             if (e == null) {
               return;
@@ -1008,8 +1008,8 @@ $(function() {
             return false;
           };
         })(this),
-        enter: (function(_this) {
-          return function(e) {
+        enter: (function (_this) {
+          return function (e) {
             var _ref;
             if (!_this.isBeingDragged) {
               return;
@@ -1029,7 +1029,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.addEvents = function() {
+    NanoScroll.prototype.addEvents = function () {
       var events;
       this.removeEvents();
       events = this.events;
@@ -1050,7 +1050,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.removeEvents = function() {
+    NanoScroll.prototype.removeEvents = function () {
       var events;
       events = this.events;
       this.win.unbind(RESIZE, events[RESIZE]);
@@ -1069,7 +1069,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.generate = function() {
+    NanoScroll.prototype.generate = function () {
       var contentClass, cssRule, currentPadding, options, pane, paneClass, sliderClass;
       options = this.options;
       paneClass = options.paneClass, sliderClass = options.sliderClass, contentClass = options.contentClass;
@@ -1102,7 +1102,7 @@ $(function() {
       @private
      */
 
-    NanoScroll.prototype.restore = function() {
+    NanoScroll.prototype.restore = function () {
       this.stopped = false;
       if (!this.iOSNativeScrolling) {
         this.pane.show();
@@ -1119,7 +1119,7 @@ $(function() {
           $(".nano").nanoScroller();
      */
 
-    NanoScroll.prototype.reset = function() {
+    NanoScroll.prototype.reset = function () {
       var content, contentHeight, contentPosition, contentStyle, contentStyleOverflowY, paneBottom, paneHeight, paneOuterHeight, paneTop, parentMaxHeight, right, sliderHeight;
       if (this.iOSNativeScrolling) {
         this.contentHeight = this.content.scrollHeight;
@@ -1201,7 +1201,7 @@ $(function() {
           $(".nano").nanoScroller({ scroll: 'top' });
      */
 
-    NanoScroll.prototype.scroll = function() {
+    NanoScroll.prototype.scroll = function () {
       if (!this.isActive) {
         return;
       }
@@ -1225,7 +1225,7 @@ $(function() {
           $(".nano").nanoScroller({ scrollBottom: value });
      */
 
-    NanoScroll.prototype.scrollBottom = function(offsetY) {
+    NanoScroll.prototype.scrollBottom = function (offsetY) {
       if (!this.isActive) {
         return;
       }
@@ -1244,7 +1244,7 @@ $(function() {
           $(".nano").nanoScroller({ scrollTop: value });
      */
 
-    NanoScroll.prototype.scrollTop = function(offsetY) {
+    NanoScroll.prototype.scrollTop = function (offsetY) {
       if (!this.isActive) {
         return;
       }
@@ -1263,7 +1263,7 @@ $(function() {
           $(".nano").nanoScroller({ scrollTo: $('#a_node') });
      */
 
-    NanoScroll.prototype.scrollTo = function(node) {
+    NanoScroll.prototype.scrollTo = function (node) {
       if (!this.isActive) {
         return;
       }
@@ -1281,7 +1281,7 @@ $(function() {
           $(".nano").nanoScroller({ stop: true });
      */
 
-    NanoScroll.prototype.stop = function() {
+    NanoScroll.prototype.stop = function () {
       if (cAF && this.scrollRAF) {
         cAF(this.scrollRAF);
         this.scrollRAF = null;
@@ -1303,7 +1303,7 @@ $(function() {
           $(".nano").nanoScroller({ destroy: true });
      */
 
-    NanoScroll.prototype.destroy = function() {
+    NanoScroll.prototype.destroy = function () {
       if (!this.stopped) {
         this.stop();
       }
@@ -1333,7 +1333,7 @@ $(function() {
           $(".nano").nanoScroller({ flash: true });
      */
 
-    NanoScroll.prototype.flash = function() {
+    NanoScroll.prototype.flash = function () {
       if (this.iOSNativeScrolling) {
         return;
       }
@@ -1342,8 +1342,8 @@ $(function() {
       }
       this.reset();
       this.pane.addClass(this.options.flashedClass);
-      setTimeout((function(_this) {
-        return function() {
+      setTimeout((function (_this) {
+        return function () {
           _this.pane.removeClass(_this.options.flashedClass);
         };
       })(this), this.options.flashDelay);
@@ -1353,8 +1353,8 @@ $(function() {
     return NanoScroll;
 
   })();
-  $.fn.nanoScroller = function(settings) {
-    return this.each(function() {
+  $.fn.nanoScroller = function (settings) {
+    return this.each(function () {
       var options, scrollbar;
       if (!(scrollbar = this.nanoscroller)) {
         options = $.extend({}, defaults, settings);
@@ -1396,5 +1396,5 @@ $(function() {
   $.fn.nanoScroller.Constructor = NanoScroll;
 });
 
-    
+
 

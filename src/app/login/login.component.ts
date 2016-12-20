@@ -53,19 +53,19 @@ export class LoginComponent {
                 self.isRequested = false;
                 switch (currentUser.role) {
 
-                    case 'parent':
+                    case 'Parent':
                         self.loginService.loggedInUser = currentUser;
                         self.loginService.loggedIn = true;
                         self.router.navigate(['/parent']);
                         break;
 
-                    case 'superadmin':
+                    case 'SuperAdmin':
                         self.loginService.loggedInUser = currentUser;
                         self.loginService.loggedIn = true;
                         self.router.navigate(['/superadmin']);
                         break;
 
-                    case 'admin':
+                    case 'Admin':
                         self.loginService.loggedInUser = currentUser;
                         self.loginService.loggedIn = true;
                         self.router.navigate(['/admin']);

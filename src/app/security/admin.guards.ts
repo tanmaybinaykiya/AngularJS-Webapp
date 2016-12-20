@@ -9,7 +9,7 @@ export class AdminGuard implements CanActivate {
     }
     canActivate() {
         console.log('Logged in user:', this.loginService.dummyVar, this.loginService.loggedInUser);
-        // if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'admin') {
+        // if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'Admin') {
         return true;
         // }
         // this.router.navigate(['login']);

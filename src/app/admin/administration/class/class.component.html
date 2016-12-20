@@ -1,3 +1,70 @@
 <div>
-    Class Component
+    <div class="card card-w-title">
+
+        <p-dataTable [value]="classes" [paginator]="true" [rows]="10" [responsive]="true">
+            <header>School Name: Class Administration</header>
+            <p-column field="name" header="Class" [sortable]="true"></p-column>
+            <p-column field="capacity" header="Capacity" [sortable]="true"></p-column>
+            <p-column header="Fee">
+                <template let-class="rowData" pTemplate type="body">
+                    <span>${{class.fee}}</span>
+                    <button type="button" icon="ui-icon-delete" (click)="removeClassDialogDisplay=true" pButton></button>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+        <button type="submit" id="add-class-button" (click)="addClassDialogDisplay=true" pButton label="Add New Class" icon="ui-icon-add"></button>
+
+    </div>
 </div>
+
+
+<p-dialog header="Add/Modify Class" [(visible)]="addClassDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <div>
+        <span class="ui-g ui-g-12 heading">General Information</span>
+        <span class="md-inputfield ui-g-6" id="add-class-dialog-class-name">
+            <input type="text" pInputText autocomplete="off" name="className" [(ngModel)]="className" >
+            <label>Class Name</label>
+        </span>
+        <div class="ui-g-6">
+            <span class="ui-g-6">Select Grade</span>
+            <p-dropdown class="ui-g-6" [options]="grades" [(ngModel)]="selectedGrade" [autoWidth]="false"></p-dropdown>
+        </div>
+        <span class="ui-g ui-g-12  heading">Billing Information</span>
+        <div *ngIf="!selectedGrade">
+            <span class="ui-g ui-g-12">Select a grade to continue...</span>
+        </div>
+        <div *ngIf="selectedGrade">
+            <span class="ui-g-12">Tuition Fee for {{selectedGrade.name}} is ${{selectedGrade.totalFee}}</span>
+            <span class="ui-g-12 heading">Schedule Options</span>
+            <p-checkbox class="ui-g ui-g-12" name="cg" value="oneTimeFullPayment" label="Allow one time full payment of ${{selectedGrade.totalFee}}"
+                [(ngModel)]="checkboxValues"></p-checkbox>
+            <p-checkbox class="ui-g ui-g-12" name="cg" value="equalSplitPayment" label="Allow equal split of payments of ${{selectedGrade.totalFee}}"
+                [(ngModel)]="checkboxValues"></p-checkbox>
+            <div class="ui-g ui-g-12">
+                <span class="heading ui-g ui-g-12">Teacher</span>
+                <p-multiSelect class="ui-g ui-g-12" [options]="teachers" [(ngModel)]="selectedTeachers"></p-multiSelect>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="addClass()" label="Add Class"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="addClassDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Remove Class" [(visible)]="removeClassDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <span>There are students in this class or this has already begun. 
+        Billing will be affected if this class is deleted. 
+        You must reassign students to a different class.
+    </span>
+    <span>Only an empty class can be deleted</span>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="removeClass()" label="Remove Class"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="removeClassDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>

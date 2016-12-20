@@ -1,3 +1,43 @@
 <div>
-    School Component
+    <div class="card card-w-title school-administration-table">
+
+        <p-dataTable [value]="schools" [paginator]="true" [rows]="10" [responsive]="true">
+            <header>School Administration</header>
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="shortCode" header="Code" [sortable]="true"></p-column>
+            <p-column field="totalMembers" header="Total Members"> </p-column>
+            <p-column header="Delete">
+                <template let-school="rowData" pTemplate type="body">
+                    <button type="button" icon="ui-icon-delete" (click)="removeSchoolDialogDisplay=true" pButton></button>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+        <button type="submit" id="add-school-button" (click)="addSchoolDialogDisplay=true" pButton label="Add New School" icon="ui-icon-add"></button>
+
+    </div>
 </div>
+
+
+<p-dialog header="Add School" [(visible)]="addSchoolDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="sendTestMessage()" label="Add School"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="addSchoolDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Remove School" [(visible)]="removeSchoolDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <span>There are students in this school or classes in this school have already begun. 
+        Billing will be affected if this school is deleted. 
+        You must reassign students to a different school.
+        </span>
+    <span>Only an empty school can be deleted</span>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="removeSchool()" label="Remove School"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="removeSchoolDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>

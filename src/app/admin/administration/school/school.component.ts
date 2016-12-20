@@ -1,19 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Institution } from '../../../models/institution';
+import { SchoolService } from '../../../shared/api.service';
 
 @Component({
-    selector: 'school',
+    selector: 'myss-admin-school',
     template: require('./school.component.html'),
-    // styles: [require('./administration.component.scss')],
+    styles: [require('./school.component.scss')],
 
 })
-export class SchoolComponent implements OnInit {
+export class SchoolAdministrationComponent implements OnInit {
 
-    constructor() {
+    newSchooolForm: FormGroup;
+    schools: Institution[];
+    selection: Institution[] = [];
+    removeSchoolDialogDisplay: boolean = false;
+    addSchoolDialogDisplay: boolean = false;
+
+    constructor(fb: FormBuilder, schoolService: SchoolService) {
         // Do stuff
+        schoolService.getAllSchools().subscribe((schools: Institution[]) => {
+            this.schools = schools;
+        });
     }
 
     ngOnInit() {
-        console.log('Hello SchoolComponent');
+        console.log('Hello SchoolAdministrationComponent');
     }
 
 }

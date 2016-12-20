@@ -23,14 +23,17 @@ import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 // primeng
 import {
     ButtonModule,
+    DialogModule,
+    CheckboxModule,
     PasswordModule,
+    DataGridModule,
+    DropdownModule,
     InputTextModule,
     DataTableModule,
-    DialogModule,
-    DataGridModule,
+    MultiSelectModule,
+    AutoCompleteModule,
     ConfirmDialogModule,
     ConfirmationService,
-    AutoCompleteModule
 } from './lib/primeng/primeng';
 
 // other libs
@@ -81,7 +84,7 @@ import { EnrollmentCenterComponent } from './admin/enrollment-center';
 import { AdminHeaderUserBadgeComponent } from './admin/header/userBadge';
 
 import { AdminNotificationComponent } from './admin/administration/notification';
-import { SchoolComponent } from './admin/administration/school';
+import { SchoolAdministrationComponent } from './admin/administration/school';
 import { StaffComponent } from './admin/administration/staff';
 import { StudentComponent } from './admin/administration/student';
 import { ClassComponent } from './admin/administration/class';
@@ -103,9 +106,12 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         DialogModule,
         ButtonModule,
         PasswordModule,
+        DropdownModule,
         DataGridModule,
+        CheckboxModule,
         InputTextModule,
         DataTableModule,
+        MultiSelectModule,
         AutoCompleteModule,
         ConfirmDialogModule,
 
@@ -179,10 +185,10 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         // admin admin
         StaffComponent,
         ClassComponent,
-        SchoolComponent,
         GeneralComponent,
         StudentComponent,
         DiscountsComponent,
+        SchoolAdministrationComponent,
 
 
     ],

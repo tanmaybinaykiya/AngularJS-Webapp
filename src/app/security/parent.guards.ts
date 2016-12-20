@@ -10,7 +10,7 @@ export class ParentGuard implements CanActivate {
     }
     canActivate() {
         console.log('ParentGuard', this.loginService.dummyVar, this.loginService.loggedInUser);
-        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'parent') {
+        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'Parent') {
             return true;
         } else {
             this.router.navigate(['login']);

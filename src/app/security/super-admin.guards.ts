@@ -8,7 +8,7 @@ export class SuperAdminGuard implements CanActivate {
         console.log('Hello SuperAdminGuard');
     }
     canActivate() {
-        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'superadmin') {
+        if (this.loginService.loggedInUser && this.loginService.loggedInUser.role === 'SuperAdmin') {
             return true;
         }
         this.router.navigate(['login']);
