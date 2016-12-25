@@ -1,3 +1,32 @@
 <div>
-    Notification
+    <div class="card card-w-title">
+        <h1>Notification Administration</h1>
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="ui-g form-group">
+                        <h3>Billing:</h3>
+                        <p-checkbox name="cg" class="ui-g-12 ui-md-12" value="BillingNotifications" label="Send Billing Notifications" [(ngModel)]="billingNotifications"></p-checkbox>
+                        <div class="ui-g-12 ui-md-6">
+                            <div class="ui-g">
+                                <div class="ui-md-4"></div>
+                                <span class="ui-md-1">Email</span>
+                                <span class="ui-md-1">Text</span>
+                            </div>
+                            <div class="ui-g">
+                                <div class="ui-md-4">Payment is due</div>
+                                <p-checkbox class="ui-md-1" name="cg" value="BillingNotifications1" [(ngModel)]="billingNotifications"></p-checkbox>
+                                <p-checkbox class="ui-md-1" name="cg" value="BillingNotifications2" [(ngModel)]="billingNotifications"></p-checkbox>
+                            </div>
+                            <div class="ui-g">
+                                <div class="ui-md-4">Late Payment</div>
+                                <p-checkbox class="ui-md-1" name="cg" value="BillingNotifications3" [(ngModel)]="billingNotifications"></p-checkbox>
+                                <p-checkbox class="ui-md-1" name="cg" value="BillingNotifications4" [(ngModel)]="billingNotifications"></p-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

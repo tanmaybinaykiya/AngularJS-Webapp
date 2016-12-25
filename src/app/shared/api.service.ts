@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs';
 import * as _throw from 'rxjs/observable/throw';
 
-import { User, Grade, Class, Teacher, Institution } from '../models';
+import { User, Grade, Class, Teacher, Institution, Staff, Student } from '../models';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
@@ -68,6 +68,16 @@ export class SchoolService {
         }, 1500);
     }
 
+    dummyGetAllStudents(cb: (result: Student[]) => any) {
+        setTimeout(function () {
+            cb([
+                new Student(12, 'student61', 'classA'),
+                new Student(2, 'student12', 'classB'),
+                new Student(1, 'student31', 'classC'),
+                new Student(22, 'student11', 'classD'),
+            ]);
+        }, 1500);
+    }
 
     getSchool(institutionCode: string): Observable<Institution> {
         console.log('getSchool called');
@@ -108,6 +118,12 @@ export class SchoolService {
     public getAllTeachers(): Observable<Teacher[]> {
         console.log('getTeachers called');
         let getJSONAsObservable: () => Observable<Teacher[]> = Rx.Observable.bindCallback(this.dummyGetAllTeachers);
+        return getJSONAsObservable();
+    }
+
+    public getAllStudents(): Observable<Student[]> {
+        console.log('getStudents called');
+        let getJSONAsObservable: () => Observable<Student[]> = Rx.Observable.bindCallback(this.dummyGetAllStudents);
         return getJSONAsObservable();
     }
 
@@ -217,6 +233,29 @@ export class ClassService {
 }
 
 @Injectable()
+export class InstitutionService {
+
+    public getAllStaff(): Observable<Staff[]> {
+        console.log('getTeachers called');
+        let getJSONAsObservable: () => Observable<Staff[]> = Rx.Observable.bindCallback(this.dummyGetAllStaff);
+        return getJSONAsObservable();
+    }
+
+    dummyGetAllStaff(cb: (result: Staff[]) => any) {
+        setTimeout(function () {
+            cb([
+                new Staff(12, 'staff61', 'Teacher'),
+                new Staff(112, 'staff12', 'Staff'),
+                new Staff(132, 'staff31', 'Teacher'),
+                new Staff(212, 'staff11', 'Administrator'),
+            ]);
+        }, 1500);
+    }
+
+}
+
+
+@Injectable()
 export class NotificationService {
     notifications = [
         {
@@ -253,5 +292,5 @@ export class RecipientService {
 }
 
 export const APP_SERVICES = [
-    NotificationService, ParentService, LoginService, ApiUrlService, SchoolService, RecipientService
+    NotificationService, ParentService, LoginService, ApiUrlService, SchoolService, RecipientService, InstitutionService
 ];

@@ -1,3 +1,46 @@
 <div>
-    Student Component
+    <div class="card card-w-title student-administration-table">
+        <p-dataTable selectionMode="multiple" [(selection)]="selectedStudent" [value]="students" [paginator]="true" [rows]="10" [responsive]="true">
+            <header>Student Administration</header>
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="className" header="Class" [sortable]="true"></p-column>
+        </p-dataTable>
+        <button type="submit" id="add-student-button" (click)="addStudentDialogDisplay=true" pButton label="Add Student" icon="ui-icon-add"></button>
+    </div>
 </div>
+
+<p-dialog header="Add Student" [(visible)]="addStudentDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <span>It is highly encouraged to invite parents to complete information related to their child. This reduces the burden on the school staff.Request the parents' email and enter it below. An invitation link, inviting them to complete the necessary information regarding their child will be sent. </span>
+                <div id="send-invitation" class="ui-g-12 ui-md-8">
+                    <span class="md-inputfield">
+                        <input id="input" type="text" pInputText [(ngModel)]="parentsEmail"/>
+                        <label>Parents' Email Address</label>
+                    </span>
+                </div>
+                <button type="submit" pButton class="primary" id="send-invitation-btn" icon="fa-check" (click)="sendInvitation()" label="Send Invitation"></button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="addStudent()" label="Add Student"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="addStudentDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Remove Student" [(visible)]="removeStudentDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <span>This will remove the student from all classes and will be considered unenrolled.
+        Billing will sieze effective immediately. Are you sure you want to continue?
+    </span>
+
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="removeStudent()" label="Remove Student"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="removeStudentDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>

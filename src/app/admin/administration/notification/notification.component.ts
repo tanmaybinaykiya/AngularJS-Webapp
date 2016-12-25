@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminNotificationComponent implements OnInit {
 
+    billingNotifications: string[] = [];
+
     constructor() {
         // Do stuff
     }
