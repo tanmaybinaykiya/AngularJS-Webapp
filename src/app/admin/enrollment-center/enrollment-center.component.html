@@ -45,7 +45,7 @@
 
     <button class="action-buttons" md-raised-button color="primary" (click)="enrollStudentManager.toggleView()">Enroll Student</button>
 </div-->
-<div>
+<!--<div>
     <p-dialog header="Godfather I" [(visible)]="display" modal="modal" showEffect="fade">
         <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His
             beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
@@ -59,4 +59,45 @@
             </div>
         </footer>
     </p-dialog>
+</div>-->
+
+<div class="ui-g">
+    <div class="card card-w-title people-administration-table">
+        <h1>Enrollment Centre</h1>
+        <p-dataTable [value]="enrollmentList" selectionMode="multiple" [(selection)]="selection" [paginator]="true" [rows]="10" [responsive]="true">
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="reason" header="Reason" [sortable]="true"></p-column>
+        </p-dataTable>
+
+        <div class="ui-g-6">
+            <span class="ui-g-6">Assign To Class:</span>
+            <p-dropdown class="ui-g-6" [options]="assignableClasses" [(ngModel)]="selectedClass" [autoWidth]="true"></p-dropdown>
+        </div>
+
+        <div class="ui-g-6">
+            <span class="ui-g-6">Update Status:</span>
+            <p-dropdown class="ui-g-6" [options]="statuses" [(ngModel)]="selectedStatus" [autoWidth]="true"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-2">
+            <button pButton type="button" (click)="commitModify()" label="Modify" icon="ui-icon-edit"></button>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+            <button pButton type="button" (click)="delete()" icon="ui-icon-delete" label="Delete" icon="ui-icon-edit"></button>
+        </div>
+
+        <!--<div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-8">
+            </div>
+            <div class="ui-g-12 ui-md-2">
+                <button pButton type="button" (click)="modify()" [disabled]="selection.length===0" label="Modify" icon="ui-icon-edit"></button>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+                <p-confirmDialog header="Confirmation" icon="fa ui-icon-warning" width="425"></p-confirmDialog>
+                <button pButton type="text" (click)="delete()" [disabled]="selection.length===0" class="pink-btn" label="Delete" icon="ui-icon-delete"></button>
+            </div>
+            {{diagnostic}}
+        </div>-->
+
+    </div>
 </div>

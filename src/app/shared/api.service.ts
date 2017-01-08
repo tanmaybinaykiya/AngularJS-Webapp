@@ -183,18 +183,15 @@ export class LoginService {
     }
 
     login(email: String, password: String): Observable<User> {
-
-        this.dummyVar = 'login called 1ce';
-        console.log('Login called: dummyVar:', this.dummyVar);
         let getJSONAsObservable: () => Observable<User> = Rx.Observable.bindCallback(this.dummyServiceResponse);
         return getJSONAsObservable();
         /*
-                let body = JSON.stringify({ email: email, password: password });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
-                return this.http.post(this.loginUrl, body, options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
+        let body = JSON.stringify({ email: email, password: password });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.loginUrl, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
         */
     }
 
