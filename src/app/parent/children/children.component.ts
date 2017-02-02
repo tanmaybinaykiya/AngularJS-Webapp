@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
 import { MdIconRegistry } from '@angular2-material/icon';
 
-import { ParentService, SchoolService, LoginService } from '../../shared';
+import { ParentService, SchoolService } from '../../shared';
+import { LoginService } from '../../shared/login.service';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';

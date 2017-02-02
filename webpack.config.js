@@ -302,7 +302,7 @@ module.exports = function makeWebpackConfig() {
         if (deployTarget === 'prod') {
             s3BucketName = 'app.secureslice.com';
         }
-        var credentials = new AWS.SharedIniFileCredentials({ profile: 'beta' });
+        var credentials = new AWS.SharedIniFileCredentials({ profile: 'secs' });
         config.plugins.push(new S3Plugin({
             directory: "dist/",
             s3Options: {

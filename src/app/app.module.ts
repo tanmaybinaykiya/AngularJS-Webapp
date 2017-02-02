@@ -39,11 +39,21 @@ import {
 // other libs
 import { MDLDirective } from './lib/mdl/MaterialDesignLiteUpgradeElement';
 import { FileUploadModule } from 'ng2-file-upload';
+import { CookieService } from 'angular2-cookie/core';
 
 // app services
-import { APP_SERVICES } from './shared';
+import {
+    NotificationService,
+    ParentService,
+    ApiUrlService,
+    SchoolService,
+    RecipientService,
+    InstitutionService
+} from './shared';
+import { LoginService } from './shared/login.service';
+
 import { QuestionControlService } from './lib/question-control.service';
-import { AppRoutes } from './app.routes';
+import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 
 // app components
@@ -130,8 +140,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
 
         FileUploadModule,
 
-        AppRoutes,
-
+        AppRoutingModule,
 
     ],
     declarations: [
@@ -189,16 +198,21 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         StudentComponent,
         DiscountsComponent,
         SchoolAdministrationComponent,
-
-
     ],
 
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         SuperAdminGuard, ParentGuard, AdminGuard,
-        ...APP_SERVICES,
+        NotificationService,
+        ParentService,
+        LoginService,
+        ApiUrlService,
+        SchoolService,
+        RecipientService,
+        InstitutionService,
         ConfirmationService,
-        QuestionControlService
+        QuestionControlService,
+        CookieService
     ],
     bootstrap: [AppComponent]
 })

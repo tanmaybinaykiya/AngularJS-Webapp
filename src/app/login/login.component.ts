@@ -1,14 +1,17 @@
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
 
 import { User } from '../models/user';
-import { LoginService, SchoolService } from '../shared';
+import { SchoolService } from '../shared/';
+import { LoginService } from '../shared/login.service';
 
 @Component({
     selector: 'my-login-app',
     template: require('./login.component.html'),
-    styles: [require('./login.component.scss')]
+    styles: [require('./login.component.scss')],
+    providers: [CookieService]
 })
 export class LoginComponent {
 
@@ -20,8 +23,8 @@ export class LoginComponent {
     form: FormGroup;
 
     constructor(private loginService: LoginService, private schoolService: SchoolService,
-        private router: Router, fbld: FormBuilder) {
-        console.log('Hello LoginComponent');
+        private router: Router, fbld: FormBuilder, private cookieService: CookieService) {
+        console.log('Hello LoginComponent: ', cookieService);
         this.form = fbld.group({});
     }
 
@@ -49,34 +52,29 @@ export class LoginComponent {
         this.loginService.login(this.email, this.password)
             .subscribe(
             function (currentUser: User) {
-
+                console.log('I CAME HERE FIRST!!!: ', self.loginService.loggedInUser, currentUser);
+                self.cookieService.putObject('loggedInUser', currentUser);
                 self.isRequested = false;
                 switch (currentUser.role) {
-
-                    case 'Parent':
-                        self.loginService.loggedInUser = currentUser;
-                        self.loginService.loggedIn = true;
+                    case 'parent':
+                        // self.loginService.loggedInUser = currentUser;
+                        // self.loginService.loggedIn = true;
                         self.router.navigate(['/parent']);
                         break;
-
-                    case 'SuperAdmin':
-                        self.loginService.loggedInUser = currentUser;
-                        self.loginService.loggedIn = true;
+                    case 'SECS':
+                        // self.loginService.loggedInUser = currentUser;
+                        // self.loginService.loggedIn = true;
                         self.router.navigate(['/superadmin']);
                         break;
-
-                    case 'Admin':
-                        self.loginService.loggedInUser = currentUser;
-                        self.loginService.loggedIn = true;
+                    case 'admin':
+                        // self.loginService.loggedInUser = currentUser;
+                        // self.loginService.loggedIn = true;
                         self.router.navigate(['/admin']);
                         break;
-
                     default:
-                        self.setErrorMessage('Not a valid user');
+                        self.setErrorMessage('Not a valid user' + ' ' + currentUser + ' ' + currentUser.role);
                         break;
-
                 }
-
             }, function (error) {
                 self.isRequested = false;
                 console.log('Error: ', error);

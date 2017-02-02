@@ -1,21 +1,21 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'angular2-cookie/core';
 
 import { User } from '../models/user';
-import { LoginService } from '../shared/api.service';
+import { LoginService } from '../shared/login.service';
 declare var Ultima: any;
 
 @Component({
     selector: 'admin',
     template: require('./admin.component.html'),
-    styles: [require('./admin.component.scss')]
+    styles: [require('./admin.component.scss')],
 })
-
 export class AdminComponent implements OnInit, AfterViewInit {
 
-    loggedInUser: User;
+    loggedInUser: any;
 
-    constructor(private loginService: LoginService, private router: Router, private el: ElementRef) {
+    constructor(private loginService: LoginService, private router: Router, private el: ElementRef, private cookieService: CookieService) {
         console.log('Hello AdminComponent');
     }
 
@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this.loggedInUser = this.loginService.loggedInUser;
+        this.loggedInUser = this.cookieService.getObject('loggedInUser');
     }
 
     donate() {
@@ -33,8 +33,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
     logout() {
         console.log('Logout called');
-        this.loginService.loggedIn = false;
-        this.loginService.loggedInUser = null;
+        this.cookieService.remove('loggedInUser');
         this.router.navigate(['/login']);
     }
 }

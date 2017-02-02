@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { LoginComponent } from './login/login.component';
 import { SuperAdminComponent } from './superadmin';
@@ -17,4 +17,8 @@ const routes: Routes = [
     { path: '**', component: PageNotFoundComponent }
 ];
 
-export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, { enableTracing: true });
+@NgModule({
+    imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+    exports: [RouterModule]
+})
+export class AppRoutingModule { }

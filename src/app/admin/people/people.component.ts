@@ -17,10 +17,10 @@ export class PeopleComponent implements OnInit {
     constructor(private confirmationService: ConfirmationService) {
         // Do stuff
         this.people = [
-            new User(1, 'tanmay1', 'Admin', '12434tgrfvc', 'ISS2'),
-            new User(2, 'tanmay2', 'Admin', '12434tgrfvc', 'ISS3'),
-            new User(3, 'tanmay3', 'Admin', '12434tgrfvc', 'ISS1'),
-            new User(4, 'tanmay4', 'Staff', '12434tgrfvc', 'ISS4')
+            new User(1, 'tanmay1', 'admin', '12434tgrfvc', 'ISS2'),
+            new User(2, 'tanmay2', 'admin', '12434tgrfvc', 'ISS3'),
+            new User(3, 'tanmay3', 'admin', '12434tgrfvc', 'ISS1'),
+            new User(4, 'tanmay4', 'staff', '12434tgrfvc', 'ISS4')
         ];
     }
 

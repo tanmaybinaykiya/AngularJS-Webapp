@@ -158,66 +158,11 @@ export function getApiHost() {
         case 'app-beta.secureslice.com':
             return 'https://api.secureslice.com/beta';
         case 'localhost':
-            return 'http://localhost:3000';
+            return 'http://localhost:8100/secs';
         default:
             return 'https://api.secureslice.com/prod';
     }
 };
-
-@Injectable()
-export class LoginService {
-
-    loginUrl = getApiHost() + '/users/token';
-    loggedIn = false;
-    loggedInUser: User;
-    dummyVar: string = 'defaultValue';
-
-    constructor(private http: Http) {
-        console.log('hello login service');
-    }
-
-    dummyServiceResponse(cb: (result: User) => any) {
-        setTimeout(function () {
-            cb(new User(1, 'tanmay', 'Admin', 'blah', 'ISS'));
-        }, 1500);
-    }
-
-    login(email: String, password: String): Observable<User> {
-        let getJSONAsObservable: () => Observable<User> = Rx.Observable.bindCallback(this.dummyServiceResponse);
-        return getJSONAsObservable();
-        /*
-        let body = JSON.stringify({ email: email, password: password });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.loginUrl, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
-        */
-    }
-
-    private extractData(res: Response) {
-        this.loggedIn = true;
-        let body = res.json();
-        this.loggedInUser = body;
-        this.loggedInUser.name = body.firstname;
-        console.log('extractData: ', this.loggedInUser);
-        return body || {};
-    }
-
-    private handleError(error: any) {
-        this.loggedIn = false;
-        try {
-            let errMsg = JSON.parse(error.json().errorMessage).message;
-            console.error('LALALA:', errMsg); // log to console instead
-
-            return _throw._throw(errMsg);
-        } catch (err) {
-            console.error('LALALA1:', 'Actual error from server: ', error);
-            console.error('LALALA2:', 'Error while parsing error: ', err);
-            return _throw._throw('Unknown service error');
-        }
-    }
-}
 
 @Injectable()
 export class ParentService {
@@ -277,17 +222,17 @@ export class RecipientService {
         setTimeout(function () {
             console.log('Returning now: ');
             cb([
-                new User(123, 'name11', 'Staff', 'tgrdchfgvjbn', 'ISS3'),
-                new User(12, 'name2', 'Staff', 'tgrdchfgvjbn', 'ISS2'),
-                new User(1234, 'name13', 'Staff', 'tgrdchfgvjbn', 'ISS4'),
-                new User(23, 'name4', 'Staff', 'tgrdchfgvjbn', 'ISS2'),
-                new User(31, 'name51', 'Staff', 'tgrdchfgvjbn', 'ISS1'),
+                new User(123, 'name11', 'staff', 'tgrdchfgvjbn', 'ISS3'),
+                new User(12, 'name2', 'staff', 'tgrdchfgvjbn', 'ISS2'),
+                new User(1234, 'name13', 'staff', 'tgrdchfgvjbn', 'ISS4'),
+                new User(23, 'name4', 'staff', 'tgrdchfgvjbn', 'ISS2'),
+                new User(31, 'name51', 'staff', 'tgrdchfgvjbn', 'ISS1'),
             ]);
         }, 1500);
     }
 
 }
 
-export const APP_SERVICES = [
-    NotificationService, ParentService, LoginService, ApiUrlService, SchoolService, RecipientService, InstitutionService
-];
+// export const APP_SERVICES = [
+//     NotificationService, ParentService, LoginService, ApiUrlService, SchoolService, RecipientService, InstitutionService
+// ];
