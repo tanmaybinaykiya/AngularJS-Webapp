@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Class, Grade, Teacher } from '../../../models';
-import { SchoolService } from '../../../shared/api.service';
+import { SchoolService } from '../../../service';
 
 interface GradeView {
     label: string;
@@ -11,7 +11,7 @@ interface GradeView {
 
 interface TeacherView {
     label: string;
-    value: Teacher
+    value: Teacher;
 }
 
 @Component({

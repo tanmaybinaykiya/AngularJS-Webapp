@@ -45,13 +45,12 @@ import { CookieService } from 'angular2-cookie/core';
 import {
     NotificationService,
     ParentService,
-    ApiUrlService,
     SchoolService,
     RecipientService,
-    InstitutionService
-} from './shared';
-import { LoginService } from './shared/login.service';
-import { StudentService } from './shared/student.service';
+    InstitutionService,
+    LoginService,
+    StudentService
+} from './service';
 import { QuestionControlService } from './lib/question-control.service';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
@@ -207,7 +206,6 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         ParentService,
         LoginService,
         StudentService,
-        ApiUrlService,
         SchoolService,
         RecipientService,
         InstitutionService,

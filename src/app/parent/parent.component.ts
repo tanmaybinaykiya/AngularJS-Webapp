@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ParentService } from '../shared';
+import { ParentService } from '../service';
 
 @Component({
     selector: 'my-parent',

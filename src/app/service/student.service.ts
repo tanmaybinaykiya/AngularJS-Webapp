@@ -10,7 +10,7 @@ import { EnrollableStudent, EnrolledStudent } from '../models';
 import {
     getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject,
     getUserEmailFromTokenObject
-} from './api.service';
+} from './serviceHelper';
 
 @Injectable()
 export class StudentService {

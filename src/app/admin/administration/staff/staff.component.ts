@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Staff } from '../../../models';
-import { InstitutionService } from '../../../shared/api.service';
+import { InstitutionService } from '../../../service';
 
 @Component({
     selector: 'staff',

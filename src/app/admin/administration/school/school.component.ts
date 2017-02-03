@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Institution } from '../../../models/institution';
-import { SchoolService } from '../../../shared/api.service';
+import { SchoolService } from '../../../service';
 
 @Component({
     selector: 'myss-admin-school',

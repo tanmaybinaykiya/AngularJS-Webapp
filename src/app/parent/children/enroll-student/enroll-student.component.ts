@@ -4,9 +4,8 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { CookieService } from 'angular2-cookie/core';
 
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
-import { StudentService } from '../../../shared/student.service';
+import { StudentService, getUserEmailFromTokenObject } from '../../../service';
 import { EnrollableStudent } from '../../../models/student';
-import { getUserEmailFromTokenObject } from '../../../shared/api.service'
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({

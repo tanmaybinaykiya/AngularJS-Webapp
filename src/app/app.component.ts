@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { ModalControlService } from './lib/modal/modal-control.service';
-import { SchoolService } from './shared';
-import { LoginService } from './shared/login.service';
+import { SchoolService, LoginService } from './service';
 
 declare var Ultima: any;
 

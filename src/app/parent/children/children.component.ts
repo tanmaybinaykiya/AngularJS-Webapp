@@ -3,8 +3,7 @@ import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { CookieService } from 'angular2-cookie/core';
 
-import { ParentService, SchoolService } from '../../shared';
-import { StudentService } from '../../shared/student.service';
+import { ParentService, SchoolService, StudentService } from '../../service';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';

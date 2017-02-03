@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { CookieService } from 'angular2-cookie/core';
 
-import { LoginService } from '../../../shared/login.service';
-
 @Component({
     selector: 'parent-header-user-badge',
     viewProviders: [MdIconRegistry],
@@ -13,6 +11,7 @@ import { LoginService } from '../../../shared/login.service';
 export class ParentHeaderUserBadgeComponent implements OnInit {
     user = 'Dr. House';
     role = 'Parent';
+
     constructor(private cookieService: CookieService) {
     }
 

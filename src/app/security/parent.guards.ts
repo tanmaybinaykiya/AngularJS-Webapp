@@ -1,5 +1,5 @@
 import { CanActivate, Router } from '@angular/router';
-import { LoginService } from '../shared/login.service';
+import { LoginService } from '../service';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 

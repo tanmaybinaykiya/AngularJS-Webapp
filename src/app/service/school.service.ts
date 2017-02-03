@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'angular2-cookie/core';
 
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Http, Response, } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs';
-import * as _throw from 'rxjs/observable/throw';
 
-import { User, Grade, Class, Teacher, Institution, Staff, Student } from '../models';
+import { Grade, Class, Teacher, Institution, Student } from '../models';
 import { Subject } from 'rxjs/Subject';
+import { getApiHost } from './serviceHelper';
 
 @Injectable()
 export class SchoolService {
@@ -148,113 +147,3 @@ export class SchoolService {
         }
     }
 }
-
-
-@Injectable()
-export class ApiUrlService {
-    schoolName = 'Test School';
-}
-
-export function getApiHost() {
-    switch (window.location.hostname) {
-        case 'app-beta.secureslice.com':
-            return 'https://api.secureslice.com/beta';
-        case 'localhost':
-            return 'http://localhost:8100/secs';
-        default:
-            return 'https://api.secureslice.com/prod';
-    }
-};
-
-function getCurrentUser(cookieService: CookieService): any {
-    return cookieService.getObject('loggedInUser');
-}
-
-export function getAuthorizationHeader(cookieService: CookieService): string {
-    return 'Bearer ' + getCurrentUser(cookieService).token;
-}
-
-export function getInstitutionShortCodeFromTokenObject(cookieService: CookieService): string {
-    return getCurrentUser(cookieService).institutionShortCode;
-}
-
-export function getSchoolCodeFromTokenObject(cookieService: CookieService): string {
-    return getCurrentUser(cookieService).schoolCode;
-}
-
-export function getUserEmailFromTokenObject(cookieService: CookieService): string {
-    return getCurrentUser(cookieService).email;
-}
-
-@Injectable()
-export class ParentService {
-    title = 'Angular 2';
-}
-
-@Injectable()
-export class ClassService {
-    title = 'Angular 2';
-}
-
-@Injectable()
-export class InstitutionService {
-
-    public getAllStaff(): Observable<Staff[]> {
-        console.log('getTeachers called');
-        let getJSONAsObservable: () => Observable<Staff[]> = Rx.Observable.bindCallback(this.dummyGetAllStaff);
-        return getJSONAsObservable();
-    }
-
-    dummyGetAllStaff(cb: (result: Staff[]) => any) {
-        setTimeout(function () {
-            cb([
-                new Staff(12, 'staff61', 'Teacher'),
-                new Staff(112, 'staff12', 'Staff'),
-                new Staff(132, 'staff31', 'Teacher'),
-                new Staff(212, 'staff11', 'Administrator'),
-            ]);
-        }, 1500);
-    }
-
-}
-
-
-@Injectable()
-export class NotificationService {
-    notifications = [
-        {
-            title: 'Message Title',
-            message: 'Lorem ipsum doler sit amet',
-            timestamp: 1234567
-        }
-    ];
-}
-
-@Injectable()
-export class RecipientService {
-
-    getRecipients(): Observable<User[]> {
-        console.log('RecipientService called ');
-        let getJSONAsObservable: () => Observable<User[]> = Rx.Observable.bindCallback(this.dummyServiceResponse);
-        return getJSONAsObservable();
-    }
-
-    dummyServiceResponse(cb: (results: User[]) => any) {
-        console.log('dummyServiceResponse ');
-        setTimeout(function () {
-            console.log('Returning now: ');
-            cb([
-                new User(123, 'name11', 'staff', 'tgrdchfgvjbn', 'ISS3'),
-                new User(12, 'name2', 'staff', 'tgrdchfgvjbn', 'ISS2'),
-                new User(1234, 'name13', 'staff', 'tgrdchfgvjbn', 'ISS4'),
-                new User(23, 'name4', 'staff', 'tgrdchfgvjbn', 'ISS2'),
-                new User(31, 'name51', 'staff', 'tgrdchfgvjbn', 'ISS1'),
-            ]);
-        }, 1500);
-    }
-
-}
-
-// export const APP_SERVICES = [
-//     NotificationService, ParentService, LoginService, ApiUrlService, SchoolService, RecipientService, InstitutionService
-// ];

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _throw from 'rxjs/observable/throw';
 
 import { User } from '../models';
-import { getApiHost } from './api.service';
+import { getApiHost } from './serviceHelper';
 
 @Injectable()
 export class LoginService {

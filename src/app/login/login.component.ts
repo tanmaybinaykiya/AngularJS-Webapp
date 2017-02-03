@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 
 import { User } from '../models/user';
-import { SchoolService } from '../shared/';
-import { LoginService } from '../shared/login.service';
+import { SchoolService, LoginService } from '../service';
 
 @Component({
     selector: 'my-login-app',

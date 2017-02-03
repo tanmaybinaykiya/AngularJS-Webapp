@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
 
 import { User } from '../models/user';
-import { LoginService } from '../shared/login.service';
+import { LoginService } from '../service';
 declare var Ultima: any;
 
 @Component({

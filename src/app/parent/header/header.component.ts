@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
 
-import { SchoolService } from '../../shared';
+import { SchoolService } from '../../service';
 import { Institution } from '../../models/institution';
 
 @Component({
