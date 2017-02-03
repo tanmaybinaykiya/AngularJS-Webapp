@@ -1,26 +1,28 @@
 import { format } from 'util';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 
 import { Observable } from 'rxjs/Observable';
 import * as _throw from 'rxjs/observable/throw';
 
-import { EnrollableStudent } from '../models';
-import { getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject } from './api.service';
+import { EnrollableStudent, EnrolledStudent } from '../models';
+import {
+    getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject,
+    getUserEmailFromTokenObject
+} from './api.service';
 
 @Injectable()
 export class StudentService {
 
     private enrollStudentUrl = '%s/student/institution/%s/school/%s/';
+    private getEnrolledStudentsUrl = '%s/student/institution/%s/school/%s/';
 
     constructor(private http: Http, private cookieService: CookieService) {
         console.log('hello login service: ', cookieService);
     }
 
     enrollStudent(enrollableStudent: EnrollableStudent): Observable<string> {
-        // let getJSONAsObservable: () => Observable<User> = Rx.Observable.bindCallback(this.dummyServiceResponse);
-        // return getJSONAsObservable();
         let self = this;
         let body = JSON.stringify(enrollableStudent);
         let headers = new Headers({
@@ -31,11 +33,33 @@ export class StudentService {
 
         return this.http.post(format(this.enrollStudentUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService)), body, options)
-            .map(this.extractData)
+            .map(this.extractStudentId)
             .catch(this.handleError);
     }
 
-    private extractData(res: Response) {
+    getEnrolledStudents(): Observable<EnrolledStudent[]> {
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('parentEmail', getUserEmailFromTokenObject(self.cookieService));
+        let options = new RequestOptions({ headers: headers, search: params });
+        return this.http.get(format(this.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService)), options)
+            .map(this.extractEnrolledStudent)
+            .catch(this.handleError);
+
+    }
+
+    private extractEnrolledStudent(res: Response): EnrolledStudent[] {
+        let body = res.json();
+        console.log('extractData: ', body);
+        return body;
+    }
+
+    private extractStudentId(res: Response): string {
         let body = res.json();
         let studentId = body.studentId;
         console.log('extractData: ', body);
@@ -52,4 +76,5 @@ export class StudentService {
             return _throw._throw('Unknown service error');
         }
     }
+
 }

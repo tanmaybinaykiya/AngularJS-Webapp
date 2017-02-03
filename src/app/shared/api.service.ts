@@ -182,6 +182,10 @@ export function getSchoolCodeFromTokenObject(cookieService: CookieService): stri
     return getCurrentUser(cookieService).schoolCode;
 }
 
+export function getUserEmailFromTokenObject(cookieService: CookieService): string {
+    return getCurrentUser(cookieService).email;
+}
+
 @Injectable()
 export class ParentService {
     title = 'Angular 2';

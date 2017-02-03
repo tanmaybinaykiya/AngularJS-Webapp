@@ -31,6 +31,7 @@ export class EnrollableStudent {
     public race: string;
     public gender: string;
     public extraInfo: string;
+    public parentEmail: string;
     public documents: {
         medicalForm: string,
         tuitionForm: string
@@ -46,4 +47,25 @@ export class EnrollableStudent {
     }
 }
 
+export class EnrolledStudent {
+
+    public institutionShortCode: string;
+    public schoolCode: string;
+    public firstName: string;
+    public lastName: string;
+    public dateOfBirth: Date;
+    public middleName: string;
+    public nickName: string;
+    public cityOfBirth: string;
+    public stateOfBirth: string;
+    public countryOfBirth: string;
+    public race: string;
+    public gender: string;
+    public extraInfo: string;
+    public documents: {
+        medicalForm: string,
+        tuitionForm: string
+    };
+
+}
 

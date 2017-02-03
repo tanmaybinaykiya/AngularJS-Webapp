@@ -4,11 +4,12 @@ import { MdIconRegistry } from '@angular2-material/icon';
 import { CookieService } from 'angular2-cookie/core';
 
 import { ParentService, SchoolService } from '../../shared';
-import { LoginService } from '../../shared/login.service';
+import { StudentService } from '../../shared/student.service';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';
 import { Institution } from '../../models/institution';
+import { EnrolledStudent } from '../../models';
 
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
@@ -50,21 +51,11 @@ export class ChildrenComponent implements OnInit {
         }
     ];
 
-    enrolledStudents = [
-        {
-            name: 'Harry',
-            class: '1A',
-            teacher: 'Albus'
-        }, {
-            name: 'Ron',
-            class: '1A',
-            teacher: 'Severus'
-        }, {
-            name: 'Hermione',
-            class: '1A',
-            teacher: 'Minerva'
-        }
-    ];
+    private enrolledStudents: {
+        name: string,
+        class: string,
+        teacher: string
+    }[];
 
     question: QuestionBase<any> =
     new DropdownQuestion({
@@ -82,7 +73,7 @@ export class ChildrenComponent implements OnInit {
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
         private modalControlService: ModalControlService, private schoolService: SchoolService,
-        private cookieService: CookieService) { }
+        private cookieService: CookieService, private studentService: StudentService) { }
 
     ngOnInit() {
         console.log('Children On init', this.schoolService);
@@ -97,6 +88,21 @@ export class ChildrenComponent implements OnInit {
                 console.log('school', school);
                 // self.isLoading = false;
                 self.institution = school;
+            },
+            function (error) {
+                console.log(error);
+            });
+
+        this.studentService.getEnrolledStudents()
+            .subscribe(function (students: EnrolledStudent[]) {
+                console.log('students:', students);
+                self.enrolledStudents = students.map(student => ({
+                    name: student.firstName + ' ' + student.lastName,
+                    class: 'Enrollment Confirmation Pending',
+                    teacher: 'Enrollment Confirmation Pending',
+                }));
+                // self.isLoading = false;
+                // self.institution = school;
             },
             function (error) {
                 console.log(error);

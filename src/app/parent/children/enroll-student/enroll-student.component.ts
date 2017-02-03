@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { CookieService } from 'angular2-cookie/core';
+
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
 import { StudentService } from '../../../shared/student.service';
 import { EnrollableStudent } from '../../../models/student';
-
+import { getUserEmailFromTokenObject } from '../../../shared/api.service'
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -35,7 +37,9 @@ export class EnrollStudentComponent implements OnInit {
         return c;
     };
 
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService, private studentService: StudentService) {
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService, private studentService: StudentService,
+        private cookieService: CookieService
+    ) {
         this.modalControlService = modalControlService;
         this.months = this.range(12, 1, this.months);
         console.log('Months: ', this.months);
@@ -61,9 +65,9 @@ export class EnrollStudentComponent implements OnInit {
 
     submit() {
         console.log('Submitted! ');
+        this.enrollableStudent.parentEmail = getUserEmailFromTokenObject(this.cookieService);
         this.studentService.enrollStudent(this.enrollableStudent)
             .subscribe((value) => {
-                this.modalControlService.disable();
                 console.log('Success!');
                 this.modalControlService.disable();
             }, (err) => {
