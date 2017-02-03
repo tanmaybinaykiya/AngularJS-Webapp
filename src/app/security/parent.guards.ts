@@ -13,7 +13,7 @@ export class ParentGuard implements CanActivate {
     canActivate() {
         let currentUser: any = this.cookieService.getObject('loggedInUser');
         console.log('Logged in user:', currentUser);
-        if (currentUser && currentUser.role === 'admin') {
+        if (currentUser && currentUser.role === 'parent') {
             return true;
         } else {
             this.router.navigate(['login']);

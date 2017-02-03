@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../shared/login.service';
+import { CookieService } from 'angular2-cookie/core';
+
 import { SchoolService } from '../../shared';
 import { Institution } from '../../models/institution';
 
@@ -15,8 +16,7 @@ export class ParentHeaderComponent implements OnInit {
     private schoolName: String;
     isLoading: boolean = false;
 
-    constructor(private loginService: LoginService, private schoolService: SchoolService,
-        private router: Router) {
+    constructor(private cookieService: CookieService, private schoolService: SchoolService, private router: Router) {
         console.log('ParentHeaderComponent');
     }
 
@@ -24,8 +24,9 @@ export class ParentHeaderComponent implements OnInit {
         console.log('notificationMenu');
     }
     ngOnInit() {
-        console.log('Hello ParentHeaderComponent', this.loginService.loggedInUser.institutionShortCode);
-        let institutionCode = this.loginService.loggedInUser.institutionShortCode;
+        console.log('Hello ParentHeaderComponent');
+        let currentUser: any = this.cookieService.getObject('loggedInUser');
+        let institutionCode = currentUser.institutionShortCode;
         let self = this;
         self.isLoading = true;
         this.schoolService.getSchool(institutionCode)
@@ -37,14 +38,11 @@ export class ParentHeaderComponent implements OnInit {
             function (error) {
                 console.log(error);
             });
-
     }
 
     logout() {
-        console.log('logout triggered');
-        this.loginService.loggedIn = false;
-        console.log('navigating');
+        console.log('Logout called');
+        this.cookieService.remove('loggedInUser');
         this.router.navigate(['/login']);
-        console.log('navigated');
     }
 }

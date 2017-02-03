@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdIconRegistry } from '@angular2-material/icon';
+import { CookieService } from 'angular2-cookie/core';
+
 import { LoginService } from '../../../shared/login.service';
 
 @Component({
@@ -11,12 +13,13 @@ import { LoginService } from '../../../shared/login.service';
 export class ParentHeaderUserBadgeComponent implements OnInit {
     user = 'Dr. House';
     role = 'Parent';
-    constructor(private loginService: LoginService) {
+    constructor(private cookieService: CookieService) {
     }
 
     ngOnInit() {
         console.log('Hello Home');
-        this.user = this.loginService.loggedInUser.name;
-        this.role = this.loginService.loggedInUser.role;
+        let currentUser: any = this.cookieService.getObject('loggedInUser');
+        this.user = currentUser.name;
+        this.role = currentUser.role;
     }
 }

@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.loggedInUser = this.cookieService.getObject('loggedInUser');
+        console.log("AdminComponent: ", this.loggedInUser);
     }
 
     donate() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
 import { MdIconRegistry } from '@angular2-material/icon';
+import { CookieService } from 'angular2-cookie/core';
 
 import { ParentService, SchoolService } from '../../shared';
 import { LoginService } from '../../shared/login.service';
@@ -85,7 +86,7 @@ export class ChildrenComponent implements OnInit {
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
         private modalControlService: ModalControlService, private schoolService: SchoolService,
-        private loginService: LoginService) { }
+        private cookieService: CookieService) { }
 
     ngOnInit() {
         console.log('Children On init', this.schoolService);
@@ -93,7 +94,8 @@ export class ChildrenComponent implements OnInit {
         let self = this;
 
         // self.isLoading = true;
-        let institutionCode = this.loginService.loggedInUser.institutionShortCode;
+        let currentUser: any = this.cookieService.getObject('loggedInUser');
+        let institutionCode = currentUser.institutionShortCode;
         this.schoolService.getSchool(institutionCode)
             .subscribe(function (school: Institution) {
                 console.log('school', school);
