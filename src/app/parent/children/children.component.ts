@@ -93,7 +93,7 @@ export class ChildrenComponent implements OnInit {
                 console.log(error);
             });
 
-        this.studentService.getEnrolledStudents()
+        this.studentService.getEnrolledStudentsForParent()
             .subscribe(function (students: EnrolledStudent[]) {
                 console.log('students:', students);
                 self.enrolledStudents = students.map(student => ({

@@ -37,7 +37,7 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-    getEnrolledStudents(): Observable<EnrolledStudent[]> {
+    getEnrolledStudentsForParent(): Observable<EnrolledStudent[]> {
         let self = this;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -46,11 +46,24 @@ export class StudentService {
         let params: URLSearchParams = new URLSearchParams();
         params.set('parentEmail', getUserEmailFromTokenObject(self.cookieService));
         let options = new RequestOptions({ headers: headers, search: params });
-        return this.http.get(format(this.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+        return this.http.get(format(self.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService)), options)
             .map(this.extractEnrolledStudent)
             .catch(this.handleError);
+    }
 
+    getEnrolledStudentsForAdmin(): Observable<EnrolledStudent[]> {
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        console.log('getEnrolledStudentsForAdmin: ', self.getEnrolledStudentsUrl);
+        return this.http.get(format(self.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService)), options)
+            .map(this.extractEnrolledStudent)
+            .catch(this.handleError);
     }
 
     private extractEnrolledStudent(res: Response): EnrolledStudent[] {

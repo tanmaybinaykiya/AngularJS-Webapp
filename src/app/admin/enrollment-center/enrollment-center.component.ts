@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SchoolService } from '../../shared/api.service';
+import { StudentService } from '../../shared/student.service';
+import { EnrolledStudent } from '../../models';
 
 @Component({
     selector: 'enrollment-center',
@@ -16,13 +18,27 @@ export class EnrollmentCenterComponent implements OnInit {
     private selectedStatus: EnrollmentStateView;
     private selection: EnrollmentListView[];
 
-    constructor(private schoolService: SchoolService) {
+    constructor(private schoolService: SchoolService, private studentService: StudentService) {
         // Do stuff
-        this.enrollmentList = [
-            new EnrollmentListView('1', 'tanmay1', 'Class Full'),
-            new EnrollmentListView('2', 'tanmay2', 'Pending Review'),
-            new EnrollmentListView('3', 'tanmay3', 'In Progress'),
-            new EnrollmentListView('4', 'tanmay4', 'Class Full')
+        let self = this;
+        this.studentService.getEnrolledStudentsForAdmin()
+            .subscribe(function (students: EnrolledStudent[]) {
+                console.log('students:', students);
+                self.enrollmentList = students.map(student =>
+                    (new EnrollmentListView(student.firstName + ' ' + student.lastName, 'Pending Review')));
+                // self.isLoading = false;
+                // self.institution = school;
+            },
+            function (error) {
+                console.log(error);
+            });
+
+
+        [
+            new EnrollmentListView('tanmay1', 'Class Full'),
+            new EnrollmentListView('tanmay2', 'Pending Review'),
+            new EnrollmentListView('tanmay3', 'In Progress'),
+            new EnrollmentListView('tanmay4', 'Class Full')
         ];
 
         this.assignableClasses = [
@@ -51,7 +67,7 @@ export class EnrollmentCenterComponent implements OnInit {
 }
 
 class EnrollmentListView {
-    constructor(private id: string,
+    constructor(
         private name: string,
         private reason: EnrollmentState) {
     }
