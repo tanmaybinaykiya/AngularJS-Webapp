@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
+
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs';
@@ -163,6 +165,22 @@ export function getApiHost() {
             return 'https://api.secureslice.com/prod';
     }
 };
+
+function getCurrentUser(cookieService: CookieService): any {
+    return cookieService.getObject('loggedInUser');
+}
+
+export function getAuthorizationHeader(cookieService: CookieService): string {
+    return 'Bearer ' + getCurrentUser(cookieService).token;
+}
+
+export function getInstitutionShortCodeFromTokenObject(cookieService: CookieService): string {
+    return getCurrentUser(cookieService).institutionShortCode;
+}
+
+export function getSchoolCodeFromTokenObject(cookieService: CookieService): string {
+    return getCurrentUser(cookieService).schoolCode;
+}
 
 @Injectable()
 export class ParentService {

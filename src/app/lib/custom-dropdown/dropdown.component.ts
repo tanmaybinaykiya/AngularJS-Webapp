@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MdIconRegistry } from '@angular2-material/icon';
 
 @Component({
@@ -10,35 +10,29 @@ import { MdIconRegistry } from '@angular2-material/icon';
 export class DropDownComponent implements OnInit {
 
     private static dividerSentinel: String = '#DIVIDER#';
-    private _options: String[];
+    private _options: string[];
     @Input() options;
-    @Input() placeholder: String;
+    @Input() placeholder: string;
     private isSelected: boolean = false;
-    @Output() selectedOption: {
-        value: String,
-        id: String
-    };
+    @Output() selectedOption: DropdownValue;
+    @Output() selectedOptionEvent = new EventEmitter();
 
     ngOnInit() {
         let self = this;
         self._options = self.options.split(',');
         console.log('options', self._options, 'placeholder', self.placeholder);
-        self.selectedOption = self.placeholder ? {
-            value: self.placeholder,
-            id: self.placeholder
-        } : {
-                value: self._options[0],
-                id: self._options[0]
-            };
+        self.selectedOption = self.placeholder ? new DropdownValue(self.placeholder, self.placeholder) :
+            new DropdownValue(self._options[0], self._options[0]);
         console.log('selectedOption', self.selectedOption);
+        self.selectedOptionEvent.emit(self.selectedOption);
     }
 
     clickHandler() {
         this.isSelected = !this.isSelected;
     }
 
-    select(option: String) {
-        this.selectedOption = { value: option, id: option };
+    select(option: string) {
+        this.selectedOption = new DropdownValue(option, option);
         this.placeholder = null;
         this.isSelected = false;
     }
@@ -46,4 +40,14 @@ export class DropDownComponent implements OnInit {
         return DropDownComponent.dividerSentinel === option;
     }
 
+}
+
+export class DropdownValue {
+    value: string;
+    label: string;
+
+    constructor(value: string, label: string) {
+        this.value = value;
+        this.label = label;
+    }
 }

@@ -51,7 +51,7 @@ import {
     InstitutionService
 } from './shared';
 import { LoginService } from './shared/login.service';
-
+import { StudentService } from './shared/student.service';
 import { QuestionControlService } from './lib/question-control.service';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
@@ -206,6 +206,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         NotificationService,
         ParentService,
         LoginService,
+        StudentService,
         ApiUrlService,
         SchoolService,
         RecipientService,

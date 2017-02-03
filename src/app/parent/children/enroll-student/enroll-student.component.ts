@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
+import { StudentService } from '../../../shared/student.service';
+import { EnrollableStudent } from '../../../models/student';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -23,6 +25,7 @@ export class EnrollStudentComponent implements OnInit {
     public genders: String[] = ['Male', 'Female'];
     private months: number[];
     private years: number[];
+    private enrollableStudent: EnrollableStudent = new EnrollableStudent();
 
     private range(a, b, c) {
         c = [];
@@ -32,12 +35,12 @@ export class EnrollStudentComponent implements OnInit {
         return c;
     };
 
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
+    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService, private studentService: StudentService) {
         this.modalControlService = modalControlService;
         this.months = this.range(12, 1, this.months);
-        console.log(this.months);
+        console.log('Months: ', this.months);
         this.years = this.range(50, 2016, this.years);
-        console.log(this.years);
+        console.log('Years', this.years);
     }
 
     ngOnInit() {
@@ -54,6 +57,24 @@ export class EnrollStudentComponent implements OnInit {
 
     public fileOverAnother(e: any): void {
         this.hasAnotherDropZoneOver = e;
+    }
+
+    submit() {
+        console.log('Submitted! ');
+        this.studentService.enrollStudent(this.enrollableStudent)
+            .subscribe((value) => {
+                this.modalControlService.disable();
+                console.log('Success!');
+                this.modalControlService.disable();
+            }, (err) => {
+                console.log('Failure!', err);
+            });
+    }
+
+    get diagnostic() {
+        let self = this;
+        // TODO figure out how to set race and gender
+        return JSON.stringify(self.enrollableStudent);
     }
 
 }

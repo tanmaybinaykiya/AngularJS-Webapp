@@ -52,21 +52,17 @@ export class ChildrenComponent implements OnInit {
 
     enrolledStudents = [
         {
-            name: 'Barack Obama',
+            name: 'Harry',
             class: '1A',
-            teacher: 'Putin'
+            teacher: 'Albus'
         }, {
-            name: 'Manmohan Singh',
+            name: 'Ron',
             class: '1A',
-            teacher: 'Putin'
+            teacher: 'Severus'
         }, {
-            name: 'Nicolaus Sarcozhy',
+            name: 'Hermione',
             class: '1A',
-            teacher: 'Putin'
-        }, {
-            name: 'Agnela Merkel',
-            class: '1A',
-            teacher: 'Putin'
+            teacher: 'Minerva'
         }
     ];
 
@@ -130,4 +126,5 @@ export class ChildrenComponent implements OnInit {
         console.log('Profile: toggleModal', modal);
         this.modalControlService.enable(modal);
     }
+
 }
