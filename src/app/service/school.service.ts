@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs';
+import { format } from 'util';
+import { CookieService } from 'angular2-cookie/core';
 
-import { Http, Response, } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import * as Rx from 'rxjs';
-
-import { Grade, Class, Teacher, Institution, Student } from '../models';
+import { Grade, Class, Teacher, Institution, Student, School } from '../models';
 import { Subject } from 'rxjs/Subject';
-import { getApiHost } from './serviceHelper';
+import { getApiHost, handleError, getAuthorizationHeader } from './serviceHelper';
+import { LoginService } from './login.service';
 
 @Injectable()
 export class SchoolService {
@@ -14,10 +15,11 @@ export class SchoolService {
     private _school = new Subject<Institution>();
     school = this._school.asObservable();
 
-    private getInstitutionUrl: string = getApiHost() + '/institution/shortcode';
+    private getSchoolsByInstitutionCodeUrl: string = '%s/school/institution/%s/school';
+    private getSchoolsByInstitutionAndSchoolCodeUrl: string = '%s/school/institution/%s/school/%s';
 
-    constructor(private http: Http) {
-        console.log('hello SchoolService');
+    constructor(private http: Http, private loginService: LoginService, private cookieService: CookieService, ) {
+        console.log('hello SchoolService', loginService.loggedInUser);
     }
 
     dummyGetSchool(cb: (result: Institution) => any) {
@@ -80,70 +82,73 @@ export class SchoolService {
         }, 1500);
     }
 
-    getSchool(institutionCode: string): Observable<Institution> {
-        console.log('getSchool called');
-        let getJSONAsObservable: () => Observable<Institution> = Rx.Observable.bindCallback(this.dummyGetSchool);
-        return getJSONAsObservable();
+    getSchoolsByInstitutionAndSchoolCode(institutionCode: string, schoolCode: string): Observable<School> {
+        console.log('getSchoolsByInstitutionAndSchoolCode called: ', institutionCode, schoolCode);
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getSchoolsByInstitutionAndSchoolCodeUrl, getApiHost(), institutionCode, schoolCode);
+        console.log('url: ', url, 'options: ', options);
+        return this.http.get(url, options)
+            .map((res: Response): School => {
+                let school: School;
+                school = res.json();
+                return school;
+            })
+            .catch(handleError);
+    }
 
-        /*
-            let headers = new Headers({ 'Content-Type': 'application/json' });
-            let options = new RequestOptions({ headers: headers });
-            let params: URLSearchParams = new URLSearchParams();
-            let url = this.getInstitutionUrl;
-            params.set('shortCode', institutionCode);
-            console.log('url: ', url, 'params: ', params);
-            return this.http.get(this.getInstitutionUrl, { search: params })
-                .map(this.extractData)
-                .catch(this.handleError);
-        */
+    getSchoolsByInstitutionCode(institutionCode: string): Observable<School[]> {
+        console.log('getSchoolsByInstitutionCode called: ', institutionCode);
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getSchoolsByInstitutionCodeUrl, getApiHost(), institutionCode);
+        console.log('url: ', url, 'options: ', options);
+        return this.http.get(url, options)
+            .map((res: Response): School[] => {
+                let schools: School[];
+                schools = res.json();
+                return schools;
+            })
+            .catch(handleError);
+
     }
 
     public getAllSchools(): Observable<Institution[]> {
         console.log('getSchool called');
-        let getJSONAsObservable: () => Observable<Institution[]> = Rx.Observable.bindCallback(this.dummyGetAllSchools);
+        let getJSONAsObservable: () => Observable<Institution[]> = Observable.bindCallback(this.dummyGetAllSchools);
         return getJSONAsObservable();
     }
 
     public getAllClasses(): Observable<Class[]> {
         console.log('getClasses called');
-        let getJSONAsObservable: () => Observable<Class[]> = Rx.Observable.bindCallback(this.dummyGetAllClasses);
+        let getJSONAsObservable: () => Observable<Class[]> = Observable.bindCallback(this.dummyGetAllClasses);
         return getJSONAsObservable();
     }
 
     public getAllGrades(): Observable<Grade[]> {
         console.log('getClasses called');
-        let getJSONAsObservable: () => Observable<Grade[]> = Rx.Observable.bindCallback(this.dummyGetAllGrades);
+        let getJSONAsObservable: () => Observable<Grade[]> = Observable.bindCallback(this.dummyGetAllGrades);
         return getJSONAsObservable();
     }
 
     public getAllTeachers(): Observable<Teacher[]> {
         console.log('getTeachers called');
-        let getJSONAsObservable: () => Observable<Teacher[]> = Rx.Observable.bindCallback(this.dummyGetAllTeachers);
+        let getJSONAsObservable: () => Observable<Teacher[]> = Observable.bindCallback(this.dummyGetAllTeachers);
         return getJSONAsObservable();
     }
 
     public getAllStudents(): Observable<Student[]> {
         console.log('getStudents called');
-        let getJSONAsObservable: () => Observable<Student[]> = Rx.Observable.bindCallback(this.dummyGetAllStudents);
+        let getJSONAsObservable: () => Observable<Student[]> = Observable.bindCallback(this.dummyGetAllStudents);
         return getJSONAsObservable();
     }
 
-    private extractData(res: Response) {
-        let inst = res.json();
-        this._school = inst;
-        console.log('extractData: ', this._school);
-        return this._school || {};
-    }
-
-    private handleError(error: any) {
-        try {
-            let errMsg = JSON.parse(error.json().errorMessage).message;
-            console.error(errMsg); // log to console instead
-            return Observable.throw(errMsg);
-        } catch (err) {
-            console.error('Actual error from service ', error);
-            console.error('Error while parsing error', err);
-            return Observable.throw('Unknown service error');
-        }
-    }
 }

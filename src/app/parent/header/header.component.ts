@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
 
 import { SchoolService } from '../../service';
-import { Institution } from '../../models/institution';
+import { School } from '../../models';
 
 @Component({
-    selector: 'parent-header-toolbar',
+    selector: 'myss-parent-header-toolbar',
     template: require('./header.component.html'),
     styles: [require('./header.component.scss')]
 })
@@ -26,11 +26,12 @@ export class ParentHeaderComponent implements OnInit {
     ngOnInit() {
         console.log('Hello ParentHeaderComponent');
         let currentUser: any = this.cookieService.getObject('loggedInUser');
-        let institutionCode = currentUser.institutionShortCode;
+        let institutionCode = currentUser.institutionCode;
+        let schoolCode = currentUser.schoolCode;
         let self = this;
         self.isLoading = true;
-        this.schoolService.getSchool(institutionCode)
-            .subscribe(function (school: Institution) {
+        this.schoolService.getSchoolsByInstitutionAndSchoolCode(institutionCode, schoolCode)
+            .subscribe(function (school: School) {
                 console.log('school', school);
                 self.isLoading = false;
                 self.schoolName = school.name;

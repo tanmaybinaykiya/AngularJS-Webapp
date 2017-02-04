@@ -7,8 +7,7 @@ import { ParentService, SchoolService, StudentService } from '../../service';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';
-import { Institution } from '../../models/institution';
-import { EnrolledStudent } from '../../models';
+import { School, Institution, EnrolledStudent } from '../../models';
 
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
@@ -22,7 +21,9 @@ import { DropdownQuestion } from '../../lib/question-dropdown';
 export class ChildrenComponent implements OnInit {
 
     form: any; // ControlGroup;
+
     institution: Institution;
+    school: School;
     // isLoading: boolean = false;
     isInstitutionPanelOpen: boolean = false;
 
@@ -82,15 +83,18 @@ export class ChildrenComponent implements OnInit {
         // self.isLoading = true;
         let currentUser: any = this.cookieService.getObject('loggedInUser');
         let institutionCode = currentUser.institutionShortCode;
-        this.schoolService.getSchool(institutionCode)
-            .subscribe(function (school: Institution) {
+        let schoolCode = currentUser.schoolCode;
+        this.schoolService.getSchoolsByInstitutionAndSchoolCode(institutionCode, schoolCode)
+            .subscribe(function (school: School) {
                 console.log('school', school);
                 // self.isLoading = false;
-                self.institution = school;
+                self.school = school;
             },
             function (error) {
                 console.log(error);
             });
+
+
 
         this.studentService.getEnrolledStudentsForParent()
             .subscribe(function (students: EnrolledStudent[]) {

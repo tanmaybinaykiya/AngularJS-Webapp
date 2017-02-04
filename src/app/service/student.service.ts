@@ -4,12 +4,11 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { CookieService } from 'angular2-cookie/core';
 
 import { Observable } from 'rxjs/Observable';
-import * as _throw from 'rxjs/observable/throw';
 
 import { EnrollableStudent, EnrolledStudent } from '../models';
 import {
     getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject,
-    getUserEmailFromTokenObject
+    getUserEmailFromTokenObject, handleError
 } from './serviceHelper';
 
 @Injectable()
@@ -33,8 +32,8 @@ export class StudentService {
 
         return this.http.post(format(this.enrollStudentUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService)), body, options)
-            .map(this.extractStudentId)
-            .catch(this.handleError);
+            .map((res: Response): string => res.json().studentId)
+            .catch(handleError);
     }
 
     getEnrolledStudentsForParent(): Observable<EnrolledStudent[]> {
@@ -48,8 +47,8 @@ export class StudentService {
         let options = new RequestOptions({ headers: headers, search: params });
         return this.http.get(format(self.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService)), options)
-            .map(this.extractEnrolledStudent)
-            .catch(this.handleError);
+            .map((res: Response): EnrolledStudent[] => res.json())
+            .catch(handleError);
     }
 
     getEnrolledStudentsForAdmin(): Observable<EnrolledStudent[]> {
@@ -62,32 +61,8 @@ export class StudentService {
         console.log('getEnrolledStudentsForAdmin: ', self.getEnrolledStudentsUrl);
         return this.http.get(format(self.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService)), options)
-            .map(this.extractEnrolledStudent)
-            .catch(this.handleError);
-    }
-
-    private extractEnrolledStudent(res: Response): EnrolledStudent[] {
-        let body = res.json();
-        console.log('extractData: ', body);
-        return body;
-    }
-
-    private extractStudentId(res: Response): string {
-        let body = res.json();
-        let studentId = body.studentId;
-        console.log('extractData: ', body);
-        return studentId;
-    }
-
-    private handleError(error: any) {
-        try {
-            console.error('LALALA:', error.statusText); // log to console instead
-            return _throw._throw(error.statusText);
-        } catch (err) {
-            console.error('LALALA1:', 'Actual error from server: ', error);
-            console.error('LALALA2:', 'Error while parsing error: ', err);
-            return _throw._throw('Unknown service error');
-        }
+            .map((res: Response): EnrolledStudent => res.json())
+            .catch(handleError);
     }
 
 }

@@ -10,7 +10,6 @@ import { SchoolService, LoginService } from '../service';
     selector: 'my-login-app',
     template: require('./login.component.html'),
     styles: [require('./login.component.scss')],
-    providers: [CookieService]
 })
 export class LoginComponent {
 
@@ -23,7 +22,7 @@ export class LoginComponent {
 
     constructor(private loginService: LoginService, private schoolService: SchoolService,
         private router: Router, fbld: FormBuilder, private cookieService: CookieService) {
-        console.log('Hello LoginComponent: ', cookieService);
+        console.log('Hello LoginComponent: ');
         this.form = fbld.group({});
     }
 
@@ -49,26 +48,33 @@ export class LoginComponent {
         let self = this;
         self.isRequested = true;
         this.loginService.login(this.email, this.password)
-            .subscribe(
-            function (currentUser: User) {
-                console.log('I CAME HERE FIRST!!!: ', self.loginService.loggedInUser, currentUser);
-                self.cookieService.putObject('loggedInUser', currentUser);
-                self.isRequested = false;
+            .subscribe((currentUser: User) => {
+                console.log('currentUser:', currentUser);
                 switch (currentUser.role) {
                     case 'parent':
+                        self.cookieService.putObject('loggedInUser', currentUser);
                         // self.loginService.loggedInUser = currentUser;
                         // self.loginService.loggedIn = true;
+                        self.isRequested = false;
                         self.router.navigate(['/parent']);
                         break;
                     case 'SECS':
-                        // self.loginService.loggedInUser = currentUser;
-                        // self.loginService.loggedIn = true;
+                        self.cookieService.putObject('loggedInUser', currentUser);
+                        self.isRequested = false;
                         self.router.navigate(['/superadmin']);
                         break;
                     case 'admin':
-                        // self.loginService.loggedInUser = currentUser;
-                        // self.loginService.loggedIn = true;
-                        self.router.navigate(['/admin']);
+                        self.schoolService.getSchoolsByInstitutionCode(currentUser.institutionShortCode)
+                            .subscribe(schools => {
+                                currentUser.schools = {
+                                    isSelectedIndex: 0,
+                                    availableSchools: schools
+                                };
+                                self.cookieService.putObject('loggedInUser', currentUser);
+                                self.loginService.loggedInUser = currentUser;
+                                self.isRequested = false;
+                                self.router.navigate(['/admin']);
+                            });
                         break;
                     default:
                         self.setErrorMessage('Not a valid user' + ' ' + currentUser + ' ' + currentUser.role);

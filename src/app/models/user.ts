@@ -1,3 +1,5 @@
+import { School } from './school';
+
 export type Role = 'admin' | 'staff' | 'parent' | 'SECS';
 
 export class User {
@@ -6,6 +8,10 @@ export class User {
     role: Role;
     token: string;
     institutionShortCode: string;
+    schools: {
+        isSelectedIndex: number,
+        availableSchools: School[]
+    };
     constructor(id: number, name: string, role: Role, token: string, institutionShortCode: string) {
         this.id = id;
         this.name = name;

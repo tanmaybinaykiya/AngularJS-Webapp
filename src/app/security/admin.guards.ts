@@ -10,8 +10,10 @@ export class AdminGuard implements CanActivate {
     }
 
     canActivate() {
+        console.log('CAN ACTIVATE');
         let currentUser: any = this.cookieService.getObject('loggedInUser');
         console.log('Logged in user:', currentUser);
+        console.log('Logged in use LS:', this.loginService.loggedInUser);
         if (currentUser && currentUser.role === 'admin') {
             return true;
         } else {

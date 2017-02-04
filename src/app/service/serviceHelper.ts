@@ -1,4 +1,5 @@
 import { CookieService } from 'angular2-cookie/core';
+import * as _throw from 'rxjs/observable/throw';
 
 export function getApiHost() {
     switch (window.location.hostname) {
@@ -29,4 +30,16 @@ export function getSchoolCodeFromTokenObject(cookieService: CookieService): stri
 
 export function getUserEmailFromTokenObject(cookieService: CookieService): string {
     return getCurrentUser(cookieService).email;
+}
+
+export function handleError(error: any) {
+    this.loggedIn = false;
+    try {
+        console.error('LALALA:', error.statusText); // log to console instead
+        return _throw._throw(error.statusText);
+    } catch (err) {
+        console.error('LALALA1:', 'Actual error from server: ', error);
+        console.error('LALALA2:', 'Error while parsing error: ', err);
+        return _throw._throw('Unknown service error');
+    }
 }

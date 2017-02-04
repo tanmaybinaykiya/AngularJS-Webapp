@@ -2,12 +2,11 @@ import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
 
-import { User } from '../models/user';
 import { LoginService } from '../service';
 declare var Ultima: any;
 
 @Component({
-    selector: 'admin',
+    selector: 'myss-admin',
     template: require('./admin.component.html'),
     styles: [require('./admin.component.scss')],
 })
@@ -15,7 +14,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
     loggedInUser: any;
 
-    constructor(private loginService: LoginService, private router: Router, private el: ElementRef, private cookieService: CookieService) {
+    constructor(private router: Router, private el: ElementRef, private cookieService: CookieService) {
         console.log('Hello AdminComponent');
     }
 
@@ -25,7 +24,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.loggedInUser = this.cookieService.getObject('loggedInUser');
-        console.log("AdminComponent: ", this.loggedInUser);
+        console.log('AdminComponent: ', this.loggedInUser);
     }
 
     donate() {
