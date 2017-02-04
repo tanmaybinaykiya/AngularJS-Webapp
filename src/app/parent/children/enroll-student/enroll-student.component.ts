@@ -24,26 +24,12 @@ export class EnrollStudentComponent implements OnInit {
     public races: String[] = ['American Indian', 'Alaskan Native', 'Asian', 'African American',
         'Native Hawaian or Other Pacific Islander', 'American'];
     public genders: String[] = ['Male', 'Female'];
-    private months: number[];
-    private years: number[];
     private enrollableStudent: EnrollableStudent = new EnrollableStudent();
-
-    private range(a, b, c) {
-        c = [];
-        while (a--) {
-            c[a] = a + b;
-        }
-        return c;
-    };
 
     constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService, private studentService: StudentService,
         private cookieService: CookieService
     ) {
         this.modalControlService = modalControlService;
-        this.months = this.range(12, 1, this.months);
-        console.log('Months: ', this.months);
-        this.years = this.range(50, 2016, this.years);
-        console.log('Years', this.years);
     }
 
     ngOnInit() {
@@ -74,10 +60,16 @@ export class EnrollStudentComponent implements OnInit {
             });
     }
 
+    setRace(race) {
+        this.enrollableStudent.race = race;
+    }
+
+    setGender(gender) {
+        this.enrollableStudent.gender = gender;
+    }
+
     get diagnostic() {
-        let self = this;
-        // TODO figure out how to set race and gender
-        return JSON.stringify(self.enrollableStudent);
+        return JSON.stringify(this.enrollableStudent);
     }
 
 }

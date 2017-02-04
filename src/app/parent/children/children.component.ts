@@ -3,7 +3,7 @@ import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { CookieService } from 'angular2-cookie/core';
 
-import { ParentService, SchoolService, StudentService } from '../../service';
+import { ParentService, SchoolService, StudentService, InstitutionService } from '../../service';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';
@@ -13,7 +13,7 @@ import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
 
 @Component({
-    selector: 'my-children',
+    selector: 'myss-children',
     viewProviders: [MdIconRegistry],
     template: require('./children.component.html'),
     styles: [require('./children.component.scss')]
@@ -24,7 +24,7 @@ export class ChildrenComponent implements OnInit {
 
     institution: Institution;
     school: School;
-    // isLoading: boolean = false;
+    isLoading: boolean = false;
     isInstitutionPanelOpen: boolean = false;
 
     billingHistory = [
@@ -73,29 +73,37 @@ export class ChildrenComponent implements OnInit {
     constructor(private fb: FormBuilder, private parentService: ParentService,
         mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
         private modalControlService: ModalControlService, private schoolService: SchoolService,
-        private cookieService: CookieService, private studentService: StudentService) { }
+        private cookieService: CookieService, private studentService: StudentService,
+        private institutionService: InstitutionService) { }
 
     ngOnInit() {
         console.log('Children On init', this.schoolService);
         this.form = this.toControlGroup(this.question);
         let self = this;
 
-        // self.isLoading = true;
+        self.isLoading = true;
         let currentUser: any = this.cookieService.getObject('loggedInUser');
         let institutionCode = currentUser.institutionShortCode;
         let schoolCode = currentUser.schoolCode;
         this.schoolService.getSchoolsByInstitutionAndSchoolCode(institutionCode, schoolCode)
-            .subscribe(function (school: School) {
+            .subscribe((school: School) => {
                 console.log('school', school);
-                // self.isLoading = false;
+                self.isLoading = false;
                 self.school = school;
             },
-            function (error) {
+            (error) => {
                 console.log(error);
             });
 
+        self.isLoading = true;
+        this.institutionService.getInstitutionByCode(institutionCode).subscribe((institution: Institution) => {
+            self.isLoading = false;
+            self.institution = institution;
+        }, (err) => {
+            console.log('Error getting Institution:', err);
+        });
 
-
+        self.isLoading = true;
         this.studentService.getEnrolledStudentsForParent()
             .subscribe(function (students: EnrolledStudent[]) {
                 console.log('students:', students);
@@ -104,8 +112,7 @@ export class ChildrenComponent implements OnInit {
                     class: 'Enrollment Confirmation Pending',
                     teacher: 'Enrollment Confirmation Pending',
                 }));
-                // self.isLoading = false;
-                // self.institution = school;
+                self.isLoading = false;
             },
             function (error) {
                 console.log(error);

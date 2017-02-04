@@ -26,7 +26,7 @@ export class ParentHeaderComponent implements OnInit {
     ngOnInit() {
         console.log('Hello ParentHeaderComponent');
         let currentUser: any = this.cookieService.getObject('loggedInUser');
-        let institutionCode = currentUser.institutionCode;
+        let institutionCode = currentUser.institutionShortCode;
         let schoolCode = currentUser.schoolCode;
         let self = this;
         self.isLoading = true;

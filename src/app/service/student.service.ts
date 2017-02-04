@@ -29,9 +29,9 @@ export class StudentService {
             'Authorization': getAuthorizationHeader(self.cookieService)
         });
         let options = new RequestOptions({ headers: headers });
-
-        return this.http.post(format(this.enrollStudentUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
-            getSchoolCodeFromTokenObject(self.cookieService)), body, options)
+        let url = format(this.enrollStudentUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.post(url, body, options)
             .map((res: Response): string => res.json().studentId)
             .catch(handleError);
     }

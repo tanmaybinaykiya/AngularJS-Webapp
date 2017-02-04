@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { CookieService } from 'angular2-cookie/core';
 import { format } from 'util';
 
 import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs';
 
 import { Staff, Institution } from '../models';
-import { getApiHost, handleError } from './serviceHelper';
+import { getApiHost, handleError, getAuthorizationHeader } from './serviceHelper';
 
 @Injectable()
 export class InstitutionService {
 
-    private readonly getInstitutionUrl: string = '%s/institution/%s';
+    private readonly getInstitutionByCodeUrl: string = '%s/institution';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private cookieService: CookieService) { }
 
     public getAllStaff(): Observable<Staff[]> {
         console.log('getTeachers called');
@@ -33,15 +34,18 @@ export class InstitutionService {
     }
 
     getInstitutionByCode(institutionCode: string): Observable<Institution> {
-        console.log('getInstitutionByCode called: ', institutionCode);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('shortCode', institutionCode);
-        let options = new RequestOptions({ headers: headers, search: params });
-        let url = this.getInstitutionUrl;
+        console.log('getInstitutionByCode called: ', );
         let self = this;
-        console.log('url: ', url, 'params: ', params);
-        return this.http.get(format(self.getInstitutionUrl, getApiHost(), institutionCode), options)
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('institutionCode', institutionCode);
+        let options = new RequestOptions({ headers: headers, search: params });
+        let url = format(this.getInstitutionByCodeUrl, getApiHost());
+        console.log('url: ', url, 'options: ', options);
+        return this.http.get(url, options)
             .map((res: Response) => {
                 let institution: Institution = res.json();
                 return institution;

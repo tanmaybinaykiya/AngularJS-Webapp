@@ -14,7 +14,7 @@ export class DropDownComponent implements OnInit {
     @Input() options;
     @Input() placeholder: string;
     private isSelected: boolean = false;
-    @Output() selectedOption: DropdownValue;
+    private selectedOption: DropdownValue;
     @Output() selectedOptionEvent = new EventEmitter();
 
     ngOnInit() {
@@ -24,7 +24,6 @@ export class DropDownComponent implements OnInit {
         self.selectedOption = self.placeholder ? new DropdownValue(self.placeholder, self.placeholder) :
             new DropdownValue(self._options[0], self._options[0]);
         console.log('selectedOption', self.selectedOption);
-        self.selectedOptionEvent.emit(self.selectedOption);
     }
 
     clickHandler() {
@@ -35,6 +34,7 @@ export class DropDownComponent implements OnInit {
         this.selectedOption = new DropdownValue(option, option);
         this.placeholder = null;
         this.isSelected = false;
+        this.selectedOptionEvent.emit(option);
     }
     isDivider(option): boolean {
         return DropDownComponent.dividerSentinel === option;

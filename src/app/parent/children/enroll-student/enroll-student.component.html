@@ -3,12 +3,13 @@
         <div id="modal">
             <md-card>
                 <md-card-title>Enroll Student</md-card-title>
+                <p>{{diagnostic}}</p>
                 <md-card-content>
                     <md-tab-group>
                         <md-tab>
                             <template md-tab-label>Student Information</template>
                             <template md-tab-content>
-                                <p>{{diagnostic}}</p>
+
                                 <md-input class="input-field" [(ngModel)]="enrollableStudent.firstName" placeholder="First Name"></md-input>
                                 <md-input class="input-field" [(ngModel)]="enrollableStudent.middleName" placeholder="Middle Name"></md-input>
                                 <md-input class="input-field" [(ngModel)]="enrollableStudent.lastName" placeholder="Last Name"></md-input>
@@ -17,8 +18,8 @@
                                 <md-input class="input-field" [(ngModel)]="enrollableStudent.cityOfBirth" placeholder="City of Birth"></md-input>
                                 <md-input class="input-field" [(ngModel)]="enrollableStudent.stateOfBirth" placeholder="State of Birth"></md-input>
                                 <md-input class="input-field" [(ngModel)]="enrollableStudent.countryOfBirth" placeholder="Country of Birth"></md-input>
-                                <custom-dropdown options={{races}} placeholder="Select Race"></custom-dropdown>
-                                <custom-dropdown options={{genders}} placeholder="Select Gender"></custom-dropdown>
+                                <custom-dropdown (selectedOptionEvent)=setRace($event) options={{races}} placeholder="Select Race"></custom-dropdown>
+                                <custom-dropdown (selectedOptionEvent)=setGender($event) options={{genders}} placeholder="Select Gender"></custom-dropdown>
                                 <div class="some-class input-field mdl-textfield mdl-js-textfield">
                                     <label>Additional Information</label>
                                     <textarea placeholder="Enter any additional information" [(ngModel)]="enrollableStudent.extraInfo" class="mdl-textfield__input"
@@ -29,19 +30,11 @@
                         <md-tab>
                             <template md-tab-label>Payment Information</template>
                             <template md-tab-content>
-                                <md-input class="input-field" placeholder="Credit Card Number"></md-input>
-                                <md-input class="input-field" placeholder="CVV2 Number"></md-input>
+                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.cardNumber" placeholder="Credit Card Number"></md-input>
+                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.cvv" placeholder="CVV Number"></md-input>
                                 <br>
-                                <div class="input-field form-group">
-                                    <label>Expiration:</label>
-                                    <custom-dropdown options={{months}} placeholder="Month"></custom-dropdown>
-                                    <custom-dropdown options={{years}} placeholder="Year"></custom-dropdown>
-                                </div>
-                                <br>
-                                <md-input class="input-field" placeholder="Street"></md-input>
-                                <md-input class="input-field" placeholder="City"></md-input>
-                                <md-input class="input-field" placeholder="State"></md-input>
-                                <md-input class="input-field" placeholder="Zip"></md-input>
+                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.expiration" placeholder="Expiration (MM/DD)"></md-input>
+                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.postalCode" placeholder="Postal Code"></md-input>
                             </template>
                         </md-tab>
                         <md-tab>
