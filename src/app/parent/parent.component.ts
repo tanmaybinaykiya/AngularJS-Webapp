@@ -20,4 +20,6 @@ export class ParentComponent implements OnInit {
         console.log('Thanks for intending to donate');
     }
 
+
+
 }

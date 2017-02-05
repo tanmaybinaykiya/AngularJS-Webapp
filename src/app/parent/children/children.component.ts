@@ -3,11 +3,11 @@ import { /*ControlGroup, */FormBuilder, Validators } from '@angular/forms';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { CookieService } from 'angular2-cookie/core';
 
-import { ParentService, SchoolService, StudentService, InstitutionService } from '../../service';
+import { ParentService, SchoolService, BillingService, StudentService, InstitutionService } from '../../service';
 import { QuestionControlService } from '../../lib/question-control.service';
 import { ModalControlService } from '../../lib/modal/modal-control.service';
 import { Modal } from '../../lib/enums/modal-names.enums';
-import { School, Institution, EnrolledStudent } from '../../models';
+import { School, Institution, EnrolledStudent, PaymentMethodResponse } from '../../models';
 
 import { QuestionBase } from '../../lib/question-base';
 import { DropdownQuestion } from '../../lib/question-dropdown';
@@ -71,13 +71,13 @@ export class ChildrenComponent implements OnInit {
     });
 
     constructor(private fb: FormBuilder, private parentService: ParentService,
-        mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
+        private mdIconRegistry: MdIconRegistry, private qcs: QuestionControlService,
         private modalControlService: ModalControlService, private schoolService: SchoolService,
         private cookieService: CookieService, private studentService: StudentService,
-        private institutionService: InstitutionService) { }
+        private institutionService: InstitutionService, private billingService: BillingService) { }
 
     ngOnInit() {
-        console.log('Children On init', this.schoolService);
+        console.log('Children Oninit');
         this.form = this.toControlGroup(this.question);
         let self = this;
 
@@ -118,13 +118,7 @@ export class ChildrenComponent implements OnInit {
                 console.log(error);
             });
 
-        // this.schoolService.school.subscribe(function (school: Institution) {
-        //     console.log('school', school);
-        //     // self.isLoading = false;
-        //     self.institution = school;
-        // }, function (err: any) {
-        //     console.log(err);
-        // })
+
     }
 
     OnChanges() {

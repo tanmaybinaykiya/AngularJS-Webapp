@@ -44,14 +44,14 @@
             <thead>
                 <tr>
                     <th class="table-heading mdl-data-table__cell--non-numeric">Type</th>
-                    <th class="table-heading mdl-data-table__cell--non-numeric">Account Number</th>
+                    <th class="table-heading mdl-data-table__cell--non-numeric">Card Number</th>
                     <th class="table-heading mdl-data-table__cell--non-numeric">Primary</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let row of billingInfo; let idx = index">
+                <tr *ngFor="let row of paymentMethods; let idx = index">
                     <td class="mdl-data-table__cell--non-numeric">
-                        <span>{{row.type}}</span>
+                        <span>Credit Card</span>
                         <!-- TODO Fails when routed-->
                         <button md-icon-button id="billingInfo-submenu-button-{{idx}}" class="billingInfo-submenu-button">
                             <md-icon>arrow_drop_down</md-icon>
@@ -64,10 +64,10 @@
                                 (click)="toggleModal('ParentProfileModal_DeletePaymentType')">Delete Payment Type</button>
                         </ul>
                     </td>
-                    <td class="mdl-data-table__cell--non-numeric">{{row.accountNumber}}</td>
-                    <td class="mdl-data-table__cell--non-numeric negative-color" *ngIf="row.status.isExpired">Expired!</td>
-                    <td class="mdl-data-table__cell--non-numeric" *ngIf="!row.status.isExpired">
-                        <md-slide-toggle class="slide-toggle" color="primary" [checked]="row.status.isPrimary"></md-slide-toggle>
+                    <td class="mdl-data-table__cell--non-numeric">{{row.cardNumber}}</td>
+                    <!--<td class="mdl-data-table__cell--non-numeric negative-color" *ngIf="row.status.isExpired">Expired!</td>-->
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <md-slide-toggle class="slide-toggle" color="primary" [checked]="row.isDefault"></md-slide-toggle>
                     </td>
                 </tr>
             </tbody>

@@ -36,7 +36,7 @@ export class EnrollableStudent {
         medicalForm: string,
         tuitionForm: string
     };
-    public paymentMethod: PaymentMethod;
+    public paymentMethodId: string;
 
     constructor() {
         this.race = 'Asian';
@@ -45,7 +45,6 @@ export class EnrollableStudent {
             medicalForm: 'blah',
             tuitionForm: 'blah',
         };
-        this.paymentMethod = new PaymentMethod();
     }
 }
 
@@ -68,11 +67,4 @@ export class EnrolledStudent {
         medicalForm: string,
         tuitionForm: string
     };
-}
-
-class PaymentMethod {
-    cardNumber: string;
-    cvv: string;
-    pincode: string;
-    expiration: string;
 }

@@ -1,4 +1,6 @@
 export * from './serviceHelper';
+
+export * from './billing.service';
 export * from './class.service';
 export * from './institution.service';
 export * from './login.service';

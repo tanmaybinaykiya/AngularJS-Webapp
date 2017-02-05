@@ -4,8 +4,8 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { CookieService } from 'angular2-cookie/core';
 
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
-import { StudentService, getUserEmailFromTokenObject } from '../../../service';
-import { EnrollableStudent } from '../../../models/student';
+import { StudentService, BillingService, getUserEmailFromTokenObject } from '../../../service';
+import { EnrollableStudent, PaymentMethodResponse } from '../../../models';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -16,8 +16,8 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 
 export class EnrollStudentComponent implements OnInit {
+
     @Input() isModalOpen: Boolean;
-    private modalControlService: ModalControlService;
     public uploader: FileUploader = new FileUploader({ url: URL });
     public hasBaseDropZoneOver: boolean = false;
     public hasAnotherDropZoneOver: boolean = false;
@@ -25,15 +25,22 @@ export class EnrollStudentComponent implements OnInit {
         'Native Hawaian or Other Pacific Islander', 'American'];
     public genders: String[] = ['Male', 'Female'];
     private enrollableStudent: EnrollableStudent = new EnrollableStudent();
+    public defaultPaymentMethod: PaymentMethodResponse;
 
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService, private studentService: StudentService,
-        private cookieService: CookieService
-    ) {
-        this.modalControlService = modalControlService;
+    constructor(mdIconRegistry: MdIconRegistry, private modalControlService: ModalControlService, private studentService: StudentService,
+        private cookieService: CookieService, private billingService: BillingService) {
     }
 
     ngOnInit() {
         console.log('EnrollStudentComponent');
+        let parentEmail: string = getUserEmailFromTokenObject(this.cookieService);
+        let self = this;
+        this.billingService.getDefaultPaymentMethod(parentEmail)
+            .subscribe((paymentMethods: PaymentMethodResponse[]) => {
+                self.defaultPaymentMethod = paymentMethods[0];
+            }, err => {
+                console.log('Error getting paymentMethods');
+            });
     }
 
     closeView() {
@@ -49,9 +56,12 @@ export class EnrollStudentComponent implements OnInit {
     }
 
     submit() {
+        let self = this;
         console.log('Submitted! ');
         this.enrollableStudent.parentEmail = getUserEmailFromTokenObject(this.cookieService);
-        this.studentService.enrollStudent(this.enrollableStudent)
+        this.enrollableStudent.paymentMethodId = this.defaultPaymentMethod.methodId;
+        console.log('Submitted! :', self.enrollableStudent);
+        this.studentService.enrollStudent(self.enrollableStudent)
             .subscribe((value) => {
                 console.log('Success!');
                 this.modalControlService.disable();

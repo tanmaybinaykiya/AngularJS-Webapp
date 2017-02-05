@@ -23,7 +23,9 @@ export class StudentService {
 
     enrollStudent(enrollableStudent: EnrollableStudent): Observable<string> {
         let self = this;
+        console.log('enrollableStudent:', enrollableStudent);
         let body = JSON.stringify(enrollableStudent);
+        console.log('body:', body);
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': getAuthorizationHeader(self.cookieService)

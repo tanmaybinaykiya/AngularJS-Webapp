@@ -49,6 +49,7 @@ import {
     RecipientService,
     InstitutionService,
     LoginService,
+    BillingService,
     StudentService
 } from './service';
 import { QuestionControlService } from './lib/question-control.service';
@@ -201,16 +202,20 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
 
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+
         SuperAdminGuard, ParentGuard, AdminGuard,
-        NotificationService,
-        ParentService,
+
         LoginService,
-        StudentService,
         SchoolService,
+        ParentService,
+        BillingService,
+        StudentService,
         RecipientService,
         InstitutionService,
         ConfirmationService,
+        NotificationService,
         QuestionControlService,
+
         CookieService
     ],
     bootstrap: [AppComponent]

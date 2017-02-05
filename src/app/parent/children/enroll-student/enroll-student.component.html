@@ -30,11 +30,18 @@
                         <md-tab>
                             <template md-tab-label>Payment Information</template>
                             <template md-tab-content>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.cardNumber" placeholder="Credit Card Number"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.cvv" placeholder="CVV Number"></md-input>
                                 <br>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.expiration" placeholder="Expiration (MM/DD)"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.paymentMethod.postalCode" placeholder="Postal Code"></md-input>
+                                <div *ngIf="defaultPaymentMethod">
+                                    <md-input class="input-field" disabled value="Credit Card" placeholder="Type"></md-input>
+                                    <md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.cardNumber" placeholder="Credit Card Number"></md-input>
+
+                                    <!--<md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.cvv" placeholder="CVV Number"></md-input>-->
+                                    
+                                    <!--<md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.expiration" placeholder="Expiration (MM/DD)"></md-input>
+                                    <md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.postalCode" placeholder="Postal Code"></md-input>-->
+                                    <p>To change the payment method, make the appropriate payment method primary in the Payment Method Management section</p>
+                                </div>
+                                <p *ngIf="!defaultPaymentMethod"> No Default Payment Method Detected! Add a payment method or reload </p>
                             </template>
                         </md-tab>
                         <md-tab>

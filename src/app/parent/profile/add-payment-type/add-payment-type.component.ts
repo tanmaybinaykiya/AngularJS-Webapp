@@ -1,6 +1,10 @@
 import { MdIconRegistry } from '@angular2-material/icon';
+import { CookieService } from 'angular2-cookie/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { ModalControlService } from '../../../lib/modal/modal-control.service';
+import { BillingService } from '../../../service';
+import { PaymentMethod, PaymentMethodResponse } from '../../../models';
 
 @Component({
     selector: 'add-payment-type',
@@ -12,10 +16,11 @@ import { ModalControlService } from '../../../lib/modal/modal-control.service';
 
 export class AddPaymentTypeComponent implements OnInit {
 
-    modalControlService: ModalControlService;
+    paymentMethod: PaymentMethod = new PaymentMethod();
+    parentEmail: string;
 
-    constructor(mdIconRegistry: MdIconRegistry, modalControlService: ModalControlService) {
-        this.modalControlService = modalControlService;
+    constructor(private mdIconRegistry: MdIconRegistry, private modalControlService: ModalControlService, 
+        private billingService: BillingService, public cookieService: CookieService) {
     }
 
     closeView() {
@@ -24,7 +29,18 @@ export class AddPaymentTypeComponent implements OnInit {
 
     ngOnInit() {
         console.log('AddPaymentTypeComponent');
+        let loggedInUser: any = this.cookieService.getObject('loggedInUser');
+        this.parentEmail = loggedInUser.email;
     }
 
+    submit(){
+        let self = this;
+        this.billingService.addPaymentMethod(this.parentEmail, this.paymentMethod)
+            .subscribe((resp: PaymentMethodResponse) => {
+                self.closeView();
+            }, err => {
+                console.error('Error adding payment method');
+            });
+    }
 
 }
