@@ -1,4 +1,5 @@
 export * from './billingUser';
+export * from './braintreeTokenResponse';
 export * from './class';
 export * from './grade';
 export * from './institution';

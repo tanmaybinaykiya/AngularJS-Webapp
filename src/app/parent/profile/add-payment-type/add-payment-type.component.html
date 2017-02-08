@@ -21,7 +21,8 @@
                                     <md-input [(ngModel)]="paymentMethod.expiration" class="input-field" placeholder="Expiration (MM/YY)"></md-input>
                                     <md-input [(ngModel)]="paymentMethod.cvv" class="input-field right-column" placeholder="CVV"></md-input>
                                 </div>
-                                
+                                <span class="error-message" *ngIf="errorMessage">{{errorMessage}}</span>
+                                <span class="success-message" *ngIf="successMessage">{{successMessage}}</span>
                             </template>
                         </md-tab>
                         <md-tab>
@@ -42,7 +43,7 @@
                 </md-card-content>
                 <md-card-actions align="end">
                     <button md-raised-button color="secondary" id="submit-button" (click)="closeView()">Cancel</button>
-                    <button md-raised-button color="primary" id="submit-button" (click)="submit()">Submit</button>
+                    <button md-raised-button [(disabled)]="isBusy" color="primary" id="submit-button" (click)="submit()">Submit</button>
                 </md-card-actions>
             </md-card>
         </div>

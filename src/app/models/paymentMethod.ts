@@ -6,14 +6,8 @@ export class PaymentMethod {
     constructor() { }
 }
 
-export class PaymentMethodRequest extends PaymentMethod {
-    constructor(paymentMethod: PaymentMethod, public parentEmail: string) {
-        super();
-        this.cardNumber = paymentMethod.cardNumber;
-        this.cvv = paymentMethod.cvv;
-        this.postalCode = paymentMethod.postalCode;
-        this.expiration = paymentMethod.expiration;
-    }
+export class PaymentMethodRequest {
+    constructor(public parentEmail: string, public nonce: string, public firstName: string, public lastName: string) {}
 }
 
 export class PaymentMethodResponse {
