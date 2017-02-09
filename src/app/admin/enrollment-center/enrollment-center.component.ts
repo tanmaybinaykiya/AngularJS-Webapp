@@ -24,7 +24,7 @@ export class EnrollmentCenterComponent implements OnInit {
             .subscribe(function (students: EnrolledStudent[]) {
                 console.log('students:', students);
                 self.enrollmentList = students.map(student =>
-                    (new EnrollmentListView(student.firstName + ' ' + student.lastName, 'Pending Review')));
+                    (new EnrollmentListView(student.firstName + ' ' + student.lastName, student.enrollmentInfo.state)));
                 // self.isLoading = false;
                 // self.institution = school;
             },
@@ -33,12 +33,12 @@ export class EnrollmentCenterComponent implements OnInit {
             });
 
 
-        [
-            new EnrollmentListView('tanmay1', 'Class Full'),
-            new EnrollmentListView('tanmay2', 'Pending Review'),
-            new EnrollmentListView('tanmay3', 'In Progress'),
-            new EnrollmentListView('tanmay4', 'Class Full')
-        ];
+        // [
+        //     new EnrollmentListView('tanmay1', 'PENDING_REVIEW'),
+        //     new EnrollmentListView('tanmay2', 'PENDING_REVIEW'),
+        //     new EnrollmentListView('tanmay3', 'PENDING_REVIEW'),
+        //     new EnrollmentListView('tanmay4', 'PENDING_REVIEW')
+        // ];
 
         this.assignableClasses = [
             new AssignableClassesView('1A', '1A (Full)'),
@@ -46,9 +46,9 @@ export class EnrollmentCenterComponent implements OnInit {
         ];
 
         this.statuses = [
-            new EnrollmentStateView('Class Full'),
-            new EnrollmentStateView('Pending Review'),
-            new EnrollmentStateView('In Progress')];
+            new EnrollmentStateView('PENDING_REVIEW'),
+            new EnrollmentStateView('PENDING_REVIEW'),
+            new EnrollmentStateView('PENDING_REVIEW')];
     }
 
     delete() {
@@ -79,7 +79,7 @@ class AssignableClassesView {
     }
 }
 
-type EnrollmentState = 'Class Full' | 'Pending Review' | 'In Progress';
+type EnrollmentState = 'PENDING_REVIEW' | 'WAITLIST' | 'IN_PROCESS' | 'REGISTERED';
 
 class EnrollmentStateView {
     private value: string;

@@ -50,6 +50,8 @@ export class EnrollableStudent {
 
 export class EnrolledStudent {
 
+    public studentId: string;
+    public parentEmail: string;
     public institutionShortCode: string;
     public schoolCode: string;
     public firstName: string;
@@ -60,11 +62,19 @@ export class EnrolledStudent {
     public cityOfBirth: string;
     public stateOfBirth: string;
     public countryOfBirth: string;
+    public zip: number;
     public race: string;
     public gender: string;
     public extraInfo: string;
     public documents: {
         medicalForm: string,
         tuitionForm: string
+    }
+    public enrollmentInfo: {
+        state: EnrollmentState,
+        pastClassesEnrolled: string[]
+        classEnrolled: string,
     };
 }
+
+type EnrollmentState = 'PENDING_REVIEW' | 'WAITLIST' | 'IN_PROCESS' | 'REGISTERED';

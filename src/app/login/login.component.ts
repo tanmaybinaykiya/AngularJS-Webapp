@@ -50,16 +50,15 @@ export class LoginComponent {
         this.loginService.login(this.email, this.password)
             .subscribe((currentUser: User) => {
                 console.log('currentUser:', currentUser);
+                self.cookieService.putObject('loggedInUser', currentUser);
                 switch (currentUser.role) {
                     case 'parent':
-                        self.cookieService.putObject('loggedInUser', currentUser);
                         // self.loginService.loggedInUser = currentUser;
                         // self.loginService.loggedIn = true;
                         self.isRequested = false;
                         self.router.navigate(['/parent']);
                         break;
                     case 'SECS':
-                        self.cookieService.putObject('loggedInUser', currentUser);
                         self.isRequested = false;
                         self.router.navigate(['/superadmin']);
                         break;
@@ -77,7 +76,7 @@ export class LoginComponent {
                             });
                         break;
                     default:
-                        self.setErrorMessage('Not a valid user' + ' ' + currentUser + ' ' + currentUser.role);
+                        self.setErrorMessage('Not a valid user ' + currentUser + ' ' + currentUser.role);
                         break;
                 }
             }, function (error) {
