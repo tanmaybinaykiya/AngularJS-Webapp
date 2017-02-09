@@ -22,7 +22,7 @@ export class AddPaymentTypeComponent implements OnInit, OnDestroy {
     paypalClientInstance: any;
     errorMessage: string;
     successMessage: string;
-    isBusy: boolean= false;
+    isBusy: boolean = false;
 
     constructor(private mdIconRegistry: MdIconRegistry, private modalControlService: ModalControlService,
         private billingService: BillingService, public cookieService: CookieService) {
@@ -122,6 +122,20 @@ export class AddPaymentTypeComponent implements OnInit, OnDestroy {
                         });
                     }
                 });
+            }, err => {
+                switch (err) {
+                    case 'NoBraintreeCredentialsFound':
+                        self.errorMessage = 'No braintree credentials configured. Please contact the school administrator';
+                        break;
+                    default:
+                        console.log('Error Occured: ', err);
+                        self.isBusy = false;
+                        self.errorMessage = 'Internal Server Error!';
+                        setTimeout(() => {
+                            delete self.errorMessage;
+                        }, 3000);
+                        break;
+                }
             });
     }
 

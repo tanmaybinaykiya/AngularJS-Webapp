@@ -35,11 +35,10 @@ export function getUserEmailFromTokenObject(cookieService: CookieService): strin
 export function handleError(error: any) {
     this.loggedIn = false;
     try {
-        console.error('LALALA:', error.statusText); // log to console instead
-        return _throw._throw(error.statusText);
+        console.error('Error occured:', JSON.parse(error._body).code); // log to console instead
+        return _throw._throw(JSON.parse(error._body).code);
     } catch (err) {
-        console.error('LALALA1:', 'Actual error from server: ', error);
-        console.error('LALALA2:', 'Error while parsing error: ', err);
+        console.error('Actual error from server: ', error);
         return _throw._throw('Unknown service error');
     }
 }

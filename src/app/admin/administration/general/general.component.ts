@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BraintreeCredentials } from '../../../models';
+import { BillingService } from '../../../service';
 
 @Component({
     selector: 'general',
@@ -8,12 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralComponent implements OnInit {
 
-    constructor() {
+    credentials: BraintreeCredentials = new BraintreeCredentials();
+    isBusy: boolean = false;
+    constructor(private billingService: BillingService) {
         // Do stuff
     }
 
     ngOnInit() {
         console.log('Hello GeneralComponent');
+    }
+
+    submit() {
+        this.isBusy = true;
+        let self = this;
+        this.billingService.updateBraintreeCredentials(self.credentials)
+            .subscribe(() => {
+                console.log('Successfully updated credentials');
+            }, err => {
+                console.error('Error occurred: ', err);
+            });
+
     }
 
 }

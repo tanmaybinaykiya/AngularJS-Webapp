@@ -3,27 +3,29 @@
         <div id="modal">
             <md-card>
                 <md-card-title>Enroll Student</md-card-title>
-                <p>{{diagnostic}}</p>
+
                 <md-card-content>
                     <md-tab-group>
                         <md-tab>
                             <template md-tab-label>Student Information</template>
                             <template md-tab-content>
-
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.firstName" placeholder="First Name"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.middleName" placeholder="Middle Name"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.lastName" placeholder="Last Name"></md-input>
-                                <md-input class="input-field" placeholder="Prefered Nickname"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.dateOfBirth" placeholder="Date of Birth"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.cityOfBirth" placeholder="City of Birth"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.stateOfBirth" placeholder="State of Birth"></md-input>
-                                <md-input class="input-field" [(ngModel)]="enrollableStudent.countryOfBirth" placeholder="Country of Birth"></md-input>
-                                <custom-dropdown (selectedOptionEvent)=setRace($event) options={{races}} placeholder="Select Race"></custom-dropdown>
-                                <custom-dropdown (selectedOptionEvent)=setGender($event) options={{genders}} placeholder="Select Gender"></custom-dropdown>
-                                <div class="some-class input-field mdl-textfield mdl-js-textfield">
-                                    <label>Additional Information</label>
-                                    <textarea placeholder="Enter any additional information" [(ngModel)]="enrollableStudent.extraInfo" class="mdl-textfield__input"
-                                        type="text" rows="3" id="sample5"></textarea>
+                                <p *ngIf="!defaultPaymentMethod">No Payment Method Detected, please add a payment method to continue enrollment.</p>
+                                <div *ngIf="defaultPaymentMethod">
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.firstName" placeholder="First Name"></md-input>
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.middleName" placeholder="Middle Name"></md-input>
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.lastName" placeholder="Last Name"></md-input>
+                                    <md-input class="input-field" placeholder="Prefered Nickname"></md-input>
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.dateOfBirth" placeholder="Date of Birth"></md-input>
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.cityOfBirth" placeholder="City of Birth"></md-input>
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.stateOfBirth" placeholder="State of Birth"></md-input>
+                                    <md-input class="input-field" [(ngModel)]="enrollableStudent.countryOfBirth" placeholder="Country of Birth"></md-input>
+                                    <custom-dropdown (selectedOptionEvent)=setRace($event) options={{races}} placeholder="Select Race"></custom-dropdown>
+                                    <custom-dropdown (selectedOptionEvent)=setGender($event) options={{genders}} placeholder="Select Gender"></custom-dropdown>
+                                    <div class="some-class input-field mdl-textfield mdl-js-textfield">
+                                        <label>Additional Information</label>
+                                        <textarea placeholder="Enter any additional information" [(ngModel)]="enrollableStudent.extraInfo" class="mdl-textfield__input"
+                                            type="text" rows="3" id="sample5"></textarea>
+                                    </div>
                                 </div>
                             </template>
                         </md-tab>
@@ -36,10 +38,11 @@
                                     <md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.cardNumber" placeholder="Credit Card Number"></md-input>
 
                                     <!--<md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.cvv" placeholder="CVV Number"></md-input>-->
-                                    
+
                                     <!--<md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.expiration" placeholder="Expiration (MM/DD)"></md-input>
                                     <md-input class="input-field" disabled [(ngModel)]="defaultPaymentMethod.postalCode" placeholder="Postal Code"></md-input>-->
-                                    <p>To change the payment method, make the appropriate payment method primary in the Payment Method Management section</p>
+                                    <p>To change the payment method, make the appropriate payment method primary in the Payment
+                                        Method Management section</p>
                                 </div>
                                 <p *ngIf="!defaultPaymentMethod"> No Default Payment Method Detected! Add a payment method or reload </p>
                             </template>

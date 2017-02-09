@@ -1,3 +1,35 @@
 <div>
-    General Component
+    <div class="card card-w-title ui-g-4">
+        <h1>Paypal Credentials Administration</h1>
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <form (ngSubmit)="submit()">
+                        <div class="ui-g-8">
+                            <span class="md-inputfield">
+                                <input type="text" pInputText autocomplete="off" name="email" [(ngModel)]="credentials.merchantId" >
+                                <label>Merchant Id</label>
+                            </span>
+                        </div>
+                        <div class="ui-g-8">
+                            <span class="md-inputfield">
+                                <input type="text" pInputText autocomplete="off" name="email" [(ngModel)]="credentials.publicKey" >
+                                <label>Public Key</label>
+                            </span>
+                        </div>
+                        <div class="ui-g-8">
+                            <span class="md-inputfield">
+                                <input type="text" pInputText autocomplete="off" name="email" [(ngModel)]="credentials.privateKey" >
+                                <label>Private Key</label>
+                            </span>
+                        </div>
+                        <div class="ui-g-8">
+                            <br>
+                            <button type="submit" pButton label="Update"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 import { format } from 'util';
-import { PaymentMethodRequest, PaymentMethodResponse, PaymentMethod, BraintreeTokenResponse } from '../models';
+import { PaymentMethodRequest, PaymentMethodResponse, BraintreeTokenResponse, BraintreeCredentials } from '../models';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -17,6 +17,7 @@ export class BillingService {
     private readonly addPaymentMethodUrl: string = '%s/billing/institution/%s/school/%s/paymentMethod';
     private readonly getPaymentMethodUrl: string = '%s/billing/paymentMethod';
     private readonly getBraintreeTokenUrl: string = '%s/billing/institution/%s/school/%s/braintree/token';
+    private readonly updateBraintreeCredentialsUrl: string = '%s/billing/institution/%s/school/%s/braintree/credentials';
 
     constructor(private http: Http, private cookieService: CookieService) { }
 
@@ -57,7 +58,6 @@ export class BillingService {
         let requestUrl = format(this.addPaymentMethodUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService));
         let requestBody = paymentMethodRequest;
-        console.log('url: ', requestUrl, 'options: ', options);
         return this.http.post(requestUrl, requestBody, options)
             .map((res: Response): PaymentMethodResponse => (res.json()))
             .catch(handleError);
@@ -73,10 +73,23 @@ export class BillingService {
         let options = new RequestOptions({ headers: headers });
         let requestUrl = format(self.getBraintreeTokenUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
             getSchoolCodeFromTokenObject(self.cookieService));
-        console.log('url: ', requestUrl, 'options: ', options);
         return this.http.get(requestUrl, options)
             .map((res: Response): BraintreeTokenResponse => (res.json()))
             .catch(handleError);
     }
 
+    updateBraintreeCredentials(credentials: BraintreeCredentials) {
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let requestUrl = format(this.updateBraintreeCredentialsUrl, getApiHost(),
+            getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
+        let requestBody = credentials;
+        return this.http.post(requestUrl, requestBody, options)
+            .map((res: Response) => (res.json()))
+            .catch(handleError);
+    }
 }
