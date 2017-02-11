@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { format } from 'util';
 import { CookieService } from 'angular2-cookie/core';
 
 import { Grade, Class, Teacher, Institution, Student, School } from '../models';
 import { Subject } from 'rxjs/Subject';
-import { getApiHost, handleError, getAuthorizationHeader } from './serviceHelper';
+import { getApiHost, handleError, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject } from './serviceHelper';
 import { LoginService } from './login.service';
 
 @Injectable()
@@ -17,6 +17,7 @@ export class SchoolService {
 
     private getSchoolsByInstitutionCodeUrl: string = '%s/school/institution/%s/school';
     private getSchoolsByInstitutionAndSchoolCodeUrl: string = '%s/school/institution/%s/school/%s';
+    private getClassesBySchoolUrl: string = '%s/school/institution/%s/school/%s/class';
 
     constructor(private http: Http, private loginService: LoginService, private cookieService: CookieService, ) {
         console.log('hello SchoolService', loginService.loggedInUser);
@@ -34,17 +35,6 @@ export class SchoolService {
             new Institution('ISS3', '136', 'InstitutionName32', 'admin@sslice.com', 'blah', 'blah', 'blah', 12344, 'INDIA'),
             new Institution('ISS4', '1246', 'InstitutionName12', 'admin4@sslice.com', 'blah', 'blah', 'blah', 12344, 'INDIA'),
             new Institution('ISS3', '33456', 'InstitutionName12', 'admin8@sslice.com', 'blah', 'blah', 'blah', 12344, 'INDIA')
-            ]);
-        }, 1500);
-    }
-
-    dummyGetAllClasses(cb: (result: Class[]) => any) {
-        setTimeout(function () {
-            cb([
-                new Class('Class17', 'CLS17', 1236, 3500),
-                new Class('Class71', 'CLS71', 1236, 1500),
-                new Class('Class12', 'CLS12', 1236, 2500),
-                new Class('Class21', 'CLS21', 1236, 500),
             ]);
         }, 1500);
     }
@@ -127,10 +117,24 @@ export class SchoolService {
         return getJSONAsObservable();
     }
 
-    public getAllClasses(): Observable<Class[]> {
-        console.log('getClasses called');
-        let getJSONAsObservable: () => Observable<Class[]> = Observable.bindCallback(this.dummyGetAllClasses);
-        return getJSONAsObservable();
+    public getClassesBySchool(): Observable<Class[]> {
+        console.log('getAllClassesBySchool called');
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getClassesBySchoolUrl, getApiHost(),
+            getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
+        console.log('url: ', url, 'options: ', options);
+        return this.http.get(url, options)
+            .map((res: Response): School[] => {
+                let schools: School[];
+                schools = res.json();
+                return schools;
+            })
+            .catch(handleError);
     }
 
     public getAllGrades(): Observable<Grade[]> {

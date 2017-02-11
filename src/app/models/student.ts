@@ -77,4 +77,8 @@ export class EnrolledStudent {
     };
 }
 
-type EnrollmentState = 'PENDING_REVIEW' | 'WAITLIST' | 'IN_PROCESS' | 'REGISTERED';
+export type EnrollmentState = 'PENDING_REVIEW' | 'WAITLIST' | 'IN_PROCESS' | 'REGISTERED';
+
+export class UpdateStudentStateRequest{
+    constructor(public state: EnrollmentState, public studentIds: string[]){};
+}

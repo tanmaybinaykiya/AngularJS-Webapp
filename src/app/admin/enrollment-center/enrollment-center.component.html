@@ -1,103 +1,37 @@
-<!--div id="enrolment-centre-table" class="table-container">
-    <span class="table-title">Enrollment Centre</span>
-    <md-tab-group>
-        <md-tab>
-            <template md-tab-label>Wait List</template>
-            <template md-tab-content>
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp student-table">
-                    <thead>
-                        <tr>
-                            <th class="table-heading mdl-data-table__cell--non-numeric">#</th>
-                            <th class="table-heading mdl-data-table__cell--non-numeric">Name</th>
-                            <th class="table-heading mdl-data-table__cell--non-numeric">Reason</th>
-                            <th class="table-heading mdl-data-table__cell--non-numeric">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let student of enrolledStudents; let idx = index;">
-                            <td class="mdl-data-table__cell--non-numeric">{{idx+1}}</td>
-                            <td class="mdl-data-table__cell--non-numeric">
-                                <span class="student-name"> {{student.name}} </span>
-                                <button id="student-submenu-button-{{idx}}" class="student-submenu-button mdl-button mdl-js-button mdl-button--icon">
-                                    <md-icon>home</md-icon>
-                                </button>
-                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" attr.for="student-submenu-button-{{idx}}">
-                                    <button class="submenu mdl-menu__item" (click)="childProfileManager.toggleView()">Manage</button>
-                                    <button class="submenu mdl-menu__item mdl-menu__item--full-bleed-divider" (click)="tuitionFeesManager.toggleView()">Pay Tuition Fees</button>
-                                    <button class="submenu mdl-menu__item" (click)="unenrollManager.toggleView()">Un-enroll</button>
-                                </ul>
-                            </td>
-                            <td class="mdl-data-table__cell--non-numeric">{{student.class}}</td>
-                            <td class="mdl-data-table__cell--non-numeric">{{student.teacher}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </template>
-        </md-tab>
-        <md-tab>
-            <template md-tab-label>Two</template>
-            <template md-tab-content>
-                <h1>Some more tab content</h1>
-                <p>...</p>
-            </template>
-        </md-tab>
-    </md-tab-group>
-
-    <button class="action-buttons" md-raised-button color="primary" (click)="enrollStudentManager.toggleView()">Enroll Student</button>
-</div-->
-<!--<div>
-    <p-dialog header="Godfather I" [(visible)]="display" modal="modal" showEffect="fade">
-        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His
-            beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-            Through Michael's life the nature of the family business becomes clear. The business of the family is just like
-            the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever
-            anything stands against the good of the family.</p>
-        <footer>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" pButton icon="fa-close" (click)="display=false" label="No"></button>
-                <button type="button" pButton icon="fa-check" (click)="display=false" label="Yes"></button>
-            </div>
-        </footer>
-    </p-dialog>
-</div>-->
-
 <div class="ui-g">
     <div class="card card-w-title people-administration-table">
         <h1>Enrollment Centre</h1>
-        <p-dataTable [value]="enrollmentList" selectionMode="multiple" [(selection)]="selection" [paginator]="true" [rows]="10" [responsive]="true">
+        <div class="ui-g-12 ui-md-2">
+            <button pButton class="secondary flat" type="button" (click)="setList('PENDING_REVIEW')" label="Pending Review ({{pendingReviewList.length}})"></button>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+            <button pButton class="secondary flat" type="button" (click)="setList('WAITLIST')" label="Wait List ({{waitList.length}})"></button>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+            <button pButton class="secondary flat" type="button" (click)="setList('IN_PROCESS')" label="In Process ({{inProcessList.length}})" ></button>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+            <button pButton class="secondary flat" type="button" (click)="setList('UN_ENROLLED')" label="Un Enrolled ({{unEnrolledList.length}})" ></button>
+        </div>
+        <p-dataTable [value]="viewEnrollmentList" selectionMode="multiple" [(selection)]="selection" [paginator]="true" [rows]="10" [responsive]="true">
             <p-column field="name" header="Name" [sortable]="true"></p-column>
-            <p-column field="reason" header="Reason" [sortable]="true"></p-column>
+            <p-column field="age" header="Age" [sortable]="true"></p-column>
         </p-dataTable>
 
         <div class="ui-g-6">
-            <span class="ui-g-6">Assign To Class:</span>
-            <p-dropdown class="ui-g-6" [options]="assignableClasses" [(ngModel)]="selectedClass" [autoWidth]="true"></p-dropdown>
+            <span class="ui-g-4">Assign To Class:</span>
+            <p-dropdown class="ui-g-4" [options]="assignableClasses" [(ngModel)]="selectedClass" autoWidth></p-dropdown>
+            <button class="ui-g-3" pButton type="button" [disabled]="isLoading || viewEnrollmentList.length<1"  (click)="assignClass()" label="Submit" icon="ui-icon-edit"></button>
         </div>
 
         <div class="ui-g-6">
-            <span class="ui-g-6">Update Status:</span>
-            <p-dropdown class="ui-g-6" [options]="statuses" [(ngModel)]="selectedStatus" [autoWidth]="true"></p-dropdown>
+            <span class="ui-g-4">Update Status:</span>
+            <p-dropdown class="ui-g-4" [options]="statuses" [(ngModel)]="selectedStatus" autoWidth></p-dropdown>
+            <button class="ui-g-3" pButton type="button" [disabled]="isLoading || viewEnrollmentList.length<1" (click)="updateStatus()" label="Submit" icon="ui-icon-edit"></button>
         </div>
-
-        <div class="ui-g-12 ui-md-2">
-            <button pButton type="button" (click)="commitModify()" label="Modify" icon="ui-icon-edit"></button>
-        </div>
-        <div class="ui-g-12 ui-md-2">
+        <div class="ui-g-2">
             <button pButton type="button" (click)="delete()" icon="ui-icon-delete" label="Delete" icon="ui-icon-edit"></button>
         </div>
-
-        <!--<div class="ui-g ui-fluid">
-            <div class="ui-g-12 ui-md-8">
-            </div>
-            <div class="ui-g-12 ui-md-2">
-                <button pButton type="button" (click)="modify()" [disabled]="selection.length===0" label="Modify" icon="ui-icon-edit"></button>
-            </div>
-            <div class="ui-g-12 ui-md-2">
-                <p-confirmDialog header="Confirmation" icon="fa ui-icon-warning" width="425"></p-confirmDialog>
-                <button pButton type="text" (click)="delete()" [disabled]="selection.length===0" class="pink-btn" label="Delete" icon="ui-icon-delete"></button>
-            </div>
-            {{diagnostic}}
-        </div>-->
 
     </div>
 </div>

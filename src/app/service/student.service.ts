@@ -5,7 +5,7 @@ import { CookieService } from 'angular2-cookie/core';
 
 import { Observable } from 'rxjs/Observable';
 
-import { EnrollableStudent, EnrolledStudent } from '../models';
+import { EnrollableStudent, EnrolledStudent, EnrollmentState, UpdateStudentStateRequest } from '../models';
 import {
     getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject,
     getUserEmailFromTokenObject, handleError
@@ -15,6 +15,7 @@ import {
 export class StudentService {
 
     private enrollStudentUrl = '%s/student/institution/%s/school/%s/';
+    private updateStudentStateUrl = '%s/student/institution/%s/school/%s/student/status';
     private getEnrolledStudentsUrl = '%s/student/institution/%s/school/%s/';
 
     constructor(private http: Http, private cookieService: CookieService) {
@@ -66,5 +67,23 @@ export class StudentService {
             .map((res: Response): EnrolledStudent => res.json())
             .catch(handleError);
     }
+
+    updateStudentStatus(studentIds: string[], state: EnrollmentState){
+        let self = this;
+        console.log('updateStudentState:', studentIds, state);
+        let body = new UpdateStudentStateRequest(state, studentIds);
+        console.log('body:', body);
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.updateStudentStateUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.post(url, body, options)
+            // .map((res: Response): string => res.json().studentId)
+            .catch(handleError);
+    }
+
 
 }

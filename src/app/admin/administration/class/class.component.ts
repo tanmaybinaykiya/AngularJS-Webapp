@@ -34,13 +34,26 @@ export class ClassComponent implements OnInit {
     teachers: TeacherView[] = [];
     selectedTeachers: Teacher[] = [];
 
-    constructor(fb: FormBuilder, schoolService: SchoolService) {
+    constructor(private fb: FormBuilder, private schoolService: SchoolService) {
         // Do stuff
-        schoolService.getAllClasses().subscribe((classes: Class[]) => {
-            this.classes = classes;
-        });
+        this.addModifyClassForm = this.fb.group({});
+    }
 
-        schoolService.getAllGrades().subscribe((grades: Grade[]) => {
+    addClass() {
+        console.log('Add Class');
+        this.addClassDialogDisplay = false;
+    }
+
+    ngOnInit() {
+        console.log('Hello ClassComponent');
+        this.schoolService.getClassesBySchool()
+            .subscribe((classes: Class[]) => {
+                this.classes = classes;
+            }, err => {
+                console.error('Error occurred getting classes: ', err)
+            });
+
+        this.schoolService.getAllGrades().subscribe((grades: Grade[]) => {
             this.grades = grades.map(gradze => {
                 console.log('in map grades:', grades, gradze);
                 return {
@@ -51,7 +64,7 @@ export class ClassComponent implements OnInit {
             console.log('grades:', this.grades);
         });
 
-        schoolService.getAllTeachers().subscribe((teachers: Teacher[]) => {
+        this.schoolService.getAllTeachers().subscribe((teachers: Teacher[]) => {
             this.teachers = teachers.map(teacherz => {
                 console.log('in map grades:', teachers, teacherz);
                 return {
@@ -61,17 +74,6 @@ export class ClassComponent implements OnInit {
             });
             console.log('teachers:', this.teachers);
         });
-        this.addModifyClassForm = fb.group({});
-
-    }
-
-    addClass() {
-        console.log('Add Class');
-        this.addClassDialogDisplay = false;
-    }
-
-    ngOnInit() {
-        console.log('Hello ClassComponent');
     }
 
     get diagnostic() {
