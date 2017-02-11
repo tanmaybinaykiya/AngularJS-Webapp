@@ -79,6 +79,10 @@ export class EnrolledStudent {
 
 export type EnrollmentState = 'PENDING_REVIEW' | 'WAITLIST' | 'IN_PROCESS' | 'REGISTERED';
 
-export class UpdateStudentStateRequest{
-    constructor(public state: EnrollmentState, public studentIds: string[]){};
+export class UpdateStudentStateRequest {
+    constructor(public state: EnrollmentState, public studentIds: string[]) { };
+}
+
+export class UpdateStudentClassRequest {
+    constructor(public className: string, public studentIds: string[]) { };
 }

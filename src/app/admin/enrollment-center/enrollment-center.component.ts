@@ -20,7 +20,7 @@ export class EnrollmentCenterComponent implements OnInit {
 
     private assignableClasses: AssignableClassesView[];
     private statuses: EnrollmentStateView[];
-    private selectedClass: AssignableClassesView;
+    private selectedClass: string;
     private selectedStatus: EnrollmentState;
     private selection: EnrollmentListView[];
     private isLoading: boolean = false;
@@ -55,7 +55,19 @@ export class EnrollmentCenterComponent implements OnInit {
     }
 
     assignClass() {
-        console.log('Modify: ', this.selection);
+        console.log('Modify: ', this.selection, this.selectedStatus);
+        let self = this;
+        self.isLoading = true;
+        this.studentService.assignStudentClass(this.selection.map(el => el.studentId), this.selectedClass)
+            .subscribe(() => {
+                self.isLoading = false;
+                delete self.selection;
+                console.log('Successfully assigned student class');
+                self.refreshStudentLists();
+            }, err => {
+                self.isLoading = false;
+                console.log('Error updating student status');
+            });
     }
 
     refreshStudentLists() {
@@ -91,17 +103,12 @@ export class EnrollmentCenterComponent implements OnInit {
                     (new AssignableClassesView(clazz.name,
                         format('%s (%d/%d)', clazz.name, clazz.fullCapacity - clazz.currentUsage, clazz.fullCapacity))));
                 self.isLoading = false;
+                self.selectedClass = self.assignableClasses[0].value;
             }, err => {
                 self.isLoading = false;
                 console.error('Error getting classes');
             });
         this.refreshStudentLists();
-
-        this.assignableClasses = [
-            new AssignableClassesView('1A', '1A (Full)'),
-            new AssignableClassesView('2B', '1A (2/20)')
-        ];
-
     }
 
     setList(val) {
@@ -129,7 +136,7 @@ class EnrollmentListView {
 }
 
 class AssignableClassesView {
-    constructor(private value: string, private label: string) { }
+    constructor(public value: string, public label: string) { }
 }
 
 class EnrollmentStateView {

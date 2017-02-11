@@ -5,7 +5,7 @@ import { CookieService } from 'angular2-cookie/core';
 
 import { Observable } from 'rxjs/Observable';
 
-import { EnrollableStudent, EnrolledStudent, EnrollmentState, UpdateStudentStateRequest } from '../models';
+import { EnrollableStudent, EnrolledStudent, EnrollmentState, UpdateStudentStateRequest, UpdateStudentClassRequest } from '../models';
 import {
     getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject,
     getUserEmailFromTokenObject, handleError
@@ -16,6 +16,7 @@ export class StudentService {
 
     private enrollStudentUrl = '%s/student/institution/%s/school/%s/';
     private updateStudentStateUrl = '%s/student/institution/%s/school/%s/student/status';
+    private assignStudentClassUrl = '%s/student/institution/%s/school/%s/student/assign';
     private getEnrolledStudentsUrl = '%s/student/institution/%s/school/%s/';
 
     constructor(private http: Http, private cookieService: CookieService) {
@@ -68,7 +69,7 @@ export class StudentService {
             .catch(handleError);
     }
 
-    updateStudentStatus(studentIds: string[], state: EnrollmentState){
+    updateStudentStatus(studentIds: string[], state: EnrollmentState) {
         let self = this;
         console.log('updateStudentState:', studentIds, state);
         let body = new UpdateStudentStateRequest(state, studentIds);
@@ -85,5 +86,21 @@ export class StudentService {
             .catch(handleError);
     }
 
+    assignStudentClass(studentIds: string[], className: string) {
+        let self = this;
+        console.log('updateStudentState:', studentIds, className);
+        let body = new UpdateStudentClassRequest(className, studentIds);
+        console.log('body:', body);
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.assignStudentClassUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.post(url, body, options)
+            // .map((res: Response): string => res.json().studentId)
+            .catch(handleError);
+    }
 
 }
