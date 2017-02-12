@@ -4,7 +4,8 @@
         <p-dataTable [value]="classes" [paginator]="true" [rows]="10" [responsive]="true">
             <header>School Name: Class Administration</header>
             <p-column field="name" header="Class" [sortable]="true"></p-column>
-            <p-column field="capacity" header="Capacity" [sortable]="true"></p-column>
+            <p-column field="fullCapacity" header="Capacity" [sortable]="true"></p-column>
+            <p-column field="currentUsage" header="Current Usage" [sortable]="true"></p-column>
             <p-column header="Fee">
                 <template let-class="rowData" pTemplate type="body">
                     <span>${{class.fee}}</span>
@@ -22,13 +23,13 @@
 <p-dialog header="Add/Modify Class" [(visible)]="addClassDialogDisplay" [width]=600 modal="modal" showEffect="fade">
     <div>
         <span class="ui-g ui-g-12 heading">General Information</span>
-        <span class="md-inputfield ui-g-6" id="add-class-dialog-class-name">
-            <input type="text" pInputText autocomplete="off" name="className" [(ngModel)]="className" >
+        <span class="md-inputfield ui-g-5" id="add-class-dialog-class-name">
+            <input type="text" pInputText autocomplete="off" name="className" [(ngModel)]="selectedClass.name" >
             <label>Class Name</label>
         </span>
-        <div class="ui-g-6">
-            <span class="ui-g-6">Select Grade</span>
-            <p-dropdown class="ui-g-6" [options]="grades" [(ngModel)]="selectedGrade" [autoWidth]="false"></p-dropdown>
+        <div class="ui-g-7">
+            <span class="ui-g-5">Select Grade</span>
+            <p-dropdown class="ui-g-7" [options]="grades" [(ngModel)]="selectedGrade" autoWidth></p-dropdown>
         </div>
         <span class="ui-g ui-g-12  heading">Billing Information</span>
         <div *ngIf="!selectedGrade">
@@ -37,16 +38,19 @@
         <div *ngIf="selectedGrade">
             <span class="ui-g-12">Tuition Fee for {{selectedGrade.name}} is ${{selectedGrade.totalFee}}</span>
             <span class="ui-g-12 heading">Schedule Options</span>
-            <p-checkbox class="ui-g ui-g-12" name="cg" value="oneTimeFullPayment" label="Allow one time full payment of ${{selectedGrade.totalFee}}"
-                [(ngModel)]="checkboxValues"></p-checkbox>
-            <p-checkbox class="ui-g ui-g-12" name="cg" value="equalSplitPayment" label="Allow equal split of payments of ${{selectedGrade.totalFee}}"
-                [(ngModel)]="checkboxValues"></p-checkbox>
-            <div class="ui-g ui-g-12">
-                <span class="heading ui-g ui-g-12">Teacher</span>
-                <p-multiSelect class="ui-g ui-g-12" [options]="teachers" [(ngModel)]="selectedTeachers"></p-multiSelect>
+            <p-checkbox class="ui-g ui-g-12" name="cg" value="oneTimeFullPayment" label="Allow one time full payment of $100" [(ngModel)]="checkboxValues" disabled></p-checkbox>
+            <p-checkbox class="ui-g ui-g-12" name="cg" value="equalSplitPayment" label="Allow equal split of payments of a total of $100" [(ngModel)]="checkboxValues" disabled></p-checkbox>
+            <div class="ui-g ui-g-6">
+                <span class="heading ui-g ui-g-4">Teacher</span>
+                <p-multiSelect class="ui-g ui-g-8" [options]="teachers" [(ngModel)]="selectedClass.teachers" autowidth></p-multiSelect>
             </div>
+            <span class="md-inputfield ui-g-6">
+                <input type="text" pInputText autocomplete="off" name="classCapacity" [(ngModel)]="selectedClass.capacity" >
+                <label>Class Capacity</label>
+            </span>
         </div>
     </div>
+     {{statusMessage}}
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="submit" pButton class="primary" icon="fa-check" (click)="addClass()" label="Add Class"></button>

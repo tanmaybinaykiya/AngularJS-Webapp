@@ -1,4 +1,4 @@
 export class Teacher {
 
-    constructor(public teacherId: number, public name: string) { }
+    constructor(public teacherId: string, public name: string) { }
 }

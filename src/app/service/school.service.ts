@@ -4,9 +4,12 @@ import { Observable } from 'rxjs';
 import { format } from 'util';
 import { CookieService } from 'angular2-cookie/core';
 
-import { Grade, Class, Teacher, Institution, Student, School } from '../models';
+import { Grade, Class, Teacher, Institution, Student, School, AddClassRequest, AddGradeRequest } from '../models';
 import { Subject } from 'rxjs/Subject';
-import { getApiHost, handleError, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject } from './serviceHelper';
+import {
+    getApiHost, handleError, getAuthorizationHeader,
+    getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject
+} from './serviceHelper';
 import { LoginService } from './login.service';
 
 @Injectable()
@@ -18,6 +21,9 @@ export class SchoolService {
     private getSchoolsByInstitutionCodeUrl: string = '%s/school/institution/%s/school';
     private getSchoolsByInstitutionAndSchoolCodeUrl: string = '%s/school/institution/%s/school/%s';
     private getClassesBySchoolUrl: string = '%s/school/institution/%s/school/%s/class';
+    private getGradesBySchoolUrl: string = '%s/school/institution/%s/school/%s/grade';
+    private addClassUrl: string = '%s/school/institution/%s/school/%s/grade/%s/class';
+    private addGradeUrl: string = '%s/school/institution/%s/school/%s/grade';
 
     constructor(private http: Http, private loginService: LoginService, private cookieService: CookieService, ) {
         console.log('hello SchoolService', loginService.loggedInUser);
@@ -53,10 +59,10 @@ export class SchoolService {
     dummyGetAllTeachers(cb: (result: Teacher[]) => any) {
         setTimeout(function () {
             cb([
-                new Teacher(12, 'teacher61'),
-                new Teacher(12, 'teacher12'),
-                new Teacher(12, 'teacher31'),
-                new Teacher(12, 'teacher11'),
+                new Teacher('12', 'teacher61'),
+                new Teacher('13', 'teacher12'),
+                new Teacher('18', 'teacher31'),
+                new Teacher('22', 'teacher11'),
             ]);
         }, 1500);
     }
@@ -139,8 +145,23 @@ export class SchoolService {
 
     public getAllGrades(): Observable<Grade[]> {
         console.log('getClasses called');
-        let getJSONAsObservable: () => Observable<Grade[]> = Observable.bindCallback(this.dummyGetAllGrades);
-        return getJSONAsObservable();
+        console.log('getAllClassesBySchool called');
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getGradesBySchoolUrl, getApiHost(),
+            getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
+        console.log('url: ', url, 'options: ', options);
+        return this.http.get(url, options)
+            .map((res: Response): School[] => {
+                let schools: School[];
+                schools = res.json();
+                return schools;
+            })
+            .catch(handleError);
     }
 
     public getAllTeachers(): Observable<Teacher[]> {
@@ -153,6 +174,40 @@ export class SchoolService {
         console.log('getStudents called');
         let getJSONAsObservable: () => Observable<Student[]> = Observable.bindCallback(this.dummyGetAllStudents);
         return getJSONAsObservable();
+    }
+
+    public addClass(addClassRequest: AddClassRequest, gradeName: string): Observable<string> {
+        let self = this;
+        console.log('addClassRequest:', addClassRequest);
+        let body = JSON.stringify(addClassRequest);
+        console.log('body:', body);
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.addClassUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService), gradeName);
+        return this.http.post(url, body, options)
+            .map((res: Response): string => res.json().studentId)
+            .catch(handleError);
+    }
+
+    public addGrade(addGradeRequest: AddGradeRequest): Observable<string> {
+        let self = this;
+        console.log('addGradeRequest:', addGradeRequest);
+        let body = JSON.stringify(addGradeRequest);
+        console.log('body:', body);
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.addGradeUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.post(url, body, options)
+            .map((res: Response): string => res.json().studentId)
+            .catch(handleError);
     }
 
 }

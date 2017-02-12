@@ -12,7 +12,7 @@ import { getApiHost, handleError, getAuthorizationHeader } from './serviceHelper
 @Injectable()
 export class InstitutionService {
 
-    private readonly getInstitutionByCodeUrl: string = '%s/institution';
+    private readonly getInstitutionByCodeUrl: string = '%s/institution/%s';
 
     constructor(private http: Http, private cookieService: CookieService) { }
 
@@ -40,10 +40,8 @@ export class InstitutionService {
             'Content-Type': 'application/json',
             'Authorization': getAuthorizationHeader(self.cookieService)
         });
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('institutionCode', institutionCode);
-        let options = new RequestOptions({ headers: headers, search: params });
-        let url = format(this.getInstitutionByCodeUrl, getApiHost());
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getInstitutionByCodeUrl, getApiHost(), institutionCode);
         console.log('url: ', url, 'options: ', options);
         return this.http.get(url, options)
             .map((res: Response) => {

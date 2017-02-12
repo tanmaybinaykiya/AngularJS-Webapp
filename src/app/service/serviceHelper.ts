@@ -4,8 +4,8 @@ import * as _throw from 'rxjs/observable/throw';
 export function getApiHost() {
     switch (window.location.hostname) {
         case 'app-beta.secureslice.com':
-            return 'https://api.secureslice.com/stage';
-        case 'localhost':
+         return 'https://api.secureslice.com/stage';
+     case 'localhost':
             return 'http://localhost:8100/secs';
         default:
             return 'https://api.secureslice.com/prod';
