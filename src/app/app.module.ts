@@ -34,6 +34,7 @@ import {
     AutoCompleteModule,
     ConfirmDialogModule,
     ConfirmationService,
+    CalendarModule,
 } from './lib/primeng/primeng';
 
 // other libs
@@ -118,6 +119,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         PasswordModule,
         DropdownModule,
         DataGridModule,
+        CalendarModule,
         CheckboxModule,
         InputTextModule,
         DataTableModule,

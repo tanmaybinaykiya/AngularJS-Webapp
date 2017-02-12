@@ -1,4 +1,4 @@
-#add-class-button{
+#add-class-button, #add-grade-button, {
     margin-top : 15px; 
 }
 
@@ -7,5 +7,10 @@
 }
 
 .heading{
+    margin-top: 10px;
     font-weight: bold;
+}
+
+.ui-g-1-5, .ui-g-1{
+    width:10%;
 }

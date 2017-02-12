@@ -1,15 +1,19 @@
 export class Grade {
 
-    constructor(
-        public name: string,
-        public id: string,
-        public daysOfWeek: boolean[], // M T W Th F Sa Su
-        public totalFee: number,
-        public from: Date,
-        public to: Date,
-        public minimumAge: number
-    ) {
-    }
+    public name: string;
+    public tuitionFee: number;
+    public planId: string;
+    public duration: {
+        days: string,
+        from: Date,
+        to: Date
+    };
+    public minimumAgeCriterion: {
+        age: number,
+        validationDate: Date
+    };
+    constructor() { }
+
 }
 
 export class AddGradeRequest {

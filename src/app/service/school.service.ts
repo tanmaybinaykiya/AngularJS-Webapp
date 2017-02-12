@@ -45,17 +45,6 @@ export class SchoolService {
         }, 1500);
     }
 
-    dummyGetAllGrades(cb: (result: Grade[]) => any) {
-        setTimeout(function () {
-            cb([
-                new Grade('Grade17', 'G17', [false, false], 1236, new Date(), new Date(), 12),
-                new Grade('Grade71', 'G71', [false, false], 1236, new Date(), new Date(), 12),
-                new Grade('Grade12', 'G12', [false, false], 1236, new Date(), new Date(), 12),
-                new Grade('Grade21', 'G21', [false, false], 1236, new Date(), new Date(), 12)
-            ]);
-        }, 1500);
-    }
-
     dummyGetAllTeachers(cb: (result: Teacher[]) => any) {
         setTimeout(function () {
             cb([
@@ -156,11 +145,7 @@ export class SchoolService {
             getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
         console.log('url: ', url, 'options: ', options);
         return this.http.get(url, options)
-            .map((res: Response): School[] => {
-                let schools: School[];
-                schools = res.json();
-                return schools;
-            })
+            .map((res: Response) => res.json())
             .catch(handleError);
     }
 

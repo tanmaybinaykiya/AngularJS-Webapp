@@ -1,15 +1,14 @@
 <div>
     <div class="card card-w-title">
 
-        <p-dataTable [value]="classes" [paginator]="true" [rows]="10" [responsive]="true">
-            <header>School Name: Class Administration</header>
+        <p-dataTable [value]="classes" [paginator]="true" [rows]="10" [responsive]="true" [resizableColumns]="true">
+            <header>Class Administration</header>
             <p-column field="name" header="Class" [sortable]="true"></p-column>
             <p-column field="fullCapacity" header="Capacity" [sortable]="true"></p-column>
             <p-column field="currentUsage" header="Current Usage" [sortable]="true"></p-column>
-            <p-column header="Fee">
+            <p-column header="Delete">
                 <template let-class="rowData" pTemplate type="body">
-                    <span>${{class.fee}}</span>
-                    <button type="button" icon="ui-icon-delete" (click)="removeClassDialogDisplay=true" pButton></button>
+                    <button type="button" disabled icon="ui-icon-delete" (click)="deleteClassDialog(class)" pButton></button>
                 </template>
             </p-column>
         </p-dataTable>
@@ -17,14 +16,33 @@
         <button type="submit" id="add-class-button" (click)="addClassDialogDisplay=true" pButton label="Add New Class" icon="ui-icon-add"></button>
 
     </div>
+
+    <div class="card card-w-title">
+
+        <p-dataTable [value]="originalGrades" [paginator]="true" [rows]="10" [responsive]="true" [resizableColumns]="true">
+            <header>Grade Administration</header>
+            <p-column field="name" header="Grade Group" [sortable]="true"></p-column>
+            <p-column field="days" header="Days" [sortable]="true"></p-column>
+            <p-column field="hours" header="Hours" [sortable]="true"></p-column>
+            <p-column field="tuitionFee" header="Tuition" [sortable]="true"></p-column>
+            <p-column header="Delete">
+                <template let-class="rowData" pTemplate type="body">
+                    <button type="button" disabled icon="ui-icon-delete" (click)="deleteClassDialog(class)" pButton></button>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+        <button type="submit" id="add-grade-button" (click)="addGradeDialogDisplay=true" pButton label="Add New Grade" icon="ui-icon-add"></button>
+
+    </div>
 </div>
 
 
-<p-dialog header="Add/Modify Class" [(visible)]="addClassDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+<p-dialog header="Add Class" [(visible)]="addClassDialogDisplay" [responsive]="true" [width]=600 modal="modal" showEffect="fade">
     <div>
         <span class="ui-g ui-g-12 heading">General Information</span>
         <span class="md-inputfield ui-g-5" id="add-class-dialog-class-name">
-            <input type="text" pInputText autocomplete="off" name="className" [(ngModel)]="selectedClass.name" >
+            <input type="text" pInputText autocomplete="off" name="className" [(ngModel)]="createClass.name" >
             <label>Class Name</label>
         </span>
         <div class="ui-g-7">
@@ -36,21 +54,21 @@
             <span class="ui-g ui-g-12">Select a grade to continue...</span>
         </div>
         <div *ngIf="selectedGrade">
-            <span class="ui-g-12">Tuition Fee for {{selectedGrade.name}} is ${{selectedGrade.totalFee}}</span>
+            <span class="ui-g-12">Tuition Fee for {{selectedGrade.name}} is ${{selectedGrade.tuitionFee}}</span>
             <span class="ui-g-12 heading">Schedule Options</span>
-            <p-checkbox class="ui-g ui-g-12" name="cg" value="oneTimeFullPayment" label="Allow one time full payment of $100" [(ngModel)]="checkboxValues" disabled></p-checkbox>
-            <p-checkbox class="ui-g ui-g-12" name="cg" value="equalSplitPayment" label="Allow equal split of payments of a total of $100" [(ngModel)]="checkboxValues" disabled></p-checkbox>
+            <p-checkbox class="ui-g ui-g-12" name="cg" value="oneTimeFullPayment" label="Allow one time full payment of ${{selectedGrade.tuitionFee}}" [(ngModel)]="checkboxValues" disabled></p-checkbox>
+            <p-checkbox class="ui-g ui-g-12" name="cg" value="equalSplitPayment" label="Allow equal split of payments of a total of ${{selectedGrade.tuitionFee}}" [(ngModel)]="checkboxValues" disabled></p-checkbox>
             <div class="ui-g ui-g-6">
                 <span class="heading ui-g ui-g-4">Teacher</span>
-                <p-multiSelect class="ui-g ui-g-8" [options]="teachers" [(ngModel)]="selectedClass.teachers" autowidth></p-multiSelect>
+                <p-multiSelect class="ui-g ui-g-8" [options]="teachers" [(ngModel)]="createClass.teachers" autowidth></p-multiSelect>
             </div>
             <span class="md-inputfield ui-g-6">
-                <input type="text" pInputText autocomplete="off" name="classCapacity" [(ngModel)]="selectedClass.capacity" >
+                <input type="text" pInputText autocomplete="off" name="classCapacity" [(ngModel)]="createClass.capacity" >
                 <label>Class Capacity</label>
             </span>
         </div>
+        {{statusMessage}}
     </div>
-     {{statusMessage}}
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="submit" pButton class="primary" icon="fa-check" (click)="addClass()" label="Add Class"></button>
@@ -69,6 +87,55 @@
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="submit" pButton class="primary" icon="fa-check" (click)="removeClass()" label="Remove Class"></button>
             <button type="button" pButton class="secondary" icon="fa-close" (click)="removeClassDialogDisplay=false" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Add Grade" [responsive]="true" [resizable]="true" [(visible)]="addGradeDialogDisplay" [width]="600" modal="modal" [minHeight]="1400" showEffect="fade">
+    <div>
+        <span class="ui-g ui-g-12 heading">General Information</span>
+        <span class="md-inputfield ui-g-4" id="add-class-dialog-class-name">
+            <input type="text" pInputText autocomplete="off" name="gradeName" [(ngModel)]="createGrade.name" >
+            <label>Grade Name</label>
+        </span>
+        <span class="md-inputfield ui-g-4" id="add-class-dialog-class-name">
+            <input type="text" pInputText autocomplete="off" name="tuitionFee" [(ngModel)]="createGrade.tuitionFee" >
+            <label>Tuition Fee($)</label>
+        </span>
+        <span class="md-inputfield ui-g-4" id="add-class-dialog-class-name">
+            <input type="text" pInputText autocomplete="off" name="planId" [(ngModel)]="createGrade.planId" >
+            <label>Paypal PlanId</label>
+        </span>
+        <span class="ui-g ui-g-12 heading">Duration</span>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="M" value="M" label="M" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="T" value="T" label="T" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="W" value="W" label="W" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="Th" value="Th" label="Th" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="F" value="F" label="F" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="S" value="S" label="S" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+        <p-checkbox class="ui-g ui-g-1 ui-g-1-5" name="Su" value="Su" label="Su" [(ngModel)]="createGrade.gradeDayCheckboxValues" ></p-checkbox>
+
+        <div class="ui-g-12 ui-md-6">
+            <span>From</span>
+            <p-calendar [showTime]="true" [(ngModel)]="createGrade.fromTime"></p-calendar> 
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <span>To</span>
+            <p-calendar [showTime]="true" [(ngModel)]="createGrade.toTime"></p-calendar>
+        </div>
+        <br>
+        <span class="ui-g ui-g-12 heading">Age Restrictions</span>
+        <span class="ui-g ui-g-6">Student should be a minimum age of </span>
+        <input class="ui-g ui-g-3" type="text" pInputText autocomplete="off" name="className" [(ngModel)]="createGrade.minimumAge" >
+        <span class="ui-g ui-g-3">years before</span>
+        <p-calendar class="ui-g ui-g-4" [(ngModel)]="createGrade.validationDate"  dateFormat="mm/yy"></p-calendar>
+        <span class="ui-g ui-g-4">of current year</span>        
+        {{statusMessage}}
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="addGrade()" label="Add Grade"></button>
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="addGradeDialogDisplay=false" label="Cancel"></button>
         </div>
     </footer>
 </p-dialog>
