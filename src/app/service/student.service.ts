@@ -19,9 +19,7 @@ export class StudentService {
     private assignStudentClassUrl = '%s/student/institution/%s/school/%s/student/assign';
     private getEnrolledStudentsUrl = '%s/student/institution/%s/school/%s/';
 
-    constructor(private http: Http, private cookieService: CookieService) {
-        console.log('hello login service: ', cookieService);
-    }
+    constructor(private http: Http, private cookieService: CookieService) { }
 
     enrollStudent(enrollableStudent: EnrollableStudent): Observable<string> {
         let self = this;

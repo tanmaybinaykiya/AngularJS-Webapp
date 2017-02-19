@@ -12,7 +12,7 @@ export function getApiHost() {
     }
 };
 
-function getCurrentUser(cookieService: CookieService): any {
+export function getCurrentUser(cookieService: CookieService): any {
     return cookieService.getObject('loggedInUser');
 }
 
@@ -26,6 +26,11 @@ export function getInstitutionShortCodeFromTokenObject(cookieService: CookieServ
 
 export function getSchoolCodeFromTokenObject(cookieService: CookieService): string {
     return getCurrentUser(cookieService).schoolCode;
+}
+
+export function getAdminSchoolCodeFromTokenObject(cookieService: CookieService): string {
+    let user: any = getCurrentUser(cookieService);
+    return user.schools.availableSchools[user.schools.isSelectedIndex].code;
 }
 
 export function getUserEmailFromTokenObject(cookieService: CookieService): string {

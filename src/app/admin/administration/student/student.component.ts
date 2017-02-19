@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../../../models';
-import { SchoolService } from '../../../service';
+import { EnrolledStudent, InviteParentRequest } from '../../../models';
+import { StudentService, ParentService } from '../../../service';
 
 @Component({
     selector: 'student',
@@ -10,30 +10,38 @@ import { SchoolService } from '../../../service';
 })
 export class StudentComponent implements OnInit {
 
-    private selectedStudent: Student;
-    private students: Student[];
-    private parentsEmail: String;
+    private selectedStudent: EnrolledStudent;
+    private students: EnrolledStudent[];
+    private parentEmails: string;
+    private inviteParentRequest: InviteParentRequest = new InviteParentRequest();
 
-    constructor(private schoolService: SchoolService) {
-        schoolService.getAllStudents().subscribe((students: Student[]) => {
-            this.students = students;
-        });
-    }
+    constructor(private studentService: StudentService, private parentService: ParentService) { }
 
     ngOnInit() {
         console.log('Hello StudentComponent');
+        this.studentService.getEnrolledStudentsForAdmin()
+            .subscribe((students: EnrolledStudent[]) => {
+                this.students = students;
+            });
     }
 
-    addStudent() {
+    sendInvitation() {
         console.log('Add Student ');
+        this.inviteParentRequest.email = this.parentEmails.split(',');
+        this.parentService.inviteParent(this.inviteParentRequest)
+            .subscribe(() => {
+                console.log('Successfully invited parent');
+            }, err => {
+                console.error('Error occured: ', err);
+            });
     }
 
     removeStudent() {
         console.log('Remove Student ', this.selectedStudent);
     }
 
-    sendInvitation() {
-        console.log('Send Invitation ', this.parentsEmail);
-    }
+    // sendInvitation() {
+    //     console.log('Send Invitation ', this.parentsEmail);
+    // }
 
 }

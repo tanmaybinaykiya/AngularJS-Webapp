@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Institution } from '../../../models/institution';
+import { School, AddSchoolRequest } from '../../../models';
 import { SchoolService } from '../../../service';
 
 @Component({
@@ -13,20 +13,48 @@ import { SchoolService } from '../../../service';
 export class SchoolAdministrationComponent implements OnInit {
 
     newSchooolForm: FormGroup;
-    schools: Institution[];
-    selection: Institution[] = [];
+    schools: School[];
+    selection: School[] = [];
     removeSchoolDialogDisplay: boolean = false;
     addSchoolDialogDisplay: boolean = false;
+    createSchool: AddSchoolRequest = new AddSchoolRequest();
+    addSchoolStatusMessage: string;
 
-    constructor(fb: FormBuilder, schoolService: SchoolService) {
+    constructor(private fb: FormBuilder, private schoolService: SchoolService ) {
         // Do stuff
-        schoolService.getAllSchools().subscribe((schools: Institution[]) => {
+
+    }
+
+    refreshSchools(){
+        this.schoolService.getAllSchools()
+        .subscribe((schools: School[]) => {
             this.schools = schools;
         });
     }
 
     ngOnInit() {
         console.log('Hello SchoolAdministrationComponent');
+        this.refreshSchools();
+    }
+
+    addSchool() {
+        console.log('addSchool');
+        this.schoolService.addSchool(this.createSchool)
+            .subscribe(() => {
+                this.addSchoolStatusMessage = 'School added succesfully';
+                this.refreshSchools();
+                setTimeout(() => {
+                    this.addSchoolDialogDisplay = false;
+                    delete this.addSchoolStatusMessage;
+                }, 1500);
+            }, (err) => {
+                console.error('Error adding school', err);
+                this.addSchoolStatusMessage = 'School added succesfully';
+                setTimeout(() => {
+                    this.addSchoolDialogDisplay = false;
+                    delete this.addSchoolStatusMessage;
+                }, 1500);
+            })
     }
 
 }

@@ -5,19 +5,19 @@
             <div class="ui-g-12">
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                    <input type="text" pInputText autocomplete="off" name="firstName" [(ngModel)]="isAdmin?adminRegistrationRequest.firstName:parentRegistrationRequest.firstName" >
+                    <input type="text" pInputText autocomplete="off" name="firstName" [(ngModel)]="reqBody.firstName" >
                     <label>First Name</label>
                 </span>
                 </div>
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                    <input type="text" pInputText autocomplete="off" name="middleName" [(ngModel)]="isAdmin?adminRegistrationRequest.middleName:parentRegistrationRequest.middleName" >
+                    <input type="text" pInputText autocomplete="off" name="middleName" [(ngModel)]="reqBody.middleName" >
                     <label>Middle Name</label>
                 </span>
                 </div>
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                    <input type="text" pInputText autocomplete="off" name="lastName" [(ngModel)]="isAdmin?adminRegistrationRequest.lastName:parentRegistrationRequest.lastName" >
+                    <input type="text" pInputText autocomplete="off" name="lastName" [(ngModel)]="reqBody.lastName" >
                     <label>Last Name</label>
                 </span>
                 </div>
@@ -25,13 +25,13 @@
             <div class="ui-g-12">
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                        <input type="text" pInputText autocomplete="off" name="email" [(ngModel)]="isAdmin?adminRegistrationRequest.email:parentRegistrationRequest.email" >
+                        <input type="text" pInputText autocomplete="off" name="email" [(ngModel)]="reqBody.email" >
                         <label>Email</label>
                     </span>
                 </div>
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                        <input type="password" pInputText autocomplete="off" name="password" [(ngModel)]="isAdmin?adminRegistrationRequest.password:parentRegistrationRequest.password" >
+                        <input type="password" pInputText autocomplete="off" name="password" [(ngModel)]="reqBody.password" >
                         <label>Password</label>
                     </span>
                 </div>
@@ -45,25 +45,27 @@
             <div class="ui-g-12">
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                    <input type="text" pInputText autocomplete="off" name="contactNumber" [(ngModel)]="isAdmin?adminRegistrationRequest.contact.number:parentRegistrationRequest.contact.number" >
-                    <label>Contact Number</label>
-                </span>
+                        <input type="text" pInputText autocomplete="off" name="contactNumber" [(ngModel)]="reqBody.contact.number" >
+                        <label>Contact Number</label>
+                    </span>
                 </div>
                 <div class="ui-g-4">
-                    <button type="button" (click)="generateVerificationCode()" [disabled]="isGeneratingVerificationCode || isAdmin?!adminRegistrationRequest.contact.number:!parentRegistrationRequest.contact.number" pButton label="Generate Verification Code" class="blue-grey-btn"></button>
+                    <button type="button" (click)="generateVerificationCode()" [disabled]="!reqBody.contact.number" pButton label="Generate Verification Code" class="blue-grey-btn"></button>
                 </div>
                 <div class="ui-g-4">
                     <span class="md-inputfield">
-                    <input type="text" pInputText autocomplete="off" name="verificationCode" [disabled]="isAdmin?!adminRegistrationRequest.contact.verification.requestId:!parentRegistrationRequest.contact.verification.requestId" [(ngModel)]="isAdmin?adminRegistrationRequest.contact.verification.code:parentRegistrationRequest.contact.verification.code" >
-                    <label>Verification Code</label>
-                </span>
+                        <input type="text" pInputText autocomplete="off" name="verificationCode" [disabled]="!reqBody.contact.verification.requestId" [(ngModel)]="reqBody.contact.verification.code" >
+                        <label>Verification Code</label>
+                    </span>
                 </div>
+                <span class="ui-g ui-g-12">Verification Code generation may take upto 5 minutes</span>
             </div>
-            <div class="ui-g-12 ui-md-4">
-                <button type="submit" pButton label="Register" [disabled]="isAdmin?!isAdminReqValid:!isParentReqValid" icon="ui-icon-person"></button>
+            <div class="ui-g ui-g-12">
+                <button class="ui-g-4" type="submit" pButton label="Register" [disabled]="!isValid" icon="ui-icon-person"></button>
             </div>
         </form>
         <span *ngIf="errorMessage">{{errorMessage}}</span>
+        <span *ngIf="successMessage">{{successMessage}}</span>
     </div>
 
 </div>

@@ -14,18 +14,23 @@ import { RegisterService } from '../service';
 })
 export class RegisterComponent implements OnInit {
 
+    form: FormGroup;
+
     adminRegistrationRequest: AdminRegistrationRequest = new AdminRegistrationRequest();
     parentRegistrationRequest: ParentRegistrationRequest = new ParentRegistrationRequest();
+
     institutionCode: string;
     schoolCode: string;
+    isAdmin: boolean;
     token: string;
+    role: any;
+
     errorMessage: string;
+    genVerifnCodeErrorMessage: string;
+    successMessage: string;
+
     isRequested: boolean = false;
     isGeneratingVerificationCode: boolean = false;
-    genVerifnCodeErrorMessage: string;
-    role: any;
-    isAdmin: boolean;
-    form: FormGroup;
 
     constructor(private route: ActivatedRoute, private registerService: RegisterService, private router: Router, fbld: FormBuilder, ) {
         console.log('Hello RegisterComponent: ');
@@ -43,8 +48,9 @@ export class RegisterComponent implements OnInit {
             this.token = param['token'];
         });
         this.isAdmin = this.role === 'admin';
+        console.log('role: ', this.role);
+        console.log('isAdmin: ', this.isAdmin);
         if (this.institutionCode == null || this.institutionCode === undefined || this.institutionCode === '') {
-
             console.error('Invalid URL, no institutionCode passed');
         }
         if (this.role === 'parent' && (this.schoolCode == null || this.schoolCode === undefined || this.schoolCode === '')) {
@@ -52,6 +58,7 @@ export class RegisterComponent implements OnInit {
         }
         if (this.isAdmin) {
             this.adminRegistrationRequest.institutionCode = this.institutionCode;
+            console.log('Set iss code: ', this.adminRegistrationRequest.institutionCode);
         } else {
             this.parentRegistrationRequest.institutionCode = this.institutionCode;
             this.parentRegistrationRequest.schoolCode = this.schoolCode;
@@ -95,6 +102,10 @@ export class RegisterComponent implements OnInit {
         );
     }
 
+    get isValid() {
+        return this.isAdmin ? this.isAdminReqValid : this.isParentReqValid;
+    }
+
     // get diagnostic() { return JSON.stringify({ email: this.email, password: this.password }); }
 
     setErrorMessage(message: string) {
@@ -107,6 +118,7 @@ export class RegisterComponent implements OnInit {
 
     generateVerificationCode() {
         this.isGeneratingVerificationCode = true;
+        let self = this;
         let email: string = this.isAdmin ? this.adminRegistrationRequest.email : this.parentRegistrationRequest.email;
         // tslint:disable-next-line:max-line-length
         let contactNumber: string = this.isAdmin ? this.adminRegistrationRequest.contact.number : this.parentRegistrationRequest.contact.number;
@@ -119,6 +131,17 @@ export class RegisterComponent implements OnInit {
                 } else {
                     this.parentRegistrationRequest.contact.verification.requestId = requestId;
                 }
+            }, err => {
+                console.error('Error generating verification code', err);
+                // switch (key) {
+                //     case value:
+
+                //         break;
+
+                //     default:
+                //         break;
+                // }
+                self.isGeneratingVerificationCode = false;
             });
     }
 
@@ -130,6 +153,7 @@ export class RegisterComponent implements OnInit {
             this.registerService.registerAdmin(this.adminRegistrationRequest, this.token)
                 .subscribe(() => {
                     console.log('Registration successful');
+                    self.successMessage = 'Registration successful';
                 }, function (error) {
                     self.isRequested = false;
                     console.log('Error: ', error);
@@ -140,6 +164,7 @@ export class RegisterComponent implements OnInit {
             this.registerService.registerParent(this.parentRegistrationRequest, this.token)
                 .subscribe(() => {
                     console.log('Registration successful');
+                    self.successMessage = 'Registration successful';
                 }, function (error) {
                     self.isRequested = false;
                     console.log('Error: ', error);
@@ -151,7 +176,12 @@ export class RegisterComponent implements OnInit {
     }
 
     get diagnostic() {
+        // console.log( JSON.stringify(this.adminRegistrationRequest));
         return JSON.stringify(this.isAdmin ? this.adminRegistrationRequest : this.parentRegistrationRequest);
+    }
+
+    get reqBody() {
+        return this.isAdmin ? this.adminRegistrationRequest : this.parentRegistrationRequest;
     }
 
 }

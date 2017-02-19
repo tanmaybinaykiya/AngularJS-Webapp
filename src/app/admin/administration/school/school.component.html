@@ -4,8 +4,8 @@
         <p-dataTable [value]="schools" [paginator]="true" [rows]="10" [responsive]="true">
             <header>School Administration</header>
             <p-column field="name" header="Name" [sortable]="true"></p-column>
-            <p-column field="shortCode" header="Code" [sortable]="true"></p-column>
-            <p-column field="totalMembers" header="Total Members"> </p-column>
+            <p-column field="code" header="Code" [sortable]="true"></p-column>
+            <!--<p-column field="totalMembers" header="Total Members"> </p-column>-->
             <p-column header="Delete">
                 <template let-school="rowData" pTemplate type="body">
                     <button type="button" icon="ui-icon-delete" (click)="removeSchoolDialogDisplay=true" pButton></button>
@@ -20,9 +20,20 @@
 
 
 <p-dialog header="Add School" [(visible)]="addSchoolDialogDisplay" [width]=600 modal="modal" showEffect="fade">
+    <div>
+        <span class="md-inputfield ui-g-5">
+            <input type="text" pInputText autocomplete="off" name="schoolName" [(ngModel)]="createSchool.name" >
+            <label>School Name</label>
+        </span>
+        <span class="md-inputfield ui-g-5" >
+            <input type="text" pInputText autocomplete="off" name="schoolCode" [(ngModel)]="createSchool.code" >
+            <label>School Code</label>
+        </span>
+        <span *ngIf="addSchoolStatusMessage"> {{addSchoolStatusMessage}}</span>
+    </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="submit" pButton class="primary" icon="fa-check" (click)="sendTestMessage()" label="Add School"></button>
+            <button type="submit" pButton class="primary" icon="fa-check" (click)="addSchool()" label="Add School"></button>
             <button type="button" pButton class="secondary" icon="fa-close" (click)="addSchoolDialogDisplay=false" label="Cancel"></button>
         </div>
     </footer>

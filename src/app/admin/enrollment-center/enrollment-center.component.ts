@@ -103,7 +103,9 @@ export class EnrollmentCenterComponent implements OnInit {
                     (new AssignableClassesView(clazz.name,
                         format('%s (%d/%d)', clazz.name, clazz.fullCapacity - clazz.currentUsage, clazz.fullCapacity))));
                 self.isLoading = false;
-                self.selectedClass = self.assignableClasses[0].value;
+                if (classes.length > 0) {
+                    self.selectedClass = self.assignableClasses[0].value;
+                }
             }, err => {
                 self.isLoading = false;
                 console.error('Error getting classes');

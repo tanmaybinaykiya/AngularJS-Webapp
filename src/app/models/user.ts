@@ -20,3 +20,10 @@ export class User {
         this.institutionShortCode = institutionShortCode;
     }
 }
+
+export class InviteParentRequest {
+    email: string[];
+    constructor() {
+        this.email = [];
+    }
+}

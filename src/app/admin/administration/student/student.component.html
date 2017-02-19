@@ -5,7 +5,7 @@
             <p-column field="name" header="Name" [sortable]="true"></p-column>
             <p-column field="className" header="Class" [sortable]="true"></p-column>
         </p-dataTable>
-        <button type="submit" id="add-student-button" (click)="addStudentDialogDisplay=true" pButton label="Add Student" icon="ui-icon-add"></button>
+        <button type="submit" id="add-student-button" (click)="addStudentDialogDisplay=true" pButton label="Invite Parent" icon="ui-icon-add"></button>
     </div>
 </div>
 
@@ -16,7 +16,7 @@
                 <span>It is highly encouraged to invite parents to complete information related to their child. This reduces the burden on the school staff.Request the parents' email and enter it below. An invitation link, inviting them to complete the necessary information regarding their child will be sent. </span>
                 <div id="send-invitation" class="ui-g-12 ui-md-8">
                     <span class="md-inputfield">
-                        <input id="input" type="text" pInputText [(ngModel)]="parentsEmail"/>
+                        <input id="input" type="text" pInputText [(ngModel)]="parentEmails"/>
                         <label>Parents' Email Address</label>
                     </span>
                 </div>
@@ -26,8 +26,8 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="submit" pButton class="primary" icon="fa-check" (click)="addStudent()" label="Add Student"></button>
-            <button type="button" pButton class="secondary" icon="fa-close" (click)="addStudentDialogDisplay=false" label="Cancel"></button>
+            <!--<button type="submit" pButton class="primary" icon="fa-check" (click)="addStudent()" label="Add Student"></button>-->
+            <button type="button" pButton class="secondary" icon="fa-close" (click)="addStudentDialogDisplay=false" label="Close"></button>
         </div>
     </footer>
 </p-dialog>
