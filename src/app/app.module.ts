@@ -44,21 +44,25 @@ import { CookieService } from 'angular2-cookie/core';
 
 // app services
 import {
-    NotificationService,
+    LoginService,
     ParentService,
     SchoolService,
+    BillingService,
+    StudentService,
+    RegisterService,
     RecipientService,
     InstitutionService,
-    LoginService,
-    BillingService,
-    StudentService
+    NotificationService,
 } from './service';
+
 import { QuestionControlService } from './lib/question-control.service';
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 
 // app components
 import { LoginComponent } from './login/login.component';
+
+import { RegisterComponent } from './register/register.component';
 
 import { PageNotFoundComponent } from './page-not-found';
 
@@ -177,6 +181,9 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         // login 
         LoginComponent,
 
+        // register
+        RegisterComponent,
+
         // super admin
         SuperAdminComponent,
 
@@ -212,6 +219,7 @@ import { SuperAdminGuard, ParentGuard, AdminGuard } from './security';
         ParentService,
         BillingService,
         StudentService,
+        RegisterService,
         RecipientService,
         InstitutionService,
         ConfirmationService,

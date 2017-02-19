@@ -34,8 +34,6 @@ export class LoginComponent {
         );
     }
 
-    get diagnostic() { return JSON.stringify({ email: this.email, password: this.password }); }
-
     setErrorMessage(message: string) {
         let self = this;
         self.errorMessage = message;
