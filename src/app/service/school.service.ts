@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { format } from 'util';
 import { CookieService } from 'angular2-cookie/core';
 
-import { Grade, Class, Teacher, Institution, Student, School, AddClassRequest, AddGradeRequest, AddSchoolRequest } from '../models';
+import { Grade, Class, Staff, Teacher, Institution, Student, School, AddClassRequest, AddGradeRequest, AddSchoolRequest } from '../models';
 import { Subject } from 'rxjs/Subject';
 import {
     getApiHost, handleError, getAuthorizationHeader,
-    getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject
+    getInstitutionShortCodeFromTokenObject, getAdminSchoolCodeFromTokenObject
 } from './serviceHelper';
 import { LoginService } from './login.service';
 
@@ -26,6 +26,10 @@ export class SchoolService {
     private addGradeUrl: string = '%s/school/institution/%s/school/%s/grade';
     private addSchoolUrl: string = '%s/school/institution/%s/school';
     private getSchoolsUrl: string = '%s/school/institution/%s/school';
+    private getTeachersBySchoolUrl: string = '%s/user/institution/%s/school/%s/teacher';
+    private getStaffBySchoolUrl: string = '%s/user/institution/%s/school/%s/staff';
+    private getAllStaffBySchoolUrl: string = '%s/user/institution/%s/school/%s';
+    private getAllStudentsBySchoolUrl: string = '%s/student/institution/%s/school/%s';
 
     constructor(private http: Http, private loginService: LoginService, private cookieService: CookieService, ) {
         console.log('hello SchoolService', loginService.loggedInUser);
@@ -47,17 +51,6 @@ export class SchoolService {
         }, 1500);
     }
 
-    dummyGetAllTeachers(cb: (result: Teacher[]) => any) {
-        setTimeout(function () {
-            cb([
-                new Teacher('12', 'teacher61'),
-                new Teacher('13', 'teacher12'),
-                new Teacher('18', 'teacher31'),
-                new Teacher('22', 'teacher11'),
-            ]);
-        }, 1500);
-    }
-
     dummyGetAllStudents(cb: (result: Student[]) => any) {
         setTimeout(function () {
             cb([
@@ -70,7 +63,7 @@ export class SchoolService {
     }
 
     getSchoolsByInstitutionAndSchoolCode(institutionCode: string, schoolCode: string): Observable<School> {
-        console.log('getSchoolsByInstitutionAndSchoolCode called: ', institutionCode, schoolCode);
+        console.log('getSchoolsByInstitutionAndSchoolCode called. institutionCode: ', institutionCode, 'schoolCode:', schoolCode);
         let self = this;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -89,7 +82,7 @@ export class SchoolService {
     }
 
     getSchoolsByInstitutionCode(institutionCode: string): Observable<School[]> {
-        console.log('getSchoolsByInstitutionCode called: ', institutionCode);
+        console.log('getSchoolsByInstitutionCode called. institutionCode: ', institutionCode);
         let self = this;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -110,16 +103,16 @@ export class SchoolService {
 
     public getAllSchools(): Observable<School[]> {
         console.log('getSchools called');
-       let self = this;
+        let self = this;
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Authorization': getAuthorizationHeader(self.cookieService)
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.getSchoolsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService));
-        console.log('url: ', url, 'options: ', options);
+        console.log('getSchools called. url:', url);
         return this.http.get(url, options)
-            .map((res: Response): School[] =>  res.json())
+            .map((res: Response): School[] => res.json())
             .catch(handleError);
     }
 
@@ -132,7 +125,7 @@ export class SchoolService {
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.getClassesBySchoolUrl, getApiHost(),
-            getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
+            getInstitutionShortCodeFromTokenObject(self.cookieService), getAdminSchoolCodeFromTokenObject(self.cookieService));
         console.log('url: ', url, 'options: ', options);
         return this.http.get(url, options)
             .map((res: Response): School[] => {
@@ -144,8 +137,6 @@ export class SchoolService {
     }
 
     public getAllGrades(): Observable<Grade[]> {
-        console.log('getClasses called');
-        console.log('getAllClassesBySchool called');
         let self = this;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -153,23 +144,73 @@ export class SchoolService {
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.getGradesBySchoolUrl, getApiHost(),
-            getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
-        console.log('url: ', url, 'options: ', options);
+            getInstitutionShortCodeFromTokenObject(self.cookieService), getAdminSchoolCodeFromTokenObject(self.cookieService));
+        console.log('getAllGrades: URL: ', url, 'Options: ', options);
         return this.http.get(url, options)
             .map((res: Response) => res.json())
             .catch(handleError);
     }
 
-    public getAllTeachers(): Observable<Teacher[]> {
-        console.log('getTeachers called');
-        let getJSONAsObservable: () => Observable<Teacher[]> = Observable.bindCallback(this.dummyGetAllTeachers);
-        return getJSONAsObservable();
+    public getTeachersBySchool(): Observable<Teacher[]> {
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getTeachersBySchoolUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.get(url, options)
+            .map((res: Response) => {
+                console.log('Get Teachers');
+                return res.json();
+            })
+            .catch(handleError);
+    }
+
+    public getStaffBySchool(): Observable<Teacher[]> {
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getStaffBySchoolUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.get(url, options)
+            .map((res: Response) => {
+                console.log('getStaffBySchool', res.json());
+                return res.json();
+            })
+            .catch(handleError);
+    }
+
+    public getAllStaffBySchool(): Observable<Staff[]> {
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getAllStaffBySchoolUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.get(url, options)
+            .map((res: Response) => res.json())
+            .catch(handleError);
     }
 
     public getAllStudents(): Observable<Student[]> {
-        console.log('getStudents called');
-        let getJSONAsObservable: () => Observable<Student[]> = Observable.bindCallback(this.dummyGetAllStudents);
-        return getJSONAsObservable();
+        let self = this;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': getAuthorizationHeader(self.cookieService)
+        });
+        let options = new RequestOptions({ headers: headers });
+        let url = format(this.getAllStudentsBySchoolUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
+        return this.http.get(url, options)
+            .map((res: Response) => res.json())
+            .catch(handleError);
     }
 
     public addClass(addClassRequest: AddClassRequest, gradeName: string): Observable<string> {
@@ -183,7 +224,7 @@ export class SchoolService {
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.addClassUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
-            getSchoolCodeFromTokenObject(self.cookieService), gradeName);
+            getAdminSchoolCodeFromTokenObject(self.cookieService), gradeName);
         return this.http.post(url, body, options)
             .map((res: Response): string => res.json().studentId)
             .catch(handleError);
@@ -200,7 +241,7 @@ export class SchoolService {
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.addGradeUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
-            getSchoolCodeFromTokenObject(self.cookieService));
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
         return this.http.post(url, body, options)
             .map((res: Response): string => res.json().studentId)
             .catch(handleError);

@@ -1,6 +1,6 @@
 import { School } from './school';
 
-export type Role = 'admin' | 'staff' | 'parent' | 'SECS';
+export type Role = 'admin' | 'staff' | 'parent' | 'teacher' | 'SECS';
 
 export class User {
     id: number;
@@ -25,5 +25,29 @@ export class InviteParentRequest {
     email: string[];
     constructor() {
         this.email = [];
+    }
+}
+
+export class Staff {
+    firstName: string;
+    lastName: string;
+    role: Role;
+    constructor() {
+        this.firstName = '';
+        this.lastName = '';
+        this.role = 'staff';
+    }
+
+    get name() {
+        return this.firstName + ' ' + this.lastName;
+    }
+}
+
+export class Teacher extends Staff {
+    teacherId: string;
+    constructor() {
+        super();
+        this.role = 'teacher';
+        this.teacherId = '';
     }
 }

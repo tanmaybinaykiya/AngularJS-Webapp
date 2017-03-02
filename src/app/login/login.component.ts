@@ -63,14 +63,19 @@ export class LoginComponent {
                     case 'admin':
                         self.schoolService.getSchoolsByInstitutionCode(currentUser.institutionShortCode)
                             .subscribe(schools => {
-                                currentUser.schools = {
-                                    isSelectedIndex: 0,
-                                    availableSchools: schools
-                                };
-                                self.cookieService.putObject('loggedInUser', currentUser);
-                                self.loginService.loggedInUser = currentUser;
                                 self.isRequested = false;
-                                self.router.navigate(['/admin']);
+                                if (schools.length === 0) {
+                                    self.cookieService.putObject('loggedInUser', currentUser);
+                                    self.router.navigate(['admin/administration/school']);
+                                } else {
+                                    currentUser.schools = {
+                                        isSelectedIndex: 0,
+                                        availableSchools: schools
+                                    };
+                                    self.cookieService.putObject('loggedInUser', currentUser);
+                                    self.router.navigate(['/admin']);
+                                }
+                                self.loginService.loggedInUser = currentUser;
                             });
                         break;
                     default:

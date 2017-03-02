@@ -103,15 +103,13 @@ export class ClassComponent implements OnInit {
         this.getClasses();
         this.getGrades();
         let self = this;
-        this.schoolService.getAllTeachers()
+        this.schoolService.getTeachersBySchool()
             .subscribe((teachers: Teacher[]) => {
                 console.log('teachers::::', teachers);
-                self.teachers = teachers.map(teacher => {
-                    return {
-                        label: teacher.name,
-                        value: teacher
-                    };
-                });
+                self.teachers = teachers.map(teacher => ({
+                    label: teacher.firstName + ' ' + teacher.lastName,
+                    value: teacher
+                }));
                 console.log('teachers:', this.teachers);
             });
     }

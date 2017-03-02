@@ -6,7 +6,5 @@ export * from './institution';
 export * from './paymentMethod';
 export * from './register';
 export * from './school';
-export * from './staff';
 export * from './student';
-export * from './teacher';
 export * from './user';

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { EnrollableStudent, EnrolledStudent, EnrollmentState, UpdateStudentStateRequest, UpdateStudentClassRequest } from '../models';
 import {
     getApiHost, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject, getSchoolCodeFromTokenObject,
-    getUserEmailFromTokenObject, handleError
+    getUserEmailFromTokenObject, handleError, getAdminSchoolCodeFromTokenObject
 } from './serviceHelper';
 
 @Injectable()
@@ -62,7 +62,7 @@ export class StudentService {
         let options = new RequestOptions({ headers: headers });
         console.log('getEnrolledStudentsForAdmin: ', self.getEnrolledStudentsUrl);
         return this.http.get(format(self.getEnrolledStudentsUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
-            getSchoolCodeFromTokenObject(self.cookieService)), options)
+            getAdminSchoolCodeFromTokenObject(self.cookieService)), options)
             .map((res: Response): EnrolledStudent => res.json())
             .catch(handleError);
     }
@@ -78,7 +78,7 @@ export class StudentService {
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.updateStudentStateUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
-            getSchoolCodeFromTokenObject(self.cookieService));
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
         return this.http.post(url, body, options)
             // .map((res: Response): string => res.json().studentId)
             .catch(handleError);
@@ -95,7 +95,7 @@ export class StudentService {
         });
         let options = new RequestOptions({ headers: headers });
         let url = format(this.assignStudentClassUrl, getApiHost(), getInstitutionShortCodeFromTokenObject(self.cookieService),
-            getSchoolCodeFromTokenObject(self.cookieService));
+            getAdminSchoolCodeFromTokenObject(self.cookieService));
         return this.http.post(url, body, options)
             // .map((res: Response): string => res.json().studentId)
             .catch(handleError);

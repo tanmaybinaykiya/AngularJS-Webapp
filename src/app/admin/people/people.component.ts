@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from '../../lib/primeng/primeng';
 
-import { User } from '../../models/user';
+import { SchoolService, StudentService } from '../../service';
+import { User, Staff } from '../../models/user';
 
 @Component({
     selector: 'myss-people',
@@ -11,21 +12,20 @@ import { User } from '../../models/user';
 })
 export class PeopleComponent implements OnInit {
 
-    people: User[];
-    selection: User[] = [];
+    people: Staff[];
+    selection: Staff[] = [];
 
-    constructor(private confirmationService: ConfirmationService) {
-        // Do stuff
-        this.people = [
-            new User(1, 'tanmay1', 'admin', '12434tgrfvc', 'ISS2'),
-            new User(2, 'tanmay2', 'admin', '12434tgrfvc', 'ISS3'),
-            new User(3, 'tanmay3', 'admin', '12434tgrfvc', 'ISS1'),
-            new User(4, 'tanmay4', 'staff', '12434tgrfvc', 'ISS4')
-        ];
+    constructor(private confirmationService: ConfirmationService, private schoolService: SchoolService,
+        private studentService: StudentService) {
     }
 
     ngOnInit() {
         console.log('Hello PeopleComponent');
+        let self = this;
+        self.schoolService.getAllStaffBySchool()
+            .subscribe((staff: Staff[]) => {
+                self.people = staff;
+            });
     }
 
     modify() {
@@ -37,10 +37,6 @@ export class PeopleComponent implements OnInit {
         this.confirmationService.confirm({
             message: 'Are you sure to delete the selected items?'
         });
-    }
-
-    get diagnostic() {
-        return JSON.stringify(this.selection.map(person => person.id));
     }
 
 }

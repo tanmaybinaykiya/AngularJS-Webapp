@@ -11,18 +11,18 @@ import { BillingUser } from '../../models/billingUser';
 export class BillingComponent implements OnInit {
 
     discountForm: FormGroup;
-    people: BillingUser[];
+    // people: BillingUser[];
     selection: BillingUser[] = [];
     dialogDisplay: boolean = false;
 
     constructor(fb: FormBuilder) {
         // Do stuff
-        this.people = [
-            new BillingUser(123, 'name1', 1000, 'Past Due', 12, 'ISS4'),
-            new BillingUser(124, 'name3', 1200, 'Past Due', 0, 'ISS1'),
-            new BillingUser(125, 'name2', 1500, 'Paid', 40, 'ISS3'),
-            new BillingUser(126, 'name5', 2500, 'Paid', 0, 'ISS2')
-        ];
+        // this.people = [
+        //     new BillingUser(123, 'name1', 1000, 'Past Due', 12, 'ISS4'),
+        //     new BillingUser(124, 'name3', 1200, 'Past Due', 0, 'ISS1'),
+        //     new BillingUser(125, 'name2', 1500, 'Paid', 40, 'ISS3'),
+        //     new BillingUser(126, 'name5', 2500, 'Paid', 0, 'ISS2')
+        // ];
         this.discountForm = fb.group({
             'discountValue': [0, Validators.pattern('[0-9]{1,2}')],
         });

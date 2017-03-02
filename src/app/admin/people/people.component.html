@@ -3,9 +3,8 @@
 
         <p-dataTable [value]="people" selectionMode="multiple" [(selection)]="selection" [paginator]="true" [rows]="10" [responsive]="true">
             <header>People Administration</header>
-            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="firstName" header="Name" [sortable]="true"></p-column>
             <p-column field="role" header="Role" [sortable]="true"></p-column>
-            <p-column field="institutionShortCode" header="Institution" [sortable]="false"></p-column>
             <!-- COMMENT
                 <p-column styleClass="col-button">
                 <template pTemplate type="header">

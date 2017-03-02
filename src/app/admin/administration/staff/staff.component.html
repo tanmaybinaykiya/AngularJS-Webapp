@@ -2,7 +2,7 @@
     <div class="card card-w-title staff-administration-table">
         <p-dataTable selectionMode="multiple" [(selection)]="selectedStaff" [value]="staff" [paginator]="true" [rows]="10" [responsive]="true">
             <header>Staff Administration</header>
-            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="firstName" header="Name" [sortable]="true"></p-column>
             <p-column field="role" header="Role" [sortable]="true"></p-column>
         </p-dataTable>
         <button type="submit" id="add-staff-button" (click)="addStaffDialogDisplay=true" pButton label="Modify Staff" icon="ui-icon-add"></button>

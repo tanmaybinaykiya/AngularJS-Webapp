@@ -13,6 +13,7 @@ export function getApiHost() {
 };
 
 export function getCurrentUser(cookieService: CookieService): any {
+    console.log('In Cookie: ', cookieService.getObject('loggedInUser'));
     return cookieService.getObject('loggedInUser');
 }
 

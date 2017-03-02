@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 import {
     getApiHost, handleError, getAuthorizationHeader, getInstitutionShortCodeFromTokenObject,
-    getSchoolCodeFromTokenObject
+    getSchoolCodeFromTokenObject, getAdminSchoolCodeFromTokenObject
 } from './serviceHelper';
 
 @Injectable()
@@ -33,8 +33,11 @@ export class BillingService {
         params.set('parentEmail', parentEmail);
         let options = new RequestOptions({ headers: headers, search: params });
         let requestUrl = format(this.getPaymentMethodUrl, getApiHost());
+        let requestBody = {
+            parentEmail: parentEmail
+        }
         console.log('url: ', requestUrl, 'options: ', options);
-        return this.http.get(requestUrl, options)
+        return this.http.post(requestUrl, requestBody, options)
             .map((res: Response): PaymentMethodResponse[] => (res.json()))
             .catch(handleError);
     }
@@ -86,7 +89,7 @@ export class BillingService {
         });
         let options = new RequestOptions({ headers: headers });
         let requestUrl = format(this.updateBraintreeCredentialsUrl, getApiHost(),
-            getInstitutionShortCodeFromTokenObject(self.cookieService), getSchoolCodeFromTokenObject(self.cookieService));
+            getInstitutionShortCodeFromTokenObject(self.cookieService), getAdminSchoolCodeFromTokenObject(self.cookieService));
         let requestBody = credentials;
         return this.http.post(requestUrl, requestBody, options)
             .map((res: Response) => (res.json()))

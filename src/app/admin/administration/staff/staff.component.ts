@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Staff } from '../../../models';
-import { InstitutionService } from '../../../service';
+import { SchoolService } from '../../../service';
 
 @Component({
     selector: 'staff',
@@ -13,14 +13,15 @@ export class StaffComponent implements OnInit {
     private staff: Staff[];
     private selectedStaff: Staff;
 
-    constructor(institutionService: InstitutionService) {
-        institutionService.getAllStaff().subscribe((staff: Staff[]) => {
-            this.staff = staff;
-        });
+    constructor(private schoolService: SchoolService) {
     }
 
     ngOnInit() {
         console.log('Hello StaffComponent');
+        this.schoolService.getAllStaffBySchool()
+            .subscribe((staff: Staff[]) => {
+                this.staff = staff;
+            });
     }
 
     modifyStaff() {
